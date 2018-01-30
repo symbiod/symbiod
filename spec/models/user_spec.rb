@@ -11,4 +11,10 @@ RSpec.describe User, type: :model do
   end
 
   it { is_expected.to have_many :ideas }
+
+  describe 'states' do
+    subject { create(:user) }
+
+    its(:state) { is_expected.to eq 'pending' }
+  end
 end
