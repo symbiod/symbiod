@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Poc
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    = link_to "POC", root_url(subdomain: false)
+    = link_to "Bootcamp", bootcamp_root_url
+    = link_to "Idea", idea_root_url
+    = link_to "Dashboard", dashboard_root_url
+
+    This is #{request.subdomain ? request.subdomain : 'POC'}
+    = yield
