@@ -1,24 +1,7 @@
-# README
+# Give me proof-of-concept
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Subdomains navigation
 
-Things you may want to cover:
+When you start app locally, use `lvh.me` domain to access it
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+e.g. `http://lvh.me:3000/` or `http://bootcamp.lvh.me:3000/`
