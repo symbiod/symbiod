@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory :user, aliases: [:author] do
     email { Faker::Internet.email }
     role { User::ROLES.sample }
 

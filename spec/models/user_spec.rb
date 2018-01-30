@@ -9,4 +9,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of :role }
     it { is_expected.to validate_inclusion_of(:role).in_array(User::ROLES) }
   end
+
+  it { is_expected.to have_many :ideas }
 end
