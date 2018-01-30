@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 
 gem 'aasm'
+gem 'trailblazer-operation'
 
 group :development, :test do
   gem 'rspec-rails'
