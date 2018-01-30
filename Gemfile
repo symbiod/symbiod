@@ -16,12 +16,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 
 group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end
 
 group :development do
+  gem 'migration_opener'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
@@ -29,9 +32,8 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'faker'
   gem 'shoulda-matchers'
-  gem 'factory_bot'
   gem 'database_cleaner'
 end
 
