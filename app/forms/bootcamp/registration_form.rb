@@ -1,8 +1,5 @@
 module Bootcamp
   class RegistrationForm < Reform::Form
-    include Reform::Form::ActiveModel
-    include Reform::Form::ActiveModel::ModelReflections
-
     property :email
     property :password
     property :name

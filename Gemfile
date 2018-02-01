@@ -24,6 +24,7 @@ gem 'reform-rails'
 gem "dry-validation"
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rspec-its'
   gem 'factory_bot_rails'
