@@ -1,6 +1,6 @@
 module Ops
   module Developer
-    class Create < BaseOperation
+    class Register < BaseOperation
       step :greet!
 
       def greet!(options, *)

@@ -24,4 +24,6 @@ class User < ApplicationRecord
       transitions from: :pending, to: :rejected
     end
   end
+
+  authenticates_with_sorcery!
 end
