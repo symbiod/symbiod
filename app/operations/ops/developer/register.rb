@@ -7,11 +7,15 @@ module Ops
       private
 
       def validate!(options, **)
-        true
+        Bootcamp::RegistrationForm.new(User.new).validate(user_params(options))
       end
 
       def persist!(options, **)
-        User.create(options.to_hash.merge(role: 'developer'))
+        User.create(user_params(options))
+      end
+
+      def user_params(options)
+        options.to_hash.merge(role: 'developer')
       end
     end
   end
