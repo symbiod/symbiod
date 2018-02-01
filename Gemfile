@@ -17,8 +17,14 @@ gem 'haml-rails'
 
 gem 'aasm'
 gem 'trailblazer-operation'
+gem 'sorcery'
+gem 'simple_form'
+gem 'reform'
+gem 'reform-rails'
+gem "dry-validation"
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rspec-its'
   gem 'factory_bot_rails'

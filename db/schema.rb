@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130181012) do
+ActiveRecord::Schema.define(version: 20180201181723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "developer_test_task_results", force: :cascade do |t|
+    t.string "link", null: false
+    t.integer "developer_id", null: false
+    t.integer "test_task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["developer_id"], name: "index_developer_test_task_results_on_developer_id"
+  end
+
+  create_table "developer_test_tasks", force: :cascade do |t|
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ideas", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +57,9 @@ ActiveRecord::Schema.define(version: 20180130181012) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "state"
+    t.string "crypted_password"
+    t.string "salt"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
