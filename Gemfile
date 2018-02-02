@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '~> 5.1.4'
+ruby '2.5.0'
+
+gem 'rails', github: 'rails/rails', branch: '5-2-stable'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -21,7 +20,12 @@ gem 'sorcery'
 gem 'simple_form'
 gem 'reform'
 gem 'reform-rails'
-gem "dry-validation"
+gem 'dry-validation'
+gem 'sidekiq'
+
+# Rails 5.2 stuff
+# gem 'mini_magick', '~> 4.8'
+#gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'pry-rails'

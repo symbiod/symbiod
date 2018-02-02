@@ -3,6 +3,8 @@ module Ops
     class Register < BaseOperation
       step :validate!
       step :persist!
+      #step :invite_to_slack!
+      #step :add_to_github!
 
       private
 
