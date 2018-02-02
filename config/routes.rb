@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   scope module: :web do
     scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
       root to: 'home#index'
     end
 
+    mount Sidekiq::Web => '/sidekiq'
     root to: 'home#index'
   end
 end
