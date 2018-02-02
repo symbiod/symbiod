@@ -21,7 +21,8 @@ gem 'sorcery'
 gem 'simple_form'
 gem 'reform'
 gem 'reform-rails'
-gem "dry-validation"
+gem 'dry-validation'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'pry-rails'
