@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.0'
 
-gem 'rails', '~> 5.2.0.rc1'
+gem 'rails', github: 'rails/rails', branch: '5-2-stable'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
@@ -25,7 +25,7 @@ gem 'sidekiq'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
-gem 'bootsnap', '>= 1.1.0', require: false
+#gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'pry-rails'
