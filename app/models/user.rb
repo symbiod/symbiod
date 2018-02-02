@@ -1,4 +1,5 @@
 require 'sorcery/model'
+
 class User < ApplicationRecord
   include AASM
 
