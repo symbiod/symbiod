@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.heroku.com
+docker build --build-arg master_key=$RAILS_MASTER_KEY -t registry.heroku.com/peaceful-refuge-95132/web -f Dockerfile .
+docker push registry.heroku.com/peaceful-refuge-95132/web
