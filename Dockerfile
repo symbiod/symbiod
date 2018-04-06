@@ -10,7 +10,6 @@ COPY ./ .
 ENV RAILS_ENV production
 ENV RAILS_MASTER_KEY=$master_key
 
-RUN env
 RUN gem install foreman
 RUN bundle install --deployment --without development test
 RUN cp config/database.yml.sample config/database.yml

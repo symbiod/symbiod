@@ -27,4 +27,3 @@ deploy:
     on:
       branch:
         - master
-        - ci
