@@ -26,5 +26,4 @@ deploy:
     script: bash bin/build
     on:
       branch:
-        - ci
         - master
