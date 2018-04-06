@@ -23,10 +23,8 @@ script:
 
 deploy:
   - provider: script
-    script: bin/build
+    script: bash bin/build
     on:
-      branch: master
-  - provider: script
-    script: bin/build
-    on:
-      branch: ci
+      branch:
+        - master
+        - ci
