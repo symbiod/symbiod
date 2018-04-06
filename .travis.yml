@@ -20,3 +20,13 @@ before_install:
 
 script:
   - bundle exec rspec
+
+deploy:
+  - provider: script
+    script: bin/build
+    on:
+      branch: master
+  - provider: script
+    script: bin/build
+    on:
+      branch: ci
