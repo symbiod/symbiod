@@ -5,13 +5,111 @@
     %title Poc
     = csrf_meta_tags
     = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    '/css/dashboard.css', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    = link_to "POC", root_url(subdomain: 'www')
-    = link_to "Bootcamp", bootcamp_root_url
-    = link_to "Idea", idea_root_url
-    = link_to "Dashboard", dashboard_root_url
 
-    This is #{request.subdomain ? request.subdomain : 'POC'}
-    = yield
+  %body
+    %nav.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0
+      %a.navbar-brand.col-sm-3.col-md-2.mr-0{:href => "#"} Company name
+      %input.form-control.form-control-dark.w-100{"aria-label" => "Search", :placeholder => "Search", :type => "text"}/
+      %ul.navbar-nav.px-3
+        %li.nav-item.text-nowrap
+          %a.nav-link{:href => "#"} Sign out
+    .container-fluid
+      .row
+        %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+          .sidebar-sticky
+            %ul.nav.flex-column
+              %li.nav-item
+                %a.nav-link.active{:href => "#"}
+                  %span{"data-feather" => "home"}
+                  Dashboard
+                  %span.sr-only (current)
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "file"}
+                  Orders
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "shopping-cart"}
+                  Products
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "users"}
+                  Customers
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "bar-chart-2"}
+                  Reports
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "layers"}
+                  Integrations
+            %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+              %span Saved reports
+              %a.d-flex.align-items-center.text-muted{:href => "#"}
+                %span{"data-feather" => "plus-circle"}
+            %ul.nav.flex-column.mb-2
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "file-text"}
+                  Current month
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "file-text"}
+                  Last quarter
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "file-text"}
+                  Social engagement
+              %li.nav-item
+                %a.nav-link{:href => "#"}
+                  %span{"data-feather" => "file-text"}
+                  Year-end sale
+        %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{:role => "main"}
+          = yield
+
+  /
+    Bootstrap core JavaScript
+    \==================================================
+  / Placed at the end of the document so the pages load faster
+  %script{:crossorigin => "anonymous", :integrity => "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", :src => "https://code.jquery.com/jquery-3.2.1.slim.min.js"}
+  :javascript
+    window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+  %script{:src => "../../../../assets/js/vendor/popper.min.js"}
+  %script{:src => "../../../../dist/js/bootstrap.min.js"}
+  / Icons
+  %script{:src => "https://unpkg.com/feather-icons/dist/feather.min.js"}
+  :javascript
+    feather.replace()
+  / Graphs
+  %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"}
+  :javascript
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        datasets: [{
+          data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: false,
+        }
+      }
+    });
