@@ -1,3 +1,7 @@
-POC
+%h1.cover-heading= t('landing.title')
+%p.lead
+  = t('landing.body')
+%p.lead
+  = link_to t('landing.developer'), bootcamp_root_url, class: 'btn btn-lg btn-secondary'
+  = link_to t('landing.entrepreneur'), idea_root_url, class: 'btn btn-lg btn-secondary'
 
-= link_to 'Join as Developer', new_bootcamp_registration_url

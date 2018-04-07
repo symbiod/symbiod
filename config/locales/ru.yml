@@ -1,0 +1,8 @@
+ru:
+  landing:
+    brand: 'Give Me POC'
+    navigation:
+      home: 'Главная'
+      bootcamp: 'Разработчикам'
+      idea: 'Бизнесменам'
+      dashboard: 'Войти'
