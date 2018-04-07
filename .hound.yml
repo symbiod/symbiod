@@ -1,0 +1,2 @@
+haml:
+  config_file: .haml-lint.yml
