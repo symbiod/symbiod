@@ -22,6 +22,7 @@ gem 'reform'
 gem 'reform-rails'
 gem 'dry-validation'
 gem 'sidekiq'
+gem 'slack-ruby-client'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
@@ -49,6 +50,7 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'webmock'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

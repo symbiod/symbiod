@@ -1,14 +1,20 @@
+# This class does not use any 3rd-party gems for Slack integration.
+# The reason is that user invite API endpoint is claimed to be `unofficial`
+# and most of the client libraries may not support it.
+# According to the article https://ruby.unicorn.tv/screencasts/automatically-send-slack-invitations
 require 'uri'
 require 'open-uri'
 require 'json'
+require './app/services/slack_integration/failed_api_call_exception'
 
 module SlackIntegration
   class InviteUser
-    def initialize(email, first_name, last_name)
-      # TODO: receive role to choose which channels should be joined
+    def initialize(email:, first_name:, last_name:, token:)
+      # TODO: receive channels list too
       @email      = email
       @first_name = first_name
       @last_name  = last_name
+      @token      = token
     end
 
     def call
@@ -23,7 +29,7 @@ module SlackIntegration
       "?channels=#{channels}" +
       "&set_active=true" +
       "&_attempts=1" +
-      "&token=#{token}" +
+      "&token=#{@token}" +
       "&email=#{URI::escape(@email)}" +
       "&first_name=#{URI::escape(@first_name)}" +
       "&last_name=#{URI::escape(@last_name)}"
@@ -35,10 +41,6 @@ module SlackIntegration
 
     def channels
       ''
-    end
-
-    def token
-      ENV['SLACK_TOKEN']
     end
   end
 end
