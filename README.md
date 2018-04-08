@@ -4,6 +4,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/maintainability)](https://codeclimate.com/github/howtohireme/give-me-poc/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/test_coverage)](https://codeclimate.com/github/howtohireme/give-me-poc/test_coverage)
 
+The goal of this project is to allow everyone to propose an idea of an opensource, non-profit project and to find a team of developers.
+
 ## Subdomains navigation
 
 When you start app locally, use `lvh.me` domain to access it
