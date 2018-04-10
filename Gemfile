@@ -22,6 +22,7 @@ gem 'reform'
 gem 'reform-rails'
 gem 'dry-validation'
 gem 'sidekiq'
+gem 'slack-ruby-client'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
@@ -43,12 +44,14 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rubocop'
 end
 
 group :test do
   gem 'faker'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'webmock'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
