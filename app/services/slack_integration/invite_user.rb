@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# This class does not use any 3rd-party gems for Slack integration.
-# The reason is that user invite API endpoint is claimed to be `unofficial`
-# and most of the client libraries may not support it.
-# According to the article https://ruby.unicorn.tv/screencasts/automatically-send-slack-invitations
 require 'uri'
 require 'open-uri'
 require 'json'
 require './app/services/slack_integration/failed_api_call_exception'
 
 module SlackIntegration
+  # This class does not use any 3rd-party gems for Slack integration.
+  # The reason is that user invite API endpoint is claimed to be `unofficial`
+  # and most of the client libraries may not support it.
+  # According to the article https://ruby.unicorn.tv/screencasts/automatically-send-slack-invitations
   class InviteUser
     def initialize(email:, first_name:, last_name:, token:)
       # TODO: receive channels list too
