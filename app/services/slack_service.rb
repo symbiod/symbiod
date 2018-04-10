@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class implements all required interaction with Slack service
 # Some methods are used during new member onboarding, others are required
 # for new project kick-off.
@@ -24,9 +26,9 @@ class SlackService
   # At the moment of new project kick-off we invite all interested members to its channel
   def invite_to_channel(channel_name, email)
     user = user_by_email(email)
-    fail SlackIntegration::FailedApiCallException, "User with email '#{email}' was not found" unless user
+    raise SlackIntegration::FailedApiCallException, "User with email '#{email}' was not found" unless user
     channel = channel_by_name(channel_name)
-    fail SlackIntegration::FailedApiCallException, "Channel with name '#{channel}' was not found" unless channel
+    raise SlackIntegration::FailedApiCallException, "Channel with name '#{channel}' was not found" unless channel
     client.conversations_invite(channel: channel['id'], users: user['id'])
   end
 
@@ -37,9 +39,7 @@ class SlackService
 
   private
 
-  def token
-    @token
-  end
+  attr_reader :token
 
   def client
     @client ||= Slack::Web::Client.new(token: token)

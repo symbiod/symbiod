@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'slack'
 require './app/services/slack_integration/invite_user'
@@ -34,7 +36,7 @@ describe SlackService do
       it 'calls postMessage method' do
         expect(client).to receive(:chat_postMessage)
           .with(channel: channel, text: message, as_user: false, username: 'Idea Bot')
-          .once 
+          .once
         subject.post_to_channel(channel, message)
       end
     end
@@ -51,17 +53,16 @@ describe SlackService do
       context 'channel and user exists' do
         let(:users_data) do
           { 'members' => [
-              { 'id' => '1', 'profile' => { 'email' => 'email1' }},
-              { 'id' => '2', 'profile' => { 'email' => 'email' }}
-            ]
-          }
+            { 'id' => '1', 'profile' => { 'email' => 'email1' } },
+            { 'id' => '2', 'profile' => { 'email' => 'email' } }
+          ] }
         end
 
         let(:channels_data) do
-          {'channels' => [
+          { 'channels' => [
             { 'id' => '1', 'name' => 'channel1' },
             { 'id' => '2', 'name' => 'channel' }
-          ]}
+          ] }
         end
 
         it 'calls coversations_invite with proper args' do
@@ -73,16 +74,15 @@ describe SlackService do
       context 'user does not exist in slack' do
         let(:users_data) do
           { 'members' => [
-              { 'id' => '1', 'profile' => { 'email' => 'email1' }}
-            ]
-          }
+            { 'id' => '1', 'profile' => { 'email' => 'email1' } }
+          ] }
         end
 
         let(:channels_data) do
-          {'channels' => [
+          { 'channels' => [
             { 'id' => '1', 'name' => 'channel1' },
             { 'id' => '2', 'name' => 'channel' }
-          ]}
+          ] }
         end
 
         it 'raises error' do
@@ -93,16 +93,15 @@ describe SlackService do
       context 'channel does not exist in slack' do
         let(:users_data) do
           { 'members' => [
-              { 'id' => '1', 'profile' => { 'email' => 'email1' }},
-              { 'id' => '2', 'profile' => { 'email' => 'email' }}
-            ]
-          }
+            { 'id' => '1', 'profile' => { 'email' => 'email1' } },
+            { 'id' => '2', 'profile' => { 'email' => 'email' } }
+          ] }
         end
 
         let(:channels_data) do
-          {'channels' => [
+          { 'channels' => [
             { 'id' => '1', 'name' => 'channel1' }
-          ]}
+          ] }
         end
 
         it 'raises error' do
@@ -117,7 +116,7 @@ describe SlackService do
       it 'calls conversations_create' do
         expect(client).to receive(:conversations_create)
           .with(name: channel, is_private: false)
-          .once 
+          .once
         subject.create_channel(channel)
       end
     end

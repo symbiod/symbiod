@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class does not use any 3rd-party gems for Slack integration.
 # The reason is that user invite API endpoint is claimed to be `unofficial`
 # and most of the client libraries may not support it.
@@ -25,18 +27,18 @@ module SlackIntegration
     private
 
     def url
-      "https://slack.com/api/users.admin.invite" +
-      "?channels=#{channels}" +
-      "&set_active=true" +
-      "&_attempts=1" +
-      "&token=#{@token}" +
-      "&email=#{URI::escape(@email)}" +
-      "&first_name=#{URI::escape(@first_name)}" +
-      "&last_name=#{URI::escape(@last_name)}"
+      'https://slack.com/api/users.admin.invite' \
+        "?channels=#{channels}" \
+        '&set_active=true' \
+        '&_attempts=1' \
+        "&token=#{@token}" \
+        "&email=#{URI.escape(@email)}" \
+        "&first_name=#{URI.escape(@first_name)}" \
+        "&last_name=#{URI.escape(@last_name)}"
     end
 
     def raise_error(response)
-      fail SlackIntegration::FailedApiCallException, "Unsuccessful invite api call: #{response.to_s}"
+      raise SlackIntegration::FailedApiCallException, "Unsuccessful invite api call: #{response}"
     end
 
     def channels
