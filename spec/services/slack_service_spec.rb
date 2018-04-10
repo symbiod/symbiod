@@ -1,0 +1,125 @@
+require 'spec_helper'
+require 'slack'
+require './app/services/slack_integration/invite_user'
+require './app/services/slack_service'
+
+describe SlackService do
+  subject { described_class.new(token) }
+  let(:token) { '123456' }
+
+  describe '#invite' do
+    let(:email)      { 'user@test.com' }
+    let(:first_name) { 'John' }
+    let(:last_name)  { 'Smith' }
+
+    it 'calls SlackIntegration::InviteUser class' do
+      invite_service = double
+      allow(invite_service).to receive(:call)
+      allow(SlackIntegration::InviteUser).to receive(:new)
+        .with(email: email, first_name: first_name, last_name: last_name, token: token)
+        .and_return(invite_service)
+      subject.invite(email, first_name, last_name)
+    end
+  end
+
+  describe 'slack gem wrappers' do
+    let(:client) { double }
+
+    before { allow_any_instance_of(described_class).to receive(:client).and_return(client) }
+
+    describe '#post_to_channel' do
+      let(:channel) { 'channel' }
+      let(:message) { 'message' }
+
+      it 'calls postMessage method' do
+        expect(client).to receive(:chat_postMessage)
+          .with(channel: channel, text: message, as_user: false, username: 'Idea Bot')
+          .once 
+        subject.post_to_channel(channel, message)
+      end
+    end
+
+    describe '#invite_to_channel' do
+      let(:channel) { 'channel' }
+      let(:email)   { 'email' }
+
+      before do
+        allow(client).to receive(:conversations_list).and_return(channels_data)
+        allow(client).to receive(:users_list).and_return(users_data)
+      end
+
+      context 'channel and user exists' do
+        let(:users_data) do
+          { 'members' => [
+              { 'id' => '1', 'profile' => { 'email' => 'email1' }},
+              { 'id' => '2', 'profile' => { 'email' => 'email' }}
+            ]
+          }
+        end
+
+        let(:channels_data) do
+          {'channels' => [
+            { 'id' => '1', 'name' => 'channel1' },
+            { 'id' => '2', 'name' => 'channel' }
+          ]}
+        end
+
+        it 'calls coversations_invite with proper args' do
+          expect(client).to receive(:conversations_invite).with(channel: '2', users: '2').once
+          subject.invite_to_channel(channel, email)
+        end
+      end
+
+      context 'user does not exist in slack' do
+        let(:users_data) do
+          { 'members' => [
+              { 'id' => '1', 'profile' => { 'email' => 'email1' }}
+            ]
+          }
+        end
+
+        let(:channels_data) do
+          {'channels' => [
+            { 'id' => '1', 'name' => 'channel1' },
+            { 'id' => '2', 'name' => 'channel' }
+          ]}
+        end
+
+        it 'raises error' do
+          expect { subject.invite_to_channel(channel, email) }.to raise_error(SlackIntegration::FailedApiCallException)
+        end
+      end
+
+      context 'channel does not exist in slack' do
+        let(:users_data) do
+          { 'members' => [
+              { 'id' => '1', 'profile' => { 'email' => 'email1' }},
+              { 'id' => '2', 'profile' => { 'email' => 'email' }}
+            ]
+          }
+        end
+
+        let(:channels_data) do
+          {'channels' => [
+            { 'id' => '1', 'name' => 'channel1' }
+          ]}
+        end
+
+        it 'raises error' do
+          expect { subject.invite_to_channel(channel, email) }.to raise_error(SlackIntegration::FailedApiCallException)
+        end
+      end
+    end
+
+    describe '#create_channel' do
+      let(:channel) { 'channel' }
+
+      it 'calls conversations_create' do
+        expect(client).to receive(:conversations_create)
+          .with(name: channel, is_private: false)
+          .once 
+        subject.create_channel(channel)
+      end
+    end
+  end
+end
