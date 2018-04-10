@@ -3,7 +3,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
   user: postgres
-  password: root
+  password: 1
   timeout: 5000
 
 development:

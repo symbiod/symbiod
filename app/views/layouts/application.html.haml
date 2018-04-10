@@ -19,6 +19,9 @@
             = link_to t('landing.navigation.bootcamp'), bootcamp_root_url, class: 'nav-link'
             = link_to t('landing.navigation.idea'), idea_root_url, class: 'nav-link'
             = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link'
+            - unless logged_in?
+              = link_to t('sign_up'), new_bootcamp_registration_url, class: 'nav-link'
+              = link_to t('sign_in'), new_bootcamp_user_session_url, class: 'nav-link'
 
       %main.inner.cover{:role => "main"}
         = yield
