@@ -1,6 +1,11 @@
 /storage/*
 /public/assets
 /config/master.key
+/log/
+/tmp/
+config/database.yml
+.byebug_history
+.ruby-version
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope module: :web do
     scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
       resource :registration, only: [:new, :create]
+      resources :user_sessions, only: [:new, :create, :destroy]
       root to: 'home#index'
     end
 

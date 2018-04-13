@@ -5,4 +5,6 @@ ru:
       home: 'Главная'
       bootcamp: 'Разработчикам'
       idea: 'Бизнесменам'
-      dashboard: 'Войти'
+      dashboard: 'Dashboard'
+      sign_up: 'Регистрация'
+      sign_in: 'Войти'
