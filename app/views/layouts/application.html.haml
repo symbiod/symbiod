@@ -19,6 +19,12 @@
             = link_to t('landing.navigation.bootcamp'), bootcamp_root_url, class: 'nav-link'
             = link_to t('landing.navigation.idea'), idea_root_url, class: 'nav-link'
             = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link'
+            - unless current_user
+              = link_to t('landing.navigation.sign_up'), new_bootcamp_registration_url, class: 'nav-link'
+              = link_to t('landing.navigation.sign_in'), bootcamp_login_url, class: 'nav-link'
+              = link_to t('landing.navigation.github_login'), bootcamp_auth_at_provider_url(provider: :github), class: 'nav-link'
+            - else
+              = link_to t('landing.navigation.logout'), bootcamp_logout_url, method: :post, class: 'nav-link'
 
       %main.inner.cover{:role => "main"}
         = yield

@@ -1,14 +1,14 @@
 require 'sorcery/model'
 
 class User < ApplicationRecord
+  rolify
   include AASM
 
-  ROLES = %w[ developer stuff author ]
-
+  after_create :assign_default_role
   validates :email, presence: true, uniqueness: true
-  validates :role, presence: true, inclusion: { in: User::ROLES }
-
   has_many :ideas, foreign_key: 'author_id'
+  has_many :authentications, dependent: :destroy
+  accepts_nested_attributes_for :authentications
 
   aasm column: 'state' do
     state :pending, initial: true
@@ -28,4 +28,8 @@ class User < ApplicationRecord
   end
 
   authenticates_with_sorcery!
+
+  def assign_default_role
+    self.add_role(:developer) if self.roles.blank?
+  end
 end

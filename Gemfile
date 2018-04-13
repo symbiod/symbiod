@@ -15,14 +15,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 
 gem 'aasm'
-gem 'trailblazer-operation'
-gem 'sorcery'
-gem 'simple_form'
+gem 'dry-validation'
 gem 'reform'
 gem 'reform-rails'
-gem 'dry-validation'
+gem 'rolify'
 gem 'sidekiq'
+gem 'simple_form'
 gem 'slack-ruby-client'
+gem 'sorcery'
+gem 'trailblazer-operation'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
@@ -30,6 +31,7 @@ gem 'slack-ruby-client'
 
 group :development, :test do
   gem 'pry-rails'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'rspec-its'
   gem 'factory_bot_rails'
@@ -53,5 +55,3 @@ group :test do
   gem 'database_cleaner'
   gem 'webmock'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

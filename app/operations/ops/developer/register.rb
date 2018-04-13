@@ -21,7 +21,7 @@ module Ops
       end
 
       def user_params(options)
-        options.to_hash.merge(role: 'developer')
+        options.to_hash
       end
     end
   end
