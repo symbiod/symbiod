@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'aasm/rspec'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
@@ -6,15 +7,55 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_presence_of :email }
     it { is_expected.to validate_uniqueness_of :email }
-    it { is_expected.to validate_presence_of :role }
-    it { is_expected.to validate_inclusion_of(:role).in_array(User::ROLES) }
   end
 
   it { is_expected.to have_many :ideas }
 
-  describe 'states' do
-    subject { create(:user) }
+  describe 'users default state and role' do
+    let(:user) { create(:user, :with_name) }
 
-    its(:state) { is_expected.to eq 'pending' }
+    it 'users default role is developer' do
+      expect(user.has_role?(:developer)).to eq(true)
+    end
+
+    it 'users default have state pending' do
+      expect(user).to have_state(:pending)
+    end
+  end
+
+  describe 'changes in users states' do
+    let(:user) { create(:user, :with_name) }
+
+    it 'activate user' do
+      expect(user).to transition_from(:pending).to(:active).on_event(:activate)
+      expect(user).to transition_from(:disabled).to(:active).on_event(:activate)
+    end
+
+    it 'disable user' do
+      expect(user).to transition_from(:active).to(:disabled).on_event(:disable)
+    end
+
+    it 'reject user' do
+      expect(user).to transition_from(:pending).to(:rejected).on_event(:reject)
+    end
+  end
+
+  describe 'changes in users roles' do
+    let(:user) { create(:user, :with_name) }
+
+    it 'author role can be added' do
+      user.add_role(:author)
+      expect(user.has_role?(:author)).to eq(true)
+    end
+
+    it 'stuff role can be added' do
+      user.add_role(:stuff)
+      expect(user.has_role?(:stuff)).to eq(true)
+    end
+
+    it 'invalid role can not be added' do
+      user.add_role(:invalid)
+      expect(user.has_role?(:invalid)).to eq(false)
+    end
   end
 end

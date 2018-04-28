@@ -8,7 +8,8 @@ module Web
       def create
         result = Ops::Developer::Register.(resource_params)
         if result.success?
-          redirect_to root_path, notice: 'Application submitted'
+          login(params[:bootcamp_registration][:email], params[:bootcamp_registration][:password])
+          redirect_to root_url(subdomain: 'www'), notice: t('landing.success_register')
         else
           render :new
         end
