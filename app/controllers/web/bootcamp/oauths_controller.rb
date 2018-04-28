@@ -11,15 +11,10 @@ module Web
         if (@user = login_from(provider))
           redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login', provider: provider.titleize))
         else
-          begin
-            @user = create_from(provider)
-
-            reset_session
-            auto_login(@user)
-            redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login', provider: provider.titleize))
-          rescue => e
-            redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.failed_login', error: e.message))
-          end
+          @user = create_from(provider)
+          reset_session
+          auto_login(@user)
+          redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login', provider: provider.titleize))
         end
       end
 
