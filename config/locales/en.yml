@@ -9,7 +9,6 @@ en:
       sign_up: 'Sign up'
       sign_in: 'Sign in'
       logout: 'Logout'
-      github_login: 'Github login'
     success_register: 'Successfully registered'
     success_login: 'Login successful'
     failed_login: 'Login failed'

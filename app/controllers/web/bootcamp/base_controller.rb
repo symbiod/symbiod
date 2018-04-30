@@ -1,7 +1,7 @@
 module Web
   module Bootcamp
     class BaseController < ApplicationController
-      layout 'bootcamp'
+      #layout 'bootcamp'
     end
   end
 end
