@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many :ideas, foreign_key: 'author_id'
   has_many :authentications, dependent: :destroy
-  has_one :developer_onboarding
+  has_one :developer_onboarding, class_name: 'Developer::Onboarding'
 
   accepts_nested_attributes_for :authentications
 
@@ -35,5 +35,9 @@ class User < ApplicationRecord
 
   def assign_default_role
     self.add_role(:developer) if self.roles.blank?
+  end
+
+  def github_uid
+    authentications.github.first&.uid
   end
 end
