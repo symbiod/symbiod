@@ -5,9 +5,13 @@ class User < ApplicationRecord
   include AASM
 
   after_create :assign_default_role
+
   validates :email, presence: true, uniqueness: true
+
   has_many :ideas, foreign_key: 'author_id'
   has_many :authentications, dependent: :destroy
+  has_one :developer_onboarding
+
   accepts_nested_attributes_for :authentications
 
   aasm column: 'state' do

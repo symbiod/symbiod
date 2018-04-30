@@ -12,16 +12,17 @@ class GithubService
     client.create_repository(repo_name, new_repository_attributes)
   end
 
-  def invite_member(username, team='bootcamp')
+  def invite_member(user_id, team='bootcamp')
+    username = user_name_by_id(user_id)
     client.update_organization_membership(organization, user: username)
     client.add_team_member(team, username)
   end
 
+  private
+
   def user_name_by_id(id)
     client.user(id.to_i)[:login]
   end
-
-  private
 
   def new_repository_attributes
     {
