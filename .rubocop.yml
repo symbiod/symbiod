@@ -1451,6 +1451,7 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
+    - 'db/migrate/**/*'
 
 Style/DoubleNegation:
   Description: 'Checks for uses of double negation (!!).'
@@ -1922,6 +1923,8 @@ Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
   StyleGuide: '#consistent-string-literals'
   Enabled: true
+  Exclude:
+    - "db/schema.rb"
 
 Style/StringLiteralsInInterpolation:
   Description: >-

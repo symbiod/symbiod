@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The goal of this class is to automate github-related routine.
 class GithubService
   attr_reader :token, :organization
@@ -12,7 +13,7 @@ class GithubService
     client.create_repository(repo_name, new_repository_attributes)
   end
 
-  def invite_member(user_id, team='bootcamp')
+  def invite_member(user_id, team = 'bootcamp')
     username = user_name_by_id(user_id)
     client.update_organization_membership(organization, user: username)
     client.add_team_member(team, username)

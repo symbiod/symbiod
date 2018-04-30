@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
 module Web
   module Bootcamp
+    # Handles all sign in / sign up GitHub logic
+    # On sign up it triggers Onboarding operation,
+    # that runs all necessary steps for newcomer
     class OauthsController < BaseController
       skip_before_action :require_login, raise: false
 

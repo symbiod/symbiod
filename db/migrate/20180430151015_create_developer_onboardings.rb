@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDeveloperOnboardings < ActiveRecord::Migration[5.2]
   def change
     create_table :developer_onboardings do |t|
