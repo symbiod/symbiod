@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require './app/models/developer/onboarding'
 require './app/operations/ops/developer/invite_to_github'
 
 module Developer
