@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require './app/models/developer/onboarding'
+
 module Developer
   class Onboarding
     # Runs onboarding step in asyncronous manner.
