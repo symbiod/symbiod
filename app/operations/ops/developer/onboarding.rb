@@ -1,3 +1,5 @@
+# This is master onboarding job
+# It triggers different steps of onboarding
 module Ops
   module Developer
     class Onboarding < BaseOperation

@@ -4,19 +4,18 @@ module Ops
   module Developer
     class InviteToSlack < BaseOperation
       step :add_to_slack!
-      step :mark_step_as_complete!
+      success :mark_step_as_complete!
 
       def add_to_slack!(ctx, user:, **)
         # TODO: where can we get a name of user at this step?
         SlackService.new(ENV['SLACK_TOKEN']).invite(user.email, '', '')
         true
       rescue SlackIntegration::FailedApiCallException => e
-        return true if e == 'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
+        return true if e.message == 'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
       end
 
-      def mark_step_as_complete!
-        # TODO: should be implemented later
-         true
+      def mark_step_as_complete!(ctx, user:, **)
+        user.developer_onboarding.update!(slack: true)
       end
     end
   end
