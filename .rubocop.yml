@@ -1452,6 +1452,7 @@ Style/Documentation:
     - 'spec/**/*'
     - 'test/**/*'
     - 'db/migrate/**/*'
+    - 'config/**/*'
 
 Style/DoubleNegation:
   Description: 'Checks for uses of double negation (!!).'

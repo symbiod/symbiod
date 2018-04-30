@@ -9,7 +9,6 @@ ru:
       sign_up: 'Зарегистрироваться'
       sign_in: 'Войти'
       logout: 'Выйти'
-      github_login: 'Войти через github'
     success_register: 'Удачная регистрация'
     success_login: 'Удачный вход'
     failed_login: 'Неудачный вход'

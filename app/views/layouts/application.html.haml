@@ -10,19 +10,19 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body.text-center
+    = render partial: 'layouts/shared/fork_me'
     .cover-container.d-flex.h-100.p-3.mx-auto.flex-column
       %header.masthead.mb-auto
         .inner
           %h3.masthead-brand= t('landing.brand')
           %nav.nav.nav-masthead.justify-content-center
-            = link_to t('landing.navigation.home'), root_url(subdomain: 'www'), class: 'nav-link active'
-            = link_to t('landing.navigation.bootcamp'), bootcamp_root_url, class: 'nav-link'
-            = link_to t('landing.navigation.idea'), idea_root_url, class: 'nav-link'
-            = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link'
+            = nav_link t('landing.navigation.home'), root_url(subdomain: 'www'), subdomain: 'www'
+            = nav_link t('landing.navigation.bootcamp'), bootcamp_root_url, subdomain: 'bootcamp'
+            -#= link_to t('landing.navigation.idea'), idea_root_url, class: 'nav-link'
+            -#= link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link'
             - unless current_user
-              = link_to t('landing.navigation.sign_up'), new_bootcamp_registration_url, class: 'nav-link'
-              = link_to t('landing.navigation.sign_in'), bootcamp_login_url, class: 'nav-link'
-              = link_to t('landing.navigation.github_login'), bootcamp_auth_at_provider_url(provider: :github), class: 'nav-link'
+              -#= link_to t('landing.navigation.sign_up'), new_bootcamp_registration_url, class: 'nav-link'
+              -#= link_to t('landing.navigation.sign_in'), bootcamp_login_url, class: 'nav-link'
             - else
               = link_to t('landing.navigation.logout'), bootcamp_logout_url, method: :post, class: 'nav-link'
 
