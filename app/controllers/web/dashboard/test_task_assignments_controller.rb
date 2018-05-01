@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 module Web
   module Dashboard
+    # Handles all management logic for newcomers
     class TestTaskAssignmentsController < BaseController
-      before_action :load_candidate, only: %i[show activate reject]
+      before_action :candidate, only: %i[show activate reject]
 
       def index
         @candidates = User.screening_completed
       end
 
-      def show
-      end
+      def show; end
 
       def activate
         Ops::Developer::Activate.call(user: @candidate)
@@ -22,7 +24,7 @@ module Web
 
       private
 
-      def load_candidate
+      def candidate
         @candidate ||= User.find(params[:id])
       end
 

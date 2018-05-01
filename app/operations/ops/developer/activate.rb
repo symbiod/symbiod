@@ -7,7 +7,7 @@ module Ops
     # test task during screening.
     class Activate < BaseOperation
       step :change_state!
-      step :send_notifications!
+      # step :send_notifications!
       step :start_onboarding!
 
       private
@@ -16,11 +16,10 @@ module Ops
         user.activate!
       end
 
-      def send_notifications!(_ctx, user:, **)
-        true
-        # TODO: notify user about starting onboarding
-        # by email
-      end
+      # def send_notifications!(_ctx, user:, **)
+      ## TODO: notify user about starting onboarding
+      ## by email
+      # end
 
       def start_onboarding!(_ctx, user:, **)
         Ops::Developer::Onboarding.call(user: user)
