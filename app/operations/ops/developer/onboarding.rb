@@ -4,6 +4,8 @@ module Ops
   module Developer
     # This is master onboarding operation
     # It triggers different steps of onboarding
+    # TODO: consider making a namespace 'Onboarding' and
+    # possible creation of start/stop operations.
     class Onboarding < BaseOperation
       step :setup_onboarding
       step :invite_to_slack!

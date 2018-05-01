@@ -14,7 +14,7 @@ module Web
       private
 
       def check_authentication
-        return true if current_user&.active?
+        return true if current_user.active? || current_user.has_role?(:stuff)
         redirect_to root_landing_url,
                     alert: t('landing.alerts.not_authenticated_dashboard_access')
       end

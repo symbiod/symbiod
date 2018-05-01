@@ -14,5 +14,6 @@ module Developer
     belongs_to :developer, class_name: 'User', foreign_key: 'developer_id'
 
     scope :uncompleted, -> { where(test_task_result_id: nil) }
+    scope :completed, -> { where('test_task_result_id IS NOT NULL') }
   end
 end
