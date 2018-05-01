@@ -16,4 +16,4 @@ RUN cp config/database.yml.sample config/database.yml
 
 RUN rails assets:precompile
 
-CMD rm -f /app/tmp/pids/server.pid && rails db:migrate && foreman start -f Procfile.production
+CMD rm -f /app/tmp/pids/server.pid && rails db:migrate:with_data && foreman start -f Procfile.production
