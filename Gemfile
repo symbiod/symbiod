@@ -25,6 +25,7 @@ gem 'slack-ruby-client'
 gem 'sorcery'
 gem 'trailblazer-operation'
 gem "octokit", "~> 4.0"
+gem 'rollbar'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'

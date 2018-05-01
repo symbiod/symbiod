@@ -258,6 +258,8 @@ GEM
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
     rolify (5.2.0)
+    rollbar (2.15.6)
+      multi_json
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -404,6 +406,7 @@ DEPENDENCIES
   reform
   reform-rails
   rolify
+  rollbar
   rspec-its
   rspec-rails
   rubocop
