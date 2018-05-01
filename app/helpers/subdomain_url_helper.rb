@@ -6,4 +6,8 @@ module SubdomainUrlHelper
     is_active = request.subdomains.include?(subdomain)
     link_to title, url, class: "nav-link #{is_active ? 'active' : ''}"
   end
+
+  def root_landing_url
+    root_url(subdomain: 'www')
+  end
 end

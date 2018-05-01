@@ -17,5 +17,7 @@ en:
     body: 'For everyone who has some programming skills or an idea of an awesome project '
     developer: 'Join as Developer'
     entrepreneur: 'Entrepreneur'
+    alerts:
+      not_authenticated_dashboard_access: 'You should sign in before accessing Dashboard'
     footer:
       built_by: 'Proudly built by'

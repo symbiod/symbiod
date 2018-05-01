@@ -18,6 +18,10 @@ module Web
 
       def destroy
         logout
+        reset_sorcery_session
+        # NOTICE: For some reason Sorcery does not sign out properly
+        # So we need to manualy nullify current user variable
+        @current_user = nil
         redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.logout'))
       end
 
