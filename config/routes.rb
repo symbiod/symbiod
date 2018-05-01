@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require './lib/sidekiq_constraint'
 
 Rails.application.routes.draw do
   scope module: :web do
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
       root to: 'home#index'
     end
 
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => '/sidekiq', constraints: SidekiqConstraint.new
     root to: 'home#index'
   end
 end
