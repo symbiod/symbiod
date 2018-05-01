@@ -20,7 +20,8 @@ module Web
 
       def sign_in
         @user = login_from(provider_name)
-        redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login')) if @user
+        redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login'))
+        @user
       end
 
       def sign_up
