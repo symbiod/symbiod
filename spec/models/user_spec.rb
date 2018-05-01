@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'aasm/rspec'
 
@@ -7,6 +9,7 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_presence_of :email }
     it { is_expected.to validate_uniqueness_of :email }
+    it { is_expected.to have_many(:test_task_results) }
   end
 
   it { is_expected.to have_many :ideas }
