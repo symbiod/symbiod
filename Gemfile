@@ -26,6 +26,7 @@ gem 'sorcery'
 gem 'trailblazer-operation'
 gem "octokit", "~> 4.0"
 gem 'rollbar'
+gem 'newrelic_rpm'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
