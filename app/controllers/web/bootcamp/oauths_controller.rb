@@ -20,24 +20,25 @@ module Web
 
       def sign_in
         @user = login_from(provider_name)
-        redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login'))
+        return unless @user
+        redirect_to bootcamp_root_url, notice: t('landing.success_login')
         @user
       end
 
       def sign_up
         if validate_github_profile
-          start_onboarding
-          redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login'))
+          start_screening
+          redirect_to bootcamp_screenings_url, notice: t('landing.success_login')
         else
           redirect_to bootcamp_root_url, alert: t('bootcamp.landing.unfilled_github_email')
         end
       end
 
-      def start_onboarding
+      def start_screening
         @user = create_from(provider_name)
         reset_session
         auto_login(@user)
-        Ops::Developer::Onboarding.call(user: @user)
+        Ops::Developer::Screening::Start.call(user: @user)
       end
 
       def validate_github_profile

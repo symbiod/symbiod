@@ -8,11 +8,14 @@ Rails.application.routes.draw do
     scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
       resource :registration, only: %i[new create]
       resource :user_sessions, only: :create
+      resources :screenings, only: %i[index update]
+
       get '/login', to: 'user_sessions#new', as: :login
       post '/logout', to: 'user_sessions#destroy', as: :logout
       post 'oauth/callback', to: 'oauths#callback'
       get 'oauth/callback', to: 'oauths#callback'
       get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
+
       root to: 'home#index'
     end
 

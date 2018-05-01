@@ -5,5 +5,12 @@ FactoryBot.define do
     test_task { create(:developer_test_task) }
     test_task_result { create(:developer_test_task_result) }
     developer { create(:developer) }
+
+    trait :uncompleted do
+      test_task_result_id nil
+    end
+
+    trait :completed do
+    end
   end
 end

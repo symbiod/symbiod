@@ -61,4 +61,18 @@ RSpec.describe User, type: :model do
       expect(user.has_role?(:invalid)).to eq(false)
     end
   end
+
+  describe '#screening_completed?' do
+    subject { create(:developer) }
+
+    context 'has uncompleted test tasks' do
+      before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
+      specify { expect(subject.screening_completed?).to eq false }
+    end
+
+    context 'all tasks are completed' do
+      before { create(:developer_test_task_assignment, :completed) }
+      specify { expect(subject.screening_completed?).to eq true }
+    end
+  end
 end
