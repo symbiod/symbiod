@@ -1451,7 +1451,7 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'db/migrate/**/*'
+    - 'db/**/*'
     - 'config/**/*'
 
 Style/DoubleNegation:
@@ -1542,6 +1542,8 @@ Style/FrozenStringLiteralComment:
                  Add the frozen_string_literal comment to the top of files
                  to help transition from Ruby 2.3.0 to Ruby 3.0.
   Enabled: true
+  Exclude:
+    - 'db/**/*'
 
 Style/GlobalVars:
   Description: 'Do not introduce global variables.'
@@ -1748,6 +1750,8 @@ Style/NumericLiterals:
                  readability.
   StyleGuide: '#underscores-in-numerics'
   Enabled: true
+  Exclude:
+    - 'db/**/*'
 
 Style/NumericPredicate:
   Description: >-
