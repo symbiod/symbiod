@@ -780,6 +780,7 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - "**/*_spec.rb"
+    - "db/schema.rb"
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting'
