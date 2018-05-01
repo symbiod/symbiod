@@ -6,6 +6,7 @@ module Ops
       # Persists the result of completed task
       class CompleteTask < BaseOperation
         step :persist_result!
+        success :complete_screening!
 
         private
 
@@ -13,6 +14,10 @@ module Ops
           assignment = user.test_task_assignments.find(assignment_id)
           result = ::Developer::TestTaskResult.create!(params)
           assignment.update!(test_task_result: result)
+        end
+
+        def complete_screening!(_ctx, user:, **)
+          Finish.call(user: user)
         end
       end
     end
