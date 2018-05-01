@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
+require './lib/sidekiq_constraint'
 
 Rails.application.routes.draw do
   scope module: :web do
     scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
-      resource :registration, only: [:new, :create]
+      resource :registration, only: %i[new create]
       resource :user_sessions, only: :create
       get '/login', to: 'user_sessions#new', as: :login
       post '/logout', to: 'user_sessions#destroy', as: :logout
@@ -21,7 +24,7 @@ Rails.application.routes.draw do
       root to: 'home#index'
     end
 
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => '/sidekiq', constraints: SidekiqConstraint.new
     root to: 'home#index'
   end
 end

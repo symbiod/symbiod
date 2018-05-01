@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/ilyakatz/data-migrate.git
+  revision: 7e109ac3e5a99ac2d3ce5f1d5bc9d15e4a8a02ae
+  branch: rails5.2
+  specs:
+    data_migrate (4.0.0)
+      rails (>= 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -389,6 +397,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  data_migrate!
   database_cleaner
   dry-validation
   factory_bot_rails

@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(version: 2018_04_30_151015) do
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 
+  create_table "data_migrations", id: false, force: :cascade do |t|
+    t.string "version", null: false
+    t.index ["version"], name: "unique_data_migrations", unique: true
+  end
+
   create_table "developer_onboardings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.boolean "slack", default: false
