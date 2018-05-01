@@ -1,5 +1,11 @@
+# frozen_string_literal: true
+
 module Web
   module Bootcamp
+    # ATM this controller used only for sign outs.
+    # But this should be also a good place for email/password authentication.
+    # TODO: Consider moving it to some root namespace,
+    # so it can be used for other roles signup too
     class UserSessionsController < ApplicationController
       skip_before_action :verify_authenticity_token
 
@@ -8,7 +14,7 @@ module Web
       end
 
       def create
-        if @user = login(params[:bootcamp_login][:email], params[:bootcamp_login][:password])
+        if (@user = login(resource_params[:email], resource_params[:password]))
           redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login', email: @user.email))
         else
           flash.now[:alert] = t('landing.failed_login')
