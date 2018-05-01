@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'aasm/rspec'
 
@@ -7,6 +9,7 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_presence_of :email }
     it { is_expected.to validate_uniqueness_of :email }
+    it { is_expected.to have_many(:test_task_assignments) }
   end
 
   it { is_expected.to have_many :ideas }
@@ -26,8 +29,12 @@ RSpec.describe User, type: :model do
   describe 'changes in users states' do
     let(:user) { create(:user, :with_name) }
 
+    it 'completes screening' do
+      expect(user).to transition_from(:pending).to(:screening_completed).on_event(:complete_screening)
+    end
+
     it 'activate user' do
-      expect(user).to transition_from(:pending).to(:active).on_event(:activate)
+      expect(user).to transition_from(:screening_completed).to(:active).on_event(:activate)
       expect(user).to transition_from(:disabled).to(:active).on_event(:activate)
     end
 
@@ -36,7 +43,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'reject user' do
-      expect(user).to transition_from(:pending).to(:rejected).on_event(:reject)
+      expect(user).to transition_from(:screening_completed).to(:rejected).on_event(:reject)
     end
   end
 
@@ -56,6 +63,20 @@ RSpec.describe User, type: :model do
     it 'invalid role can not be added' do
       user.add_role(:invalid)
       expect(user.has_role?(:invalid)).to eq(false)
+    end
+  end
+
+  describe '#test_tasks_completed?' do
+    subject { create(:developer) }
+
+    context 'has uncompleted test tasks' do
+      before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
+      specify { expect(subject.test_tasks_completed?).to eq false }
+    end
+
+    context 'all tasks are completed' do
+      before { create(:developer_test_task_assignment, :completed) }
+      specify { expect(subject.test_tasks_completed?).to eq true }
     end
   end
 end

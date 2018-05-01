@@ -8,12 +8,13 @@ module Web
 
       include SubdomainUrlHelper
 
+      before_action :require_login
       before_action :check_authentication
 
       private
 
       def check_authentication
-        return true if current_user
+        return true if current_user&.active?
         redirect_to root_landing_url,
                     alert: t('landing.alerts.not_authenticated_dashboard_access')
       end
