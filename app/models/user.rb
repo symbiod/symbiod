@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   # TODO: move to some other model, that represents developer explicitly.
   has_one :developer_onboarding, class_name: 'Developer::Onboarding'
-  has_many :test_task_results, class_name: 'Developer::TestTaskResult', foreign_key: 'developer_id'
+  has_many :test_task_assignments, class_name: 'Developer::TestTaskAssignment', foreign_key: 'developer_id'
 
   accepts_nested_attributes_for :authentications
 

@@ -5,7 +5,6 @@ module Developer
   class TestTaskResult < ApplicationRecord
     validates :link, presence: true # TODO: url format?
 
-    belongs_to :developer, class_name: 'User', foreign_key: 'developer_id'
-    belongs_to :test_task, class_name: 'Developer::TestTask'
+    has_one :test_task_assignment, class_name: 'Developer::TestTaskAssignment'
   end
 end
