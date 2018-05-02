@@ -1,0 +1,2 @@
+#!/bin/bash
+heroku pg:psql postgresql-infinite-47832 --app peaceful-refuge-95132
