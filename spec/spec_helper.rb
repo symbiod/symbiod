@@ -2,6 +2,11 @@
 
 require 'webmock/rspec'
 require './spec/support/slack_mock'
+require 'simplecov'
+
+SimpleCov.start 'rails' do
+  minimum_coverage 23.87
+end
 
 RSpec.configure do |config|
   config.extend SlackMock
