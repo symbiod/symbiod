@@ -5,6 +5,7 @@ module Web
     # Handles all management logic for newcomers
     class TestTaskAssignmentsController < BaseController
       before_action :candidate, only: %i[show activate reject]
+      before_action :authorize_staff!
 
       def index
         @candidates = User.screening_completed
@@ -26,6 +27,10 @@ module Web
 
       def candidate
         @candidate ||= User.find(params[:id])
+      end
+
+      def authorize_staff!
+        authorize :test_task_assignment, "#{action_name}?".to_sym
       end
 
       def rejection_params

@@ -26,10 +26,11 @@
                   %span{"data-feather" => "home"}
                   Dashboard
                   %span.sr-only (current)
-              %li.nav-item
-                = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
-                  %span{"data-feather" => "file"}
-                  Applicants
+              - if policy(:test_task_assignment).index?
+                %li.nav-item
+                  = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
+                    %span{"data-feather" => "file"}
+                    Applicants
               %li.nav-item
                 %a.nav-link{:href => "#"}
                   %span{"data-feather" => "file"}
