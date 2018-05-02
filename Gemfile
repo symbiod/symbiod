@@ -47,6 +47,7 @@ end
 
 group :development do
   gem 'migration_opener'
+  gem 'letter_opener'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
