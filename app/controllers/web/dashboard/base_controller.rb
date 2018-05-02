@@ -10,13 +10,18 @@ module Web
 
       before_action :require_login
       before_action :check_authentication
+      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       private
 
       def check_authentication
-        return true if current_user&.active?
+        return true if current_user.active? || current_user.has_role?(:stuff)
         redirect_to root_landing_url,
                     alert: t('landing.alerts.not_authenticated_dashboard_access')
+      end
+
+      def redirect_to_dashboard_root
+        redirect_to dashboard_root_url
       end
     end
   end

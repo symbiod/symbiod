@@ -24,6 +24,12 @@ Rails.application.routes.draw do
     end
 
     scope as: :dashboard, module: :dashboard, constraints: { subdomain: 'dashboard' } do
+      resources :test_task_assignments, only: %i[index show] do
+        member do
+          put :activate
+          put :reject
+        end
+      end
       root to: 'home#index'
     end
 

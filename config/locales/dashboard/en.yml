@@ -1,0 +1,9 @@
+en:
+  dashboard:
+    candidates:
+      notices:
+        activated: The candidate was activated
+        rejected: The candidate was rejected
+      reject: Reject
+      activate: Activate
+      confirm_rejection: Do you really want to reject this candidate?
