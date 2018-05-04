@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
-# Allows only stuff to manage newcomers applications
+# Allows only staff to manage newcomers applications
 class TestTaskAssignmentPolicy < ApplicationPolicy
   def index?
-    stuff?
+    staff?
   end
 
   def show?
-    stuff?
+    staff?
   end
 
   def activate?
-    stuff?
+    staff?
   end
 
   def reject?
-    stuff?
+    staff?
   end
 
   private
 
-  def stuff?
-    user.has_role? :stuff
+  def staff?
+    user.has_role? :staff
   end
 end

@@ -55,9 +55,9 @@ RSpec.describe User, type: :model do
       expect(user.has_role?(:author)).to eq(true)
     end
 
-    it 'stuff role can be added' do
-      user.add_role(:stuff)
-      expect(user.has_role?(:stuff)).to eq(true)
+    it 'staff role can be added' do
+      user.add_role(:staff)
+      expect(user.has_role?(:staff)).to eq(true)
     end
 
     it 'invalid role can not be added' do
