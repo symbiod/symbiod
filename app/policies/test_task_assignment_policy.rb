@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Allows only stuff to manage newcomers applications
-class TestTaskAssignmentPolicy < ApplicationPolicy
+class TestTaskAssignmentPolicy < DashboardPolicy
   def index?
     stuff?
   end
@@ -16,11 +16,5 @@ class TestTaskAssignmentPolicy < ApplicationPolicy
 
   def reject?
     stuff?
-  end
-
-  private
-
-  def stuff?
-    user.has_role? :stuff
   end
 end
