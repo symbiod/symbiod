@@ -14,7 +14,7 @@ module Web
         Ops::Developer::Screening::CompleteTask.call(
           user: current_user,
           assignment_id: params[:id],
-          params: assignment_result
+          params: assignment_result.to_hash
         )
         redirect_to bootcamp_screenings_url
       end
