@@ -782,6 +782,7 @@ Metrics/BlockLength:
     - "**/*_spec.rb"
     - "db/schema.rb"
     - "config/routes.rb"
+    - "spec/factories/**/*.rb"
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting'
