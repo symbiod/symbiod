@@ -12,8 +12,14 @@ FactoryBot.define do
       name { Faker::Name.name }
     end
 
+    trait :pending
+
     trait :active do
       state 'active'
+    end
+
+    trait :screening_completed do
+      state 'screening_completed'
     end
 
     trait :staff do
