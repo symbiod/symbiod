@@ -31,7 +31,9 @@ class GithubService
     }
   end
 
+  # :nocov:
   def client
     @client ||= Octokit::Client.new(access_token: token)
   end
+  # :nocov:
 end
