@@ -7,7 +7,7 @@ module Ops
     class InviteToGithub < BaseOperation
       step :add_to_github!
       # TODO: makes sense to extract to base class for all onboarding steps
-      success :mark_step_as_complete!
+      step :mark_step_as_complete!
 
       def add_to_github!(_ctx, user:, **)
         GithubService.new(ENV['GITHUB_TOKEN'], 'howtohireme')
@@ -16,6 +16,11 @@ module Ops
       end
 
       def mark_step_as_complete!(_ctx, user:, **)
+        # TODO: consider introducing specific fields for onboarding status
+        # like:
+        # - invited_to_github
+        # - accepted_github_invitation
+        # - left_github
         user.developer_onboarding.update!(github: true)
       end
     end

@@ -27,5 +27,17 @@ FactoryBot.define do
         user.add_role(:stuff)
       end
     end
+
+    trait :with_assignment do
+      after(:create) do |user|
+        create(:developer_test_task_assignment, developer: user)
+      end
+    end
+
+    trait :authenticated_through_github do
+      after(:create) do |user|
+        create(:authentication, :github, user: user)
+      end
+    end
   end
 end
