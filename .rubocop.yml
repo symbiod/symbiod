@@ -804,6 +804,8 @@ Metrics/LineLength:
   StyleGuide: '#80-character-limits'
   Enabled: true
   Max: 120
+  Exclude:
+    - 'db/seeds.rb'
 
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 10 lines of code.'
