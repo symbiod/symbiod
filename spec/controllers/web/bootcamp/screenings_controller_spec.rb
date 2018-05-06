@@ -20,7 +20,8 @@ describe Web::Bootcamp::ScreeningsController do
 
       it 'assigns assigments' do
         get :index
-        expect(assigns(:assignments)).to eq user.reload.test_task_assignments.uncompleted
+        current_assignment = user.reload.test_task_assignments.uncompleted.first
+        expect(assigns(:assignment)).to eq current_assignment
       end
     end
 
