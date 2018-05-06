@@ -59,6 +59,17 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    cells (4.1.7)
+      declarative-builder (< 0.2.0)
+      declarative-option (< 0.2.0)
+      tilt (>= 1.4, < 3)
+      uber (< 0.2.0)
+    cells-haml (0.0.10)
+      cells (>= 4.0.1, <= 6.0.0)
+      haml (>= 4.1.0.beta.1)
+    cells-rails (0.0.9)
+      actionpack (>= 3.0)
+      cells (>= 4.1.6, < 5.0.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.2)
@@ -403,6 +414,8 @@ DEPENDENCIES
   aasm
   byebug
   capybara (~> 2.13)
+  cells-haml
+  cells-rails
   coffee-rails (~> 4.2)
   data_migrate
   database_cleaner

@@ -7,7 +7,7 @@ module Web
       before_action :require_login
 
       def index
-        @assignments = current_user.test_task_assignments.uncompleted
+        @assignment = current_user.test_task_assignments.uncompleted.first
       end
 
       def update
