@@ -7,14 +7,14 @@ module Web
       before_action :require_login
 
       def index
-        @assignments = current_user.test_task_assignments.uncompleted
+        @assignment = current_user.test_task_assignments.uncompleted.first
       end
 
       def update
         Ops::Developer::Screening::CompleteTask.call(
           user: current_user,
           assignment_id: params[:id],
-          params: assignment_result
+          params: assignment_result.to_hash
         )
         redirect_to bootcamp_screenings_url
       end

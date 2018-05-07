@@ -1,17 +1,12 @@
-- if @assignments.any?
+- if @assignment.present?
   %h1.cover-heading= t('bootcamp.screening.title')
   %p.lead
     = t('bootcamp.screening.body')
   %hr
 
-  - @assignments.each_with_index do |assignment, index|
-    %p.lead
-      Question #{index}
-    = assignment.test_task.description
+  .cell
+    = cell(Developer::Screening::DisplayAssignment, @assignment).()
 
-    = simple_form_for(Developer::TestTaskResult.new, method: :put, remote: false, url: bootcamp_screening_path(assignment)) do |f|
-      = f.input :link
-      = f.button :submit, 'Submit', type: :submit, class: 'btn btn-lg btn-secondary'
 - else
   %h1.cover-heading= t('bootcamp.screening.congrats')
   %p.lead

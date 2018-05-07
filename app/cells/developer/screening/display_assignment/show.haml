@@ -1,0 +1,11 @@
+%p.lead
+  Question
+  = current_user.test_task_assignments.count - current_user.test_task_assignments.uncompleted.count + 1
+  = '/'
+  = current_user.test_task_assignments.count
+
+= model.test_task.description
+
+= simple_form_for(Developer::TestTaskResult.new, method: :put, remote: false, url: bootcamp_screening_path(model)) do |f|
+  = f.input :link
+  = f.button :submit, 'Submit', type: :submit, class: 'btn btn-lg btn-secondary'

@@ -36,4 +36,5 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq', constraints: SidekiqConstraint.new
     root to: 'home#index'
   end
+  get '/ping', to: 'ping#index'
 end

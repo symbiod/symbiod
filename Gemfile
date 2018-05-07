@@ -14,6 +14,10 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 
+gem 'trailblazer-operation'
+gem 'cells-rails'
+gem 'cells-haml'
+
 gem 'aasm'
 gem 'dry-validation'
 gem 'reform'
@@ -23,11 +27,11 @@ gem 'sidekiq'
 gem 'simple_form'
 gem 'slack-ruby-client'
 gem 'sorcery'
-gem 'trailblazer-operation'
+
 gem "octokit", "~> 4.0"
 gem 'rollbar'
 gem 'newrelic_rpm'
-gem 'data_migrate', github: 'ilyakatz/data-migrate', branch: 'rails5.2'
+gem 'data_migrate'
 gem 'pundit'
 
 # Rails 5.2 stuff

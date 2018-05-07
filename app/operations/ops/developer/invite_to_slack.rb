@@ -13,11 +13,16 @@ module Ops
         SlackService.new(ENV['SLACK_TOKEN']).invite(user.email, '', '')
         true
       rescue SlackIntegration::FailedApiCallException => e
-        return true if e.message == 'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
+        handle_exception(e)
       end
 
       def mark_step_as_complete!(_ctx, user:, **)
         user.developer_onboarding.update!(slack: true)
+      end
+
+      def handle_exception(exception)
+        return true if exception.message == 'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
+        raise
       end
     end
   end

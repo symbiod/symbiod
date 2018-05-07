@@ -40,10 +40,11 @@ class SlackService
   private
 
   attr_reader :token
-
+  # :nocov:
   def client
-    @client ||= Slack::Web::Client.new(token: token)
+    @client ||= ::Slack::Web::Client.new(token: token)
   end
+  # :nocov:
 
   def channel_by_name(channel)
     client.conversations_list['channels'].find do |entry|

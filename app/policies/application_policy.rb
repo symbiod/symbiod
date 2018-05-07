@@ -5,6 +5,9 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
+    # TODO: uncomment this for single point of
+    # authentication check for dashboard
+    # raise Pundit::NotAuthorizedError, "must be logged in" unless user
     @user = user
     @record = record
   end

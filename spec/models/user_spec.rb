@@ -4,19 +4,19 @@ require 'rails_helper'
 require 'aasm/rspec'
 
 RSpec.describe User, type: :model do
-  describe 'validations' do
-    subject { create(:user) }
+  subject(:user) { create(:user) }
 
+  describe 'validations' do
     it { is_expected.to validate_presence_of :email }
     it { is_expected.to validate_uniqueness_of :email }
-    it { is_expected.to have_many(:test_task_assignments) }
   end
 
-  it { is_expected.to have_many :ideas }
+  describe 'relations' do
+    it { is_expected.to have_many :ideas }
+    it { is_expected.to have_many :test_task_assignments }
+  end
 
   describe 'users default state and role' do
-    let(:user) { create(:user, :with_name) }
-
     it 'users default role is developer' do
       expect(user.has_role?(:developer)).to eq(true)
     end
@@ -27,8 +27,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'changes in users states' do
-    let(:user) { create(:user, :with_name) }
-
     it 'completes screening' do
       expect(user).to transition_from(:pending).to(:screening_completed).on_event(:complete_screening)
     end
@@ -48,8 +46,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'changes in users roles' do
-    let(:user) { create(:user, :with_name) }
-
     it 'author role can be added' do
       user.add_role(:author)
       expect(user.has_role?(:author)).to eq(true)
@@ -67,8 +63,6 @@ RSpec.describe User, type: :model do
   end
 
   describe '#test_tasks_completed?' do
-    subject { create(:developer) }
-
     context 'has uncompleted test tasks' do
       before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
       specify { expect(subject.test_tasks_completed?).to eq false }
@@ -77,6 +71,19 @@ RSpec.describe User, type: :model do
     context 'all tasks are completed' do
       before { create(:developer_test_task_assignment, :completed) }
       specify { expect(subject.test_tasks_completed?).to eq true }
+    end
+  end
+
+  describe '#github_uid' do
+    context 'no authentications' do
+      its(:github_uid) { is_expected.to eq nil }
+    end
+
+    context 'several authentications' do
+      let!(:auth1) { create(:authentication, :github, user: subject) }
+      let!(:auth2) { create(:authentication, :github, user: subject) }
+
+      its(:github_uid) { is_expected.to eq auth1.uid }
     end
   end
 end

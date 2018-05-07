@@ -11,6 +11,7 @@ FactoryBot.define do
     end
 
     trait :completed do
+      test_task_result { create(:developer_test_task_result) }
     end
   end
 end

@@ -11,14 +11,14 @@ module Web
       # Force user to visit screening, if it is not completed yet
       # Othervise redirect him to dashboard
       def check_if_screening_completed?
-        if screening_completed?
+        if user_active?
           redirect_to dashboard_root_url
         elsif controller_name != 'screenings'
           redirect_to bootcamp_screenings_url
         end
       end
 
-      def screening_completed?
+      def user_active?
         current_user.active?
       end
     end
