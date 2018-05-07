@@ -8,15 +8,15 @@ class DashboardPolicy < ApplicationPolicy
 <<<<<<< HEAD
     user&.active? || user&.has_role?(:staff)
 =======
-    result = user&.active? || user&.has_role?(:stuff)
+    result = user&.active? || user&.has_role?(:staff)
     return false if result.nil?
     result
   end
 
   private
 
-  def stuff?
-    user.has_role? :stuff
+  def staff?
+    user.has_role? :staff
 >>>>>>> 443de4f8672fb506073a32e024d845fcd49f3890
   end
 end

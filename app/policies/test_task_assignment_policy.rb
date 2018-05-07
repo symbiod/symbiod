@@ -4,7 +4,7 @@
 # Allows only staff to manage newcomers applications
 class TestTaskAssignmentPolicy < ApplicationPolicy
 =======
-# Allows only stuff to manage newcomers applications
+# Allows only staff to manage newcomers applications
 class TestTaskAssignmentPolicy < DashboardPolicy
 >>>>>>> 443de4f8672fb506073a32e024d845fcd49f3890
   def index?
