@@ -783,6 +783,7 @@ Metrics/BlockLength:
     - "db/schema.rb"
     - "config/routes.rb"
     - "spec/factories/**/*.rb"
+    - 'config/initializers/*.rb'
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting'
@@ -806,6 +807,7 @@ Metrics/LineLength:
   Max: 120
   Exclude:
     - 'db/seeds.rb'
+    - 'config/initializers/*.rb'
 
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 10 lines of code.'
