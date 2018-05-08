@@ -12,7 +12,7 @@ describe SidekiqConstraint do
       let(:user_id) { user.id }
 
       context 'user is staff' do
-        before { user.add_role :stuff }
+        before { user.add_role :staff }
         specify { expect(subject.matches?(request)).to eq true }
       end
 
