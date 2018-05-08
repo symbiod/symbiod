@@ -22,5 +22,9 @@ describe Ops::Developer::Reject do
         .to change { assignment.reload.feedback }
         .from(nil).to(feedback)
     end
+
+    it 'sends email about rejection with sidekiq-job' do
+      expect(Sidekiq::Worker.jobs.to_s.include?('RejectionNotificationMailer')).to eq true
+    end
   end
 end

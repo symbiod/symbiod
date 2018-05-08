@@ -10,3 +10,7 @@ en:
       body: Complete several small quizes, to show that you know the basics
       congrats: Congratulations!
       wait_for_tasks_review: Let us check you answers, and we'll be back to you soon.
+      completed: Screening was completed
+      rejection: You were rejected
+    onboarding:
+      started: Onboarding started!

@@ -14,6 +14,10 @@ describe Ops::Developer::Activate do
         .from('screening_completed').to('active')
     end
 
+    it 'sends email about start of onboarding with sidekiq-job' do
+      expect(Sidekiq::Worker.jobs.to_s.include?('OnboardingStartedMailer')).to eq true
+    end
+
     it 'starts onboarding operation' do
       expect(Ops::Developer::Onboarding).to receive(:call).with(user: user)
       subject.call(params)
