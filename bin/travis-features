@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git clone https://github.com/howtohireme/give-me-poc-features.git
+cd give-me-poc-features
+bin/run

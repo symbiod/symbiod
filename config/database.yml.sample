@@ -18,3 +18,8 @@ production:
   url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   adapter: postgresql
+
+features:
+  <<: *default
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: poc_features

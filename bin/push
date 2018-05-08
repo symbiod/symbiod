@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.heroku.com
+docker push registry.heroku.com/peaceful-refuge-95132/web
