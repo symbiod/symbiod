@@ -62,7 +62,12 @@ describe Web::Dashboard::TestTaskAssignmentsController do
     end
 
     context 'not authorized' do
-      pending 'Add some tests here'
+      let!(:candidate) { create(:user, :active) }
+      before { get :show, params: { id: candidate.id } }
+
+      it 'redirect to dashboard root' do
+        expect(response).to redirect_to dashboard_root_path
+      end
     end
   end
 
@@ -83,7 +88,12 @@ describe Web::Dashboard::TestTaskAssignmentsController do
     end
 
     context 'not authorized' do
-      pending 'Add some tests here'
+      let!(:candidate) { create(:user, :active) }
+
+      it 'redirect to dashboard root' do
+        put :activate, params: { id: candidate.id }
+        expect(response).to redirect_to dashboard_root_path
+      end
     end
   end
 
@@ -104,7 +114,12 @@ describe Web::Dashboard::TestTaskAssignmentsController do
     end
 
     context 'not authorized' do
-      pending 'Add some tests here'
+      let!(:candidate) { create(:user, :active) }
+
+      it 'redirecct to dashboard root' do
+        put :reject, params: { id: candidate.id, developer_test_task_assignment: { feedback: 'some text' } }
+        expect(response).to redirect_to dashboard_root_path
+      end
     end
   end
 end
