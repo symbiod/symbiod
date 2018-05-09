@@ -1,0 +1,39 @@
+%h2
+  User id
+  = @user.id
+.table-responsive
+  %table.table.table-striped.table-sm
+    %tr
+      %td
+        %b
+          email
+      %td= @user.email
+    %tr
+      %td
+        %b
+          GitHub username
+      %td= @user.name
+    %tr
+      %td
+        %b
+          Roles
+      %td
+        - @user.roles_name.each_with_index do |role, index|
+          - unless index.zero?
+            %br/
+          = role
+          = link_to 'delete', remove_role_dashboard_user_path(@user, role: role), method: :put
+        - %w[developer stuff author].each do |role|
+          - unless @user.roles_name.include?(role)
+            %br/
+            = link_to "add role #{role}", add_role_dashboard_user_path(@user, role: role), method: :put
+    %tr
+      %td
+        %b
+          Task assignments
+      %td
+        - @user.test_task_assignments.each_with_index do |test_task_assignment, index|
+          - if index.zero?
+            = test_task_assignment
+          - else
+            %br= test_task_assignment

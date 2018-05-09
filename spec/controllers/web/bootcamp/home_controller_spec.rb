@@ -24,6 +24,15 @@ describe Web::Bootcamp::HomeController do
           expect(response).to redirect_to bootcamp_screenings_url
         end
       end
+
+      context 'user active' do
+        let(:user) { create(:user, :active) }
+
+        it 'redirect to dashboard root path' do
+          get :index
+          expect(response).to redirect_to dashboard_root_url
+        end
+      end
     end
 
     context 'not authenticated' do

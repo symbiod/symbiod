@@ -18,6 +18,10 @@ FactoryBot.define do
       state 'active'
     end
 
+    trait :disable do
+      state 'disabled'
+    end
+
     trait :screening_completed do
       state 'screening_completed'
     end
@@ -25,6 +29,12 @@ FactoryBot.define do
     trait :staff do
       after(:create) do |user|
         user.add_role(:stuff)
+      end
+    end
+
+    trait :developer do
+      after(:create) do |user|
+        user.add_role(:developer)
       end
     end
 

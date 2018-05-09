@@ -1,0 +1,25 @@
+%h2 Users Management
+.table-responsive
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th email
+        %th GitHub username
+        %th roles
+        %th status
+      - @users.each do |user|
+        %tr
+          %td= link_to user.email, dashboard_user_path(user)
+          %td= user.name
+          %td
+            - user.roles.each_with_index do |role, index|
+              - if index.zero?
+                = role.name
+              - else
+                %br/
+                = role.name
+          %td
+            - if user.active?
+              = link_to user.state, disable_dashboard_user_path(user), method: :put
+            - else
+              = link_to user.state, activate_dashboard_user_path(user), method: :put
