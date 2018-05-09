@@ -73,6 +73,8 @@
                   %span{"data-feather" => "file-text"}
                   Year-end sale
         %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{:role => "main"}
+          = render partial: 'layouts/shared/dashboard_flashes'
+
           = yield
 
   /
