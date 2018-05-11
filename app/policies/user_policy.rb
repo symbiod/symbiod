@@ -14,7 +14,7 @@ class UserPolicy < DashboardPolicy
     stuff?
   end
 
-  def disable?
+  def delete?
     stuff?
   end
 
@@ -22,7 +22,7 @@ class UserPolicy < DashboardPolicy
     stuff?
   end
 
-  def remove_role?
+  def delete_role?
     stuff?
   end
 end

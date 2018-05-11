@@ -2,14 +2,15 @@
 
 module Ops
   module Developer
-    # This remove role to user
+    # Removes the role from user
     class RemoveRole < BaseOperation
       step :remove_role!
 
       private
 
       def remove_role!(_ctx, user:, role:, size:, **)
-        user.remove_role role if size > 1
+        return user.remove_role role if size > 1
+        raise CustomErrors::LastRoleError
       end
     end
   end

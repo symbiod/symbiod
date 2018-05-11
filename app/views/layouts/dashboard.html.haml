@@ -4,7 +4,8 @@
     %meta{ content: "text/html; charset=UTF-8", "http-equiv": "Content-Type" }/
     %title Poc
     = csrf_meta_tags
-    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+                             media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    '/css/dashboard.css', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -12,7 +13,7 @@
   %body
     %nav.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0
       = link_to 'givemepoc.org', root_landing_url, class: 'navbar-brand col-sm-3 col-md-2 mr-0'
-      %input.form-control.form-control-dark.w-100{ "aria-label": "Search", placeholder: "Search", type: "text"}/
+      %input.form-control.form-control-dark.w-100{ "aria-label": "Search", placeholder: "Search", type: "text" }/
       %ul.navbar-nav.px-3
         %li.nav-item.text-nowrap
           %a.nav-link{ href: "#" } Sign out
@@ -24,8 +25,9 @@
               %li.nav-item
                 %a.nav-link.active{ href: "#" }
                   %span{ "data-feather": "home" }
-                  Dashboard
-                  %span.sr-only(current)
+                    Dashboard
+                  %span{ class: 'sr-only' }
+                    Current
               - if policy(:test_task_assignment).index?
                 %li.nav-item
                   = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
@@ -52,7 +54,7 @@
                   %span{ "data-feather": "bar-chart-2" }
                   Reports
               %li.nav-item
-                %a.nav-link{:href => "#"}
+                %a.nav-link{ href: "#" }
                   %span{ "data-feather": "layers" }
                   Integrations
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
@@ -85,7 +87,8 @@
     Bootstrap core JavaScript
     \==================================================
   / Placed at the end of the document so the pages load faster
-  %script{ crossorigin: "anonymous", integrity: "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", src: "https://code.jquery.com/jquery-3.2.1.slim.min.js" }
+  %script{ crossorigin: "anonymous", integrity: "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN",
+           src: "https://code.jquery.com/jquery-3.2.1.slim.min.js" }
   :javascript
     window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')
   %script{ src: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" }

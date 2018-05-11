@@ -3,7 +3,7 @@
 module Ops
   module Developer
     # This add role to user
-    class AddRole < BaseOperation
+    class AssignRole < BaseOperation
       step :add_role!
 
       private

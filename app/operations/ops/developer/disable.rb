@@ -2,13 +2,13 @@
 
 module Ops
   module Developer
-    # When the candidate is approved we run a bunch of tasks.
+    # When the candidate is disabled we run a bunch of tasks.
     # Usually it should happen when staff approves applicant's
     # test task during screening.
     class Disable < BaseOperation
       step :change_state!
       # step :send_notifications!
-      step :start_onboarding!
+      # step :start_offboarding!
 
       private
 
@@ -17,13 +17,14 @@ module Ops
       end
 
       # def send_notifications!(_ctx, user:, **)
-      ## TODO: notify user about starting onboarding
-      ## by email
+      # TODO: notify user about starting onboarding
+      # by email
       # end
 
-      def start_onboarding!(_ctx, user:, **)
-        Ops::Developer::Onboarding.call(user: user)
-      end
+      # def start_offboarding!(_ctx, user:, **)
+      #   TODO: remove the user from slack, github, etc.
+      #   Ops::Developer::Offboarding.call(user: user)
+      # end
     end
   end
 end

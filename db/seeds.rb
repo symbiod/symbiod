@@ -6,3 +6,7 @@ tasks = [
 tasks.each do |task_attributes|
   Developer::TestTask.find_or_create_by!(task_attributes)
 end
+
+9.times do |i|
+  User.create!(email: "test0#{i}@gmail.com", name: "test0#{i}", state: 'disabled')
+end

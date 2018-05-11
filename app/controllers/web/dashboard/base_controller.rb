@@ -28,6 +28,11 @@ module Web
         flash[:danger] = t('dashboard.users.access.deny')
         redirect_to dashboard_users_path
       end
+
+      def redirect_to_dashboard_user
+        flash[:danger] = t('dashboard.users.alert.last_role')
+        redirect_to dashboard_user_path(@user)
+      end
     end
   end
 end

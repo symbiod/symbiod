@@ -17,8 +17,8 @@ module Ops
       end
 
       # def send_notifications!(_ctx, user:, **)
-      ## TODO: notify user about starting onboarding
-      ## by email
+      # TODO: notify user about starting onboarding
+      # by email
       # end
 
       def start_onboarding!(_ctx, user:, **)

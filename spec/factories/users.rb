@@ -18,7 +18,7 @@ FactoryBot.define do
       state 'active'
     end
 
-    trait :disable do
+    trait :disabled do
       state 'disabled'
     end
 
@@ -29,12 +29,6 @@ FactoryBot.define do
     trait :staff do
       after(:create) do |user|
         user.add_role(:stuff)
-      end
-    end
-
-    trait :developer do
-      after(:create) do |user|
-        user.add_role(:developer)
       end
     end
 

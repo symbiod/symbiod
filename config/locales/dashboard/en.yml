@@ -16,4 +16,4 @@ en:
         add_role: role was added
         remove_role: role was removed
       alert:
-        last_role: is the last role, can not be remove
+        last_role: Can not remove the last role

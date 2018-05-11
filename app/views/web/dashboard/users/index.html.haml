@@ -3,23 +3,28 @@
   %table.table.table-striped.table-sm
     %thead
       %tr
-        %th email
+        %th Email
         %th GitHub username
-        %th roles
-        %th status
+        %th Roles
+        %th Status
       - @users.each do |user|
         %tr
           %td= link_to user.email, dashboard_user_path(user)
           %td= user.name
           %td
-            - user.roles.each_with_index do |role, index|
-              - if index.zero?
-                = role.name
-              - else
-                %br/
-                = role.name
+            %ul
+              - user.roles.each do |role|
+                %li
+                  = role.name
           %td
-            - if user.active?
-              = link_to user.state, disable_dashboard_user_path(user), method: :put
+            - if current_user.has_role?(:stuff)
+              - if user.active?
+                = link_to user.state, delete_dashboard_user_path(user), method: :put,
+                                                                        class: "btn btn-success",
+                                                                        data: { confirm: 'Are you sure to disable?' }
+              - else
+                = link_to user.state, activate_dashboard_user_path(user), method: :put,
+                                                                          class: "btn btn-danger",
+                                                                          data: { confirm: 'Are you sure to activate?' }
             - else
-              = link_to user.state, activate_dashboard_user_path(user), method: :put
+              = user.state
