@@ -7,6 +7,7 @@
         %th GitHub username
         %th Roles
         %th Status
+        %th Applicants
       - @users.each do |user|
         %tr
           %td= link_to user.email, dashboard_user_path(user)
@@ -19,12 +20,18 @@
           %td
             - if current_user.has_role?(:stuff)
               - if user.active?
-                = link_to user.state, delete_dashboard_user_path(user), method: :put,
-                                                                        class: "btn btn-success",
-                                                                        data: { confirm: 'Are you sure to disable?' }
+                = link_to user.state, deactivate_dashboard_user_path(user),
+                                      method: :put,
+                                      class: "btn btn-success",
+                                      data: { confirm: 'Are you sure to disable?' }
               - else
-                = link_to user.state, activate_dashboard_user_path(user), method: :put,
-                                                                          class: "btn btn-danger",
-                                                                          data: { confirm: 'Are you sure to activate?' }
+                = link_to user.state, activate_dashboard_user_path(user),
+                                      method: :put,
+                                      class: "btn btn-danger",
+                                      data: { confirm: 'Are you sure to activate?' }
             - else
               = user.state
+          %td
+            - if user.state == 'screening_completed'
+              = link_to 'Reiew applicant\'s', dashboard_test_task_assignment_url(user),
+                                              class: 'btn btn-info'

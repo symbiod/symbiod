@@ -11,9 +11,9 @@ describe UserPolicy do
     it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_action(:show) }
     it { is_expected.to permit_action(:activate) }
-    it { is_expected.to permit_action(:delete) }
+    it { is_expected.to permit_action(:deactivate) }
     it { is_expected.to permit_action(:add_role) }
-    it { is_expected.to permit_action(:delete_role) }
+    it { is_expected.to permit_action(:remove_role) }
   end
 
   context 'active user' do
@@ -22,8 +22,8 @@ describe UserPolicy do
     it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_action(:show) }
     it { is_expected.not_to permit_action(:activate) }
-    it { is_expected.not_to permit_action(:delete) }
+    it { is_expected.not_to permit_action(:deactivate) }
     it { is_expected.not_to permit_action(:add_role) }
-    it { is_expected.not_to permit_action(:delete_role) }
+    it { is_expected.not_to permit_action(:remove_role) }
   end
 end

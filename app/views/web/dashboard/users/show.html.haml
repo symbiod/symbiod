@@ -6,7 +6,7 @@
     %tr
       %td
         %b
-          email
+          Email
       %td= @user.email
     %tr
       %td
@@ -22,7 +22,7 @@
           - @user.roles_name.each do |role|
             %li
               = role
-              = link_to 'delete', delete_role_dashboard_user_path(@user, role: role),
+              = link_to 'delete', remove_role_dashboard_user_path(@user, role: role),
                                   method: :put,
                                   data: { confirm: "Are you sure to delete role #{role}" }
 

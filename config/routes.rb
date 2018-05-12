@@ -33,8 +33,8 @@ Rails.application.routes.draw do
       resources :users, only: %i[index show] do
         member do
           put :activate
-          put :delete
-          put :delete_role
+          put :deactivate
+          put :remove_role
           put :add_role
         end
       end

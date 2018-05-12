@@ -21,17 +21,8 @@ module Web
       end
 
       def redirect_to_dashboard_root
-        redirect_to dashboard_root_url
-      end
-
-      def redirect_to_dashboard_users
         flash[:danger] = t('dashboard.users.access.deny')
-        redirect_to dashboard_users_path
-      end
-
-      def redirect_to_dashboard_user
-        flash[:danger] = t('dashboard.users.alert.last_role')
-        redirect_to dashboard_user_path(@user)
+        redirect_to dashboard_root_url
       end
     end
   end

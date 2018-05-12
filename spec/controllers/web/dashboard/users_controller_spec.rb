@@ -15,11 +15,18 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let(:user) { create(:user, :active) }
-      before { get :index }
+      let!(:candidate) { create(:user, :active) }
+      before do
+        login_user(candidate)
+        get :index
+      end
 
-      it 'redirect to dashboard root' do
-        expect(response).to redirect_to dashboard_root_path
+      it 'render template' do
+        expect(response).to render_template :index
+      end
+
+      it 'returns success status' do
+        expect(response.status).to eq 200
       end
     end
 
@@ -58,10 +65,17 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :active) }
-      before { get :show, params: { id: user.id } }
+      before do
+        login_user(candidate)
+        get :show, params: { id: candidate.id }
+      end
 
-      it 'redirect to dashboard root' do
-        expect(response).to redirect_to dashboard_root_path
+      it 'renders template' do
+        expect(response).to render_template :show
+      end
+
+      it 'returns success status' do
+        expect(response.status).to eq 200
       end
     end
   end
@@ -89,36 +103,43 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :disabled) }
+      before { login_user(candidate) }
 
       it 'redirects to dashboard root' do
         put :activate, params: { id: candidate.id }
-        expect(response).to redirect_to dashboard_root_path
+        expect(response).to redirect_to dashboard_root_url
       end
     end
   end
 
-  describe 'PUT #delete' do
+  describe 'PUT #deactivate' do
     context 'authorized' do
       let!(:candidate) { create(:user, :active) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
         expect(Ops::Developer::Disable).to receive(:call).with(user: candidate)
-        put :delete, params: { id: candidate.id }
+        put :deactivate, params: { id: candidate.id }
       end
 
       it 'redirect to users list' do
-        put :delete, params: { id: candidate.id }
+        put :deactivate, params: { id: candidate.id }
         expect(response).to redirect_to dashboard_users_path
       end
     end
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :active) }
+      before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
-        put :delete, params: { id: candidate.id }
-        expect(response).to redirect_to dashboard_root_path
+        put :deactivate, params: { id: candidate.id }
+        expect(response).to redirect_to dashboard_root_url
+      end
+
+      it 'flash access deny disabled user' do
+        put :deactivate, params: { id: candidate.id }
+        expect(flash[:danger]).to eq(I18n.t('dashboard.users.access.deny'))
       end
     end
   end
@@ -143,16 +164,18 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :active) }
+      before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
         put :add_role, params: { id: candidate.id, role: role }
-        expect(response).to redirect_to dashboard_root_path
+        expect(response).to redirect_to dashboard_root_url
       end
     end
   end
 
-  describe 'PUT #delete_role' do
+  describe 'PUT #remove_role' do
     let(:role) { 'stuff' }
+
     context 'authorized' do
       let!(:candidate) { create(:user, :active, :staff) }
       before { login_user(user) }
@@ -161,21 +184,38 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
         expect(Ops::Developer::RemoveRole).to receive(:call).with(user: candidate,
                                                                   role: role,
                                                                   size: candidate.roles.size)
-        put :delete_role, params: { id: candidate.id, role: role }
+        put :remove_role, params: { id: candidate.id, role: role, size: candidate.roles.size }
       end
 
       it 'redirect to user' do
-        put :delete_role, params: { id: candidate.id, role: role }
+        put :remove_role, params: { id: candidate.id, role: role, size: candidate.roles.size }
         expect(response).to redirect_to dashboard_user_path(candidate)
       end
     end
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :active) }
+      before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
-        put :delete_role, params: { id: candidate.id, role: role }
-        expect(response).to redirect_to dashboard_root_path
+        put :remove_role, params: { id: candidate.id, role: role }
+        expect(response).to redirect_to dashboard_root_url
+      end
+    end
+
+    context 'removing last role users' do
+      let!(:candidate) { create(:user, :active) }
+      let!(:role) { 'developer' }
+      before { login_user(user) }
+
+      it 'redirect to user' do
+        put :remove_role, params: { id: candidate.id, role: role }
+        expect(response).to redirect_to dashboard_user_path(candidate)
+      end
+
+      it 'flash error remove last role' do
+        put :remove_role, params: { id: candidate.id, role: role }
+        expect(flash[:danger]).to eq(I18n.t('dashboard.users.alert.last_role'))
       end
     end
   end

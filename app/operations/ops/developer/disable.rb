@@ -20,11 +20,6 @@ module Ops
       # TODO: notify user about starting onboarding
       # by email
       # end
-
-      # def start_offboarding!(_ctx, user:, **)
-      #   TODO: remove the user from slack, github, etc.
-      #   Ops::Developer::Offboarding.call(user: user)
-      # end
     end
   end
 end

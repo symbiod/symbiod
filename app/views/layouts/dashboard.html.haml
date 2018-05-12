@@ -26,7 +26,7 @@
                 %a.nav-link.active{ href: "#" }
                   %span{ "data-feather": "home" }
                     Dashboard
-                  %span{ class: 'sr-only' }
+                  %span.sr-only
                     Current
               - if policy(:test_task_assignment).index?
                 %li.nav-item
@@ -87,7 +87,8 @@
     Bootstrap core JavaScript
     \==================================================
   / Placed at the end of the document so the pages load faster
-  %script{ crossorigin: "anonymous", integrity: "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN",
+  %script{ crossorigin: "anonymous",
+           integrity: "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN",
            src: "https://code.jquery.com/jquery-3.2.1.slim.min.js" }
   :javascript
     window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')

@@ -6,8 +6,8 @@ module Web
     class UsersController < BaseController
       before_action :user_find, except: :index
       before_action :authorize_role
-      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_users
-      rescue_from CustomErrors::LastRoleError, with: :redirect_to_dashboard_user
+      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
+      rescue_from Ops::Developer::UnassignRole::LastRoleError, with: :redirect_to_dashboard_user
 
       def index
         @users = User.active_or_disabled
@@ -23,7 +23,7 @@ module Web
                     flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.email}" }
       end
 
-      def delete
+      def deactivate
         Ops::Developer::Disable.call(user: @user)
         redirect_to dashboard_users_path, flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.email}" }
       end
@@ -34,7 +34,7 @@ module Web
                     flash: { success: "#{params[:role].capitalize} #{t('dashboard.users.notices.add_role')}" }
       end
 
-      def delete_role
+      def remove_role
         Ops::Developer::RemoveRole.call(user: @user, role: params[:role], size: @user.roles.size)
         redirect_to dashboard_user_path(@user),
                     flash: { success: "#{params[:role].capitalize} #{t('dashboard.users.notices.remove_role')}" }
@@ -48,6 +48,11 @@ module Web
 
       def user_find
         @user = User.find(params[:id])
+      end
+
+      def redirect_to_dashboard_user
+        flash[:danger] = t('dashboard.users.alert.last_role')
+        redirect_to dashboard_user_path(@user)
       end
     end
   end

@@ -8,5 +8,5 @@ tasks.each do |task_attributes|
 end
 
 9.times do |i|
-  User.create!(email: "test0#{i}@gmail.com", name: "test0#{i}", state: 'disabled')
+  User.create!(email: "test0#{i}@gmail.com", name: "test0#{i}", state: %w[active disabled screening_completed].sample)
 end
