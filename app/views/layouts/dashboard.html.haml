@@ -1,10 +1,11 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ content: "text/html; charset=UTF-8", "http-equiv": "Content-Type" }/
     %title Poc
     = csrf_meta_tags
-    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+                             media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    '/css/dashboard.css', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -12,67 +13,72 @@
   %body
     %nav.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0
       = link_to 'givemepoc.org', root_landing_url, class: 'navbar-brand col-sm-3 col-md-2 mr-0'
-      %input.form-control.form-control-dark.w-100{"aria-label" => "Search", :placeholder => "Search", :type => "text"}/
+      %input.form-control.form-control-dark.w-100{ "aria-label": "Search", placeholder: "Search", type: "text" }/
       %ul.navbar-nav.px-3
         %li.nav-item.text-nowrap
-          %a.nav-link{:href => "#"} Sign out
+          %a.nav-link{ href: "#" } Sign out
     .container-fluid
       .row
         %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
           .sidebar-sticky
             %ul.nav.flex-column
               %li.nav-item
-                %a.nav-link.active{:href => "#"}
-                  %span{"data-feather" => "home"}
-                  Dashboard
-                  %span.sr-only (current)
+                %a.nav-link.active{ href: "#" }
+                  %span{ "data-feather": "home" }
+                    Dashboard
+                  %span.sr-only
+                    Current
               - if policy(:test_task_assignment).index?
                 %li.nav-item
                   = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
-                    %span{"data-feather" => "file"}
+                    %span{ "data-feather": "file" }
                     Applicants
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "file"}
+                = link_to dashboard_users_path, class: 'nav-link' do
+                  %span{ "data-feather": "file" }
+                  Users Management
+              %li.nav-item
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "file" }
                   Orders
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "shopping-cart"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "shopping-cart" }
                   Products
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "users"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "users" }
                   Customers
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "bar-chart-2"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "bar-chart-2" }
                   Reports
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "layers"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "layers" }
                   Integrations
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
               %span Saved reports
-              %a.d-flex.align-items-center.text-muted{:href => "#"}
-                %span{"data-feather" => "plus-circle"}
+              %a.d-flex.align-items-center.text-muted{ href: "#" }
+                %span{ "data-feather": "plus-circle" }
             %ul.nav.flex-column.mb-2
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "file-text"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "file-text" }
                   Current month
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "file-text"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "file-text" }
                   Last quarter
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "file-text"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "file-text" }
                   Social engagement
               %li.nav-item
-                %a.nav-link{:href => "#"}
-                  %span{"data-feather" => "file-text"}
+                %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "file-text" }
                   Year-end sale
-        %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{:role => "main"}
+        %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{ role: "main" }
           = render partial: 'layouts/shared/dashboard_flashes'
 
           = yield
@@ -81,16 +87,18 @@
     Bootstrap core JavaScript
     \==================================================
   / Placed at the end of the document so the pages load faster
-  %script{:crossorigin => "anonymous", :integrity => "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", :src => "https://code.jquery.com/jquery-3.2.1.slim.min.js"}
+  %script{ crossorigin: "anonymous",
+           integrity: "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN",
+           src: "https://code.jquery.com/jquery-3.2.1.slim.min.js" }
   :javascript
     window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-  %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"}
+  %script{ src: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" }
   / Icons
-  %script{:src => "https://unpkg.com/feather-icons/dist/feather.min.js"}
+  %script{ src: "https://unpkg.com/feather-icons/dist/feather.min.js" }
   :javascript
     feather.replace()
   / Graphs
-  %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"}
+  %script{ src: "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" }
   :javascript
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {

@@ -7,3 +7,13 @@ en:
       reject: Reject
       activate: Activate
       confirm_rejection: Do you really want to reject this candidate?
+    users:
+      access:
+        deny: The user does not have the role of stuff
+      notices:
+        activated: The user was activated
+        disabled: The user was disabled
+        add_role: role was added
+        remove_role: role was removed
+      alert:
+        last_role: Can not remove the last role

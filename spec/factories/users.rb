@@ -18,6 +18,10 @@ FactoryBot.define do
       state 'active'
     end
 
+    trait :disabled do
+      state 'disabled'
+    end
+
     trait :screening_completed do
       state 'screening_completed'
     end

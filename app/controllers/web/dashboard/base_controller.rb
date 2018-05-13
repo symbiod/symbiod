@@ -21,6 +21,7 @@ module Web
       end
 
       def redirect_to_dashboard_root
+        flash[:danger] = t('dashboard.users.access.deny')
         redirect_to dashboard_root_url
       end
     end
