@@ -17,3 +17,13 @@ en:
         remove_role: role was removed
       alert:
         last_role: Can not remove the last role
+    developer_test_task:
+      notices:
+        update: The test task was updated
+      edit:
+        header: Edit test task
+      index:
+        header: Bootcamp test tasks
+      description: Description
+      button:
+        edit: Edit

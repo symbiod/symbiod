@@ -10,6 +10,7 @@ class BaseCell < Cell::ViewModel
   # include ApplicationHelper
   # include AbstractController::Helpers
   include SimpleForm::ActionViewExtensions::FormHelper
+  include MarkdownHelper
 
   def current_user
     controller.current_user

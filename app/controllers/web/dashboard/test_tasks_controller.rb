@@ -1,26 +1,36 @@
+# frozen_string_literal: true
+
 # frozen_string_literal : true
 
 module Web
   module Dashboard
+    # Management test tasks
     class TestTasksController < BaseController
-      before_action :test_task_find, only: %i[edit update]
+      before_action :find_test_task, only: %i[edit update]
       before_action :authorize_staff!
 
       def index
-        @developer_test_tasks = Developer::TestTask.all
+        @developer_test_tasks = Developer::TestTask.order(id: :asc)
       end
 
       def edit; end
 
-      def update; end
+      def update
+        if @developer_test_task.update(developer_test_task_params)
+          redirect_to dashboard_test_tasks_url
+          flash[:success] = t('dashboard.developer_test_task.notices.update')
+        else
+          render 'edit'
+        end
+      end
 
       private
 
-      def test_task_params
+      def developer_test_task_params
         params.require(:developer_test_task).permit(:description)
       end
 
-      def test_task_find
+      def find_test_task
         @developer_test_task = Developer::TestTask.find(params[:id])
       end
 

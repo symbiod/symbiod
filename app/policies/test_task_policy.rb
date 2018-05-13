@@ -5,6 +5,7 @@ class TestTaskPolicy < DashboardPolicy
   def index?
     stuff?
   end
+
   def edit?
     stuff?
   end

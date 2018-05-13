@@ -4,7 +4,7 @@
   = '/'
   = current_user.test_task_assignments.count
 
-= model.test_task.description
+= markdown(model.test_task.description)
 
 = simple_form_for(Developer::TestTaskResult.new, method: :put, remote: false, url: bootcamp_screening_path(model)) do |f|
   = f.input :link

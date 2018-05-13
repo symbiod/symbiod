@@ -1,1 +1,18 @@
-%h2 Test Tasks
+%h2= t('dashboard.developer_test_task.index.header')
+.table-responsive
+  %table.table.table-striped.tabke-sm
+    %thead
+      %tr
+        %th #
+        %th= t('dashboard.developer_test_task.description')
+        %th #
+    %tbody
+      - @developer_test_tasks.each do |developer_test_task|
+        %tr
+          %td= developer_test_task.id
+          %td= markdown(developer_test_task.description)
+          %td
+            = link_to t('dashboard.developer_test_task.button.edit'),
+                      edit_dashboard_test_task_url(developer_test_task),
+                      class: 'btn btn-info'
+
