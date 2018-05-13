@@ -20,6 +20,7 @@ gem 'cells-haml'
 
 gem 'aasm'
 gem 'dry-validation'
+gem 'kaminari'
 gem 'reform'
 gem 'reform-rails'
 gem 'rolify'

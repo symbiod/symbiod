@@ -35,3 +35,4 @@
             - if user.state == 'screening_completed'
               = link_to 'Reiew applicant\'s', dashboard_test_task_assignment_url(user),
                                               class: 'btn btn-info'
+= paginate @users
