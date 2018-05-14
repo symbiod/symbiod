@@ -16,9 +16,9 @@
         .inner
           %h3.masthead-brand= t('landing.brand')
           %nav.nav.nav-masthead.justify-content-center
-            = nav_link t('landing.navigation.home'), root_url(subdomain: 'www'), subdomain: 'www'
+            = nav_link t('landing.navigation.home'), root_url(subdomain: 'www'), subdomain: 'www', id: 'home'
             - unless policy(:dashboard).allowed?
-              = nav_link t('landing.navigation.bootcamp'), bootcamp_root_url, subdomain: 'bootcamp'
+              = nav_link t('landing.navigation.bootcamp'), bootcamp_root_url, subdomain: 'bootcamp', id: 'bootcamp'
             -#= link_to t('landing.navigation.idea'), idea_root_url, class: 'nav-link'
             - if policy(:dashboard).allowed?
               = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link'

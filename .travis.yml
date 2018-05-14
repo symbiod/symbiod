@@ -25,13 +25,15 @@ before_script:
 
 script:
   - bundle exec rspec
+  - bin/build
+  - bin/travis-features
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 deploy:
   - provider: script
-    script: bash bin/build
+    script: bash bin/push
     on:
       branch:
         - master

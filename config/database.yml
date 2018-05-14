@@ -17,3 +17,7 @@ test:
 production:
   <<: *default
   database: poc_production
+
+features:
+  <<: *default
+  database: poc_features

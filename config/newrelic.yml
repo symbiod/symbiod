@@ -40,3 +40,7 @@ test:
 
 production:
   <<: *default_settings
+
+features:
+  <<: *default_settings
+  monitor_mode: false
