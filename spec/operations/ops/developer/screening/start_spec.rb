@@ -9,7 +9,6 @@ describe Ops::Developer::Screening::Start do
 
     context 'no test tasks exist' do
       it 'does not assign test tasks to user' do
-        binding.pry
         expect { described_class.call(user: user) }
           .to change { user.test_task_assignments.count }
           .by(0)
@@ -27,7 +26,7 @@ describe Ops::Developer::Screening::Start do
     end
 
     context 'multiple test tasks exist' do
-      before { create_list(:developer_test_task, number_of_test_tasks) }
+      before { create_list(:developer_test_task, 100) }
 
       it 'assigns all existing test tasks to user' do
         expect { described_class.call(user: user) }
