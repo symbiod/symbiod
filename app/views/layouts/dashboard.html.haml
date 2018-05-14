@@ -6,6 +6,8 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
                              media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css'
+    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css'
     = stylesheet_link_tag    '/css/dashboard.css', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -33,6 +35,10 @@
                   = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
                     %span{ "data-feather": "file" }
                     Applicants
+                %li.nav-item
+                  = link_to dashboard_test_tasks_url, class: 'nav-link' do
+                    %span{ "data-feather": "file" }
+                    Test Tasks
               %li.nav-item
                 = link_to dashboard_users_path, class: 'nav-link' do
                   %span{ "data-feather": "file" }
@@ -97,6 +103,10 @@
   %script{ src: "https://unpkg.com/feather-icons/dist/feather.min.js" }
   :javascript
     feather.replace()
+  / SimpleMDE
+  %script{ src: "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js" }
+  :javascript
+    var simplemde = new SimpleMDE();
   / Graphs
   %script{ src: "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" }
   :javascript
