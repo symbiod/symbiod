@@ -20,5 +20,9 @@ describe Ops::Developer::Screening::CompleteTask do
       allow(::Ops::Developer::Screening::Finish)
         .to receive(:call).with(user: user)
     end
+
+    it 'sends email about completed of screening with sidekiq-job' do
+      expect(Sidekiq::Worker.jobs.to_s.include?('ScreeningCompletedMailer')).to eq true
+    end
   end
 end

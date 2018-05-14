@@ -25,6 +25,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :authentications
 
+  scope :active_or_disabled, -> { where(state: %w[active disabled screening_completed]).order(id: :desc) }
+
   aasm column: 'state' do
     state :pending, initial: true
     state :screening_completed, :active, :disabled, :rejected

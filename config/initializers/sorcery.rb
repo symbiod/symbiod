@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The first thing you need to configure is which modules you need in your app.
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
@@ -115,7 +117,7 @@ Rails.application.config.sorcery.configure do |config|
   config.github.key = ENV['GITHUB_CLIENT_ID'].chomp if ENV['GITHUB_CLIENT_ID']
   config.github.secret = ENV['GITHUB_SECRET'].chomp if ENV['GITHUB_SECRET']
   config.github.callback_url = "#{ENV['GITHUB_CALLBACK_DOMAIN']}/oauth/callback?provider=github".chomp
-  config.github.user_info_mapping = {:email => "email"}
+  config.github.user_info_mapping = { email: 'email', name: 'login', github: 'html_url' }
   # config.github.scope = ""
   #
   # config.paypal.key = ""

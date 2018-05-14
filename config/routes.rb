@@ -30,6 +30,15 @@ Rails.application.routes.draw do
           put :reject
         end
       end
+      resources :users, only: %i[index show] do
+        member do
+          put :activate
+          put :deactivate
+          put :remove_role
+          put :add_role
+        end
+      end
+      resources :test_tasks, only: %i[index edit update]
       root to: 'home#index'
     end
 

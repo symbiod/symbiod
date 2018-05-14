@@ -7,7 +7,7 @@ module Ops
     class Reject < BaseOperation
       step :change_state!
       step :persist_feedback!
-      # step :notify_candidate!
+      step :notify_candidate!
 
       private
 
@@ -20,11 +20,9 @@ module Ops
         assignment.update!(feedback: feedback)
       end
 
-      # def notify_candidate!(_ctx, user:, feedback:, **)
-      # user
-      # feedback
-      ## TODO: send feedback to user
-      # end
+      def notify_candidate!(_ctx, user:, feedback:, **)
+        ::Developer::RejectionNotificationMailer.notify(user, feedback).deliver_later
+      end
     end
   end
 end
