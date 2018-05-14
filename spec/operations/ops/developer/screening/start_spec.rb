@@ -9,6 +9,7 @@ describe Ops::Developer::Screening::Start do
 
     context 'no test tasks exist' do
       it 'does not assign test tasks to user' do
+        binding.pry
         expect { described_class.call(user: user) }
           .to change { user.test_task_assignments.count }
           .by(0)

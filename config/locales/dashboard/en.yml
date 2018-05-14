@@ -25,6 +25,7 @@ en:
       index:
         header: Bootcamp test tasks
       title: Title
+      position: Position
       description: Description
       button:
         edit: Edit

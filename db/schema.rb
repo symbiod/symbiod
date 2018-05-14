@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_05_14_181710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title", null: false
+    t.integer "position"
   end
 
   create_table "ideas", force: :cascade do |t|

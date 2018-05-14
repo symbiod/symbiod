@@ -5,6 +5,7 @@
       %tr
         %th #
         %th= t('dashboard.developer_test_task.title')
+        %th= t('dashboard.developer_test_task.position')
         %th= t('dashboard.developer_test_task.description')
         %th #
     %tbody
@@ -12,6 +13,7 @@
         %tr
           %td= developer_test_task.id
           %td= developer_test_task.title
+          %td= developer_test_task.position
           %td= markdown(developer_test_task.description)
           %td
             = link_to t('dashboard.developer_test_task.button.edit'),

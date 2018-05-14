@@ -18,7 +18,9 @@ module Ops
         end
 
         def test_tasks
-          ::Developer::TestTask.all.sample(NUMBER_OF_ASSIGNED_TEST_TASKS)
+          test_tasks = []
+          NUMBER_OF_ASSIGNED_TEST_TASKS.times { |i| test_tasks << ::Developer::TestTask.where(position: i + 1).sample }
+          test_tasks
         end
       end
     end
