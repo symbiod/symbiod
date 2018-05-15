@@ -6,8 +6,6 @@ module Web
     # On sign up it triggers Onboarding operation,
     # that runs all necessary steps for newcomer
     class OauthsController < BaseController
-      skip_before_action :require_login, raise: false
-
       def oauth
         login_at(provider_name)
       end

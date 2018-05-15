@@ -10,22 +10,27 @@ describe Web::Dashboard::TestTaskAssignmentsController do
       before { get :index }
 
       it 'redirects to root landing' do
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to root_url(subdomain: 'www')
       end
     end
 
     context 'not authorized' do
-      let(:user) { create(:user, :active) }
-      before { get :index }
+      let(:candidate) { create(:user, :active) }
+      before do
+        login_user(candidate)
+        get :index
+      end
 
       it 'redirects to dashboard root' do
-        expect(response).to redirect_to dashboard_root_path
+        expect(response).to redirect_to dashboard_root_url
       end
     end
 
     context 'staff' do
-      before { login_user(user) }
-      before { get :index }
+      before do
+        login_user(user)
+        get :index
+      end
 
       it 'renders template' do
         expect(response).to render_template :index
@@ -45,8 +50,10 @@ describe Web::Dashboard::TestTaskAssignmentsController do
   describe 'GET #show' do
     context 'authorized' do
       let!(:candidate) { create(:user, :screening_completed) }
-      before { login_user(user) }
-      before { get :show, params: { id: candidate.id } }
+      before do
+        login_user(user)
+        get :show, params: { id: candidate.id }
+      end
 
       it 'renders template' do
         expect(response).to render_template :show
@@ -63,10 +70,13 @@ describe Web::Dashboard::TestTaskAssignmentsController do
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :active) }
-      before { get :show, params: { id: candidate.id } }
+      before do
+        login_user(candidate)
+        get :show, params: { id: candidate.id }
+      end
 
       it 'redirect to dashboard root' do
-        expect(response).to redirect_to dashboard_root_path
+        expect(response).to redirect_to dashboard_root_url
       end
     end
   end
@@ -89,10 +99,11 @@ describe Web::Dashboard::TestTaskAssignmentsController do
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :active) }
+      before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
         put :activate, params: { id: candidate.id }
-        expect(response).to redirect_to dashboard_root_path
+        expect(response).to redirect_to dashboard_root_url
       end
     end
   end
@@ -115,10 +126,11 @@ describe Web::Dashboard::TestTaskAssignmentsController do
 
     context 'not authorized' do
       let!(:candidate) { create(:user, :active) }
+      before { login_user(candidate) }
 
       it 'redirecct to dashboard root' do
         put :reject, params: { id: candidate.id, developer_test_task_assignment: { feedback: 'some text' } }
-        expect(response).to redirect_to dashboard_root_path
+        expect(response).to redirect_to dashboard_root_url
       end
     end
   end

@@ -10,7 +10,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
       before { get :index }
 
       it 'redirect to root landing' do
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to dashboard_root_url
       end
     end
 

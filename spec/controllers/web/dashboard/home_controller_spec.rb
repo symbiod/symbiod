@@ -7,13 +7,22 @@ describe Web::Dashboard::HomeController do
     context 'not authenticated' do
       it 'redirects to root landing page' do
         get :index
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to root_url(subdomain: 'www')
       end
     end
 
     context 'pending user' do
       let(:user) { create(:user) }
       before { login_user(user) }
+
+      it 'redirects to root landing page' do
+        get :index
+        expect(response).to redirect_to root_url(subdomain: 'www')
+      end
+    end
+
+    context 'sign out' do
+      let(:user) { create(:user) }
 
       it 'redirects to root landing page' do
         get :index

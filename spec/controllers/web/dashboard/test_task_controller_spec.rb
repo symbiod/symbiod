@@ -10,7 +10,7 @@ describe Web::Dashboard::TestTasksController do
       before { get :index }
 
       it 'redirects to root landing' do
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to root_url(subdomain: 'www')
       end
     end
 
