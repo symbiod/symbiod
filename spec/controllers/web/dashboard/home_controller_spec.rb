@@ -17,6 +17,7 @@ describe Web::Dashboard::HomeController do
 
       it 'redirects to root landing page' do
         get :index
+        expect(response).to redirect_to root_url(subdomain: 'www')
       end
     end
 

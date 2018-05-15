@@ -10,14 +10,19 @@ module Web
 
       before_action :require_login
       before_action :check_authorization
-      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
+      rescue_from Pundit::NotAuthorizedError do |exception|
+        exception.query == :allowed? ? redirect_to_root_landing : redirect_to_dashboard_root
+      end
 
       private
 
       def check_authorization
         return true if authorize(:dashboard, :allowed?)
-        redirect_to root_landing_url,
-                    alert: t('landing.alerts.not_authenticated_dashboard_access')
+      end
+
+      def redirect_to_root_landing
+        flash[:danger] = t('landing.alerts.not_authenticated_dashboard_access')
+        redirect_to root_landing_url
       end
 
       def redirect_to_dashboard_root
