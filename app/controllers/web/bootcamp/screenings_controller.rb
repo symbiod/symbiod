@@ -4,7 +4,7 @@ module Web
   module Bootcamp
     # Allows newcomer to fill screening tasks survey
     class ScreeningsController < BaseController
-      before_action :require_login
+      before_action :require_login?
 
       def index
         @assignment = current_user.test_task_assignments.uncompleted.first
