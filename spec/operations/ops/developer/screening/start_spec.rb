@@ -26,7 +26,7 @@ describe Ops::Developer::Screening::Start do
     end
 
     context 'multiple test tasks exist' do
-      before { create_list(:developer_test_task, number_of_test_tasks) }
+      before { create_list(:developer_test_task, 100) }
 
       it 'assigns all existing test tasks to user' do
         expect { described_class.call(user: user) }

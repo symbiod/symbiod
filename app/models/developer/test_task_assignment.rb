@@ -16,6 +16,8 @@ module Developer
     scope :uncompleted, -> { where(test_task_result_id: nil) }
     scope :completed, -> { where('test_task_result_id IS NOT NULL') }
 
+    MAX_NUMBER_OF_ASSIGNMENTS = 5
+
     def completed?
       test_task_result.present?
     end
