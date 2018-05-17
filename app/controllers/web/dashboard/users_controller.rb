@@ -10,11 +10,12 @@ module Web
       rescue_from Ops::Developer::UnassignRole::LastRoleError, with: :redirect_to_dashboard_user
 
       def index
-        @users = User.active_or_disabled.page params[:page]
+        @users = User.newer_first.page params[:page]
       end
 
       def show
         @roles = Role.all
+        @test_task_assignments = @user.test_task_assignments.order(id: :asc)
       end
 
       def activate

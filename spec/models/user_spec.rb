@@ -93,6 +93,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#progress' do
+    context 'progress 0%' do
+      before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
+      specify { expect(subject.progress).to eq 0 }
+    end
+
+    context 'progress 33%' do
+      before { create(:developer_test_task_assignment, :completed, developer: subject) }
+      specify { expect(subject.progress).to eq 33 }
+    end
+  end
+
   describe '#github_uid' do
     context 'no authentications' do
       its(:github_uid) { is_expected.to eq nil }

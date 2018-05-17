@@ -3,11 +3,12 @@
   %table.table.table-striped.table-sm
     %thead
       %tr
-        %th Email
-        %th GitHub username
-        %th Roles
-        %th Status
-        %th Applicants
+        %th= t('dashboard.users.table.email')
+        %th= t('dashboard.users.table.github_user')
+        %th= t('dashboard.users.table.roles')
+        %th= t('dashboard.users.table.status')
+        %th= t('dashboard.users.table.progress')
+        %th= t('dashboard.users.table.applicants')
       - @users.each do |user|
         %tr
           %td= link_to user.email, dashboard_user_path(user)
@@ -22,15 +23,17 @@
               - if user.active?
                 = link_to user.state, deactivate_dashboard_user_path(user),
                                       method: :put,
-                                      class: "btn btn-success",
-                                      data: { confirm: 'Are you sure to disable?' }
+                                      class: "btn btn-success btn-sm",
+                                      data: { confirm: t('dashboard.users.link.confirm.disable') }
               - else
                 = link_to user.state, activate_dashboard_user_path(user),
                                       method: :put,
-                                      class: "btn btn-danger",
-                                      data: { confirm: 'Are you sure to activate?' }
+                                      class: "btn btn-danger btn-sm",
+                                      data: { confirm: t('dashboard.users.link.confirm.activate') }
             - else
               = user.state
+          %td
+            = cell(Developer::Dashboard::DisplayProgress, user).()
           %td
             - if user.state == 'screening_completed'
               = link_to 'Review applicant', dashboard_test_task_assignment_url(user),
