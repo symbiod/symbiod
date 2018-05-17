@@ -35,6 +35,7 @@ gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'data_migrate'
 gem 'pundit'
+gem 'strong_migrations'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
