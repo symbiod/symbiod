@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Ops::Developer::Screening::Finish do
   describe '#call' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :profile_completed) }
 
     context 'screening completed' do
       before { allow(user).to receive(:test_tasks_completed?).and_return(true) }

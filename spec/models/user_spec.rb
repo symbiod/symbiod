@@ -9,6 +9,11 @@ RSpec.describe User, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of :email }
     it { is_expected.to validate_uniqueness_of :email }
+    it { is_expected.to validate_presence_of :first_name }
+    it { is_expected.to validate_presence_of :last_name }
+    it { is_expected.to validate_presence_of :location }
+    it { is_expected.to validate_presence_of :timezone }
+    it { is_expected.to validate_presence_of :cv_url }
   end
 
   describe 'relations' do
@@ -27,17 +32,31 @@ RSpec.describe User, type: :model do
   end
 
   describe 'changes in users states' do
+    it 'completes profile' do
+      expect(user)
+        .to transition_from(:pending).to(:profile_completed)
+        .on_event(:complete_profile)
+    end
+
     it 'completes screening' do
-      expect(user).to transition_from(:pending).to(:screening_completed).on_event(:complete_screening)
+      expect(user)
+        .to transition_from(:profile_completed).to(:screening_completed)
+        .on_event(:complete_screening)
     end
 
     it 'activate user' do
-      expect(user).to transition_from(:screening_completed).to(:active).on_event(:activate)
-      expect(user).to transition_from(:disabled).to(:active).on_event(:activate)
+      expect(user)
+        .to transition_from(:screening_completed).to(:active)
+        .on_event(:activate)
+      expect(user)
+        .to transition_from(:disabled).to(:active)
+        .on_event(:activate)
     end
 
     it 'disable user' do
-      expect(user).to transition_from(:active).to(:disabled).on_event(:disable)
+      expect(user)
+        .to transition_from(:active).to(:disabled)
+        .on_event(:disable)
     end
 
     it 'reject user' do

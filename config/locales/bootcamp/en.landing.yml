@@ -5,6 +5,10 @@ en:
       body: Take part in real-life non-profit opensource projects
       github_login: Sign in via GitHub
       unfilled_github_email: Please fill your github profile according to our <a href='https://github.com/howtohireme/wiki/wiki/First-Steps' target='_blank'>guidelines</a>
+    profile:
+      title: Fill your developer profile
+      body: We prefer to work with real people who has real names
+      submit: Submit
     screening:
       title: Prove your skills
       body: Complete several small quizes, to show that you know the basics

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Web::Bootcamp::ScreeningsController do
+describe Web::Bootcamp::Wizard::ScreeningsController do
   describe 'GET #index' do
     context 'authenticated' do
       let(:user) { create(:user, :with_assignment) }
@@ -34,7 +34,7 @@ describe Web::Bootcamp::ScreeningsController do
   end
 
   describe 'PUT #update' do
-    let(:user) { create(:user, :with_assignment) }
+    let(:user) { create(:user, :profile_completed, :with_assignment) }
     let(:assignment) { user.test_task_assignments.last }
     let(:params) do
       {
@@ -55,7 +55,7 @@ describe Web::Bootcamp::ScreeningsController do
 
     it 'redirects to screenings url' do
       put :update, params: params
-      expect(response).to redirect_to bootcamp_screenings_url
+      expect(response).to redirect_to bootcamp_wizard_screenings_url
     end
   end
 end

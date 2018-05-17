@@ -12,7 +12,7 @@ describe Web::Bootcamp::HomeController do
 
         it 'redirects to screenings path' do
           get :index
-          expect(response).to redirect_to bootcamp_screenings_url
+          expect(response).to redirect_to bootcamp_wizard_screenings_url
         end
       end
 
@@ -21,7 +21,7 @@ describe Web::Bootcamp::HomeController do
 
         it 'redirects to screenings path' do
           get :index
-          expect(response).to redirect_to bootcamp_screenings_url
+          expect(response).to redirect_to bootcamp_wizard_screenings_url
         end
       end
 

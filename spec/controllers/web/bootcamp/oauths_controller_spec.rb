@@ -58,7 +58,7 @@ describe Web::Bootcamp::OauthsController do
 
         it 'redirects to screening' do
           post :callback, params: oauth_params
-          expect(response).to redirect_to bootcamp_screenings_url
+          expect(response).to redirect_to bootcamp_wizard_screenings_url
         end
       end
 

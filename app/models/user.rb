@@ -12,6 +12,7 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   validates :email, presence: true, uniqueness: true
+  validates :first_name, :last_name, :location, :timezone, :cv_url, presence: true
 
   has_many :ideas, foreign_key: 'author_id'
   has_many :authentications, dependent: :destroy
@@ -29,10 +30,15 @@ class User < ApplicationRecord
 
   aasm column: 'state' do
     state :pending, initial: true
-    state :screening_completed, :active, :disabled, :rejected
+    state :profile_completed, :screening_completed, :active,
+      :disabled, :rejected
+
+    event :complete_profile do
+      transitions from: :pending, to: :profile_completed
+    end
 
     event :complete_screening do
-      transitions from: :pending, to: :screening_completed
+      transitions from: :profile_completed, to: :screening_completed
     end
 
     event :activate do

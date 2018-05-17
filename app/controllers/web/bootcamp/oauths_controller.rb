@@ -28,17 +28,20 @@ module Web
       def sign_up
         if validate_github_profile
           start_screening
-          redirect_to bootcamp_screenings_url, notice: t('landing.success_login')
+          redirect_to first_wizard_step_url, notice: t('landing.success_login')
         else
           redirect_to bootcamp_root_url, alert: t('bootcamp.landing.unfilled_github_email')
         end
+      end
+
+      def first_wizard_step_url
+        current_wizard_step_url
       end
 
       def start_screening
         @user = create_from(provider_name)
         reset_session
         auto_login(@user)
-        Ops::Developer::Screening::Start.call(user: @user)
       end
 
       def validate_github_profile
