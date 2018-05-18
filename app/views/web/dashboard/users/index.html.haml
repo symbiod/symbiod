@@ -32,7 +32,7 @@
                                       data: { confirm: t('dashboard.users.link.confirm.activate') }
             - else
               = user.state
-          %td
+          %td{ class: 'col-md-2' }
             = cell(Developer::Dashboard::DisplayProgress, user).()
           %td
             - if user.state == 'screening_completed'
