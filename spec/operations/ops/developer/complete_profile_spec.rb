@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Ops::Developer::CompleteProfile do
@@ -37,8 +39,8 @@ describe Ops::Developer::CompleteProfile do
       end
 
       it 'does not update profile' do
-        expect { subject.call(user: user, params: params) }
-          .not_to change{ user.reload.first_name }
+        expect { subject.call(user: user, params: params) } # rubocop:disable Lint/AmbiguousBlockAssociation
+          .not_to change { user.reload.first_name }
       end
 
       it 'does not change user state' do

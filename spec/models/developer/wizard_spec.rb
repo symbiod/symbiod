@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require './app/models/developer/wizard'
 
@@ -57,7 +59,7 @@ describe Developer::Wizard do
   end
 
   describe '#steps' do
-    let(:wizard_steps) { [:pending, :profile_completed, :screening_completed] }
+    let(:wizard_steps) { %i[pending profile_completed screening_completed] }
     specify { expect(subject.steps).to match wizard_steps }
   end
 end

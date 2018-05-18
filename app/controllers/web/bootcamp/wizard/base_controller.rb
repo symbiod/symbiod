@@ -3,6 +3,7 @@
 module Web
   module Bootcamp
     module Wizard
+      # Handles authorization for all wizard steps controllers
       class BaseController < ::Web::Bootcamp::BaseController
         before_action :require_login
         before_action :authorize_step!

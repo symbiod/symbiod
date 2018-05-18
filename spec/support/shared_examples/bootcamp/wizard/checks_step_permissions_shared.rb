@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 # This shared examples allow to reuse specs of authorization
@@ -5,7 +7,7 @@ require 'rails_helper'
 # Each controller should redirect user to a proper step,
 # if its state does not correlate with current controller.
 RSpec.shared_examples 'checks step permissions' do
-  context "user state mismatches the step" do
+  context 'user state mismatches the step' do
     let(:user) { create(:user, :with_assignment, wrong_state) }
 
     it 'redirects to proper step' do

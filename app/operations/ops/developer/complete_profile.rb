@@ -25,4 +25,3 @@ module Ops
     end
   end
 end
-

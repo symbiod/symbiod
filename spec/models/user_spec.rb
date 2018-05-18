@@ -35,28 +35,28 @@ RSpec.describe User, type: :model do
     it 'completes profile' do
       expect(user)
         .to transition_from(:pending).to(:profile_completed)
-        .on_event(:complete_profile)
+                                     .on_event(:complete_profile)
     end
 
     it 'completes screening' do
       expect(user)
         .to transition_from(:profile_completed).to(:screening_completed)
-        .on_event(:complete_screening)
+                                               .on_event(:complete_screening)
     end
 
     it 'activate user' do
       expect(user)
         .to transition_from(:screening_completed).to(:active)
-        .on_event(:activate)
+                                                 .on_event(:activate)
       expect(user)
         .to transition_from(:disabled).to(:active)
-        .on_event(:activate)
+                                      .on_event(:activate)
     end
 
     it 'disable user' do
       expect(user)
         .to transition_from(:active).to(:disabled)
-        .on_event(:disable)
+                                    .on_event(:disable)
     end
 
     it 'reject user' do

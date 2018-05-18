@@ -3,6 +3,7 @@
 module Web
   module Bootcamp
     module Wizard
+      # Allows user to fill his profile during the sign up process
       class ProfilesController < BaseController
         def edit
           @profile = current_user
@@ -37,4 +38,3 @@ module Web
     end
   end
 end
-

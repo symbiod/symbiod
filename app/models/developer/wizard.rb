@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
 module Developer
+  # Keeps track of all wizard steps and allows to find
+  # a path where user should be redirected to complete
+  # current step
   class Wizard
     attr_reader :developer
 
