@@ -99,9 +99,13 @@ RSpec.describe User, type: :model do
       specify { expect(subject.progress).to eq 0 }
     end
 
-    context 'progress 33%' do
-      before { create(:developer_test_task_assignment, :completed, developer: subject) }
-      specify { expect(subject.progress).to eq 33 }
+    context 'progress 100%' do
+      before do
+        create(:developer_test_task_assignment, :completed, developer: subject)
+        create(:developer_onboarding, :slack_invited, :github_invited, user: subject)
+      end
+
+      specify { expect(subject.progress).to eq 100 }
     end
   end
 

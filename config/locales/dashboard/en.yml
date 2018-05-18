@@ -33,6 +33,7 @@ en:
         confirm:
           disable: Are you sure to disable?
           activate: are you sure to activate?
+        review_applicant: Review applicant
     developer_test_task:
       notices:
         update: The test task was updated

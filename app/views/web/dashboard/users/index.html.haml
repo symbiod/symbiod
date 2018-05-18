@@ -32,10 +32,10 @@
                                       data: { confirm: t('dashboard.users.link.confirm.activate') }
             - else
               = user.state
-          %td{ class: 'col-md-2' }
+          %td.col-md-2
             = cell(Developer::Dashboard::DisplayProgress, user).()
           %td
-            - if user.state == 'screening_completed'
-              = link_to 'Review applicant', dashboard_test_task_assignment_url(user),
-                                              class: 'btn btn-info'
+            - if user.state == 'screening_completed' && current_user.has_role?(:stuff)
+              = link_to t('dashboard.users.link.review_applicant'), dashboard_test_task_assignment_url(user),
+                                              class: 'btn btn-info btn-sm'
 = paginate @users
