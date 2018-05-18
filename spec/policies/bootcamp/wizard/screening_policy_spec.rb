@@ -22,7 +22,7 @@ describe Bootcamp::Wizard::ScreeningPolicy do
 
   context 'screening_completed user' do
     let(:user) { create(:user, :screening_completed) }
-    it { is_expected.not_to permit_action(:edit) }
+    it { is_expected.to permit_action(:edit) }
   end
 
   context 'active user' do
