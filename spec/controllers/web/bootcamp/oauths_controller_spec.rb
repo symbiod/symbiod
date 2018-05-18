@@ -51,14 +51,9 @@ describe Web::Bootcamp::OauthsController do
           expect(assigns(:user)).not_to be_nil
         end
 
-        it 'starts screening' do
-          expect(Ops::Developer::Screening::Start).to receive(:call).with(any_args)
+        it 'redirects to profile wizard' do
           post :callback, params: oauth_params
-        end
-
-        it 'redirects to screening' do
-          post :callback, params: oauth_params
-          expect(response).to redirect_to bootcamp_wizard_screenings_url
+          expect(response).to redirect_to edit_bootcamp_wizard_profile_url
         end
       end
 

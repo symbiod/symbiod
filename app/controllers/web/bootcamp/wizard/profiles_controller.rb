@@ -29,6 +29,10 @@ module Web
             .require(:user)
             .permit(:first_name, :last_name, :location, :timezone, :cv_url)
         end
+
+        def policy_class
+          ::Bootcamp::Wizard::ProfilePolicy
+        end
       end
     end
   end

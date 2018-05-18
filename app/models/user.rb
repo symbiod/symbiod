@@ -67,4 +67,8 @@ class User < ApplicationRecord
   def test_tasks_completed?
     test_task_assignments.where(test_task_result_id: nil).count.zero?
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

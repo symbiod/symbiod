@@ -7,7 +7,11 @@ module Developer
     end
 
     def completed?
-      steps.exclude?(developer.state.to_sym)
+      !active?
+    end
+
+    def active?
+      steps.include?(developer.state.to_sym)
     end
 
     def route_for_current_step

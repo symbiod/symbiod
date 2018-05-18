@@ -27,6 +27,10 @@ FactoryBot.define do
       state 'disabled'
     end
 
+    trait :rejected do
+      state 'rejected'
+    end
+
     trait :screening_completed do
       state 'screening_completed'
     end

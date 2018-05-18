@@ -5,11 +5,11 @@ module Web
     module Wizard
       # Allows newcomer to fill screening tasks survey
       class ScreeningsController < BaseController
-        # TODO: authorize if user is able to pass current assignment
         def index
           @assignment = current_user.test_task_assignments.uncompleted.first
         end
 
+        # TODO: authorize if user is able to pass current assignment
         def update
           Ops::Developer::Screening::CompleteTask.call(
             user: current_user,
@@ -23,6 +23,10 @@ module Web
 
         def assignment_result
           params.require(:developer_test_task_result).permit(:link)
+        end
+
+        def policy_class
+          ::Bootcamp::Wizard::ScreeningPolicy
         end
       end
     end

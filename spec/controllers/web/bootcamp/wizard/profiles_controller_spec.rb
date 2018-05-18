@@ -16,6 +16,14 @@ describe Web::Bootcamp::Wizard::ProfilesController do
         get :edit
         expect(response.status).to eq 200
       end
+
+      it_behaves_like 'checks step permissions' do
+        let(:wrong_state) { :profile_completed }
+
+        def invoke_action
+          get :edit
+        end
+      end
     end
 
     context 'non-authenticated' do
@@ -32,11 +40,7 @@ describe Web::Bootcamp::Wizard::ProfilesController do
 
       context 'valid params' do
         let(:result_double) { double(success?: true) }
-        let(:user_params) do
-          attributes_for(:user).reject do |(k, _)|
-            [:password, :salt, :state, :crypted_password, :email].include?(k)
-          end
-        end
+        let(:user_params) { valid_user_attributes }
 
         it 'calls operation' do
           expect(Ops::Developer::CompleteProfile)
@@ -49,6 +53,14 @@ describe Web::Bootcamp::Wizard::ProfilesController do
         it 'redirects to next step' do
           put :update, params: { user: user_params }
           expect(response).to redirect_to public_send(Developer::Wizard.new(user).route_for_current_step)
+        end
+
+        it_behaves_like 'checks step permissions' do
+          let(:wrong_state) { :profile_completed }
+
+          def invoke_action
+            put :update, params: { user: user_params }
+          end
         end
       end
 

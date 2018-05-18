@@ -6,7 +6,7 @@ module Developer
     def notify(user, feedback)
       @user = user
       @feedback = feedback
-      mail(to: @user.email, subject: "#{t('bootcamp.screening.rejection')}, #{user.name}")
+      mail(to: @user.email, subject: "#{t('bootcamp.screening.rejection')}, #{user.full_name}")
     end
   end
 end
