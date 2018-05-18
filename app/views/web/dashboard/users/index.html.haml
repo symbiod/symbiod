@@ -11,7 +11,7 @@
       - @users.each do |user|
         %tr
           %td= link_to user.email, dashboard_user_path(user)
-          %td= user.name
+          %td= user.full_name
           %td
             %ul
               - user.roles.each do |role|

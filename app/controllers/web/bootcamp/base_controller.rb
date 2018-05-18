@@ -2,24 +2,16 @@
 
 module Web
   module Bootcamp
-    # Handles all redirection and restictions logic for bootcamp area
+    # Base class for all bootcamp controllers
     class BaseController < ApplicationController
-      before_action :check_if_screening_completed?, if: :current_user
-
       private
 
-      # Force user to visit screening, if it is not completed yet
-      # Othervise redirect him to dashboard
-      def check_if_screening_completed?
-        if user_active?
-          redirect_to dashboard_root_url
-        elsif controller_name != 'screenings'
-          redirect_to bootcamp_screenings_url
-        end
+      helper_method def current_wizard_step_url
+        public_send(wizard.route_for_current_step)
       end
 
-      def user_active?
-        current_user.active?
+      helper_method def wizard
+        Developer::Wizard.new(current_user)
       end
     end
   end

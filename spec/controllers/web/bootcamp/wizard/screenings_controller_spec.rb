@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-describe Web::Bootcamp::ScreeningsController do
+describe Web::Bootcamp::Wizard::ScreeningsController do
   describe 'GET #index' do
     context 'authenticated' do
-      let(:user) { create(:user, :with_assignment) }
+      let(:user) { create(:user, :profile_completed, :with_assignment) }
       before { login_user(user) }
 
       it 'renders template' do
@@ -23,6 +23,14 @@ describe Web::Bootcamp::ScreeningsController do
         current_assignment = user.reload.test_task_assignments.uncompleted.first
         expect(assigns(:assignment)).to eq current_assignment
       end
+
+      it_behaves_like 'checks step permissions' do
+        let(:wrong_state) { :pending }
+
+        def invoke_action
+          get :index
+        end
+      end
     end
 
     context 'not authenticated' do
@@ -34,7 +42,7 @@ describe Web::Bootcamp::ScreeningsController do
   end
 
   describe 'PUT #update' do
-    let(:user) { create(:user, :with_assignment) }
+    let(:user) { create(:user, :profile_completed, :with_assignment) }
     let(:assignment) { user.test_task_assignments.last }
     let(:params) do
       {
@@ -55,7 +63,15 @@ describe Web::Bootcamp::ScreeningsController do
 
     it 'redirects to screenings url' do
       put :update, params: params
-      expect(response).to redirect_to bootcamp_screenings_url
+      expect(response).to redirect_to bootcamp_wizard_screenings_url
+    end
+
+    it_behaves_like 'checks step permissions' do
+      let(:wrong_state) { :pending }
+
+      def invoke_action
+        put :update, params: params
+      end
     end
   end
 end

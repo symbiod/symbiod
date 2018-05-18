@@ -6,7 +6,7 @@ describe Ops::Developer::Screening::CompleteTask do
   subject { described_class }
 
   describe '#call' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :profile_completed) }
     let(:assignment) { create(:developer_test_task_assignment, :uncompleted, developer: user) }
     let(:params) { Hash[link: 'some answer'] }
 

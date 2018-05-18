@@ -7,7 +7,7 @@ module Staff
 
     def notify(user)
       @user = user
-      mail(subject: "#{t('bootcamp.screening.completed')}, #{user.name}")
+      mail(subject: "#{t('bootcamp.screening.completed')}, #{user.full_name}")
     end
   end
 end

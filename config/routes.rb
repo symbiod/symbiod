@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
       resource :registration, only: %i[new create]
       resource :user_sessions, only: :create
-      resources :screenings, only: %i[index update]
+
+      namespace :wizard do
+        resources :screenings, only: %i[index update]
+        resource :profile, only: %i[edit update]
+      end
 
       get '/login', to: 'user_sessions#new', as: :login
       post '/logout', to: 'user_sessions#destroy', as: :logout
