@@ -6,7 +6,6 @@ require './lib/sidekiq_constraint'
 Rails.application.routes.draw do
   scope module: :web do
     scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
-      resource :registration, only: %i[new create]
       resource :user_sessions, only: :create
 
       namespace :wizard do
