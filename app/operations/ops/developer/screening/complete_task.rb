@@ -11,10 +11,10 @@ module Ops
 
         private
 
-        def persist_result!(_ctx, user:, assignment_id:, params:, **)
-          assignment = user.test_task_assignments.find(assignment_id)
-          result = ::Developer::TestTaskResult.create!(params)
-          assignment.update!(test_task_result: result)
+        def persist_result!(ctx, user:, assignment_id:, params:, **)
+          ctx[:model] = user.test_task_assignments.find(assignment_id)
+          result = ctx[:model].create_test_task_result(params)
+          result.valid?
         end
 
         def complete_screening!(_ctx, user:, **)

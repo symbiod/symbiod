@@ -6,6 +6,6 @@
 
 = markdown(model.test_task.description)
 
-= simple_form_for(Developer::TestTaskResult.new, method: :put, remote: false, url: bootcamp_wizard_screening_path(model)) do |f|
+= simple_form_for(assignment, method: :put, remote: false, url: bootcamp_wizard_screening_path(model)) do |f|
   = f.input :link
   = f.button :submit, 'Submit', type: :submit, class: 'btn btn-lg btn-secondary'

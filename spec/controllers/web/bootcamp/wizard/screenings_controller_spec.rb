@@ -54,16 +54,42 @@ describe Web::Bootcamp::Wizard::ScreeningsController do
     end
     before { login_user(user) }
 
-    it 'calls CompleteTask action' do
-      expect(Ops::Developer::Screening::CompleteTask)
-        .to receive(:call)
-        .with(user: user, assignment_id: assignment.id.to_s, params: { 'link' => 'some_value' })
-      put :update, params: params
+    context 'valid params' do
+      let(:result) { double(success?: true) }
+
+      it 'calls CompleteTask action' do
+        expect(Ops::Developer::Screening::CompleteTask)
+          .to receive(:call)
+          .with(user: user, assignment_id: assignment.id.to_s, params: { 'link' => 'some_value' })
+          .and_return(result)
+        put :update, params: params
+      end
+
+      it 'redirects to screenings url' do
+        put :update, params: params
+        expect(response).to redirect_to bootcamp_wizard_screenings_url
+      end
     end
 
-    it 'redirects to screenings url' do
-      put :update, params: params
-      expect(response).to redirect_to bootcamp_wizard_screenings_url
+    context 'invalid params' do
+      let(:params) do
+        {
+          id: assignment.id,
+          developer_test_task_result: {
+            link: nil
+          }
+        }
+      end
+
+      it 'renders template' do
+        put :update, params: params
+        expect(response).to render_template :index
+      end
+
+      it 'assigns assignment variable' do
+        put :update, params: params
+        expect(assigns(:assignment)).to eq assignment
+      end
     end
 
     it_behaves_like 'checks step permissions' do
