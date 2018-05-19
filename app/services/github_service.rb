@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # The goal of this class is to automate github-related routine.
+require 'octokit'
+
 class GithubService
   attr_reader :token, :organization
 
@@ -17,6 +19,8 @@ class GithubService
     username = user_name_by_id(user_id)
     client.update_organization_membership(organization, user: username)
     client.add_team_member(team, username)
+  rescue Octokit::Forbidden => e
+    ignore_exception?(e)
   end
 
   private
@@ -29,6 +33,14 @@ class GithubService
     {
       organization: organization
     }
+  end
+
+  def ignore_exception?(e)
+    if e.message.include?('You cannot demote yourself')
+      true
+    else
+      raise
+    end
   end
 
   # :nocov:
