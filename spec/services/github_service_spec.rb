@@ -85,7 +85,7 @@ describe GithubService do
       end
 
       it 'does not raise error' do
-        expect{subject.invite_member(user_id)}
+        expect { subject.invite_member(user_id) }
           .not_to raise_error
       end
     end

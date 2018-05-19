@@ -3,6 +3,7 @@
 # The goal of this class is to automate github-related routine.
 require 'octokit'
 
+# Provides convenient interface for dealing with github api.
 class GithubService
   attr_reader :token, :organization
 
@@ -35,12 +36,9 @@ class GithubService
     }
   end
 
-  def ignore_exception?(e)
-    if e.message.include?('You cannot demote yourself')
-      true
-    else
-      raise
-    end
+  def ignore_exception?(exception)
+    raise unless exception.message.include?('You cannot demote yourself')
+    true
   end
 
   # :nocov:
