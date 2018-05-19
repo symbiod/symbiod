@@ -10,7 +10,8 @@ module Developer
     belongs_to :test_task_result,
                class_name: 'Developer::TestTaskResult',
                foreign_key: 'test_task_result_id',
-               optional: true
+               optional: true,
+               inverse_of: :test_task_assignment
     belongs_to :developer, class_name: 'User', foreign_key: 'developer_id'
 
     scope :uncompleted, -> { where(test_task_result_id: nil) }
