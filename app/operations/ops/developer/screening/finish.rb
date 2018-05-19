@@ -3,7 +3,7 @@
 module Ops
   module Developer
     module Screening
-      # Marks user as completed screening and notifies stuff about new results
+      # Marks user as completed screening and notifies staff about new results
       class Finish < BaseOperation
         step :all_tasks_completed?
         success :complete_screening!

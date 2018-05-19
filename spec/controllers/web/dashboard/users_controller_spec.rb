@@ -146,7 +146,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
   end
 
   describe 'PUT #add_role' do
-    let(:role) { 'stuff' }
+    let(:role) { 'staff' }
 
     context 'authorized' do
       let!(:candidate) { create(:user, :active) }
@@ -175,7 +175,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
   end
 
   describe 'PUT #remove_role' do
-    let(:role) { 'stuff' }
+    let(:role) { 'staff' }
 
     context 'authorized' do
       let!(:candidate) { create(:user, :active, :staff) }

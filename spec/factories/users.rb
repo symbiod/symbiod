@@ -37,7 +37,7 @@ FactoryBot.define do
 
     trait :staff do
       after(:create) do |user|
-        user.add_role(:stuff)
+        user.add_role(:staff)
       end
     end
 

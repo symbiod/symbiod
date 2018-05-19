@@ -14,7 +14,7 @@ describe Ops::Developer::RemoveRole do
       it 'delete roles success' do
         expect { subject.call(user: user, role: role, size: user.roles.size) }
           .to change { user.reload.roles_name }
-          .from(%w[developer stuff]).to(['stuff'])
+          .from(%w[developer staff]).to(['staff'])
       end
     end
 
