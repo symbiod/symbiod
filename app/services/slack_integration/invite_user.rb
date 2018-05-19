@@ -21,7 +21,7 @@ module SlackIntegration
 
     def call
       response = JSON.parse(open(url).read)
-      raise_error(response) unless response['ok']
+      raise_error(response) unless successful_call?(response)
     end
 
     private
@@ -35,6 +35,12 @@ module SlackIntegration
         "&email=#{URI.escape(@email)}" \
         "&first_name=#{URI.escape(@first_name)}" \
         "&last_name=#{URI.escape(@last_name)}"
+    end
+
+    def successful_call?(response)
+      return true if response['ok']
+      return true if response['error'] == 'already_in_team'
+      false
     end
 
     def raise_error(response)

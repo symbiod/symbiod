@@ -9,7 +9,7 @@ SimpleCov.start 'rails' do
 end
 
 RSpec.configure do |config|
-  config.extend SlackMock
+  config.include SlackMock
 
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`

@@ -34,5 +34,13 @@ describe SlackIntegration::InviteUser do
         expect { subject.call }.to raise_error SlackIntegration::FailedApiCallException
       end
     end
+
+    context 'user already exists in team' do
+      slack_user_already_exists!
+
+      it 'does not raise error' do
+        expect { subject.call }.not_to raise_error
+      end
+    end
   end
 end
