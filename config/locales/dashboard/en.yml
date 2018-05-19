@@ -9,7 +9,7 @@ en:
       confirm_rejection: Do you really want to reject this candidate?
     users:
       access:
-        deny: The user does not have the role of stuff
+        deny: The user does not have the role of staff
       notices:
         activated: The user was activated
         disabled: The user was disabled

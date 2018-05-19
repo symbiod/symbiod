@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-# Allow only stuff manage test task
+# Allow only staff manage test task
 class TestTaskPolicy < DashboardPolicy
   def index?
-    stuff?
+    staff?
   end
 
   def edit?
-    stuff?
+    staff?
   end
 
   def update?
-    stuff?
+    staff?
   end
 end

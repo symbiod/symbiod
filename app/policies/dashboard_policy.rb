@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# Allows only stuff to manage newcomers applications
+# Allows only staff to manage newcomers applications
 class DashboardPolicy < ApplicationPolicy
   def allowed?
     return false unless user
-    user.active? || user.has_role?(:stuff)
+    user.active? || user.has_role?(:staff)
   end
 
   private
 
-  def stuff?
-    user.has_role? :stuff
+  def staff?
+    user.has_role? :staff
   end
 end

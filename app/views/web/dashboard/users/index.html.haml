@@ -18,7 +18,7 @@
                 %li
                   = role.name
           %td
-            - if current_user.has_role?(:stuff)
+            - if current_user.has_role?(:staff)
               - if user.active?
                 = link_to user.state, deactivate_dashboard_user_path(user),
                                       method: :put,
@@ -33,6 +33,6 @@
               = user.state
           %td
             - if user.state == 'screening_completed'
-              = link_to 'Reiew applicant\'s', dashboard_test_task_assignment_url(user),
+              = link_to 'Review applicant', dashboard_test_task_assignment_url(user),
                                               class: 'btn btn-info'
 = paginate @users

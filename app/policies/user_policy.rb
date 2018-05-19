@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Allows only stuff to manage users
+# Allows only staff to manage users
 class UserPolicy < DashboardPolicy
   def index?
     true
@@ -11,18 +11,18 @@ class UserPolicy < DashboardPolicy
   end
 
   def activate?
-    stuff?
+    staff?
   end
 
   def deactivate?
-    stuff?
+    staff?
   end
 
   def add_role?
-    stuff?
+    staff?
   end
 
   def remove_role?
-    stuff?
+    staff?
   end
 end
