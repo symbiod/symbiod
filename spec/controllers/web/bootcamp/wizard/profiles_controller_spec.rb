@@ -31,7 +31,7 @@ describe Web::Bootcamp::Wizard::ProfilesController do
     context 'non-authenticated' do
       it 'redirects to root landing' do
         get :edit
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to root_landing_url
       end
     end
   end
@@ -81,7 +81,7 @@ describe Web::Bootcamp::Wizard::ProfilesController do
 
       it 'redirects to root landing' do
         put :update, params: { user: user_params }
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to root_landing_url
       end
     end
   end

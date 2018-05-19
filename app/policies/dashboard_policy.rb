@@ -3,11 +3,8 @@
 # Allows only stuff to manage newcomers applications
 class DashboardPolicy < ApplicationPolicy
   def allowed?
-    # Using safe operator, because user can be nil here
-    # it he is not authenticated
-    result = user&.active? || user&.has_role?(:stuff)
-    return false if result.nil?
-    result
+    return false unless user
+    user.active? || user.has_role?(:stuff)
   end
 
   private

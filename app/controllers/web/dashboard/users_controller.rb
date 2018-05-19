@@ -19,24 +19,24 @@ module Web
 
       def activate
         Ops::Developer::Activate.call(user: @user)
-        redirect_to dashboard_users_path,
+        redirect_to dashboard_users_url,
                     flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.email}" }
       end
 
       def deactivate
         Ops::Developer::Disable.call(user: @user)
-        redirect_to dashboard_users_path, flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.email}" }
+        redirect_to dashboard_users_url, flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.email}" }
       end
 
       def add_role
         Ops::Developer::AssignRole.call(user: @user, role: params[:role])
-        redirect_to dashboard_user_path(@user),
+        redirect_to dashboard_user_url(@user),
                     flash: { success: "#{params[:role].capitalize} #{t('dashboard.users.notices.add_role')}" }
       end
 
       def remove_role
         Ops::Developer::RemoveRole.call(user: @user, role: params[:role], size: @user.roles.size)
-        redirect_to dashboard_user_path(@user),
+        redirect_to dashboard_user_url(@user),
                     flash: { success: "#{params[:role].capitalize} #{t('dashboard.users.notices.remove_role')}" }
       end
 
@@ -52,7 +52,7 @@ module Web
 
       def redirect_to_dashboard_user
         flash[:danger] = t('dashboard.users.alert.last_role')
-        redirect_to dashboard_user_path(@user)
+        redirect_to dashboard_user_url(@user)
       end
     end
   end

@@ -23,7 +23,7 @@ RSpec.describe Web::Bootcamp::UserSessionsController, type: :controller do
       end
 
       it 'redirects to main page' do
-        is_expected.to redirect_to(root_url(subdomain: 'www'))
+        is_expected.to redirect_to(root_landing_url)
       end
     end
 
@@ -55,7 +55,7 @@ RSpec.describe Web::Bootcamp::UserSessionsController, type: :controller do
     end
 
     it 'redirects to main page' do
-      is_expected.to redirect_to(root_url(subdomain: 'www'))
+      is_expected.to redirect_to(root_landing_url)
     end
   end
 end

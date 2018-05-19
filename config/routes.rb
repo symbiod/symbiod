@@ -47,7 +47,9 @@ Rails.application.routes.draw do
     end
 
     mount Sidekiq::Web => '/sidekiq', constraints: SidekiqConstraint.new
-    root to: 'home#index'
+    root to: 'home#index', as: :root_landing, constraints: { subdomain: 'www' }
   end
+
   get '/ping', to: 'ping#index'
+  root to: 'ping#redirect'
 end

@@ -15,7 +15,7 @@ module Web
 
       def create
         if (@user = login(resource_params[:email], resource_params[:password]))
-          redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.success_login', email: @user.email))
+          redirect_back_or_to(root_landing_url, notice: t('landing.success_login', email: @user.email))
         else
           flash.now[:alert] = t('landing.failed_login')
           render action: 'new'
@@ -28,7 +28,7 @@ module Web
         # NOTICE: For some reason Sorcery does not sign out properly
         # So we need to manualy nullify current user variable
         @current_user = nil
-        redirect_back_or_to(root_url(subdomain: 'www'), notice: t('landing.logout'))
+        redirect_back_or_to(root_landing_url, notice: t('landing.logout'))
       end
 
       def resource_params

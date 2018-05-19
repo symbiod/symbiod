@@ -36,7 +36,7 @@ describe Web::Bootcamp::Wizard::ScreeningsController do
     context 'not authenticated' do
       it 'redirects to root landing page' do
         get :index
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to root_landing_url
       end
     end
   end
