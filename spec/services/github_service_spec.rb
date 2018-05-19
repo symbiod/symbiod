@@ -65,5 +65,52 @@ describe GithubService do
         subject.invite_member(user_id)
       end
     end
+
+    context 'self-demote exception raised' do
+      let(:bad_response) do
+        {
+          method: 'PUT',
+          url: 'https://api.github.com/orgs/howtohireme/memberships/Mehonoshin',
+          status: 403,
+          response_header: {},
+          body: 'You cannot demote yourself. Admins must be demoted by another admin. // See: https://developer.github.com/v3/orgs/members/#add-or-update-organization-membership'
+        }
+      end
+
+      before do
+        expect(client)
+          .to receive(:update_organization_membership)
+          .with(organization, user: username)
+          .and_raise(Octokit::Forbidden, bad_response)
+      end
+
+      it 'does not raise error' do
+        expect { subject.invite_member(user_id) }
+          .not_to raise_error
+      end
+    end
+
+    context 'some other exception raised' do
+      let(:bad_response) do
+        {
+          method: 'PUT',
+          url: 'https://api.github.com/orgs/howtohireme/memberships/Mehonoshin',
+          status: 403,
+          response_header: {},
+          body: 'Some other drammatic error'
+        }
+      end
+
+      before do
+        expect(client)
+          .to receive(:update_organization_membership)
+          .with(organization, user: username)
+          .and_raise(Octokit::Forbidden, bad_response)
+      end
+
+      it 'reraises exception' do
+        expect { subject.invite_member(user_id) }.to raise_error Octokit::Forbidden
+      end
+    end
   end
 end
