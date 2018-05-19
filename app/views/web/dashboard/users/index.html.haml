@@ -19,19 +19,7 @@
                 %li
                   = role.name
           %td
-            - if current_user.has_role?(:staff)
-              - if user.active?
-                = link_to user.state, deactivate_dashboard_user_path(user),
-                                      method: :put,
-                                      class: "btn btn-success btn-sm",
-                                      data: { confirm: t('dashboard.users.link.confirm.disable') }
-              - else
-                = link_to user.state, activate_dashboard_user_path(user),
-                                      method: :put,
-                                      class: "btn btn-danger btn-sm",
-                                      data: { confirm: t('dashboard.users.link.confirm.activate') }
-            - else
-              = user.state
+            = cell(Developer::Dashboard::DisplayStatusUser, user).()
           %td.col-md-2
             = cell(Developer::Dashboard::DisplayProgress, user).()
           %td

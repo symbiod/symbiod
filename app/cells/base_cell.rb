@@ -11,6 +11,7 @@ class BaseCell < Cell::ViewModel
   # include AbstractController::Helpers
   include SimpleForm::ActionViewExtensions::FormHelper
   include MarkdownHelper
+  include ActionView::Helpers::TranslationHelper
 
   def current_user
     controller.current_user

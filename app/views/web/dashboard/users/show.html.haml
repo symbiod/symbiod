@@ -42,40 +42,21 @@
         %ul
           - @test_task_assignments.each do |test_task_assignment|
             %li= test_task_assignment.test_task.title
-- if @test_task_assignments.completed.presence || @user.developer_onboarding.try(:slack) || @user.developer_onboarding.try(:github)
-  %h2 Onboarding progress
-  .table-responsive
-    %table.table.table-striped.table-sm
+%h2 Onboarding progress
+.table-responsive
+  %table.table.table-striped.table-sm
+    %tr
+      %th= t('dashboard.users.table.tasks')
+      %th= t('dashboard.users.table.status')
+    - @test_task_assignments.each do |test_task_assignment|
       %tr
-        %th= t('dashboard.users.table.tasks')
-        %th= t('dashboard.users.table.status')
-      - @test_task_assignments.each do |test_task_assignment|
-        %tr
-          %td= test_task_assignment.test_task.title
-          %td
-            - if test_task_assignment.completed?
-              .btn.btn-success.btn-sm
-                = t('dashboard.developer_test_task.finished')
-            - else
-              .btn.btn-danger.btn-sm
-                = t('dashboard.developer_test_task.not_finished')
-      %tr
-        %td= t('dashboard.users.table.invite_slack')
+        %td= test_task_assignment.test_task.title
         %td
-          - if @user.developer_onboarding.try(:slack)
+          - if test_task_assignment.completed?
             .btn.btn-success.btn-sm
-              = t('dashboard.users.table.invited')
+              = t('dashboard.developer_test_task.finished')
           - else
             .btn.btn-danger.btn-sm
-              = t('dashboard.users.table.uninvited')
-      %tr
-        %td= t('dashboard.users.table.invite_github')
-        %td
-          - if @user.developer_onboarding.try(:github)
-            .btn.btn-success.btn-sm
-              = t('dashboard.users.table.invited')
-          - else
-            .btn.btn-danger.btn-sm
-              = t('dashboard.users.table.uninvited')
-
-
+              = t('dashboard.developer_test_task.not_finished')
+    = cell(Developer::Dashboard::OnboardingStep, @user, resource: :slack).()
+    = cell(Developer::Dashboard::OnboardingStep, @user, resource: :github).()
