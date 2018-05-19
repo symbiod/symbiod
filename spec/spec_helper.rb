@@ -5,7 +5,7 @@ require './spec/support/slack_mock'
 require 'simplecov'
 
 SimpleCov.start 'rails' do
-  minimum_coverage 98.25
+  minimum_coverage 98.67
 end
 
 RSpec.configure do |config|

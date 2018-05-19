@@ -10,7 +10,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
       before { get :index }
 
       it 'redirect to root landing' do
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to root_landing_url
       end
     end
 
@@ -92,7 +92,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
       it 'redirects to users list' do
         put :activate, params: { id: candidate.id }
-        expect(response).to redirect_to dashboard_users_path
+        expect(response).to redirect_to dashboard_users_url
       end
 
       it 'assigns success flash' do
@@ -102,7 +102,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :disabled) }
+      let!(:candidate) { create(:user, :active) }
       before { login_user(candidate) }
 
       it 'redirects to dashboard root' do
@@ -114,7 +114,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
   describe 'PUT #deactivate' do
     context 'authorized' do
-      let!(:candidate) { create(:user, :active) }
+      let(:candidate) { create(:user, :active) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
@@ -124,13 +124,14 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
       it 'redirect to users list' do
         put :deactivate, params: { id: candidate.id }
-        expect(response).to redirect_to dashboard_users_path
+        expect(response).to redirect_to dashboard_users_url
       end
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :active) }
-      before { login_user(candidate) }
+      let(:user) { create(:user, :active) }
+      let(:candidate) { create(:user, :active) }
+      before { login_user(user) }
 
       it 'redirect to dashboard root' do
         put :deactivate, params: { id: candidate.id }
@@ -158,7 +159,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
       it 'redirect to user' do
         put :add_role, params: { id: candidate.id, role: role }
-        expect(response).to redirect_to dashboard_user_path(candidate)
+        expect(response).to redirect_to dashboard_user_url(candidate)
       end
     end
 
@@ -189,7 +190,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
       it 'redirect to user' do
         put :remove_role, params: { id: candidate.id, role: role, size: candidate.roles.size }
-        expect(response).to redirect_to dashboard_user_path(candidate)
+        expect(response).to redirect_to dashboard_user_url(candidate)
       end
     end
 
@@ -210,7 +211,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
       it 'redirect to user' do
         put :remove_role, params: { id: candidate.id, role: role }
-        expect(response).to redirect_to dashboard_user_path(candidate)
+        expect(response).to redirect_to dashboard_user_url(candidate)
       end
 
       it 'flash error remove last role' do
