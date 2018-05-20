@@ -5,7 +5,7 @@ module Developer
     # This cell renders status user
     class DisplayStatusUser < BaseCell
       def user_status
-        current_user.has_role?(:stuff) ? user_state : model.state
+        current_user.has_role?(:staff) ? user_state : model.state
       end
 
       private

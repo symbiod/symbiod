@@ -9,8 +9,7 @@
       %td= @user.email
     %tr
       %td
-        %b
-          Full name
+        %b= t('dashboard.users.table.full_name')
       %td= @user.full_name
     %tr
       %td
@@ -36,8 +35,7 @@
                                               data: { confirm: "Are you sure to add role #{role}" }
     %tr
       %td
-        %b
-          Task assignments
+        %b= t('dashboard.users.table.task_assignments')
       %td
         %ul
           - @test_task_assignments.each do |test_task_assignment|

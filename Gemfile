@@ -44,6 +44,7 @@ gem 'strong_migrations'
 group :development, :test do
   gem 'pry-rails'
   gem 'rails-controller-testing'
+  gem 'rspec-cells'
   gem 'rspec-rails'
   gem 'rspec-its'
   gem 'factory_bot_rails'

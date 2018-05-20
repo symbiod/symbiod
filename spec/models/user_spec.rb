@@ -94,18 +94,10 @@ RSpec.describe User, type: :model do
   end
 
   describe '#progress' do
-    context 'progress 0%' do
+    context 'returns a number' do
       before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
-      specify { expect(subject.progress).to eq 0 }
-    end
 
-    context 'progress 100%' do
-      before do
-        create(:developer_test_task_assignment, :completed, developer: subject)
-        create(:developer_onboarding, :slack_invited, :github_invited, user: subject)
-      end
-
-      specify { expect(subject.progress).to eq 100 }
+      it { expect(subject.progress).to be_an(Numeric) }
     end
   end
 

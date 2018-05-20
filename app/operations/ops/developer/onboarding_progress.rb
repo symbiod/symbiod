@@ -8,6 +8,12 @@ module Ops
         @user = user
       end
 
+      def percent
+        100 * steps_done / total_steps
+      end
+
+      private
+
       def total_steps
         total = @user.test_task_assignments.size || Ops::Developer::Screening::NUMBER_OF_ASSIGNED_TEST_TASKS
         # We add 2 because of slack and github
@@ -18,10 +24,6 @@ module Ops
         steps = @user.test_task_assignments.map(&:completed?) +
                 [@user.developer_onboarding.try(:slack), @user.developer_onboarding.try(:github)]
         steps.count { |i| i }
-      end
-
-      def percent
-        100 * steps_done / total_steps
       end
     end
   end

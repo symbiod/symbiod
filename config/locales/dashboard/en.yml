@@ -20,10 +20,12 @@ en:
       table:
         applicants: Applicants
         email: Email
+        full_name: Full name
         github_user: GitHub user
         progress: Progress
         roles: Roles
         status: Status
+        task_assignments: Task assignments
         tasks: Tasks
         invite_slack: Invite to Slack
         invite_github: Invite to GitHub
@@ -32,7 +34,7 @@ en:
       link:
         confirm:
           disable: Are you sure to disable?
-          activate: are you sure to activate?
+          activate: Are you sure to activate?
         review_applicant: Review applicant
     developer_test_task:
       notices:
