@@ -56,5 +56,5 @@
           - else
             .btn.btn-danger.btn-sm
               = t('dashboard.developer_test_task.not_finished')
-    = cell(Developer::Dashboard::OnboardingStep, @user, resource: :slack).()
-    = cell(Developer::Dashboard::OnboardingStep, @user, resource: :github).()
+    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :slack).()
+    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :github).()

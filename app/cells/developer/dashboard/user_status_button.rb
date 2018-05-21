@@ -3,7 +3,7 @@
 module Developer
   module Dashboard
     # This cell renders status user
-    class DisplayStatusUser < BaseCell
+    class UserStatusButton < BaseCell
       def user_status
         current_user.has_role?(:staff) ? user_state : model.state
       end
