@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # All application cells should inherit from this class.
-# It provides available helpers from simple_form and other useful stuff.
+# It provides available helpers from simple_form and other useful staff.
 class BaseCell < Cell::ViewModel
   # include ActionView::Helpers::UrlHelper
   # include ActionView::Helpers::CaptureHelper
@@ -11,6 +11,7 @@ class BaseCell < Cell::ViewModel
   # include AbstractController::Helpers
   include SimpleForm::ActionViewExtensions::FormHelper
   include MarkdownHelper
+  include ActionView::Helpers::TranslationHelper
 
   def current_user
     controller.current_user

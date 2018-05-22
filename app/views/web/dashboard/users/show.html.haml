@@ -5,23 +5,19 @@
   %table.table.table-striped.table-sm
     %tr
       %td
-        %b
-          Email
+        %b= t('dashboard.users.table.email')
       %td= @user.email
     %tr
       %td
-        %b
-          Full name
+        %b= t('dashboard.users.table.full_name')
       %td= @user.full_name
     %tr
       %td
-        %b
-          Github
+        %b= t('dashboard.users.table.github_user')
       %td= @user.github
     %tr
       %td
-        %b
-          Roles
+        %b= t('dashboard.users.table.roles')
       %td
         %ul
           - @user.roles_name.each do |role|
@@ -39,10 +35,26 @@
                                               data: { confirm: "Are you sure to add role #{role}" }
     %tr
       %td
-        %b
-          Task assignments
+        %b= t('dashboard.users.table.task_assignments')
       %td
         %ul
-          - @user.test_task_assignments.each do |test_task_assignment|
-            %li
-              = test_task_assignment
+          - @test_task_assignments.each do |test_task_assignment|
+            %li= test_task_assignment.test_task.title
+%h2 Onboarding progress
+.table-responsive
+  %table.table.table-striped.table-sm
+    %tr
+      %th= t('dashboard.users.table.tasks')
+      %th= t('dashboard.users.table.status')
+    - @test_task_assignments.each do |test_task_assignment|
+      %tr
+        %td= test_task_assignment.test_task.title
+        %td
+          - if test_task_assignment.completed?
+            .btn.btn-success.btn-sm
+              = t('dashboard.developer_test_task.finished')
+          - else
+            .btn.btn-danger.btn-sm
+              = t('dashboard.developer_test_task.not_finished')
+    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :slack).()
+    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :github).()

@@ -3,11 +3,12 @@
   %table.table.table-striped.table-sm
     %thead
       %tr
-        %th Email
-        %th GitHub username
-        %th Roles
-        %th Status
-        %th Applicants
+        %th= t('dashboard.users.table.email')
+        %th= t('dashboard.users.table.github_user')
+        %th= t('dashboard.users.table.roles')
+        %th= t('dashboard.users.table.status')
+        %th= t('dashboard.users.table.progress')
+        %th= t('dashboard.users.table.applicants')
       - @users.each do |user|
         %tr
           %td= link_to user.email, dashboard_user_path(user)
@@ -18,21 +19,11 @@
                 %li
                   = role.name
           %td
-            - if current_user.has_role?(:staff)
-              - if user.active?
-                = link_to user.state, deactivate_dashboard_user_path(user),
-                                      method: :put,
-                                      class: "btn btn-success",
-                                      data: { confirm: 'Are you sure to disable?' }
-              - else
-                = link_to user.state, activate_dashboard_user_path(user),
-                                      method: :put,
-                                      class: "btn btn-danger",
-                                      data: { confirm: 'Are you sure to activate?' }
-            - else
-              = user.state
+            = cell(Developer::Dashboard::UserStatusButton, user).()
+          %td.col-md-2
+            = cell(Developer::Dashboard::DisplayProgress, user).()
           %td
-            - if user.state == 'screening_completed'
-              = link_to 'Review applicant', dashboard_test_task_assignment_url(user),
-                                              class: 'btn btn-info'
+            - if user.state == 'screening_completed' && current_user.has_role?(:staff)
+              = link_to t('dashboard.users.link.review_applicant'), dashboard_test_task_assignment_url(user),
+                                              class: 'btn btn-info btn-sm'
 = paginate @users

@@ -17,6 +17,25 @@ en:
         remove_role: role was removed
       alert:
         last_role: Can not remove the last role
+      table:
+        applicants: Applicants
+        email: Email
+        full_name: Full name
+        github_user: GitHub user
+        progress: Progress
+        roles: Roles
+        status: Status
+        task_assignments: Task assignments
+        tasks: Tasks
+        invite_slack: Invite to Slack
+        invite_github: Invite to GitHub
+        invited: invited
+        uninvited: uninvited
+      link:
+        confirm:
+          disable: Are you sure to disable?
+          activate: Are you sure to activate?
+        review_applicant: Review applicant
     developer_test_task:
       notices:
         update: The test task was updated
@@ -29,3 +48,5 @@ en:
       description: Description
       button:
         edit: Edit
+      finished: finished
+      not_finished: not finished

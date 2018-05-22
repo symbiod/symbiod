@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :authentications
 
-  scope :active_or_disabled, -> { where(state: %w[active disabled screening_completed]).order(id: :desc) }
+  scope :newer_first, -> { order(id: :desc) }
 
   aasm column: 'state' do
     state :pending, initial: true
@@ -70,5 +70,9 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def progress
+    Ops::Developer::OnboardingProgress.new(self).percent
   end
 end

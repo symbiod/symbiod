@@ -295,6 +295,9 @@ GEM
     rolify (5.2.0)
     rollbar (2.15.6)
       multi_json
+    rspec-cells (0.3.4)
+      cells (>= 4.0.0, < 6.0.0)
+      rspec-rails (~> 3.2)
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -457,6 +460,7 @@ DEPENDENCIES
   reform-rails
   rolify
   rollbar
+  rspec-cells
   rspec-its
   rspec-rails
   rubocop

@@ -5,5 +5,13 @@ FactoryBot.define do
     user
     slack false
     github false
+
+    trait :invited_to_slack do
+      slack true
+    end
+
+    trait :invited_to_github do
+      github true
+    end
   end
 end

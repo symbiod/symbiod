@@ -93,6 +93,14 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#progress' do
+    context 'returns a number' do
+      before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
+
+      it { expect(subject.progress).to be_an(Numeric) }
+    end
+  end
+
   describe '#github_uid' do
     context 'no authentications' do
       its(:github_uid) { is_expected.to eq nil }
