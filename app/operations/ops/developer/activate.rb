@@ -17,7 +17,7 @@ module Ops
       end
 
       def send_notifications!(_ctx, user:, **)
-        ::Developer::OnboardingStartedMailer.notify(user).deliver_later
+        ::Developer::OnboardingStartedMailer.notify(user.id).deliver_later
       end
 
       def start_onboarding!(_ctx, user:, **)

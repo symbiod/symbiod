@@ -23,8 +23,16 @@ describe Ops::Developer::Reject do
         .from(nil).to(feedback)
     end
 
-    it 'sends email about rejection with sidekiq-job' do
-      expect(Sidekiq::Worker.jobs.to_s.include?('RejectionNotificationMailer')).to eq true
+    it 'sends email about rejection' do
+      expect { subject.call(params) }
+        .to have_enqueued_job(ActionMailer::DeliveryJob)
+        .with(
+          'Developer::RejectionNotificationMailer',
+          'notify',
+          'deliver_now',
+          user.id,
+          feedback
+        )
     end
   end
 end

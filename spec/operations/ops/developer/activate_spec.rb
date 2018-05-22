@@ -15,7 +15,14 @@ describe Ops::Developer::Activate do
     end
 
     it 'sends email about start of onboarding with sidekiq-job' do
-      expect(Sidekiq::Worker.jobs.to_s.include?('OnboardingStartedMailer')).to eq true
+      expect { subject.call(params) }
+        .to have_enqueued_job(ActionMailer::DeliveryJob)
+        .with(
+          'Developer::OnboardingStartedMailer',
+          'notify',
+          'deliver_now',
+          user.id
+        )
     end
 
     it 'starts onboarding operation' do

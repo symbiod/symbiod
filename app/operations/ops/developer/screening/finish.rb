@@ -7,6 +7,7 @@ module Ops
       class Finish < BaseOperation
         step :all_tasks_completed?
         success :complete_screening!
+        success :screening_completed_notification!
 
         private
 
@@ -16,6 +17,10 @@ module Ops
 
         def complete_screening!(_ctx, user:, **)
           user.complete_screening!
+        end
+
+        def screening_completed_notification!(_ctx, user:, **)
+          Staff::ScreeningCompletedMailer.notify(user.id).deliver_later
         end
       end
     end

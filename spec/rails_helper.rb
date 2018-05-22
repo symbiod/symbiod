@@ -13,6 +13,7 @@ require 'pundit/rspec'
 require 'sidekiq/testing'
 
 Sidekiq::Testing.fake!
+ActiveJob::Base.queue_adapter = :test
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 

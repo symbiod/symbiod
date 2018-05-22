@@ -5,9 +5,9 @@ module Staff
   class ScreeningCompletedMailer < ApplicationMailer
     default to: -> { User.with_role(:staff).pluck(:email) }
 
-    def notify(user)
-      @user = user
-      mail(subject: "#{t('bootcamp.screening.completed')}, #{user.full_name}")
+    def notify(user_id)
+      @user = User.find(user_id)
+      mail(subject: "#{t('bootcamp.screening.completed')}, #{@user.full_name}")
     end
   end
 end

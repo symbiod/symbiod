@@ -37,11 +37,6 @@ describe Ops::Developer::Screening::CompleteTask do
         subject.call(user: user, assignment_id: assignment.id, params: params)
       end
 
-      it 'sends email about completed of screening with sidekiq-job' do
-        subject.call(user: user, assignment_id: assignment.id, params: params)
-        expect(Sidekiq::Worker.jobs.to_s.include?('ScreeningCompletedMailer')).to eq true
-      end
-
       include_examples 'assigns model to context'
     end
 
@@ -60,15 +55,10 @@ describe Ops::Developer::Screening::CompleteTask do
         end.not_to change(Developer::TestTaskResult, :count)
       end
 
-      it 'calls Finish operation' do
+      it 'does not call Finish operation' do
         expect(::Ops::Developer::Screening::Finish)
           .not_to receive(:call).with(user: user)
         subject.call(user: user, assignment_id: assignment.id, params: params)
-      end
-
-      it 'sends email about completed of screening with sidekiq-job' do
-        subject.call(user: user, assignment_id: assignment.id, params: params)
-        expect(Sidekiq::Worker.jobs.to_s.include?('ScreeningCompletedMailer')).to eq true
       end
 
       include_examples 'assigns model to context'
