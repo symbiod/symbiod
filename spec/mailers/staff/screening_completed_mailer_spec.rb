@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Staff::ScreeningCompletedMailer, type: :mailer do
   describe 'notify' do
     let(:user) { create(:user) }
-    let(:mail) { Staff::ScreeningCompletedMailer.notify(user) }
+    let(:mail) { Staff::ScreeningCompletedMailer.notify(user.id) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq("#{I18n.t('bootcamp.screening.completed')}, #{user.full_name}")

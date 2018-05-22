@@ -21,7 +21,7 @@ module Ops
       end
 
       def notify_candidate!(_ctx, user:, feedback:, **)
-        ::Developer::RejectionNotificationMailer.notify(user, feedback).deliver_later
+        ::Developer::RejectionNotificationMailer.notify(user.id, feedback).deliver_later
       end
     end
   end

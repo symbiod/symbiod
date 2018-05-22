@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Developer::OnboardingStartedMailer, type: :mailer do
   describe 'notify' do
     let(:user) { create(:user) }
-    let(:mail) { Developer::OnboardingStartedMailer.notify(user) }
+    let(:mail) { Developer::OnboardingStartedMailer.notify(user.id) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq("#{I18n.t('bootcamp.onboarding.started')}, #{user.full_name}")

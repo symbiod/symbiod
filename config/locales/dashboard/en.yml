@@ -36,6 +36,10 @@ en:
           disable: Are you sure to disable?
           activate: Are you sure to activate?
         review_applicant: Review applicant
+      mailers:
+        disabled:
+          subject: Your givemepoc.org account was disabled
+          account_was_disabled: Your givemepoc.org account was disabled
     developer_test_task:
       notices:
         update: The test task was updated
