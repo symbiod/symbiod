@@ -7,6 +7,13 @@
 
 The goal of this project is to allow everyone to propose an idea of an opensource, non-profit project and to find a team of developers.
 
+## To run the application you should take the following steps
+
+git clone git@github.com:howtohireme/give-me-poc.git
+cp config/database.yml.sample config/database.yml
+Change the password in config / database.yml to your password.
+rake db:schema:load
+
 ## Subdomains navigation
 
 When you start app locally, use `lvh.me` domain to access it

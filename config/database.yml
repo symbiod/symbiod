@@ -3,7 +3,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
   user: postgres
-  password: 1
+  password: postgres
   timeout: 5000
 
 development:
@@ -15,9 +15,11 @@ test:
   database: poc_test
 
 production:
-  <<: *default
-  database: poc_production
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: postgresql
 
 features:
   <<: *default
+  host: <%= ENV['DATABASE_HOST'] %>
   database: poc_features
