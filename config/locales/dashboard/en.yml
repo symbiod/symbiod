@@ -1,5 +1,20 @@
 en:
   dashboard:
+    navigation:
+      profile: Profile
+    profile:
+      edit:
+        title: Edit your profile
+        button: Edit
+      update:
+        button: Update
+        flash:
+          success: Profile is updated
+      email: Email
+      location: Location
+      timezone: Timezone
+      cv_url: CV url
+      edit_title: Edit your profile
     candidates:
       notices:
         activated: The candidate was activated
