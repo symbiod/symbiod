@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       end
 
       get '/login', to: 'user_sessions#new', as: :login
+      # TODO: change this to delete HTTP method
       post '/logout', to: 'user_sessions#destroy', as: :logout
       post 'oauth/callback', to: 'oauths#callback'
       get 'oauth/callback', to: 'oauths#callback'
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
         end
       end
       resources :test_tasks, only: %i[index edit update]
+      resource :profile, only: %i[show edit update]
       root to: 'home#index'
     end
 

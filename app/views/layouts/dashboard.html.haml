@@ -17,8 +17,11 @@
       = link_to 'givemepoc.org', root_landing_url, class: 'navbar-brand col-sm-3 col-md-2 mr-0'
       %input.form-control.form-control-dark.w-100{ "aria-label": "Search", placeholder: "Search", type: "text" }/
       %ul.navbar-nav.px-3
-        %li.nav-item.text-nowrap
-          %a.nav-link{ href: "#" } Sign out
+        %li.nav-item
+          = link_to t('dashboard.navigation.profile'), dashboard_profile_url, class: 'nav-link'
+      %ul.navbar-nav.px-3
+        %li.nav-item
+          = link_to t('dashboard.navigation.logout'), bootcamp_logout_url, method: :post, class: 'nav-link'
     .container-fluid
       .row
         %nav.col-md-2.d-none.d-md-block.bg-light.sidebar

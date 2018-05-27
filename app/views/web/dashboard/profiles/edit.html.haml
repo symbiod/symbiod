@@ -1,0 +1,9 @@
+%h1= t('dashboard.profile.edit_title')
+
+= simple_form_for @profile, url: dashboard_profile_url, method: :put do |f|
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :location
+  = f.input :timezone
+  = f.input :cv_url
+  = f.submit t('dashboard.profile.update.button')

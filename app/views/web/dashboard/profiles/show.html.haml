@@ -1,0 +1,24 @@
+%h1= @profile.full_name
+
+.table-responsive
+  %table.table.table-striped.tabke-sm
+    %tbody
+      %tr
+        %td= t('dashboard.profile.email')
+        %td= @profile.email
+      %tr
+        %td= t('dashboard.profile.github')
+        %td= @profile.github
+      %tr
+        %td= t('dashboard.profile.location')
+        %td= @profile.location
+      %tr
+        %td= t('dashboard.profile.timezone')
+        %td= @profile.timezone
+      %tr
+        %td= t('dashboard.profile.cv_url')
+        %td= link_to @profile.cv_url, @profile.cv_url, target: '_blank'
+
+= link_to t('dashboard.profile.edit.button'), edit_dashboard_profile_url,
+  class: 'btn btn-info'
+
