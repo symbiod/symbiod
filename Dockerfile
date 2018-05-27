@@ -10,6 +10,11 @@ COPY ./ .
 ENV RAILS_ENV production
 ENV RAILS_MASTER_KEY=$master_key
 
+# While https://github.com/docker-library/ruby/pull/209/files is not available on dockerhub
+# we use this workaround
+ENV PATH $GEM_HOME/bin:$BUNDLE_PATH/gems/bin:$PATH
+RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
+
 RUN gem install foreman
 RUN bundle install --deployment --without development test
 RUN cp config/database.yml.sample config/database.yml
