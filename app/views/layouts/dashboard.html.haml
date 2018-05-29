@@ -28,11 +28,9 @@
           .sidebar-sticky
             %ul.nav.flex-column
               %li.nav-item
-                %a.nav-link.active{ href: "#" }
+                %a.nav-link{ href: dashboard_root_url }
                   %span{ "data-feather": "home" }
-                    Dashboard
-                  %span.sr-only
-                    Current
+                  Dashboard
               - if policy(:test_task_assignment).index?
                 %li.nav-item
                   = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
@@ -49,44 +47,32 @@
               %li.nav-item
                 %a.nav-link{ href: "#" }
                   %span{ "data-feather": "file" }
-                  Orders
+                  Ideas
               %li.nav-item
                 %a.nav-link{ href: "#" }
                   %span{ "data-feather": "shopping-cart" }
-                  Products
+                  Projects
               %li.nav-item
                 %a.nav-link{ href: "#" }
                   %span{ "data-feather": "users" }
-                  Customers
-              %li.nav-item
-                %a.nav-link{ href: "#" }
-                  %span{ "data-feather": "bar-chart-2" }
                   Reports
               %li.nav-item
                 %a.nav-link{ href: "#" }
+                  %span{ "data-feather": "bar-chart-2" }
+                  Analytics
+              %li.nav-item
+                %a.nav-link{ href: "#" }
                   %span{ "data-feather": "layers" }
-                  Integrations
+                  Activity
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
-              %span Saved reports
+              %span My projects
               %a.d-flex.align-items-center.text-muted{ href: "#" }
                 %span{ "data-feather": "plus-circle" }
             %ul.nav.flex-column.mb-2
               %li.nav-item
                 %a.nav-link{ href: "#" }
                   %span{ "data-feather": "file-text" }
-                  Current month
-              %li.nav-item
-                %a.nav-link{ href: "#" }
-                  %span{ "data-feather": "file-text" }
-                  Last quarter
-              %li.nav-item
-                %a.nav-link{ href: "#" }
-                  %span{ "data-feather": "file-text" }
-                  Social engagement
-              %li.nav-item
-                %a.nav-link{ href: "#" }
-                  %span{ "data-feather": "file-text" }
-                  Year-end sale
+                  Mentored
         %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{ role: "main" }
           = render partial: 'layouts/shared/dashboard_flashes'
 
