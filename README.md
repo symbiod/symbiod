@@ -9,10 +9,10 @@ The goal of this project is to allow everyone to propose an idea of an opensourc
 
 ## To run the application you should take the following steps
 
-`git clone git@github.com:howtohireme/give-me-poc.git`
-`cp config/database.yml.sample config/database.yml`
-Change the password in `config/database.yml` to your password.
-`rake db:schema:load`
+* `git clone git@github.com:howtohireme/give-me-poc.git`
+* `cp config/database.yml.sample config/database.yml`
+* Change the password in `config/database.yml` to your password.
+* `rake db:schema:load`
 
 ## Subdomains navigation
 
