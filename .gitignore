@@ -3,7 +3,7 @@
 /config/master.key
 /log/
 /tmp/
-config/database.yml
+/config/database.yml
 .byebug_history
 .ruby-version
 
