@@ -12,4 +12,8 @@ class DashboardPolicy < ApplicationPolicy
   def staff?
     user.has_role? :staff
   end
+
+  def mentor?
+    user.has_role? :mentor
+  end
 end

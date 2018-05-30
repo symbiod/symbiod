@@ -3,18 +3,18 @@
 # Allows only staff to manage newcomers applications
 class TestTaskAssignmentPolicy < DashboardPolicy
   def index?
-    staff?
+    staff? || mentor?
   end
 
   def show?
-    staff?
+    staff? || mentor?
   end
 
   def activate?
-    staff?
+    staff? || mentor?
   end
 
   def reject?
-    staff?
+    staff? || mentor?
   end
 end

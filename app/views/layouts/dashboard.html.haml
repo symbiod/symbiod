@@ -36,6 +36,7 @@
                   = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
                     %span{ "data-feather": "file" }
                     Applicants
+              - if policy(:test_task).index?
                 %li.nav-item
                   = link_to dashboard_test_tasks_url, class: 'nav-link' do
                     %span{ "data-feather": "file" }

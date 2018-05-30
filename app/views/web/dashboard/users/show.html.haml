@@ -20,14 +20,14 @@
         %b= t('dashboard.users.table.roles')
       %td
         %ul
-          - @user.roles_name.each do |role|
+          - @user.roles_name.sort.each do |role|
             %li
               = role
               = link_to 'delete', remove_role_dashboard_user_path(@user, role: role),
                                   method: :put,
                                   data: { confirm: "Are you sure to delete role #{role}" }
 
-          - %w[developer staff author].each do |role|
+          - %w[author developer mentor staff].each do |role|
             - unless @user.roles_name.include?(role)
               %li
                 = link_to "add role #{role}", add_role_dashboard_user_path(@user, role: role),

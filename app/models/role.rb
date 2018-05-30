@@ -3,8 +3,9 @@
 # The Role using to add roles users
 class Role < ApplicationRecord
   has_and_belongs_to_many :users, join_table: :users_roles
+  has_many :test_tasks, class_name: 'Developer::TestTask'
 
-  ROLES = %w[developer staff author].freeze
+  ROLES = %w[developer staff author mentor].freeze
 
   belongs_to :resource, polymorphic: true, optional: true
   validates :resource_type, inclusion: { in: Rolify.resource_types }, allow_nil: true

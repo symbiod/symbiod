@@ -13,7 +13,9 @@ module Web
         @developer_test_tasks = Developer::TestTask.order(id: :asc)
       end
 
-      def edit; end
+      def edit
+        @roles = Role.all
+      end
 
       def update
         if @developer_test_task.update(developer_test_task_params)
@@ -27,7 +29,7 @@ module Web
       private
 
       def developer_test_task_params
-        params.require(:developer_test_task).permit(:title, :description, :position)
+        params.require(:developer_test_task).permit(:title, :description, :position, :role_id)
       end
 
       def find_test_task
