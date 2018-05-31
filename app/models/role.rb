@@ -3,7 +3,7 @@
 # The Role using to add roles users
 class Role < ApplicationRecord
   has_and_belongs_to_many :users, join_table: :users_roles
-  has_many :test_tasks, class_name: 'Developer::TestTask'
+  has_many :test_tasks, class_name: 'Developer::TestTask', dependent: :destroy
 
   ROLES = %w[developer staff author mentor].freeze
 

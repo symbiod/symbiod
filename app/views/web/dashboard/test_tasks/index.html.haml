@@ -1,4 +1,11 @@
 %h2= t('dashboard.developer_test_task.index.header')
+%br
+- if policy(:test_task).new?
+  .row
+    .col-md-6
+      = link_to t('dashboard.developer_test_task.button.new'), new_dashboard_test_task_url,
+                                                              class: 'btn btn-info btn-sm'
+%br
 .table-responsive
   %table.table.table-striped.tabke-sm
     %thead
@@ -6,7 +13,9 @@
         %th #
         %th= t('dashboard.developer_test_task.title')
         %th= t('dashboard.developer_test_task.position')
+        %th= t('dashboard.developer_test_task.role')
         %th= t('dashboard.developer_test_task.description')
+        %th #
         %th #
     %tbody
       - @developer_test_tasks.each do |developer_test_task|
@@ -14,9 +23,16 @@
           %td= developer_test_task.id
           %td= developer_test_task.title
           %td= developer_test_task.position
+          %td= @roles.find { |r| r.id == developer_test_task.role_id }.name
           %td= markdown(developer_test_task.description)
           %td
             = link_to t('dashboard.developer_test_task.button.edit'),
                       edit_dashboard_test_task_url(developer_test_task),
-                      class: 'btn btn-info'
+                      class: 'btn btn-info btn-sm'
+          %td
+            = link_to t('dashboard.developer_test_task.button.delete'),
+                      dashboard_test_task_url(developer_test_task),
+                      method: :delete,
+                      data: { confirm: t('dashboard.developer_test_task.link.confirm.delete') },
+                      class: 'btn btn-danger btn-sm'
 
