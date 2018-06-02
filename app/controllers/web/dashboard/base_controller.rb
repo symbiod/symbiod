@@ -20,11 +20,6 @@ module Web
         not_authenticated unless DashboardPolicy.new(current_user, nil).allowed?
       end
 
-      def redirect_to_root_landing
-        redirect_to root_landing_url,
-                    alert: t('landing.alerts.not_authenticated_dashboard_access')
-      end
-
       def redirect_to_dashboard_root
         flash[:danger] = t('dashboard.users.access.deny')
         redirect_to dashboard_root_url

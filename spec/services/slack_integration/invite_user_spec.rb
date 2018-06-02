@@ -1,21 +1,17 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 require './app/services/slack_integration/invite_user'
 
 describe SlackIntegration::InviteUser do
   subject { described_class.new(attributes) }
   let(:attributes) do
     {
-      email:      email,
-      first_name: first_name,
-      last_name:  last_name,
-      token:      token
+      user:  user,
+      token: token
     }
   end
-  let(:email) { 'user@test.com' }
-  let(:first_name) { 'User' }
-  let(:last_name) { 'Last' }
+  let(:user) { create(:user, :slack_user) }
   let(:token) { '1234567890' }
 
   describe '#call' do
@@ -39,6 +35,15 @@ describe SlackIntegration::InviteUser do
       slack_user_already_exists!
 
       it 'does not raise error' do
+        expect { subject.call }.not_to raise_error
+      end
+    end
+
+    context 'user mentor' do
+      slack_success_response_mentor!
+      let!(:user) { create(:user, :slack_user, :mentor) }
+
+      it 'add channel mentor' do
         expect { subject.call }.not_to raise_error
       end
     end

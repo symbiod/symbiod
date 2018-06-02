@@ -21,11 +21,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many :test_task_assignments }
   end
 
-  describe 'users default state and role' do
-    it 'users default role is developer' do
-      expect(user.has_role?(:developer)).to eq(true)
-    end
-
+  describe 'users default state' do
     it 'users default have state pending' do
       expect(user).to have_state(:pending)
     end

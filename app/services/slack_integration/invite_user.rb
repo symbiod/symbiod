@@ -11,12 +11,10 @@ module SlackIntegration
   # and most of the client libraries may not support it.
   # According to the article https://ruby.unicorn.tv/screencasts/automatically-send-slack-invitations
   class InviteUser
-    def initialize(email:, first_name:, last_name:, token:)
+    def initialize(user:, token:)
       # TODO: receive channels list too
-      @email      = email
-      @first_name = first_name
-      @last_name  = last_name
-      @token      = token
+      @user      = user
+      @token     = token
     end
 
     def call
@@ -27,14 +25,12 @@ module SlackIntegration
     private
 
     def url
-      'https://slack.com/api/users.admin.invite' \
-        "?channels=#{channels}" \
-        '&set_active=true' \
-        '&_attempts=1' \
-        "&token=#{@token}" \
-        "&email=#{URI.escape(@email)}" \
-        "&first_name=#{URI.escape(@first_name)}" \
-        "&last_name=#{URI.escape(@last_name)}"
+      "https://slack.com/api/users.admin.invite?#{URI.encode_www_form(
+        [
+          ['channels', channels], %w[set_active true], %w[_attempts 1], ['token', @token],
+          ['email', @user.email], ['first_name', @user.first_name], ['last_name', @user.last_name]
+        ]
+      )}"
     end
 
     def successful_call?(response)
@@ -48,7 +44,15 @@ module SlackIntegration
     end
 
     def channels
-      ''
+      mentor_channel.to_s
+    end
+
+    def mentor_channel
+      if @user.has_role? :mentor
+        'mentor'
+      else
+        ''
+      end
     end
   end
 end

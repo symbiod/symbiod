@@ -3,12 +3,11 @@
 module Ops
   module Developer
     module Screening
-      # Marks user as completed screening and notifies staff about new results
+      # Marks user as completed screening and notifies about new results
       class Finish < BaseOperation
         step :all_tasks_completed?
         success :complete_screening!
-        success :screening_completed_notification_to_staff!
-        success :screening_completed_notification_to_mentor!
+        success :screening_completed_notification!
 
         private
 
@@ -20,12 +19,8 @@ module Ops
           user.complete_screening!
         end
 
-        def screening_completed_notification_to_staff!(_ctx, user:, **)
+        def screening_completed_notification!(_ctx, user:, **)
           Staff::ScreeningCompletedMailer.notify(user.id).deliver_later
-        end
-
-        def screening_completed_notification_to_mentor!(_ctx, user:, **)
-          Mentor::ScreeningCompletedMailer.notify(user.id).deliver_later
         end
       end
     end

@@ -16,7 +16,7 @@ describe Ops::Developer::InviteToSlack do
 
     context 'user was not invited before' do
       it 'invites member to Slack' do
-        expect(service).to receive(:invite).with(user.email, '', '')
+        expect(service).to receive(:invite).with(user)
         subject.call(params)
       end
     end
@@ -25,7 +25,7 @@ describe Ops::Developer::InviteToSlack do
       it 'handles exception properly' do
         expect(service)
           .to receive(:invite)
-          .with(user.email, '', '')
+          .with(user)
           .and_raise(
             SlackIntegration::FailedApiCallException,
             'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
@@ -38,7 +38,7 @@ describe Ops::Developer::InviteToSlack do
       it 'handles exception properly' do
         allow(service)
           .to receive(:invite)
-          .with(user.email, '', '')
+          .with(user)
           .and_raise(
             SlackIntegration::FailedApiCallException,
             'some other message'

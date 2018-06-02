@@ -10,7 +10,7 @@ module Ops
 
       def add_to_slack!(_ctx, user:, **)
         # TODO: where can we get a name of user at this step?
-        SlackService.new(ENV['SLACK_TOKEN']).invite(user.email, '', '')
+        SlackService.new(ENV['SLACK_TOKEN']).invite(user)
         true
       rescue SlackIntegration::FailedApiCallException => e
         handle_exception(e)

@@ -23,7 +23,7 @@
           %td.col-md-2
             = cell(Developer::Dashboard::DisplayProgress, user).()
           %td
-            - if user.state == 'screening_completed' && policy(:test_task_assignment).show?
+            - if policy(:test_task_assignment).review?(user)
               = link_to t('dashboard.users.link.review_applicant'), dashboard_test_task_assignment_url(user),
-                                              class: 'btn btn-info btn-sm'
+                                                                    class: 'btn btn-info btn-sm'
 = paginate @users

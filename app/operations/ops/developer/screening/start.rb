@@ -12,15 +12,15 @@ module Ops
         private
 
         def assign_test_tasks!(_ctx, user:, **)
-          test_tasks.compact.each do |task|
+          test_tasks(user).compact.each do |task|
             user.test_task_assignments.create!(test_task: task)
           end
         end
 
-        def test_tasks
+        def test_tasks(user)
           # We select one task for each priority, depending on NUMBER_OF_ASSIGNED_TEST_TASKS
           (1..NUMBER_OF_ASSIGNED_TEST_TASKS).inject([]) do |tasks, i|
-            tasks << ::Developer::TestTask.where(position: i).sample
+            tasks << ::Developer::TestTask.where(position: i, role_id: user.role_ids.first).sample
           end
         end
       end

@@ -3,7 +3,7 @@
 # Allow only staff manage test task
 class TestTaskPolicy < DashboardPolicy
   def index?
-    staff? || mentor?
+    staff_or_mentor?
   end
 
   def new?
@@ -15,11 +15,11 @@ class TestTaskPolicy < DashboardPolicy
   end
 
   def edit?
-    staff? || mentor?
+    staff_or_mentor?
   end
 
   def update?
-    staff? || mentor?
+    staff_or_mentor?
   end
 
   def destroy?

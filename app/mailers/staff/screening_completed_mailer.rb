@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Staff
-  # Sends mail notify to staff about completed of screening
+  # Sends mail notify about completed of screening
   class ScreeningCompletedMailer < ApplicationMailer
-    default to: -> { User.with_role(:staff).pluck(:email) }
+    default to: -> { User.with_any_role(:staff, :mentor).pluck(:email) }
 
     def notify(user_id)
       @user = User.find(user_id)
