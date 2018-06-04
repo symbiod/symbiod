@@ -12,6 +12,11 @@ describe Bootcamp::Wizard::ProfilePolicy do
 
   context 'pending user' do
     let(:user) { create(:user) }
+    it { is_expected.not_to permit_action(:edit) }
+  end
+
+  context 'policy_accepted user' do
+    let(:user) { create(:user, :policy_accepted) }
     it { is_expected.to permit_action(:edit) }
   end
 

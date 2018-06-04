@@ -32,10 +32,15 @@ RSpec.describe User, type: :model do
   end
 
   describe 'changes in users states' do
+    it 'accept policy' do
+      expect(user)
+        .to transition_from(:pending).to(:policy_accepted)
+                                     .on_event(:accept_policy)
+    end
+
     it 'completes profile' do
       expect(user)
-        .to transition_from(:pending).to(:profile_completed)
-                                     .on_event(:complete_profile)
+        .to transition_from(:policy_accepted).to(:profile_completed).on_event(:complete_profile)
     end
 
     it 'completes screening' do

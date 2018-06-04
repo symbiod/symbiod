@@ -31,7 +31,8 @@ module Developer
 
     def steps_routes_mapping
       {
-        pending: 'edit_bootcamp_wizard_profile_url',
+        pending: 'edit_bootcamp_wizard_accept_policy_url',
+        policy_accepted: 'edit_bootcamp_wizard_profile_url',
         profile_completed: 'bootcamp_wizard_screenings_url',
         screening_completed: 'bootcamp_wizard_screenings_url'
       }

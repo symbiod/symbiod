@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       namespace :wizard do
         resources :screenings, only: %i[index update]
         resource :profile, only: %i[edit update]
+        resource :accept_policy, only: %i[edit update]
       end
 
       get '/login', to: 'user_sessions#new', as: :login

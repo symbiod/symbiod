@@ -1,0 +1,7 @@
+%h1.cover-heading= t('bootcamp.policy.title')
+%p
+  = t('bootcamp.policy.text')
+= simple_form_for(current_user, method: :put, remote: false, url: bootcamp_wizard_accept_policy_url) do |f|
+  = f.input_field :accept_policy, as: :boolean
+  %br
+  = f.button :submit, t('bootcamp.policy.submit'), type: :submit, class: 'btn btn-lg btn-secondary'

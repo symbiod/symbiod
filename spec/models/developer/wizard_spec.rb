@@ -37,6 +37,14 @@ describe Developer::Wizard do
       let(:state) { :pending }
 
       it 'returns url helper name for specified step' do
+        expect(subject.route_for_current_step).to eq 'edit_bootcamp_wizard_accept_policy_url'
+      end
+    end
+
+    context 'user accept policy' do
+      let(:state) { :policy_accepted }
+
+      it 'returns url helper name for specified step' do
         expect(subject.route_for_current_step).to eq 'edit_bootcamp_wizard_profile_url'
       end
     end
@@ -59,7 +67,7 @@ describe Developer::Wizard do
   end
 
   describe '#steps' do
-    let(:wizard_steps) { %i[pending profile_completed screening_completed] }
+    let(:wizard_steps) { %i[pending policy_accepted profile_completed screening_completed] }
     specify { expect(subject.steps).to match wizard_steps }
   end
 end
