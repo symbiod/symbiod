@@ -43,6 +43,18 @@ describe Web::Dashboard::TestTasksController do
     end
   end
 
+  shared_examples '#new' do
+    before { get :new }
+
+    it 'renders template' do
+      expect(response).to render_template :new
+    end
+
+    it 'returns success status' do
+      expect(response.status).to eq 200
+    end
+  end
+
   describe 'GET #new' do
     context 'not authorized' do
       before do
@@ -56,30 +68,26 @@ describe Web::Dashboard::TestTasksController do
     end
 
     context 'staff' do
-      before do
-        login_user(user)
-        get :new
-      end
+      before { login_user(user) }
 
-      it 'redirects to dashboard root' do
-        expect(response).to redirect_to dashboard_root_url
-      end
+      it_behaves_like '#new'
     end
 
     context 'mentor' do
-      let(:mentor) { create(:user, :active, :mentor) }
-      before do
-        login_user(mentor)
-        get :new
-      end
+      before { login_user(mentor) }
 
-      it 'renders template' do
-        expect(response).to render_template :new
-      end
+      it_behaves_like '#new'
+    end
+  end
 
-      it 'returns success status' do
-        expect(response.status).to eq 200
-      end
+  shared_examples '#create' do
+    it 'redirect to dashboard root' do
+      post :create, params: { developer_test_task: attr }
+      expect(response).to redirect_to dashboard_test_tasks_url
+    end
+
+    it 'create test task' do
+      expect { post :create, params: { developer_test_task: attr } }.to change(Developer::TestTask, :count).by(1)
     end
   end
 
@@ -103,26 +111,16 @@ describe Web::Dashboard::TestTasksController do
       end
     end
 
-    context 'authorized' do
+    context 'authorized staff' do
       before { login_user(user) }
 
-      it 'redirect to dashboard root' do
-        post :create, params: { developer_test_task: attr }
-        expect(response).to redirect_to dashboard_root_url
-      end
+      it_behaves_like '#create'
     end
 
-    context 'success create test task' do
+    context 'authorized mentor' do
       before { login_user(mentor) }
 
-      it 'redirect to index test tasks' do
-        post :create, params: { developer_test_task: attr }
-        expect(response).to redirect_to dashboard_test_tasks_url
-      end
-
-      it 'create test task' do
-        expect { post :create, params: { developer_test_task: attr } }.to change(Developer::TestTask, :count).by(1)
-      end
+      it_behaves_like '#create'
     end
 
     context 'not passed validation' do
@@ -143,25 +141,35 @@ describe Web::Dashboard::TestTasksController do
     end
   end
 
+  shared_examples '#edit' do
+    before { get :edit, params: { id: developer_test_task.id } }
+
+    it 'renders template' do
+      expect(response).to render_template :edit
+    end
+
+    it 'returns success status' do
+      expect(response.status).to eq 200
+    end
+
+    it 'assigns developer test task' do
+      expect(assigns(:developer_test_task)).to eq developer_test_task
+    end
+  end
+
   describe 'GET #edit' do
-    context 'authorized' do
-      let(:developer_test_task) { create(:developer_test_task) }
-      before do
-        login_user(user)
-        get :edit, params: { id: developer_test_task.id }
-      end
+    let(:developer_test_task) { create(:developer_test_task) }
 
-      it 'renders template' do
-        expect(response).to render_template :edit
-      end
+    context 'authorized staff' do
+      before { login_user(user) }
 
-      it 'returns success status' do
-        expect(response.status).to eq 200
-      end
+      it_behaves_like '#edit'
+    end
 
-      it 'assigns developer test task' do
-        expect(assigns(:developer_test_task)).to eq developer_test_task
-      end
+    context 'authorized mentor' do
+      before { login_user(mentor) }
+
+      it_behaves_like '#edit'
     end
 
     context 'not authorized' do
@@ -177,23 +185,33 @@ describe Web::Dashboard::TestTasksController do
     end
   end
 
-  describe 'PUT #update' do
-    let!(:developer_test_task) { create(:developer_test_task) }
-    let!(:attr) { { description: "New description_#{developer_test_task.description}" } }
+  shared_examples '#update' do
+    it 'updates attribute' do
+      put :update, params: { id: developer_test_task.id, developer_test_task: attr }
+      developer_test_task.reload
+      expect(developer_test_task.description).to eq attr[:description]
+    end
 
-    context 'authorized' do
+    it 'redirects to index test task' do
+      put :update, params: { id: developer_test_task.id, developer_test_task: attr }
+      expect(response).to redirect_to dashboard_test_tasks_url
+    end
+  end
+
+  describe 'PUT #update' do
+    let!(:attr) { { description: "New description_#{developer_test_task.description}" } }
+    let!(:developer_test_task) { create(:developer_test_task) }
+
+    context 'authorized staff' do
       before { login_user(user) }
 
-      it 'updates attribute' do
-        put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-        developer_test_task.reload
-        expect(developer_test_task.description).to eq attr[:description]
-      end
+      it_behaves_like '#update'
+    end
 
-      it 'redirects to index test task' do
-        put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-        expect(response).to redirect_to dashboard_test_tasks_url
-      end
+    context 'authorized mentor' do
+      before { login_user(user) }
+
+      it_behaves_like '#update'
     end
 
     context 'not authorized' do
@@ -230,9 +248,21 @@ describe Web::Dashboard::TestTasksController do
     end
   end
 
-  describe 'DELETE #destroy' do
-    let(:developer_test_task) { create(:developer_test_task) }
+  shared_examples '#destroy' do
     before { developer_test_task.reload }
+
+    it 'delete test task' do
+      expect { delete :destroy, params: { id: developer_test_task.id } }.to change(Developer::TestTask, :count).by(-1)
+    end
+
+    it 'redirect to index test tasks' do
+      delete :destroy, params: { id: developer_test_task.id }
+      expect(response).to redirect_to dashboard_test_tasks_url
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let!(:developer_test_task) { create(:developer_test_task) }
 
     context 'not authorized' do
       before { login_user(candidate) }
@@ -243,26 +273,16 @@ describe Web::Dashboard::TestTasksController do
       end
     end
 
-    context 'authorized' do
+    context 'authorized staff' do
       before { login_user(user) }
 
-      it 'redirect to dashboard root' do
-        delete :destroy, params: { id: developer_test_task.id }
-        expect(response).to redirect_to dashboard_root_url
-      end
+      it_behaves_like '#destroy'
     end
 
-    context 'success destroy test task' do
+    context 'authorized mentor' do
       before { login_user(mentor) }
 
-      it 'delete test task' do
-        expect { delete :destroy, params: { id: developer_test_task.id } }.to change(Developer::TestTask, :count).by(-1)
-      end
-
-      it 'redirect to index test tasks' do
-        delete :destroy, params: { id: developer_test_task.id }
-        expect(response).to redirect_to dashboard_test_tasks_url
-      end
+      it_behaves_like '#destroy'
     end
   end
 end

@@ -9,9 +9,10 @@ class SlackService
   end
 
   # We invite new registred member to our Slack
-  def invite(user)
+  def invite(user, channels)
     SlackIntegration::InviteUser.new(
       user:      user,
+      channels:  channels,
       token:     token
     ).call
   end

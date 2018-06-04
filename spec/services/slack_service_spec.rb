@@ -8,6 +8,7 @@ require './app/services/slack_service'
 describe SlackService do
   subject { described_class.new(token) }
   let(:token) { '123456' }
+  let(:channels) { '' }
 
   describe '#invite' do
     let(:user) { create(:user) }
@@ -16,9 +17,9 @@ describe SlackService do
       invite_service = double
       allow(invite_service).to receive(:call)
       allow(SlackIntegration::InviteUser).to receive(:new)
-        .with(user: user, token: token)
+        .with(user: user, channels: channels, token: token)
         .and_return(invite_service)
-      subject.invite(user)
+      subject.invite(user, channels)
     end
   end
 

@@ -11,5 +11,7 @@ class Role < ApplicationRecord
   validates :resource_type, inclusion: { in: Rolify.resource_types }, allow_nil: true
   validates :name, inclusion: { in: Role::ROLES }
 
+  scope :for_test_tasks, -> { where(name: %w[developer mentor]) }
+
   scopify
 end

@@ -7,11 +7,11 @@ class TestTaskPolicy < DashboardPolicy
   end
 
   def new?
-    mentor?
+    staff_or_mentor?
   end
 
   def create?
-    mentor?
+    staff_or_mentor?
   end
 
   def edit?
@@ -23,6 +23,6 @@ class TestTaskPolicy < DashboardPolicy
   end
 
   def destroy?
-    mentor?
+    staff_or_mentor?
   end
 end

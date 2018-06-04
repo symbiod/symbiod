@@ -21,8 +21,7 @@ module Web
       def create
         @developer_test_task = Developer::TestTask.new(developer_test_task_params)
         if @developer_test_task.save
-          redirect_to dashboard_test_tasks_url
-          flash[:success] = t('dashboard.developer_test_task.notices.create')
+          redirect_to dashboard_test_tasks_url, flash: { success: t('dashboard.developer_test_task.notices.create') }
         else
           render 'new'
         end
@@ -32,8 +31,7 @@ module Web
 
       def update
         if @developer_test_task.update(developer_test_task_params)
-          redirect_to dashboard_test_tasks_url
-          flash[:success] = t('dashboard.developer_test_task.notices.update')
+          redirect_to dashboard_test_tasks_url, flash: { success: t('dashboard.developer_test_task.notices.update') }
         else
           render 'edit'
         end
@@ -41,8 +39,7 @@ module Web
 
       def destroy
         @developer_test_task.destroy
-        redirect_to dashboard_test_tasks_url
-        flash[:success] = t('dashboard.developer_test_task.notices.destroy')
+        redirect_to dashboard_test_tasks_url, flash: { success: t('dashboard.developer_test_task.notices.destroy') }
       end
 
       private
@@ -56,7 +53,7 @@ module Web
       end
 
       def find_user_roles
-        @roles = Role.all
+        @roles = Role.for_test_tasks
       end
 
       def authorize_staff!

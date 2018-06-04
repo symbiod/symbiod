@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Ops::Developer::InviteToSlack do
   subject       { described_class }
-  let(:user)    { create(:user) }
+  let(:user)    { create(:user, :developer) }
   let(:params)  { { user: user } }
   let(:service) { double }
   before { user.create_developer_onboarding }
@@ -15,9 +15,20 @@ describe Ops::Developer::InviteToSlack do
     end
 
     context 'user was not invited before' do
-      it 'invites member to Slack' do
-        expect(service).to receive(:invite).with(user)
-        subject.call(params)
+      context 'is mentor' do
+        let(:user) { create(:user, :mentor) }
+
+        it 'invites member to Slack' do
+          expect(service).to receive(:invite).with(user, 'mentors')
+          subject.call(params)
+        end
+      end
+
+      context 'is developer' do
+        it 'invites member to Slack' do
+          expect(service).to receive(:invite).with(user, '')
+          subject.call(params)
+        end
       end
     end
 
@@ -25,7 +36,7 @@ describe Ops::Developer::InviteToSlack do
       it 'handles exception properly' do
         expect(service)
           .to receive(:invite)
-          .with(user)
+          .with(user, '')
           .and_raise(
             SlackIntegration::FailedApiCallException,
             'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
@@ -38,7 +49,7 @@ describe Ops::Developer::InviteToSlack do
       it 'handles exception properly' do
         allow(service)
           .to receive(:invite)
-          .with(user)
+          .with(user, '')
           .and_raise(
             SlackIntegration::FailedApiCallException,
             'some other message'
