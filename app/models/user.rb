@@ -33,11 +33,15 @@ class User < ApplicationRecord
 
   aasm column: 'state' do
     state :pending, initial: true
-    state :profile_completed, :screening_completed, :active,
+    state :policy_accepted, :profile_completed, :screening_completed, :active,
           :disabled, :rejected
 
+    event :accept_policy do
+      transitions from: :pending, to: :policy_accepted
+    end
+
     event :complete_profile do
-      transitions from: :pending, to: :profile_completed
+      transitions from: :policy_accepted, to: :profile_completed
     end
 
     event :complete_screening do

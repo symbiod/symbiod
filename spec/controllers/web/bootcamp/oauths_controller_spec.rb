@@ -51,9 +51,9 @@ describe Web::Bootcamp::OauthsController do
           expect(assigns(:user)).not_to be_nil
         end
 
-        it 'redirects to profile wizard' do
+        it 'redirects to accept policy wizard' do
           post :callback, params: oauth_params
-          expect(response).to redirect_to edit_bootcamp_wizard_profile_url
+          expect(response).to redirect_to edit_bootcamp_wizard_accept_policy_url
         end
       end
 

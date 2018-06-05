@@ -3,9 +3,9 @@
 module Bootcamp
   module Wizard
     # Defines access rules to profile editing wizard page
-    class ProfilePolicy < ApplicationPolicy
+    class AcceptPolicyPolicy < ApplicationPolicy
       def edit?
-        user&.policy_accepted?
+        user&.pending?
       end
     end
   end

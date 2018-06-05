@@ -15,6 +15,10 @@ FactoryBot.define do
 
     trait :pending
 
+    trait :policy_accepted do
+      state 'policy_accepted'
+    end
+
     trait :profile_completed do
       state 'profile_completed'
     end

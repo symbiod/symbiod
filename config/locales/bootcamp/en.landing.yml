@@ -21,3 +21,8 @@ en:
       rejection: You were rejected
     onboarding:
       started: Onboarding started!
+    policy:
+      must_be_accepted: Policy must be accepted
+      submit: Send
+      title: Our policy
+      text: Text of policy, text of policy, text of policy, text of policy, text of policy, text of policy.

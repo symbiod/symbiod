@@ -6,7 +6,7 @@ describe Ops::Developer::CompleteProfile do
   subject { described_class }
 
   describe '.call' do
-    let(:user) { create(:user, :pending) }
+    let(:user) { create(:user, :policy_accepted) }
 
     context 'valid profile data provided' do
       let(:params) { valid_user_attributes }

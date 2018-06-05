@@ -10,13 +10,13 @@ describe Ops::Developer::Disable do
     let(:params) { { user: user } }
 
     it 'changes user state' do
-      expect { subject.call(params) }
+      expect { subject.call(user: params[:user], params: params) }
         .to change(user.reload, :state)
         .from('active').to('disabled')
     end
 
     it 'sends notification to user' do
-      expect { subject.call(params) }
+      expect { subject.call(user: params[:user], params: params) }
         .to have_enqueued_job(ActionMailer::DeliveryJob)
         .with('Developer::DisabledNotificationMailer', 'notify', 'deliver_now', user.id)
     end
