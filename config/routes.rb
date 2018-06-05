@@ -42,7 +42,7 @@ Rails.application.routes.draw do
           put :add_role
         end
       end
-      resources :test_tasks, only: %i[index edit update]
+      resources :test_tasks
       resource :profile, only: %i[show edit update]
       root to: 'home#index'
     end

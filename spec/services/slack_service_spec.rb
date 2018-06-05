@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 require 'slack'
 require './app/services/slack_integration/invite_user'
 require './app/services/slack_service'
@@ -8,19 +8,18 @@ require './app/services/slack_service'
 describe SlackService do
   subject { described_class.new(token) }
   let(:token) { '123456' }
+  let(:channels) { '' }
 
   describe '#invite' do
-    let(:email)      { 'user@test.com' }
-    let(:first_name) { 'John' }
-    let(:last_name)  { 'Smith' }
+    let(:user) { create(:user) }
 
     it 'calls SlackIntegration::InviteUser class' do
       invite_service = double
       allow(invite_service).to receive(:call)
       allow(SlackIntegration::InviteUser).to receive(:new)
-        .with(email: email, first_name: first_name, last_name: last_name, token: token)
+        .with(user: user, channels: channels, token: token)
         .and_return(invite_service)
-      subject.invite(email, first_name, last_name)
+      subject.invite(user, channels)
     end
   end
 

@@ -9,7 +9,7 @@ describe Ops::Developer::RemoveRole do
     let(:role) { 'developer' }
 
     context 'user have two roles' do
-      let(:user) { create(:user, :staff) }
+      let(:user) { create(:user, :developer, :staff) }
 
       it 'delete roles success' do
         expect { subject.call(user: user, role: role, size: user.roles.size) }
@@ -19,7 +19,7 @@ describe Ops::Developer::RemoveRole do
     end
 
     context 'user have one role' do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :developer) }
 
       it 'raise to delete last role' do
         expect { subject.call(user: user, role: role, size: user.roles.size) }

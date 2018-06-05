@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-RSpec::Matchers.define :permit_action do |action|
+RSpec::Matchers.define :permit_action do |action, *args|
   match do |policy|
-    policy.public_send("#{action}?")
+    if args.any?
+      policy.public_send("#{action}?", *args)
+    else
+      policy.public_send("#{action}?")
+    end
   end
 
   failure_message do |policy|

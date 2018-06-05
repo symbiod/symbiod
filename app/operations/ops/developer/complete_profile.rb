@@ -6,6 +6,7 @@ module Ops
     # bases on chosen technologies
     class CompleteProfile < BaseOperation
       step :persist_profile_data!
+      success :assign_initial_role!
       success :complete_profile!
       success :start_screening!
 
@@ -13,6 +14,10 @@ module Ops
 
       def persist_profile_data!(_ctx, user:, params:, **)
         user.update(params)
+      end
+
+      def assign_initial_role!(_ctx, user:, params:, **)
+        user.add_role(params[:role])
       end
 
       def complete_profile!(_ctx, user:, **)

@@ -22,4 +22,11 @@ describe TestTaskAssignmentPolicy do
     it { is_expected.not_to permit_action(:activate) }
     it { is_expected.not_to permit_action(:reject) }
   end
+
+  context 'developer state screening_completed and user staff' do
+    let(:user) { create(:user, :staff) }
+    let(:developer) { create(:user, :screening_completed) }
+
+    it { is_expected.to permit_action(:review, developer) }
+  end
 end

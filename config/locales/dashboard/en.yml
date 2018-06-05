@@ -56,10 +56,17 @@ en:
           subject: Your givemepoc.org account was disabled
           account_was_disabled: Your givemepoc.org account was disabled
     developer_test_task:
+      link:
+        confirm:
+          delete: Are you sure to delete?
       notices:
         update: The test task was updated
+        create: The test task was created
+        destroy: The test task was deleted
       edit:
         header: Edit test task
+      new:
+        header: New test task
       index:
         header: Bootcamp test tasks
       title: Title
@@ -67,5 +74,7 @@ en:
       description: Description
       button:
         edit: Edit
+        delete: Delete
+        new: New test Task
       finished: finished
       not_finished: not finished

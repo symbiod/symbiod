@@ -9,10 +9,13 @@ class User < ApplicationRecord
 
   include AASM
 
-  after_create :assign_default_role
+  attr_accessor :role
+
+  ROLES = %w[developer mentor].freeze
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, :last_name, :location, :timezone, :cv_url, presence: true
+  validates :role, inclusion: { in: User::ROLES }, allow_nil: true
 
   has_many :ideas, foreign_key: 'author_id'
   has_many :authentications, dependent: :destroy
@@ -55,10 +58,6 @@ class User < ApplicationRecord
   end
 
   authenticates_with_sorcery!
-
-  def assign_default_role
-    add_role(:developer) if roles.blank?
-  end
 
   def github_uid
     authentications.github.first&.uid

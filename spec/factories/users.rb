@@ -41,6 +41,18 @@ FactoryBot.define do
       end
     end
 
+    trait :developer do
+      after(:create) do |user|
+        user.add_role(:developer)
+      end
+    end
+
+    trait :mentor do
+      after(:create) do |user|
+        user.add_role(:mentor)
+      end
+    end
+
     trait :with_assignment do
       after(:create) do |user|
         create(:developer_test_task_assignment, :uncompleted, developer: user)
@@ -51,6 +63,12 @@ FactoryBot.define do
       after(:create) do |user|
         create(:authentication, :github, user: user)
       end
+    end
+
+    trait :slack_user do
+      email 'user@test.com'
+      first_name 'User'
+      last_name 'Last'
     end
   end
 end
