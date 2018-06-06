@@ -18,7 +18,11 @@ module Developer
       end
 
       def color_status
-        model.active? ? 'success' : 'danger'
+        model.active? ? 'success' : color_not_success_status
+      end
+
+      def color_not_success_status
+        model.pending? ? 'warning' : 'danger'
       end
 
       def confirm_status
