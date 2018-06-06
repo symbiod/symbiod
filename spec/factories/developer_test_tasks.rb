@@ -5,5 +5,10 @@ FactoryBot.define do
     title { Faker::VForVendetta.quote }
     position { %w[1 2].sample }
     description { Faker::VForVendetta.speech }
+    state 'active'
+
+    trait :disabled do
+      state 'disabled'
+    end
   end
 end

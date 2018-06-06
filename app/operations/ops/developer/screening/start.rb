@@ -20,7 +20,7 @@ module Ops
         def test_tasks(user)
           # We select one task for each priority, depending on NUMBER_OF_ASSIGNED_TEST_TASKS
           (1..NUMBER_OF_ASSIGNED_TEST_TASKS).inject([]) do |tasks, i|
-            tasks << ::Developer::TestTask.where(position: i, role_id: user.role_ids.first).sample
+            tasks << ::Developer::TestTask.where(position: i, role_id: user.role_ids.first, state: 'active').sample
           end
         end
       end

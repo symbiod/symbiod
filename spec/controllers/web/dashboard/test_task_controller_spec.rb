@@ -248,27 +248,29 @@ describe Web::Dashboard::TestTasksController do
     end
   end
 
-  shared_examples '#destroy' do
+  shared_examples '#activate' do
     before { developer_test_task.reload }
 
-    it 'delete test task' do
-      expect { delete :destroy, params: { id: developer_test_task.id } }.to change(Developer::TestTask, :count).by(-1)
+    it 'redirect to index test tasks' do
+      put :activate, params: { id: developer_test_task.id }
+      expect(response).to redirect_to dashboard_test_tasks_url
     end
 
-    it 'redirect to index test tasks' do
-      delete :destroy, params: { id: developer_test_task.id }
-      expect(response).to redirect_to dashboard_test_tasks_url
+    it 'change state test task to activate' do
+      put :activate, params: { id: developer_test_task.id }
+      developer_test_task.reload
+      expect(developer_test_task.state).to eq 'active'
     end
   end
 
-  describe 'DELETE #destroy' do
-    let!(:developer_test_task) { create(:developer_test_task) }
+  describe 'PUT #activate' do
+    let!(:developer_test_task) { create(:developer_test_task, :disabled) }
 
     context 'not authorized' do
       before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
-        delete :destroy, params: { id: developer_test_task.id }
+        put :activate, params: { id: developer_test_task.id }
         expect(response).to redirect_to dashboard_root_url
       end
     end
@@ -276,13 +278,53 @@ describe Web::Dashboard::TestTasksController do
     context 'authorized staff' do
       before { login_user(user) }
 
-      it_behaves_like '#destroy'
+      it_behaves_like '#activate'
     end
 
     context 'authorized mentor' do
       before { login_user(mentor) }
 
-      it_behaves_like '#destroy'
+      it_behaves_like '#activate'
+    end
+  end
+
+  shared_examples '#deactivate' do
+    before { developer_test_task.reload }
+
+    it 'redirect to index test tasks' do
+      put :deactivate, params: { id: developer_test_task.id }
+      expect(response).to redirect_to dashboard_test_tasks_url
+    end
+
+    it 'change state test task to disabled' do
+      put :deactivate, params: { id: developer_test_task.id }
+      developer_test_task.reload
+      expect(developer_test_task.state).to eq 'disabled'
+    end
+  end
+
+  describe 'PUT #deactivate' do
+    let!(:developer_test_task) { create(:developer_test_task) }
+
+    context 'not authorized' do
+      before { login_user(candidate) }
+
+      it 'redirect to dashboard root' do
+        put :activate, params: { id: developer_test_task.id }
+        expect(response).to redirect_to dashboard_root_url
+      end
+    end
+
+    context 'authorized staff' do
+      before { login_user(user) }
+
+      it_behaves_like '#deactivate'
+    end
+
+    context 'authorized mentor' do
+      before { login_user(mentor) }
+
+      it_behaves_like '#deactivate'
     end
   end
 end
