@@ -43,7 +43,12 @@ Rails.application.routes.draw do
           put :add_role
         end
       end
-      resources :test_tasks
+      resources :test_tasks, except: :destroy do
+        member do
+          put :activate
+          put :deactivate
+        end
+      end
       resource :profile, only: %i[show edit update]
       root to: 'home#index'
     end

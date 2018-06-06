@@ -58,11 +58,13 @@ en:
     developer_test_task:
       link:
         confirm:
-          delete: Are you sure to delete?
+          disable: Are you sure to disable?
+          activate: Are you sure to activate?
       notices:
         update: The test task was updated
         create: The test task was created
-        destroy: The test task was deleted
+        deactivated: The test task was disabled
+        activated: The test task was activated
       edit:
         header: Edit test task
       new:
@@ -70,11 +72,10 @@ en:
       index:
         header: Bootcamp test tasks
       title: Title
+      state: Status
       position: Position
       description: Description
       button:
-        edit: Edit
-        delete: Delete
         new: New test Task
       finished: finished
       not_finished: not finished

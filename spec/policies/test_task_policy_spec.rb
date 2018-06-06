@@ -2,26 +2,29 @@
 
 require 'rails_helper'
 
+shared_examples 'permit_all_actions' do
+  it { is_expected.to permit_action(:index) }
+  it { is_expected.to permit_action(:new) }
+  it { is_expected.to permit_action(:create) }
+  it { is_expected.to permit_action(:edit) }
+  it { is_expected.to permit_action(:update) }
+  it { is_expected.to permit_action(:activate) }
+  it { is_expected.to permit_action(:deactivate) }
+end
+
 describe TestTaskPolicy do
   subject { described_class.new(user, nil) }
 
   context 'staff user' do
     let(:user) { create(:user, :staff) }
 
-    it { is_expected.to permit_action(:index) }
-    it { is_expected.to permit_action(:edit) }
-    it { is_expected.to permit_action(:update) }
+    it_behaves_like 'permit_all_actions'
   end
 
   context 'mentor user' do
     let!(:user) { create(:user, :mentor) }
 
-    it { is_expected.to permit_action(:index) }
-    it { is_expected.to permit_action(:new) }
-    it { is_expected.to permit_action(:create) }
-    it { is_expected.to permit_action(:edit) }
-    it { is_expected.to permit_action(:update) }
-    it { is_expected.to permit_action(:destroy) }
+    it_behaves_like 'permit_all_actions'
   end
 
   context 'active user' do

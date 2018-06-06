@@ -14,6 +14,16 @@ FactoryBot.define do
       end
     end
 
+    factory :role_with_test_task_disabled do
+      transient do
+        test_tasks_count 100
+      end
+
+      after(:create) do |role, evaluator|
+        create_list(:developer_test_task, evaluator.test_tasks_count, :disabled, role_id: role.id)
+      end
+    end
+
     factory :role_with_test_tasks do
       transient do
         test_tasks_count 100

@@ -22,7 +22,11 @@ class TestTaskPolicy < DashboardPolicy
     staff_or_mentor?
   end
 
-  def destroy?
+  def activate?
+    staff_or_mentor?
+  end
+
+  def deactivate?
     staff_or_mentor?
   end
 end

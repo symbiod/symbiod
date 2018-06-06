@@ -6,7 +6,7 @@ module Web
   module Dashboard
     # Management test tasks
     class TestTasksController < BaseController
-      before_action :find_test_task, only: %i[edit update destroy]
+      before_action :find_test_task, only: %i[edit update activate deactivate]
       before_action :find_user_roles, only: %i[index new edit]
       before_action :authorize_staff!
 
@@ -21,7 +21,9 @@ module Web
       def create
         @developer_test_task = Developer::TestTask.new(developer_test_task_params)
         if @developer_test_task.save
-          redirect_to dashboard_test_tasks_url, flash: { success: t('dashboard.developer_test_task.notices.create') }
+          redirect_to dashboard_test_tasks_url,
+                      flash: { success: "#{t('dashboard.developer_test_task.notices.create')}:
+                                        #{@developer_test_task.title}" }
         else
           render 'new'
         end
@@ -31,15 +33,26 @@ module Web
 
       def update
         if @developer_test_task.update(developer_test_task_params)
-          redirect_to dashboard_test_tasks_url, flash: { success: t('dashboard.developer_test_task.notices.update') }
+          redirect_to dashboard_test_tasks_url,
+                      flash: { success: "#{t('dashboard.developer_test_task.notices.update')}:
+                                        #{@developer_test_task.title}" }
         else
           render 'edit'
         end
       end
 
-      def destroy
-        @developer_test_task.destroy
-        redirect_to dashboard_test_tasks_url, flash: { success: t('dashboard.developer_test_task.notices.destroy') }
+      def activate
+        @developer_test_task.activate!
+        redirect_to dashboard_test_tasks_url,
+                    flash: { success: "#{t('dashboard.developer_test_task.notices.activated')}:
+                                      #{@developer_test_task.title}" }
+      end
+
+      def deactivate
+        @developer_test_task.disable!
+        redirect_to dashboard_test_tasks_url,
+                    flash: { success: "#{t('dashboard.developer_test_task.notices.deactivated')}:
+                                      #{@developer_test_task.title}" }
       end
 
       private
