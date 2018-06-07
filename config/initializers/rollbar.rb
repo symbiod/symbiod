@@ -66,4 +66,15 @@ Rollbar.configure do |config|
   # setup for Heroku. See:
   # https://devcenter.heroku.com/articles/deploying-to-a-custom-rails-environment
   config.environment = ENV['ROLLBAR_ENV'].presence || Rails.env
+
+  # Ignore the typical "attacks..."
+  config.exception_level_filters.merge!('ActionController::RoutingError' => lambda { |e|
+    e.message =~ %r{No route matches \[[A-Z]+\] "/(.+)"}
+    case Regexp.last_match(1)
+    when %w[myadmin phpmyadmin w00tw00t pma cgi-bin xmlrpc.php wp wordpress cfide wizard/profile/favicon.ico]
+      'ignore'
+    else
+      'warning'
+    end
+  })
 end
