@@ -51,10 +51,10 @@
         %td= test_task_assignment.test_task.title
         %td
           - if test_task_assignment.completed?
-            .btn.btn-success.btn-sm
+            .btn.btn-success.btn-sm.disabled
               = t('dashboard.developer_test_task.finished')
           - else
-            .btn.btn-danger.btn-sm
+            .btn.btn-danger.btn-sm.disabled
               = t('dashboard.developer_test_task.not_finished')
     = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :slack).()
     = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :github).()

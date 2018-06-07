@@ -22,6 +22,12 @@ describe Developer::Dashboard::UserStatusButton do
     end
   end
 
+  shared_examples 'button state disabled' do
+    it 'renders disabled button' do
+      expect(subject.user_status).to match(/ disabled/)
+    end
+  end
+
   context 'current user staff and candidate status active' do
     let(:candidate) { create(:user, :active) }
 
@@ -63,11 +69,27 @@ describe Developer::Dashboard::UserStatusButton do
       expect(subject.user_status).to match(/pending/)
     end
 
-    it 'renders danger color link' do
-      expect(subject.user_status).to match(/<a class="btn btn-warning btn-sm"/)
+    it 'renders warning color link' do
+      expect(subject.user_status).to match(/<a class="btn btn-warning btn-sm disabled"/)
     end
 
     it_behaves_like 'user staff and candidate not disabled'
+    it_behaves_like 'button state disabled'
+  end
+
+  context 'current user staff and candidate status profile completed' do
+    let(:candidate) { create(:user, :profile_completed) }
+
+    it 'renders active status' do
+      expect(subject.user_status).to match(/profile_completed/)
+    end
+
+    it 'renders danger color link' do
+      expect(subject.user_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
+    end
+
+    it_behaves_like 'user staff and candidate not disabled'
+    it_behaves_like 'button state disabled'
   end
 
   context 'current user status active and candidate status active' do
