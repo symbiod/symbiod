@@ -2,3 +2,5 @@
 
 docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.heroku.com
 docker push registry.heroku.com/peaceful-refuge-95132/web
+- wget -qO- https://toolbelt.heroku.com/install.sh | sh
+heroku container:release web
