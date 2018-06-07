@@ -19,6 +19,8 @@ RSpec.describe User, type: :model do
   describe 'relations' do
     it { is_expected.to have_many :ideas }
     it { is_expected.to have_many :test_task_assignments }
+    it { is_expected.to have_many :user_skills }
+    it { is_expected.to have_many :skills }
   end
 
   describe 'users default state' do
@@ -112,6 +114,24 @@ RSpec.describe User, type: :model do
       let!(:auth2) { create(:authentication, :github, user: subject) }
 
       its(:github_uid) { is_expected.to eq auth1.uid }
+    end
+  end
+
+  describe '#primary_skill' do
+    let(:skill) { create(:skill) }
+
+    context 'user not have primary skill' do
+      it 'return nil' do
+        expect(subject.primary_skill).to eq nil
+      end
+    end
+
+    context 'user have primary skill' do
+      before { create(:user_skill, :primary, user: subject, skill: skill) }
+
+      it 'return primary skill' do
+        expect(subject.primary_skill).to eq skill
+      end
     end
   end
 end
