@@ -13,7 +13,7 @@ module Developer
       def user_state
         link_to model.state, change_state,
                 method: :put,
-                class: "btn btn-#{color_status} btn-sm",
+                class: "btn btn-#{color_status} btn-sm#{button_state}",
                 data: { confirm: t("dashboard.users.link.confirm.#{confirm_status}") }
       end
 
@@ -23,6 +23,10 @@ module Developer
 
       def color_not_success_status
         model.pending? ? 'warning' : 'danger'
+      end
+
+      def button_state
+        model.pending? || model.profile_completed? ? ' disabled' : ''
       end
 
       def confirm_status

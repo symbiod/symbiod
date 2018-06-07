@@ -10,11 +10,13 @@ describe Developer::Dashboard::OnboardingStepStatus do
     before { create(:developer_onboarding, :invited_to_slack, user: user) }
 
     it 'renders success color' do
-      expect(subject.new(user, resource: :slack).onboarding_step_status).to match('class="btn btn-success btn-sm"')
+      expect(subject.new(user, resource: :slack).onboarding_step_status)
+        .to match('class="btn btn-success btn-sm disabled"')
     end
 
     it 'renders status invited' do
-      expect(subject.new(user, resource: :slack).onboarding_step_status).to match('invited')
+      expect(subject.new(user, resource: :slack).onboarding_step_status)
+        .to match('invited')
     end
   end
 
@@ -23,7 +25,8 @@ describe Developer::Dashboard::OnboardingStepStatus do
     before { create(:developer_onboarding, user: user) }
 
     it 'renders danger color' do
-      expect(subject.new(user, resource: :slack).onboarding_step_status).to match('class="btn btn-danger btn-sm"')
+      expect(subject.new(user, resource: :slack).onboarding_step_status)
+        .to match('class="btn btn-danger btn-sm disabled"')
     end
 
     it 'renders status uninvited' do
