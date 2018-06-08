@@ -4,6 +4,8 @@ module Developer
   module Dashboard
     # This cell renders status user
     class UserStatusButton < BaseCell
+      STATE_DISABLED_BUTTON = %w[pending profile_completed rejected].freeze
+
       def user_status
         current_user.has_role?(:staff) ? user_state : model.state
       end
@@ -26,7 +28,7 @@ module Developer
       end
 
       def button_state
-        model.pending? || model.profile_completed? ? ' disabled' : ''
+        STATE_DISABLED_BUTTON.include?(model.state) ? ' disabled' : ''
       end
 
       def confirm_status
