@@ -17,6 +17,9 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :location, :timezone, :cv_url, presence: true
   validates :role, inclusion: { in: User::ROLES }, allow_nil: true
 
+  has_many :user_skills
+  has_many :skills, through: :user_skills
+
   has_many :ideas, foreign_key: 'author_id'
   has_many :authentications, dependent: :destroy
 
@@ -77,5 +80,9 @@ class User < ApplicationRecord
 
   def progress
     Ops::Developer::OnboardingProgress.new(self).percent
+  end
+
+  def primary_skill
+    skills.find_by(user_skills: { primary: true })
   end
 end
