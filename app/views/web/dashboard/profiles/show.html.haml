@@ -18,6 +18,12 @@
       %tr
         %td= t('dashboard.profile.cv_url')
         %td= link_to @profile.cv_url, @profile.cv_url, target: '_blank'
+      %tr
+        %td= t('dashboard.profile.roles')
+        %td= @profile.roles.map(&:name).join(', ')
+      %tr
+        %td= t('dashboard.profile.primary_skill')
+        %td= @profile.primary_skill.title
 
 = link_to t('dashboard.profile.edit.button'), edit_dashboard_profile_url,
   class: 'btn btn-info'
