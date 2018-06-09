@@ -7,12 +7,16 @@
 
 The goal of this project is to allow everyone to propose an idea of an opensource, non-profit project and to find a team of developers.
 
-## To run the application you should take the following steps
+## To run the application natively:
 
 * `git clone git@github.com:howtohireme/give-me-poc.git`
 * `cp config/database.yml.sample config/database.yml`
 * Change the password in `config/database.yml` to your password.
 * `rake db:schema:load`
+
+## To run the application with Vagrant:
+
+[Check out document](https://github.com/howtohireme/give-me-poc/blob/master/vagrant/README.md)
 
 ## Subdomains navigation
 
