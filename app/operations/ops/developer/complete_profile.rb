@@ -7,6 +7,7 @@ module Ops
     class CompleteProfile < BaseOperation
       step :persist_profile_data!
       success :assign_initial_role!
+      success :assign_primary_skill!
       success :complete_profile!
       success :start_screening!
 
@@ -18,6 +19,11 @@ module Ops
 
       def assign_initial_role!(_ctx, user:, params:, **)
         user.add_role(params[:role])
+      end
+
+      def assign_primary_skill!(_ctx, user:, params:, **)
+        skill = ::Skill.find(params[:primary_skill_id])
+        UserSkill.create(user: user, skill: skill, primary: true)
       end
 
       def complete_profile!(_ctx, user:, **)

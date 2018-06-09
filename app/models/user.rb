@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   include AASM
 
-  attr_accessor :role
+  attr_accessor :role, :primary_skill_id
 
   ROLES = %w[developer mentor].freeze
 

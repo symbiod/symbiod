@@ -37,11 +37,12 @@ describe Web::Bootcamp::Wizard::ProfilesController do
 
   describe 'PUT #update' do
     context 'authenticated' do
+      let!(:skill) { create(:skill) }
       before { login_user(user) }
 
       context 'valid params' do
         let(:result_double) { double(success?: true) }
-        let(:user_params) { valid_user_attributes }
+        let(:user_params) { valid_user_attributes.merge(primary_skill_id: skill.id) }
 
         it 'calls operation' do
           expect(Ops::Developer::CompleteProfile)
