@@ -11,7 +11,7 @@ describe Ops::Developer::CompleteProfile do
     let(:skill_params) { { primary_skill_id: skill.id } }
 
     context 'valid profile data provided' do
-      let(:profile_params) { valid_user_attributes  }
+      let(:profile_params) { valid_user_attributes }
       let(:params) { profile_params.merge(skill_params) }
 
       it 'updates profile' do
@@ -28,7 +28,7 @@ describe Ops::Developer::CompleteProfile do
 
       it 'creates primary user skill' do
         expect { subject.call(user: user, params: params) }
-          .to change{user.reload.primary_skill}
+          .to change { user.reload.primary_skill }
           .from(nil)
           .to(skill)
       end
