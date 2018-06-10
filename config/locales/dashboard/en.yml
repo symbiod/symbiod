@@ -15,6 +15,8 @@ en:
       timezone: Timezone
       cv_url: CV url
       edit_title: Edit your profile
+      roles: Available roles
+      primary_skill: Primary skill
     candidates:
       notices:
         activated: The candidate was activated
