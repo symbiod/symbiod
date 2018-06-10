@@ -8,6 +8,10 @@ tasks = [
 
 skills = YAML.load_file('data/skills.yml')
 
+skills.each do |skill|
+  Skill.create! title: skill
+end
+
 tasks.each do |task_attributes|
   Developer::TestTask.find_or_create_by!(task_attributes)
 end
@@ -24,8 +28,7 @@ end
     state: %w[pending active disabled screening_completed].sample
   )
   user.add_role User::ROLES.sample
+  UserSkill.create!(user: user, skill: Skill.first, primary: true)
 end
 
-skills.each do |skill|
-  Skill.create! title: skill
-end
+
