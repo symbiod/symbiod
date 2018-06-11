@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-# Allows to find users, who should be notified about new applicant.
-# We should notify all staff members.
-# Additionally we notify mentors, who has the same specialization, as user.
 module Users
+  # Allows to find users, who should be notified about new applicant.
+  # We should notify all staff members.
+  # Additionally we notify mentors, who has the same specialization, as user.
   class ScreeningCompletedNotificationRecipientsQuery
     attr_reader :applicant
 
@@ -25,8 +25,8 @@ module Users
       # NOTICE: We do not use `with_any_role` Rolify scope, because it returns array instead of
       # AR relation ATM
       User.joins(:roles, :skills)
-        .where('roles.name IN (?)', [:mentor])
-        .where(user_skills: { skill_id: @applicant.primary_skill.id })
+          .where('roles.name IN (?)', [:mentor])
+          .where(user_skills: { skill_id: @applicant.primary_skill.id })
     end
   end
 end

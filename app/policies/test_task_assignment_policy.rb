@@ -22,6 +22,7 @@ class TestTaskAssignmentPolicy < DashboardPolicy
     screening_completed_and_staff_or_mentor?(developer)
   end
 
+  # Defines a scope of Users, who can be available for acting person
   class Scope < Scope
     def resolve
       if user.has_role? :staff
