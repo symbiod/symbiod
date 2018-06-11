@@ -74,5 +74,17 @@ FactoryBot.define do
       first_name 'User'
       last_name 'Last'
     end
+
+    trait :with_primary_skill do
+      transient do
+        skill_name nil
+      end
+
+      # Allow to pass custom skill name to the user factory
+      after(:create) do |user, options|
+        skill = options.skill_name ? Skill.find_or_create_by(title: options.skill_name) : create(:skill)
+        create(:user_skill, :primary, skill: skill, user: user)
+      end
+    end
   end
 end
