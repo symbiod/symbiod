@@ -3,7 +3,7 @@
 module Staff
   # Sends mail notify about completed of screening
   class ScreeningCompletedMailer < ApplicationMailer
-    default to: -> { User.with_any_role(:staff, :mentor).pluck(:email) }
+    default to: -> { Users::ScreeningCompletedNotificationRecipientsQuery.new(@user).call.pluck(:email) }
 
     def notify(user_id)
       @user = User.find(user_id)
