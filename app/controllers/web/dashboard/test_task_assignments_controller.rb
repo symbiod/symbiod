@@ -8,7 +8,7 @@ module Web
       before_action :authorize_staff!
 
       def index
-        @candidates = User.screening_completed
+        @candidates = TestTaskAssignmentPolicy::Scope.new(current_user, User).resolve
       end
 
       def show; end

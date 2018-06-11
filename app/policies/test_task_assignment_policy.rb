@@ -21,4 +21,16 @@ class TestTaskAssignmentPolicy < DashboardPolicy
   def review?(developer)
     screening_completed_and_staff_or_mentor?(developer)
   end
+
+  class Scope < Scope
+    def resolve
+      if user.has_role? :staff
+        User.screening_completed.all
+      elsif user.has_role? :mentor
+        ReviewableApplicantsQuery.new(user).call
+      else
+        []
+      end
+    end
+  end
 end
