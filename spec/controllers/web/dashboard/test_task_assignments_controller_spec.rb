@@ -43,6 +43,26 @@ describe Web::Dashboard::TestTaskAssignmentsController do
           expect(assigns(:candidates)).to eq User.screening_completed
         end
       end
+
+      context 'mentor' do
+        let(:user) { create(:user, :mentor, :active, :with_primary_skill, skill_name: skill_name) }
+        let!(:reviewable_candidates) do
+          create_list(:user, 2, :screening_completed, :with_primary_skill, skill_name: skill_name)
+        end
+        let(:skill_name) { 'Ruby' }
+
+        it 'renders template' do
+          expect(response).to render_template :index
+        end
+
+        it 'returns success status' do
+          expect(response.status).to eq 200
+        end
+
+        it 'assigns candidates' do
+          expect(assigns(:candidates)).to eq reviewable_candidates
+        end
+      end
     end
   end
 
