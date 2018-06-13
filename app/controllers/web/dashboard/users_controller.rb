@@ -18,6 +18,16 @@ module Web
         @test_task_assignments = @user.test_task_assignments.order(id: :asc)
       end
 
+      def edit; end
+
+      def update
+        if @user.update(user_params)
+          redirect_to dashboard_user_url, success: t('dashboard.user.update.flash.success')
+        else
+          render :edit
+        end
+      end
+
       def activate
         Ops::Developer::Activate.call(user: @user)
         redirect_to dashboard_users_url,
@@ -54,6 +64,12 @@ module Web
       def redirect_to_dashboard_user
         flash[:danger] = t('dashboard.users.alert.last_role')
         redirect_to dashboard_user_url(@user)
+      end
+
+      def user_params
+        params.require(:user)
+              .permit(:email, :first_name, :last_name, :location,
+                    :timezone, :cv_url, :github)
       end
     end
   end
