@@ -21,7 +21,7 @@ describe SidekiqConstraint do
         specify { expect(subject.matches?(request)).to eq false }
       end
 
-      context 'user is not find' do
+      context 'user is not found' do
         before do
           user.add_role :staff
           user.destroy
