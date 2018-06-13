@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_07_092448) do
+ActiveRecord::Schema.define(version: 2018_06_13_060946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 2018_06_07_092448) do
     t.integer "position"
     t.integer "role_id"
     t.string "state"
+    t.integer "skill_id"
+    t.index ["skill_id"], name: "index_developer_test_tasks_on_skill_id"
   end
 
   create_table "ideas", force: :cascade do |t|
