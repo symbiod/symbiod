@@ -6,6 +6,7 @@ FactoryBot.define do
     position { %w[1 2].sample }
     description { Faker::VForVendetta.speech }
     state 'active'
+    skill { association(:skill) }
 
     trait :disabled do
       state 'disabled'

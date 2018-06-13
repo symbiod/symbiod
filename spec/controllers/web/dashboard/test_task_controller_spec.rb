@@ -97,7 +97,8 @@ describe Web::Dashboard::TestTasksController do
         position: 1,
         title: Faker::VForVendetta.quote,
         description: Faker::VForVendetta.speech,
-        role_id: 22
+        role_id: 22,
+        skill_id: create(:skill).id
       }
     end
     let(:developer_test_task) { Developer::TestTask.new }
@@ -129,7 +130,8 @@ describe Web::Dashboard::TestTasksController do
           position: 1,
           title: Faker::VForVendetta.quote,
           description: 'not passed validation',
-          role_id: 22
+          role_id: 22,
+          skill_id: create(:skill).id
         }
       end
       before { login_user(mentor) }

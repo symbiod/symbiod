@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Ops::Developer::Screening::Start do
   describe '#call' do
-    let(:user) { create(:user, :developer) }
+    let(:user) { create(:user, :developer, :with_primary_skill) }
     let(:number_of_test_tasks) { described_class::NUMBER_OF_ASSIGNED_TEST_TASKS }
 
     context 'no test tasks exist' do

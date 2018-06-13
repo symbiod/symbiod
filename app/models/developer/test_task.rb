@@ -9,6 +9,7 @@ module Developer
     validates :position, presence: true
     validates :description, presence: true, length: { minimum: 50 }
     has_many :test_task_assignments, class_name: 'Developer::TestTaskAssignment', foreign_key: 'test_task_id'
+    belongs_to :skill
 
     aasm column: 'state' do
       state :active, initial: true

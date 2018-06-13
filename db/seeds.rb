@@ -1,16 +1,16 @@
 require 'faker'
 require 'yaml'
 
-tasks = [
-  { position: 1, title: 'Commente code', description: 'You have the following legacy controller code: https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6 Suggest which parts of it can be improved and why. Please create a new gist, copy code there and comment it. Paste the link to gist as solution of this quiz.' },
-  { position: 2, title: 'Create application', description: 'Create a small Rails application, that implements the logic from gist https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6. As a bonus you can make it 100% covered by tests and deployed to heroku.' }
-]
-
 skills = YAML.load_file('data/skills.yml')
 
 skills.each do |skill|
   Skill.create! title: skill
 end
+
+tasks = [
+  { position: 1, role_id: 1, skill_id: 1, title: 'Commente code', description: 'You have the following legacy controller code: https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6 Suggest which parts of it can be improved and why. Please create a new gist, copy code there and comment it. Paste the link to gist as solution of this quiz.' },
+  { position: 2, role_id: 2, skill_id: 1, title: 'Create application', description: 'Create a small Rails application, that implements the logic from gist https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6. As a bonus you can make it 100% covered by tests and deployed to heroku.' }
+]
 
 tasks.each do |task_attributes|
   Developer::TestTask.find_or_create_by!(task_attributes)
@@ -28,7 +28,4 @@ end
     state: %w[pending active disabled screening_completed].sample
   )
   user.add_role User::ROLES.sample
-  UserSkill.create!(user: user, skill: Skill.first, primary: true)
 end
-
-

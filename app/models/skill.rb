@@ -6,4 +6,5 @@ class Skill < ApplicationRecord
 
   has_many :user_skills
   has_many :users, through: :user_skills
+  has_many :developer_test_tasks, class_name: 'Developer::TestTask'
 end
