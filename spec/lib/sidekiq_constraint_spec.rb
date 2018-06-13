@@ -13,16 +13,27 @@ describe SidekiqConstraint do
 
       context 'user is staff' do
         before { user.add_role :staff }
+
         specify { expect(subject.matches?(request)).to eq true }
       end
 
       context 'user is not staff' do
         specify { expect(subject.matches?(request)).to eq false }
       end
+
+      context 'user is not found' do
+        before do
+          user.add_role :staff
+          user.destroy
+        end
+
+        specify { expect(subject.matches?(request)).to eq false }
+      end
     end
 
     context 'user is not authenticated' do
       let(:user_id) { nil }
+
       specify { expect(subject.matches?(request)).to eq false }
     end
   end
