@@ -49,7 +49,7 @@ describe Ops::Developer::Screening::Start do
 
         it 'assigns all existing test tasks to user' do
           expect { described_class.call(user: user) }
-            .to change { user.test_task_assignments.count }
+            .to change { user.test_task_assignments.reload.count }
             .by(number_of_test_tasks)
         end
       end
