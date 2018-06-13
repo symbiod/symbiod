@@ -21,8 +21,13 @@ module Web
       def edit; end
 
       def update
-        if @user.update(user_params)
-          redirect_to dashboard_user_url, success: t('dashboard.user.update.flash.success')
+        result = Ops::Developer::UpdateProfile.call(
+          user: @user,
+          params: user_params
+        )
+        if result.success?
+          redirect_to dashboard_user_url,
+                      flash: { success: "#{t('dashboard.users.notices.update')}: #{@user.full_name}" }
         else
           render :edit
         end
@@ -31,12 +36,13 @@ module Web
       def activate
         Ops::Developer::Activate.call(user: @user)
         redirect_to dashboard_users_url,
-                    flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.email}" }
+                    flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.full_name}" }
       end
 
       def deactivate
         Ops::Developer::Disable.call(user: @user)
-        redirect_to dashboard_users_url, flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.email}" }
+        redirect_to dashboard_users_url,
+                    flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.full_name}" }
       end
 
       def add_role
@@ -67,9 +73,8 @@ module Web
       end
 
       def user_params
-        params.require(:user)
-              .permit(:email, :first_name, :last_name, :location,
-                    :timezone, :cv_url, :github)
+        params.require(:user).permit(:email, :first_name, :last_name, :location,
+                                     :timezone, :cv_url, :github, :primary_skill_id)
       end
     end
   end

@@ -1,6 +1,5 @@
-%h1= t('dashboard.user.edit user profile')
-
-= simple_form_for @user, url: dashboard_user_url, method: :put do |f|
+%h2= "#{t('dashboard.users.edit.header')}: #{@user.full_name}"
+= simple_form_for @user, url: dashboard_user_url do |f|
   = f.input :email
   = f.input :first_name
   = f.input :last_name
@@ -8,5 +7,5 @@
   = f.input :timezone, as: :time_zone
   = f.input :cv_url
   = f.input :github
-  = f.input :primary_skill, collection: Skill.all, include_blank: false
-  = f.button :submit 
+  = f.input :primary_skill_id, collection: Skill.all, selected: @user.primary_skill.id
+  = f.button :submit, class: 'btn btn-info'

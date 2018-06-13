@@ -25,6 +25,8 @@ en:
       activate: Activate
       confirm_rejection: Do you really want to reject this candidate?
     users:
+      edit:
+        header: Edit user
       access:
         deny: The user does not have the role of staff
       notices:
@@ -32,6 +34,7 @@ en:
         disabled: The user was disabled
         add_role: role was added
         remove_role: role was removed
+        update: The user was updated
       alert:
         last_role: Can not remove the last role
       table:
@@ -57,6 +60,8 @@ en:
         disabled:
           subject: Your givemepoc.org account was disabled
           account_was_disabled: Your givemepoc.org account was disabled
+      button:
+        edit: Edit
     developer_test_task:
       link:
         confirm:

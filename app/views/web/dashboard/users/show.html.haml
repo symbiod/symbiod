@@ -1,6 +1,8 @@
 %h2
   User id
   = @user.id
+  = link_to t('dashboard.users.button.edit'), edit_dashboard_user_url(@user),
+                                              class: 'btn btn-info btn-sm' if current_user.has_role?(:staff)
 .table-responsive
   %table.table.table-striped.table-sm
 

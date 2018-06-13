@@ -11,13 +11,13 @@ class UserPolicy < DashboardPolicy
   end
 
   def edit?
-    true
+    staff?
   end
 
   def update?
-    true
+    staff?
   end
-  
+
   def activate?
     staff?
   end
