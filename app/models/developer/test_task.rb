@@ -5,11 +5,12 @@ module Developer
   class TestTask < ApplicationRecord
     include AASM
 
-    validates :title, presence: true
-    validates :position, presence: true
+    validates :title, :position, :skill_id, presence: true
     validates :description, presence: true, length: { minimum: 50 }
+
     has_many :test_task_assignments, class_name: 'Developer::TestTaskAssignment', foreign_key: 'test_task_id'
     belongs_to :skill
+    belongs_to :role
 
     aasm column: 'state' do
       state :active, initial: true
