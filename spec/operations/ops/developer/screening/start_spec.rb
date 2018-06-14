@@ -68,7 +68,7 @@ describe Ops::Developer::Screening::Start do
 
         it 'does not assign test tasks' do
           expect { described_class.call(user: user) }
-            .not_to change { user.test_task_assignments.count }
+            .not_to(change { user.test_task_assignments.count })
         end
       end
     end
