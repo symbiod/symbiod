@@ -44,7 +44,12 @@ describe Ops::Developer::Screening::Start do
 
       context 'multiple test tasks exist' do
         before do
-          create_list(:developer_test_task, number_of_test_tasks + 1, skill: skill, role: role)
+          # We can't use here create_list since the position field in the factory
+          # is shuffled, and in case if we create two first positioned records,
+          # then the spec will fail
+          create(:developer_test_task, :first_position, skill: skill, role: role)
+          create(:developer_test_task, :second_position, skill: skill, role: role)
+          create(:developer_test_task, :first_position, skill: skill, role: role)
         end
 
         it 'assigns all existing test tasks to user' do
@@ -63,7 +68,7 @@ describe Ops::Developer::Screening::Start do
 
         it 'does not assign test tasks' do
           expect { described_class.call(user: user) }
-            .not_to change { user.test_task_assignments.count }
+            .not_to(change { user.test_task_assignments.count })
         end
       end
     end

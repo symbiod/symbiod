@@ -60,7 +60,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
         end
 
         it 'assigns candidates' do
-          expect(assigns(:candidates)).to eq reviewable_candidates
+          expect(assigns(:candidates)).to match_array reviewable_candidates
         end
       end
     end
