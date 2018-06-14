@@ -6,6 +6,7 @@
         %th= t('dashboard.users.table.email')
         %th= t('dashboard.users.table.full_name')
         %th= t('dashboard.users.table.roles')
+        %th= t('dashboard.users.table.primary_skill')
         %th= t('dashboard.users.table.status')
         %th= t('dashboard.users.table.progress')
         %th= t('dashboard.users.table.applicants')
@@ -18,6 +19,7 @@
               - user.roles.each do |role|
                 %li
                   = role.name
+          %td= user.primary_skill.title
           %td
             = cell(Developer::Dashboard::UserStatusButton, user).()
           %td.col-md-2

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
           put :reject
         end
       end
-      resources :users, only: %i[index show] do
+      resources :users, only: %i[index show edit update] do
         member do
           put :activate
           put :deactivate

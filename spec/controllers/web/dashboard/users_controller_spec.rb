@@ -80,6 +80,97 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
   end
 
+  describe 'GET #edit' do
+    let!(:candidate) { create(:user, :active) }
+
+    context 'not authorized' do
+      before do
+        login_user(candidate)
+        get :edit, params: { id: candidate.id }
+      end
+
+      it 'redirect to dashboard root' do
+        expect(response).to redirect_to dashboard_root_url
+      end
+    end
+
+    context 'authorized staff' do
+      before do
+        login_user(user)
+        get :edit, params: { id: candidate.id }
+      end
+
+      it 'renders template' do
+        expect(response).to render_template :edit
+      end
+
+      it 'returns success status' do
+        expect(response.status).to eq 200
+      end
+    end
+  end
+
+  describe 'PUT #update' do
+    let(:skill) { create(:skill) }
+    let(:attr) do
+      {
+        email: Faker::Internet.email,
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        location: Faker::Address.country,
+        timezone: Faker::Address.time_zone,
+        cv_url: Faker::Internet.url,
+        primary_skill_id: skill.id
+      }
+    end
+    let!(:candidate) { create(:user, :active, :with_primary_skill) }
+
+    context 'not authorized' do
+      let(:actual) { candidate.primary_skill }
+      before { login_user(candidate) }
+
+      it 'redirect to dashboard root' do
+        put :update, params: { id: candidate.id, user: attr }
+        expect(response).to redirect_to dashboard_root_url
+      end
+
+      it 'user not updated' do
+        put :update, params: { id: candidate.id, user: attr }
+        candidate.reload
+        expect(candidate.primary_skill).to eq actual
+      end
+    end
+
+    context 'authorized staff' do
+      before { login_user(user) }
+      context 'validates params' do
+        it 'redirect to user' do
+          put :update, params: { id: candidate.id, user: attr }
+          expect(response).to redirect_to dashboard_user_url(candidate)
+        end
+
+        it 'user updated' do
+          put :update, params: { id: candidate.id, user: attr }
+          candidate.reload
+          expect(candidate.primary_skill).to eq skill
+        end
+      end
+
+      context 'not validates params' do
+        let!(:invalid_attr) do
+          {
+            first_name: nil
+          }
+        end
+
+        it 'render edit' do
+          put :update, params: { id: candidate.id, user: invalid_attr }
+          expect(response).to render_template :edit
+        end
+      end
+    end
+  end
+
   describe 'PUT #active' do
     context 'authorized' do
       let!(:candidate) { create(:user, :disabled) }

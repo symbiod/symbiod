@@ -18,15 +18,31 @@ module Web
         @test_task_assignments = @user.test_task_assignments.order(id: :asc)
       end
 
+      def edit; end
+
+      def update
+        result = Ops::Developer::UpdateProfile.call(
+          user: @user,
+          params: user_params
+        )
+        if result.success?
+          redirect_to dashboard_user_url,
+                      flash: { success: "#{t('dashboard.users.notices.update')}: #{@user.full_name}" }
+        else
+          render :edit
+        end
+      end
+
       def activate
         Ops::Developer::Activate.call(user: @user)
         redirect_to dashboard_users_url,
-                    flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.email}" }
+                    flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.full_name}" }
       end
 
       def deactivate
         Ops::Developer::Disable.call(user: @user)
-        redirect_to dashboard_users_url, flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.email}" }
+        redirect_to dashboard_users_url,
+                    flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.full_name}" }
       end
 
       def add_role
@@ -54,6 +70,11 @@ module Web
       def redirect_to_dashboard_user
         flash[:danger] = t('dashboard.users.alert.last_role')
         redirect_to dashboard_user_url(@user)
+      end
+
+      def user_params
+        params.require(:user).permit(:email, :first_name, :last_name, :location,
+                                     :timezone, :cv_url, :github, :primary_skill_id)
       end
     end
   end
