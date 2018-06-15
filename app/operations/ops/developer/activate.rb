@@ -7,6 +7,7 @@ module Ops
     # test task during screening.
     class Activate < BaseOperation
       step :change_state!
+      step :set_approver!
       step :send_notifications!
       step :start_onboarding!
 
@@ -14,6 +15,10 @@ module Ops
 
       def change_state!(_ctx, user:, **)
         user.activate!
+      end
+
+      def set_approver!(_ctx, user:, performer:, **)
+        user.update!(approver_id: performer)
       end
 
       def send_notifications!(_ctx, user:, **)

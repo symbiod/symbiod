@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_13_060946) do
+ActiveRecord::Schema.define(version: 2018_06_15_142120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,7 +122,10 @@ ActiveRecord::Schema.define(version: 2018_06_13_060946) do
     t.string "location"
     t.string "timezone"
     t.string "cv_url"
+    t.bigint "skill_id"
+    t.integer "approver_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["skill_id"], name: "index_users_on_skill_id"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

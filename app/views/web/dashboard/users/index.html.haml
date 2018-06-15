@@ -12,10 +12,10 @@
         %th= t('dashboard.users.table.applicants')
       - @users.each do |user|
         %tr
-          %td= link_to user.email, dashboard_user_path(user)
+          %td= link_to user.email, dashboard_user_url(user)
           %td= user.full_name
           %td
-            %ul
+            %ul.list-unstyled
               - user.roles.each do |role|
                 %li
                   = role.name

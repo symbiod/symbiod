@@ -107,7 +107,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
       let(:user) { create(:user, :staff) }
 
       it 'calls Activate operation' do
-        expect(Ops::Developer::Activate).to receive(:call).with(user: candidate)
+        expect(Ops::Developer::Activate).to receive(:call).with(user: candidate, performer: user.id)
         put :activate, params: { id: candidate.id }
       end
 
