@@ -34,31 +34,28 @@
           - @user.roles_name.each do |role|
             %li
               = role
-              = link_to 'delete', remove_role_dashboard_user_path(@user, role: role),
+              = link_to 'delete', remove_role_dashboard_user_url(@user, role: role),
                                   method: :put,
                                   data: { confirm: "Are you sure to delete role #{role}" }
 
           - Role::ROLES.each do |role|
             - unless @user.roles_name.include?(role)
               %li
-                = link_to "add role #{role}", add_role_dashboard_user_path(@user, role: role),
+                = link_to "add role #{role}", add_role_dashboard_user_url(@user, role: role),
                                               method: :put,
                                               data: { confirm: "Are you sure to add role #{role}" }
     %tr
       %td
         %b= t('dashboard.users.table.task_assignments')
       %td
-        %ul
+        %ul.list-unstyled
           - @test_task_assignments.each do |test_task_assignment|
             %li= test_task_assignment.test_task.title
     - if @user.approver.present?
       %tr
         %td
           %b= t('dashboard.users.table.approver')
-        %td
-          %ul.list-unstyled
-            %li= @user.approver.full_name
-            %li= mail_to @user.approver.email
+        %td= link_to @user.approver.full_name, dashboard_user_url(@user.approver)
 %h2 Onboarding progress
 .table-responsive
   %table.table.table-striped.table-sm

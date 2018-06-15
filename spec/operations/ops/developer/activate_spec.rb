@@ -6,7 +6,7 @@ describe Ops::Developer::Activate do
   subject { described_class }
   let(:user) { create(:user, :staff) }
   let(:candidate) { create(:user, :screening_completed) }
-  let(:params) { { user: candidate, approver: user.id } }
+  let(:params) { { user: candidate, performer: user.id } }
 
   describe '#call' do
     it 'changes candidates state' do
