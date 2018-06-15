@@ -4,14 +4,21 @@ require 'rails_helper'
 
 describe Ops::Developer::Activate do
   subject { described_class }
-  let(:user) { create(:user, :screening_completed) }
-  let(:params) { { user: user } }
+  let(:user) { create(:user, :staff) }
+  let(:candidate) { create(:user, :screening_completed) }
+  let(:params) { { user: candidate, approver: user.id } }
 
   describe '#call' do
-    it 'changes users state' do
+    it 'changes candidates state' do
       expect { subject.call(params) }
-        .to change { user.reload.state }
+        .to change { candidate.reload.state }
         .from('screening_completed').to('active')
+    end
+
+    it 'add approver to candidate' do
+      expect { subject.call(params) }
+        .to change { candidate.reload.approver_id }
+        .from(nil).to(user.id)
     end
 
     it 'sends email about start of onboarding with sidekiq-job' do
@@ -21,12 +28,12 @@ describe Ops::Developer::Activate do
           'Developer::OnboardingStartedMailer',
           'notify',
           'deliver_now',
-          user.id
+          candidate.id
         )
     end
 
     it 'starts onboarding operation' do
-      expect(Ops::Developer::Onboarding).to receive(:call).with(user: user)
+      expect(Ops::Developer::Onboarding).to receive(:call).with(user: candidate)
       subject.call(params)
     end
   end

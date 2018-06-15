@@ -21,6 +21,8 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many :test_task_assignments }
     it { is_expected.to have_many :user_skills }
     it { is_expected.to have_many :skills }
+    it { is_expected.to have_many :approveds }
+    it { is_expected.to belong_to :approver }
   end
 
   describe 'users default state' do

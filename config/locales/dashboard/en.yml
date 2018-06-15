@@ -39,6 +39,7 @@ en:
         last_role: Can not remove the last role
       table:
         applicants: Applicants
+        approver: Approver
         email: Email
         full_name: Full name
         github_user: GitHub user

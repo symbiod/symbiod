@@ -34,7 +34,7 @@ module Web
       end
 
       def activate
-        Ops::Developer::Activate.call(user: @user)
+        Ops::Developer::Activate.call(user: @user, approver: current_user.id)
         redirect_to dashboard_users_url,
                     flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.full_name}" }
       end

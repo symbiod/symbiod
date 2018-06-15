@@ -14,7 +14,7 @@ module Web
       def show; end
 
       def activate
-        Ops::Developer::Activate.call(user: @candidate)
+        Ops::Developer::Activate.call(user: @candidate, approver: current_user.id)
         redirect_to dashboard_test_task_assignments_url, notice: t('dashboard.candidates.notices.activated')
       end
 
