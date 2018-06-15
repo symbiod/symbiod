@@ -17,5 +17,7 @@ describe Users::ScreeningCompletedNotificationRecipientsQuery do
     it 'returns only correct recipients' do
       is_expected.to match_array [staff_1, staff_2, mentor_1]
     end
+
+    its(:size) { is_expected.to eq 3 }
   end
 end

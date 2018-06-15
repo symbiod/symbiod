@@ -82,7 +82,7 @@ FactoryBot.define do
 
       # Allow to pass custom skill name to the user factory
       after(:create) do |user, options|
-        skill_name = options.skill_name || Faker::Job.field
+        skill_name = options.skill_name || "#{Faker::Job.field}-#{Time.now.to_f}"
         skill = Skill.find_or_create_by(title: skill_name)
         create(:user_skill, :primary, skill: skill, user: user)
       end
