@@ -394,13 +394,29 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    trailblazer-activity (0.5.2)
+    trailblazer (2.1.0.beta7)
+      declarative
+      trailblazer-macro (>= 2.1.0.beta7, < 2.2.0)
+      trailblazer-macro-contract (>= 2.1.0.beta4, < 2.2.0)
+      trailblazer-operation (>= 0.3.1, < 0.4.0)
+    trailblazer-activity (0.6.2)
       hirb
       trailblazer-context
     trailblazer-context (0.1.2)
-    trailblazer-operation (0.2.5)
-      trailblazer-activity (>= 0.5.2, < 0.7.0)
+    trailblazer-loader (0.1.2)
+    trailblazer-macro (2.1.0.beta7)
+    trailblazer-macro-contract (2.1.0.beta4)
+      declarative
+      reform (>= 2.2.0, < 3.0.0)
+      trailblazer-operation (>= 0.3.0, < 0.4.0)
+    trailblazer-operation (0.3.1)
+      trailblazer-activity (>= 0.6.1, < 0.7.0)
       trailblazer-context (>= 0.1.1, < 0.3.0)
+    trailblazer-rails (2.1.5)
+      activesupport (>= 5.0.0)
+      reform-rails (>= 0.1.4, < 0.2.0)
+      trailblazer (>= 2.1.0.beta1, < 2.2.0)
+      trailblazer-loader (>= 0.1.0)
     turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
@@ -475,7 +491,9 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   strong_migrations
+  trailblazer (= 2.1.0.beta7)
   trailblazer-operation
+  trailblazer-rails
   turbolinks (~> 5)
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)

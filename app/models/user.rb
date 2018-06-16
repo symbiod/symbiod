@@ -14,7 +14,8 @@ class User < ApplicationRecord
   ROLES = %w[developer mentor].freeze
 
   validates :email, presence: true, uniqueness: true
-  validates :first_name, :last_name, :location, :timezone, :cv_url, presence: true
+  # TODO: move cv_url validation to form object
+  validates :first_name, :last_name, :location, :timezone, presence: true
   validates :role, inclusion: { in: User::ROLES }, allow_nil: true
 
   has_many :user_skills

@@ -2,16 +2,34 @@
 %html
   %head
     %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Poc
+    %title Ideas
     = csrf_meta_tags
     = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    '/css/cover.css', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    = link_to "POC", root_url(subdomain: 'www')
-    = link_to "Bootcamp", bootcamp_root_url
-    = link_to "Idea", idea_root_url
-    = link_to "Dashboard", dashboard_root_url
 
-    This is #{request.subdomain ? request.subdomain : 'POC'}
-    = yield
+  %body.text-center
+    = render partial: 'layouts/shared/fork_me'
+    .cover-container.d-flex.h-100.p-3.mx-auto.flex-column
+      %header.masthead.mb-auto
+        .inner
+          %h3.masthead-brand= t('landing.brand')
+          %nav.nav.nav-masthead.justify-content-center
+            = nav_link t('landing.navigation.home'), root_landing_url, subdomain: 'www', id: 'home'
+            = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link' if policy(:dashboard).allowed?
+            = link_to t('landing.navigation.logout'), logout_url, method: :delete, class: 'nav-link' if current_user
+
+      %main.inner.cover{:role => "main"}
+        - if flash.alert
+          .alert.alert-danger{role: 'alert'}
+            = raw flash.alert
+
+        = yield
+
+      %footer.mastfoot.mt-auto
+        .inner
+          %p
+            = t('landing.footer.built_by')
+            = succeed ", 2018" do
+              = link_to 'HowToHireMe', 'https://howtohireme.ru', target: '_blank'

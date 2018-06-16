@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
 
     scope as: :idea, module: :idea, constraints: { subdomain: 'idea' } do
+      resource :registrations, only: %i[new create]
       resource :sessions, only: %i[new create]
       root to: 'home#index'
     end

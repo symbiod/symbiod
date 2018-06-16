@@ -3,7 +3,7 @@
 module Web
   module Idea
     # Allows to sign in as author or staff by email/password
-    class SessionsController < ApplicationController
+    class SessionsController < BaseController
       skip_before_action :verify_authenticity_token
 
       def new
