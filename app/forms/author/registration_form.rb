@@ -1,5 +1,5 @@
 module Author
-  class Registration < BaseForm
+  class RegistrationForm < BaseForm
     property :email
     property :first_name
     property :last_name
