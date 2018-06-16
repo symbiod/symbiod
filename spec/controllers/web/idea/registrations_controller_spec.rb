@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Web::Idea::RegistrationsController do
@@ -85,7 +87,7 @@ describe Web::Idea::RegistrationsController do
 
       it 'does not create new user' do
         expect { post :create, params: params }
-          .not_to change { User.count }
+          .not_to(change { User.count })
       end
 
       it 'renders sign up form' do

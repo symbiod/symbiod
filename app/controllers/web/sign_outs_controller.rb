@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Web
   # This controller is located in root namespace to allow any kind of user
   # to sighn out from the system, since we have different sign in logic in

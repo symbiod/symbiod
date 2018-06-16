@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Author::RegistrationForm do
@@ -6,7 +8,6 @@ describe Author::RegistrationForm do
   let(:errors) { subject.errors.messages.keys }
 
   before { subject.validate(params) }
-
 
   context 'invalid params' do
     let(:params) { {} }

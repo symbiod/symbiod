@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Ops::Author::SignUp do
@@ -34,7 +36,7 @@ describe Ops::Author::SignUp do
 
       it 'does not create new user' do
         expect { described_class.call(params: params) }
-          .not_to change { User.count }
+          .not_to(change { User.count })
       end
     end
   end
