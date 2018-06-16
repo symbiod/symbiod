@@ -14,7 +14,6 @@ module Web
           redirect_to dashboard_root_url
         else
           @registration = result[:model]
-          puts "ERRORS: #{@registration.errors.inspect}"
           render :new
         end
       end
