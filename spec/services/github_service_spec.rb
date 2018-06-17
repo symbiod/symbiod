@@ -115,18 +115,40 @@ describe GithubService do
   end
 
   describe '#search_users' do
-    context 'find users by email' do
+    context 'found user by email' do
       before { github_response_template }
-      let(:query) { 'opensource@howtohireme.ru' }
+      let(:email) { 'opensource@howtohireme.ru' }
+      let(:request) do
+        { total_count: 1,
+          incomplete_results: false,
+          items: [{ login: 'reabiliti',
+                    id: 30_253_042,
+                    score: 16.607306 }] }
+      end
 
       it 'query generation' do
-        allow(client).to receive(:search_users).with(query)
-        subject.search_users(query)
+        allow(client).to receive(:search_users).with(email).and_return(request)
+        subject.username_by_email(email)
       end
 
       it 'does not raise error' do
-        allow(client).to receive(:search_users).with(query)
-        expect { subject.search_users(query) }.not_to raise_error
+        allow(client).to receive(:search_users).with(email).and_return(request)
+        expect { subject.username_by_email(email) }.not_to raise_error
+      end
+    end
+
+    context 'user not found by email' do
+      before { github_response_template }
+      let(:email) { 'not-opensource@howtohireme.ru' }
+      let(:request) do
+        { total_count: 0,
+          incomplete_results: false,
+          items: [] }
+      end
+
+      it 'raise error' do
+        allow(client).to receive(:search_users).with(email).and_return(request)
+        expect { subject.username_by_email(email) }.to raise_error GithubIntegration::UsernameResolveException
       end
     end
   end
