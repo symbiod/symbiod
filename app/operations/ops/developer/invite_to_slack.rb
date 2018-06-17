@@ -27,9 +27,9 @@ module Ops
 
       def channels(user)
         if user.has_role? :mentor
-          'mentors'
+          'C8KSHUPSS,C8RU3LNQ2,C8QFNNG21,CB58GFAR0'
         else
-          ''
+          'C8KSHUPSS,C8RU3LNQ2,C8QFNNG21'
         end
       end
     end
