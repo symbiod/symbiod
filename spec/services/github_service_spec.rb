@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 require './app/services/github_service'
 
 describe GithubService do
@@ -110,6 +110,49 @@ describe GithubService do
 
       it 'reraises exception' do
         expect { subject.invite_member(user_id) }.to raise_error Octokit::Forbidden
+      end
+    end
+  end
+
+  describe '#username_by_email' do
+    before { github_response_template }
+
+    context 'found user by email' do
+      let(:email) { 'opensource@howtohireme.ru' }
+      let(:response) do
+        { total_count: 1,
+          incomplete_results: false,
+          items: [{ login: 'reabiliti',
+                    id: 30_253_042,
+                    score: 16.607306 }] }
+      end
+      let(:result) { 'reabiliti' }
+      before { allow(client).to receive(:search_users).with(email).and_return(response) }
+
+      it 'query generation' do
+        subject.username_by_email(email)
+      end
+
+      it 'does not raise error' do
+        expect { subject.username_by_email(email) }.not_to raise_error
+      end
+
+      it 'return user name' do
+        expect(subject.username_by_email(email)).to eq result
+      end
+    end
+
+    context 'user not found by email' do
+      let(:email) { 'not-opensource@howtohireme.ru' }
+      let(:request) do
+        { total_count: 0,
+          incomplete_results: false,
+          items: [] }
+      end
+
+      it 'raise error' do
+        allow(client).to receive(:search_users).with(email).and_return(request)
+        expect { subject.username_by_email(email) }.to raise_error GithubIntegration::UsernameResolveException
       end
     end
   end

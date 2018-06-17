@@ -2,6 +2,7 @@
 
 require 'webmock/rspec'
 require './spec/support/slack_mock'
+require './spec/support/github_mock'
 require 'simplecov'
 
 SimpleCov.start 'rails' do
@@ -10,6 +11,7 @@ end
 
 RSpec.configure do |config|
   config.include SlackMock
+  config.include GithubMock
 
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`

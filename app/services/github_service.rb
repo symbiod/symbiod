@@ -24,6 +24,14 @@ class GithubService
     ignore_exception?(e)
   end
 
+  def username_by_email(email)
+    request = client.search_users(email)
+    if (request[:total_count]).zero?
+      raise GithubIntegration::UsernameResolveException, "User with email '#{email}' was not found"
+    end
+    request[:items].first[:login]
+  end
+
   private
 
   def user_name_by_id(id)
