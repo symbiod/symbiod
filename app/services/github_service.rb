@@ -24,6 +24,10 @@ class GithubService
     ignore_exception?(e)
   end
 
+  def search_users(query)
+    client.search_users(query)
+  end
+
   private
 
   def user_name_by_id(id)

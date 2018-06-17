@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 require './app/services/github_service'
 
 describe GithubService do
@@ -110,6 +110,23 @@ describe GithubService do
 
       it 'reraises exception' do
         expect { subject.invite_member(user_id) }.to raise_error Octokit::Forbidden
+      end
+    end
+  end
+
+  describe '#search_users' do
+    context 'find users by email' do
+      before { github_response_template }
+      let(:query) { 'opensource@howtohireme.ru' }
+
+      it 'query generation' do
+        allow(client).to receive(:search_users).with(query)
+        subject.search_users(query)
+      end
+
+      it 'does not raise error' do
+        allow(client).to receive(:search_users).with(query)
+        expect { subject.search_users(query) }.not_to raise_error
       end
     end
   end

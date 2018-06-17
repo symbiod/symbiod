@@ -1,8 +1,9 @@
 class UpdateUsersWithoutGithubUsername < ActiveRecord::Migration[5.2]
   def up
+    github_service = GithubService.new(ENV['GITHUB_TOKEN'], 'howtohireme')
     User.where(github: ['', nil]).each do |user|
-      request = JSON.parse(open("https://api.github.com/search/users?q=#{user.email}+in%3Aemail").read)
-      user.update!(github: request['items'].first['login']) if (request['total_count']).positive?
+      request = github_service.search_users(user.email)
+      user.update!(github: request[:items].first[:login]) if (request[:total_count]).positive?
     end
   end
 
