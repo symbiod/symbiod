@@ -9,10 +9,13 @@ class User < ApplicationRecord
 
   include AASM
 
+  # TODO: move to form object
   attr_accessor :role, :primary_skill_id
 
+  # TODO: bad naming, not clear what it does
   ROLES = %w[developer mentor].freeze
 
+  # TODO: extract all validations to form
   validates :email, presence: true, uniqueness: true
   # TODO: move cv_url validation to form object
   validates :first_name, :last_name, :location, :timezone, presence: true

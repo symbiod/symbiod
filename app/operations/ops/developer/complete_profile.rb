@@ -5,6 +5,7 @@ module Ops
     # Persists passed data and starts screening
     # bases on chosen technologies
     class CompleteProfile < BaseOperation
+      # TODO: use reform for validations here
       step :persist_profile_data!
       success :assign_initial_role!
       success :assign_primary_skill!

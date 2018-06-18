@@ -6,6 +6,7 @@ module Web
       # Allows user to fill his profile during the sign up process
       class ProfilesController < BaseController
         def edit
+          # TODO: use reform here
           @profile = current_user
           render :edit
         end
