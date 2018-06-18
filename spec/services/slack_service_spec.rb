@@ -13,6 +13,7 @@ describe SlackService do
   describe '#invite' do
     let(:user) { create(:user) }
     let(:client) { double }
+    let(:result_channels) { '1,2,3' }
     let(:channels_data) do
       { 'channels' => [
         { 'id' => '1', 'name' => 'channel1' },
@@ -30,7 +31,7 @@ describe SlackService do
       invite_service = double
       allow(invite_service).to receive(:call)
       allow(SlackIntegration::InviteUser).to receive(:new)
-        .with(user: user, channels: subject.send(:id_channels, channels), token: token)
+        .with(user: user, channels: result_channels, token: token)
         .and_return(invite_service)
       subject.invite(user, channels)
     end
