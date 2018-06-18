@@ -12,7 +12,7 @@ class SlackService
   def invite(user, channels)
     SlackIntegration::InviteUser.new(
       user:      user,
-      channels:  channels,
+      channels:  id_channels(channels),
       token:     token
     ).call
   end
@@ -55,5 +55,9 @@ class SlackService
     client.users_list['members'].find do |entry|
       entry['profile']['email'] == email
     end
+  end
+
+  def id_channels(channels)
+    channels.map { |channel| channel_by_name(channel)['id'] }.join(',')
   end
 end
