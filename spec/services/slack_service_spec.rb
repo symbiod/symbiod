@@ -8,16 +8,29 @@ require './app/services/slack_service'
 describe SlackService do
   subject { described_class.new(token) }
   let(:token) { '123456' }
-  let(:channels) { '' }
+  let(:channels) { %w[channel1 channel2 channel3] }
 
   describe '#invite' do
     let(:user) { create(:user) }
+    let(:client) { double }
+    let(:channels_data) do
+      { 'channels' => [
+        { 'id' => '1', 'name' => 'channel1' },
+        { 'id' => '2', 'name' => 'channel2' },
+        { 'id' => '3', 'name' => 'channel3' }
+      ] }
+    end
+
+    before do
+      allow_any_instance_of(described_class).to receive(:client).and_return(client)
+      allow(client).to receive(:conversations_list).and_return(channels_data)
+    end
 
     it 'calls SlackIntegration::InviteUser class' do
       invite_service = double
       allow(invite_service).to receive(:call)
       allow(SlackIntegration::InviteUser).to receive(:new)
-        .with(user: user, channels: channels, token: token)
+        .with(user: user, channels: subject.send(:id_channels, channels), token: token)
         .and_return(invite_service)
       subject.invite(user, channels)
     end
