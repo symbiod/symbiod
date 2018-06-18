@@ -5,21 +5,12 @@ require 'sorcery/model'
 # Represents any user in the system
 # ATM it has `developer_onboarding` association, that should be moved to some other model.
 class User < ApplicationRecord
-  rolify
-
   include AASM
 
-  # TODO: move to form object
-  attr_accessor :role, :primary_skill_id
+  authenticates_with_sorcery!
+  rolify
 
-  # TODO: bad naming, not clear what it does
-  ROLES = %w[developer mentor].freeze
-
-  # TODO: extract all validations to form
   validates :email, presence: true, uniqueness: true
-  # TODO: move cv_url validation to form object
-  validates :first_name, :last_name, :location, :timezone, presence: true
-  validates :role, inclusion: { in: User::ROLES }, allow_nil: true
 
   has_many :user_skills
   has_many :skills, through: :user_skills
@@ -67,8 +58,6 @@ class User < ApplicationRecord
       transitions from: :screening_completed, to: :rejected
     end
   end
-
-  authenticates_with_sorcery!
 
   def github_uid
     authentications.github.first&.uid

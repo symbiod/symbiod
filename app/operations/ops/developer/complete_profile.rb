@@ -5,18 +5,18 @@ module Ops
     # Persists passed data and starts screening
     # bases on chosen technologies
     class CompleteProfile < BaseOperation
-      # TODO: use reform for validations here
-      step :persist_profile_data!
+      NON_USER_PARAMS = [:primary_skill_id, :role]
+
+      step ->(ctx, user:, **) { ctx[:model] = user }
+      step Contract::Build(constant: ::Developer::Wizard::ProfileForm)
+      step Contract::Validate()
+      step Contract::Persist()
       success :assign_initial_role!
       success :assign_primary_skill!
       success :complete_profile!
       success :start_screening!
 
       private
-
-      def persist_profile_data!(_ctx, user:, params:, **)
-        user.update(params)
-      end
 
       def assign_initial_role!(_ctx, user:, params:, **)
         user.add_role(params[:role])

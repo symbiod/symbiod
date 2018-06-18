@@ -8,11 +8,16 @@ describe Ops::Developer::CompleteProfile do
   describe '.call' do
     let(:user) { create(:user, :policy_accepted) }
     let(:skill) { create(:skill) }
-    let(:skill_params) { { primary_skill_id: skill.id } }
+    let(:non_user_params) do
+      {
+        primary_skill_id: skill.id,
+        role: 'mentor'
+      }
+    end
 
     context 'valid profile data provided' do
       let(:profile_params) { valid_user_attributes }
-      let(:params) { profile_params.merge(skill_params) }
+      let(:params) { profile_params.merge(non_user_params) }
 
       it 'updates profile' do
         expect { subject.call(user: user, params: params) }
@@ -39,6 +44,11 @@ describe Ops::Developer::CompleteProfile do
           .with(user: user)
         subject.call(user: user, params: params)
       end
+
+      it 'assigns role to user' do
+        subject.call(user: user, params: params)
+        expect(user.has_role?(non_user_params[:role])).to be true
+      end
     end
 
     context 'invalid provided data' do
@@ -47,11 +57,11 @@ describe Ops::Developer::CompleteProfile do
           first_name: nil
         }
       end
-      let(:params) { invalid_profile_params.merge(skill_params) }
+      let(:params) { invalid_profile_params.merge(non_user_params) }
 
       it 'does not update profile' do
-        expect { subject.call(user: user, params: params) } # rubocop:disable Lint/AmbiguousBlockAssociation
-          .not_to change { user.reload.first_name }
+        expect { subject.call(user: user, params: params) }
+          .not_to(change { user.reload.first_name })
       end
 
       it 'does not change user state' do
@@ -70,6 +80,12 @@ describe Ops::Developer::CompleteProfile do
           .with(user: user)
         subject.call(user: user, params: params)
       end
+
+      it 'does not assign role to user' do
+        subject.call(user: user, params: params)
+        expect(user.roles).to be_empty
+      end
+
     end
   end
 end
