@@ -5,6 +5,9 @@ module Ops
     # Handles all business logic regarding adding new member to GitHub.
     # Besides calling public API, it also markes onboarding step as completed.
     class InviteToSlack < BaseOperation
+      SLACK_CHANNELS = %w[bootcamp self-development feed].freeze
+      SLACK_CHANNEL_MENTOR = ['mentors'].freeze
+
       step :add_to_slack!
       success :mark_step_as_complete!
 
@@ -25,11 +28,13 @@ module Ops
         raise
       end
 
+      private
+
       def channels(user)
-        if user.has_role? :mentor
-          'mentors'
+        if SlackPolicy.new(user, nil).able_to_join_channel?(:mentor)
+          SLACK_CHANNELS + SLACK_CHANNEL_MENTOR
         else
-          ''
+          SLACK_CHANNELS
         end
       end
     end

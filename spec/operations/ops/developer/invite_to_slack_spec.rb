@@ -6,6 +6,7 @@ describe Ops::Developer::InviteToSlack do
   subject       { described_class }
   let(:user)    { create(:user, :developer) }
   let(:params)  { { user: user } }
+  let(:channels) { %w[bootcamp self-development feed] }
   let(:service) { double }
   before { user.create_developer_onboarding }
 
@@ -17,16 +18,17 @@ describe Ops::Developer::InviteToSlack do
     context 'user was not invited before' do
       context 'is mentor' do
         let(:user) { create(:user, :mentor) }
+        let(:channels) { %w[bootcamp self-development feed mentors] }
 
         it 'invites member to Slack' do
-          expect(service).to receive(:invite).with(user, 'mentors')
+          expect(service).to receive(:invite).with(user, channels)
           subject.call(params)
         end
       end
 
       context 'is developer' do
         it 'invites member to Slack' do
-          expect(service).to receive(:invite).with(user, '')
+          expect(service).to receive(:invite).with(user, channels)
           subject.call(params)
         end
       end
@@ -36,7 +38,7 @@ describe Ops::Developer::InviteToSlack do
       it 'handles exception properly' do
         expect(service)
           .to receive(:invite)
-          .with(user, '')
+          .with(user, channels)
           .and_raise(
             SlackIntegration::FailedApiCallException,
             'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
@@ -49,7 +51,7 @@ describe Ops::Developer::InviteToSlack do
       it 'handles exception properly' do
         allow(service)
           .to receive(:invite)
-          .with(user, '')
+          .with(user, channels)
           .and_raise(
             SlackIntegration::FailedApiCallException,
             'some other message'

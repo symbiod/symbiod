@@ -13,7 +13,7 @@ describe SlackIntegration::InviteUser do
     }
   end
   let(:user) { create(:user, :slack_user) }
-  let(:channels) { '' }
+  let(:channels) { 'C8KSHUPSS,C8RU3LNQ2,C8QFNNG21' }
   let(:token) { '1234567890' }
 
   describe '#call' do
@@ -43,7 +43,7 @@ describe SlackIntegration::InviteUser do
 
     context 'user mentor' do
       slack_success_response_mentor!
-      let!(:channels) { 'mentor' }
+      let!(:channels) { 'C8KSHUPSS,C8RU3LNQ2,C8QFNNG21,CB58GFAR0' }
 
       it 'add channel mentor' do
         expect { subject.call }.not_to raise_error
