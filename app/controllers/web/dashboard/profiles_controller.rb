@@ -12,7 +12,8 @@ module Web
       def edit; end
 
       def update
-        if profile.update(profile_params)
+        if form.validate(profile_params)
+          form.save
           redirect_to dashboard_profile_url, success: t('dashboard.profile.update.flash.success')
         else
           render :edit
@@ -23,6 +24,10 @@ module Web
 
       def profile
         @profile ||= current_user
+      end
+
+      def form
+        @form ||= ::Developer::ProfileForm.new(profile)
       end
 
       def profile_params

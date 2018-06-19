@@ -4,14 +4,13 @@ module Ops
   module Developer
     # This class to update user primary skill and params when editing user
     class UpdateProfile < BaseOperation
-      step :persist_profile_data!
+      step ->(ctx, user:, **) { ctx[:model] = user }
+      step Contract::Build(constant: ::Developer::UpdateUserForm)
+      step Contract::Validate()
+      step Contract::Persist()
       success :update_primary_skill!
 
       private
-
-      def persist_profile_data!(_ctx, user:, params:, **)
-        user.update(params)
-      end
 
       def update_primary_skill!(_ctx, user:, params:, **)
         skill = ::Skill.find(params[:primary_skill_id])
