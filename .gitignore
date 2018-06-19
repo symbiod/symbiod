@@ -11,3 +11,7 @@
 /config/master.key
 .envrc
 coverage/**/*
+
+give-me-poc-features/
+node_modules/
+yarn.lock
