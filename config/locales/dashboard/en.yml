@@ -25,6 +25,11 @@ en:
       activate: Activate
       confirm_rejection: Do you really want to reject this candidate?
     users:
+      unassign_role: "Unassign role %{role}"
+      assign_role: "Assign role %{role}"
+      confirm:
+        unassign_role: "Are you sure to unassign role %{role}"
+        assign_role: "Are you sure to assign role %{role}"
       edit:
         header: Edit user
       access:
