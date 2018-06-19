@@ -5,6 +5,6 @@ class SidekiqConstraint
   def matches?(request)
     return false unless User.exists?(request.session[:user_id])
     user = User.find request.session[:user_id]
-    user&.has_role?(:staff)
+    SidekiqPolicy.new(user, nil).access_allowed?
   end
 end
