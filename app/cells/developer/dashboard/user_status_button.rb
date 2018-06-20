@@ -7,7 +7,7 @@ module Developer
       STATE_DISABLED_BUTTON = %w[pending profile_completed rejected policy_accepted].freeze
 
       def user_status
-        current_user.has_role?(:staff) ? user_state : model.state
+        policy(:user).activate? ? user_state : model.state
       end
 
       private
