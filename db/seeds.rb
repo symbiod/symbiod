@@ -24,6 +24,7 @@ end
 9.times do |i|
   user = User.create!(
     email: "test0#{i}@gmail.com",
+    github: Faker::Name.last_name,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     location: Faker::Address.country,
