@@ -29,9 +29,8 @@ end
     location: Faker::Address.country,
     timezone: Faker::Address.time_zone,
     cv_url: Faker::Internet.url,
-    role: User::ROLES.sample,
     state: %w[pending active disabled screening_completed].sample
   )
-  user.add_role User::ROLES.sample
+  user.add_role Developer::Wizard::ProfileForm::ROLES.sample
   UserSkill.create!(user: user, skill: Skill.all.sample, primary: true)
 end

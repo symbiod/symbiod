@@ -2,12 +2,12 @@
 %p.lead
   = t('bootcamp.profile.body')
 
-= simple_form_for(current_user, method: :put, remote: false, url: bootcamp_wizard_profile_path) do |f|
+= simple_form_for(@profile, method: :put, remote: false, url: bootcamp_wizard_profile_path) do |f|
   = f.input :first_name
   = f.input :last_name
   = f.input :location
   = f.input :timezone, as: :time_zone
   = f.input :cv_url
-  = f.input :role, collection: User::ROLES, include_blank: false
+  = f.input :role, collection: Developer::Wizard::ProfileForm::ROLES, include_blank: false
   = f.input :primary_skill_id, collection: Skill.all, include_blank: false
   = f.button :submit, t('bootcamp.profile.submit'), type: :submit, class: 'btn btn-lg btn-secondary'

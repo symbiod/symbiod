@@ -12,7 +12,7 @@ describe Ops::Developer::UpdateProfile do
     let(:skill_params) { { primary_skill_id: skill.id } }
 
     context 'valid profile data provided' do
-      let(:profile_params) { valid_user_attributes }
+      let(:profile_params) { valid_user_attributes.merge(github: 'username') }
       let(:params) { profile_params.merge(skill_params) }
 
       it 'updates profile' do

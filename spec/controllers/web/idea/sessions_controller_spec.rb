@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Web::Bootcamp::UserSessionsController, type: :controller do
+RSpec.describe Web::Idea::SessionsController, type: :controller do
   describe 'GET #new' do
     it 'assigns new user' do
       get :new
@@ -15,7 +15,7 @@ RSpec.describe Web::Bootcamp::UserSessionsController, type: :controller do
 
     context 'login with correct email and password' do
       before do
-        post 'create', params: { bootcamp_login: { email: user.email, password: 'password' } }
+        post 'create', params: { idea_login: { email: user.email, password: 'password' } }
       end
 
       it 'user logged in' do
@@ -29,7 +29,7 @@ RSpec.describe Web::Bootcamp::UserSessionsController, type: :controller do
 
     context 'login with incorrect email and password' do
       before do
-        post 'create', params: { bootcamp_login: { email: user.email, password: 'secrets' } }
+        post 'create', params: { idea_login: { email: user.email, password: 'secrets' } }
       end
 
       it 'user not logged in' do
@@ -39,23 +39,6 @@ RSpec.describe Web::Bootcamp::UserSessionsController, type: :controller do
       it 'redirects to main page' do
         is_expected.to render_template(:new)
       end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    let(:user) { create(:user) }
-
-    before do
-      login_user(user)
-      delete 'destroy', params: { id: user.id }
-    end
-
-    it 'session is destroyed' do
-      expect(logged_in?).to eq false
-    end
-
-    it 'redirects to main page' do
-      is_expected.to redirect_to(root_landing_url)
     end
   end
 end

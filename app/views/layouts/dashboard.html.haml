@@ -21,7 +21,7 @@
           = link_to t('dashboard.navigation.profile'), dashboard_profile_url, class: 'nav-link'
       %ul.navbar-nav.px-3
         %li.nav-item
-          = link_to t('dashboard.navigation.logout'), bootcamp_logout_url, method: :post, class: 'nav-link'
+          = link_to t('dashboard.navigation.logout'), logout_url, method: :delete, class: 'nav-link'
     .container-fluid
       .row
         %nav.col-md-2.d-none.d-md-block.bg-light.sidebar

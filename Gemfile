@@ -14,6 +14,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 
+gem 'trailblazer', '2.1.0.beta7'
+gem 'trailblazer-rails'
 gem 'trailblazer-operation'
 gem 'cells-rails'
 gem 'cells-haml'

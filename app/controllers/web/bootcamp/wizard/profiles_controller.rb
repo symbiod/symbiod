@@ -6,7 +6,7 @@ module Web
       # Allows user to fill his profile during the sign up process
       class ProfilesController < BaseController
         def edit
-          @profile = current_user
+          @profile = ::Developer::Wizard::ProfileForm.new(current_user)
           render :edit
         end
 
@@ -19,6 +19,7 @@ module Web
           if result.success?
             redirect_to current_wizard_step_url
           else
+            @profile = result['result.contract.default']
             render :edit
           end
         end
@@ -27,7 +28,7 @@ module Web
 
         def profile_params
           params
-            .require(:user)
+            .require(:developer_wizard_profile)
             .permit(:first_name, :last_name, :location,
                     :timezone, :cv_url, :role, :primary_skill_id)
         end

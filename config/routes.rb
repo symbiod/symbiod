@@ -6,17 +6,12 @@ require './lib/sidekiq_constraint'
 Rails.application.routes.draw do
   scope module: :web do
     scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
-      resource :user_sessions, only: :create
-
       namespace :wizard do
         resources :screenings, only: %i[index update]
         resource :profile, only: %i[edit update]
         resource :accept_policy, only: %i[edit update]
       end
 
-      get '/login', to: 'user_sessions#new', as: :login
-      # TODO: change this to delete HTTP method
-      post '/logout', to: 'user_sessions#destroy', as: :logout
       post 'oauth/callback', to: 'oauths#callback'
       get 'oauth/callback', to: 'oauths#callback'
       get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
@@ -25,6 +20,8 @@ Rails.application.routes.draw do
     end
 
     scope as: :idea, module: :idea, constraints: { subdomain: 'idea' } do
+      resource :registrations, only: %i[new create]
+      resource :sessions, only: %i[new create]
       root to: 'home#index'
     end
 
@@ -54,6 +51,8 @@ Rails.application.routes.draw do
     end
 
     mount Sidekiq::Web => '/sidekiq', constraints: SidekiqConstraint.new
+
+    delete '/logout', to: 'sign_outs#destroy', as: :logout
     root to: 'home#index', as: :root_landing, constraints: { subdomain: 'www' }
   end
 
