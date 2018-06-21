@@ -2,7 +2,7 @@
 %p.lead
   = t('bootcamp.profile.body')
 
-= simple_form_for(current_user, method: :put, remote: false, url: bootcamp_wizard_profile_path) do |f|
+= simple_form_for(@profile, method: :put, remote: false, url: bootcamp_wizard_profile_path) do |f|
   = f.input :first_name
   = f.input :last_name
   = f.input :location

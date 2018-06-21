@@ -120,6 +120,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
         location: Faker::Address.country,
         timezone: Faker::Address.time_zone,
         cv_url: Faker::Internet.url,
+        github: Faker::Internet.user_name,
         primary_skill_id: skill.id
       }
     end

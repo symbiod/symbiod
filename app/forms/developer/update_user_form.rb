@@ -1,9 +1,11 @@
 module Developer
-  class UpdateUserForm < BaseForm
+  class UpdateUserForm < ::Developer::BaseForm
     property :email
+    property :github
 
     validation do
       required(:email).filled
+      required(:github).filled
     end
   end
 end

@@ -49,11 +49,11 @@ describe Web::Bootcamp::Wizard::ProfilesController do
             .to receive(:call)
             .with(any_args)
             .and_return(result_double)
-          put :update, params: { user: user_params }
+          put :update, params: { developer_wizard_profile: user_params }
         end
 
         it 'redirects to next step' do
-          put :update, params: { user: user_params }
+          put :update, params: { developer_wizard_profile: user_params }
           expect(response).to redirect_to public_send(Developer::Wizard.new(user).route_for_current_step)
         end
 
@@ -61,7 +61,7 @@ describe Web::Bootcamp::Wizard::ProfilesController do
           let(:wrong_state) { :profile_completed }
 
           def invoke_action
-            put :update, params: { user: user_params }
+            put :update, params: { developer_wizard_profile: user_params }
           end
         end
       end
@@ -70,7 +70,7 @@ describe Web::Bootcamp::Wizard::ProfilesController do
         let(:user_params) { { first_name: nil } }
 
         it 'renders form' do
-          put :update, params: { user: user_params }
+          put :update, params: { developer_wizard_profile: user_params }
           expect(response).to render_template :edit
         end
       end
@@ -80,7 +80,7 @@ describe Web::Bootcamp::Wizard::ProfilesController do
       let(:user_params) { Hash[] }
 
       it 'redirects to root landing' do
-        put :update, params: { user: user_params }
+        put :update, params: { developer_wizard_profile: user_params }
         expect(response).to redirect_to root_landing_url
       end
     end
