@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Developer::ProfileForm do
@@ -14,7 +16,7 @@ describe Developer::ProfileForm do
         last_name: 'Smith',
         location: 'Russia',
         timezone: 'Europe/Moscow',
-        cv_url: 'https://google.com',
+        cv_url: 'https://google.com'
       }
     end
 

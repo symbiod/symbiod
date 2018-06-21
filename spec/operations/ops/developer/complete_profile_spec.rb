@@ -85,7 +85,6 @@ describe Ops::Developer::CompleteProfile do
         subject.call(user: user, params: params)
         expect(user.roles).to be_empty
       end
-
     end
   end
 end

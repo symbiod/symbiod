@@ -5,7 +5,7 @@ module Ops
     # Persists passed data and starts screening
     # bases on chosen technologies
     class CompleteProfile < BaseOperation
-      NON_USER_PARAMS = [:primary_skill_id, :role]
+      NON_USER_PARAMS = %i[primary_skill_id role].freeze
 
       step ->(ctx, user:, **) { ctx[:model] = user }
       step Contract::Build(constant: ::Developer::Wizard::ProfileForm)

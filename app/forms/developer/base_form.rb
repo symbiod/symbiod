@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
 module Developer
+  # Contains additional fields, that are required for developer
+  # We do not use it directly anywhere, just inherit specific forms
+  # from this one
   class BaseForm < BaseUserForm
     property :cv_url
     property :primary_skill_id, virtual: true
