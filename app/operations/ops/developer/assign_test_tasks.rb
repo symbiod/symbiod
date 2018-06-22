@@ -20,7 +20,7 @@ module Ops
         (1..@positions).inject([]) do |test_tasks, position|
           test_tasks << ::Developer::TestTask.active.where(
             position: position,
-            role_id: @user.role_ids.first,
+            role_name: @user.roles_name.first,
             skill_id: @user.primary_skill.id
           ).sample
         end.compact
