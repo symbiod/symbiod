@@ -25,4 +25,9 @@ en:
       must_be_accepted: Policy must be accepted
       submit: Submit
       title: Our policy
-      text: By accepting this, you approve your agreement with all our policies, located at wiki.
+      accept: I accept
+      text_html:
+        By accepting this, you approve your agreement with all our principles and policies,
+        located at <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>.
+        <br/>
+        Following policies is mandatory for all Bootcamp members.
