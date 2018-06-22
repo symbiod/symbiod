@@ -15,6 +15,7 @@ module Poc
     config.active_job.queue_adapter = :sidekiq
     config.session_store :cookie_store, key: '_GiveMePoc_session', domain: :all, tld_length: 2
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.action_mailer.default_url_options = { host: 'givemepoc.org' }
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
