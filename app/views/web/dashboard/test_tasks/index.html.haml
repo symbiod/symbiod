@@ -25,6 +25,6 @@
             = link_to developer_test_task.title, edit_dashboard_test_task_url(developer_test_task)
           %td= cell(Developer::Dashboard::TestTaskStatusButton, developer_test_task).()
           %td= developer_test_task.position
-          %td= @roles.find { |r| r.id == developer_test_task.role_id }.try(:name)
+          %td= developer_test_task.role.try(:name)
           %td= developer_test_task.skill.title
           %td= markdown(developer_test_task.description)

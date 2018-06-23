@@ -56,7 +56,7 @@ module Web
       private
 
       def developer_test_task_params
-        params.require(:developer_test_task).permit(:title, :description, :position, :role_id, :skill_id)
+        params.require(:developer_test_task).permit(:title, :description, :position, :role_name, :skill_id)
       end
 
       def find_test_task

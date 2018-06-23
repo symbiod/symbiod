@@ -17,10 +17,13 @@ module Ops
       end
 
       def test_tasks
+        # TODO: potentially unsafe picking just first role
+        # we need probably to pass which role do we want to assign.
+        # ATM not sure how to figure out that.
         (1..@positions).inject([]) do |test_tasks, position|
           test_tasks << ::Developer::TestTask.active.where(
             position: position,
-            role_id: @user.role_ids.first,
+            role_name: @user.roles_name.first,
             skill_id: @user.primary_skill.id
           ).sample
         end.compact
