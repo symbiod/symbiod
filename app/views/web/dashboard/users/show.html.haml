@@ -30,20 +30,7 @@
       %td
         %b= t('dashboard.users.table.roles')
       %td
-        %ul.list-unstyled
-          - @user.roles_name.each do |role|
-            %li
-              = role
-              = link_to 'delete', remove_role_dashboard_user_url(@user, role: role),
-                                  method: :put,
-                                  data: { confirm: "Are you sure to delete role #{role}" }
-
-          - Role::ROLES.each do |role|
-            - unless @user.roles_name.include?(role)
-              %li
-                = link_to "add role #{role}", add_role_dashboard_user_url(@user, role: role),
-                                              method: :put,
-                                              data: { confirm: "Are you sure to add role #{role}" }
+        = cell(Developer::Dashboard::UserRoles, @user).()
     %tr
       %td
         %b= t('dashboard.users.table.task_assignments')

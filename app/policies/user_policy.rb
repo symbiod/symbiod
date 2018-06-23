@@ -11,7 +11,7 @@ class UserPolicy < DashboardPolicy
   end
 
   def edit?
-    staff?
+    staff? || mentor?
   end
 
   def update?
