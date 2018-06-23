@@ -1,4 +1,9 @@
 %p.lead
-  = @user.full_name
+  Hello #{@user.full_name}!
 %p
   = t('bootcamp.onboarding.started')
+%ul
+  %li Read #{link_to 'wiki', 'https://github.com/howtohireme/wiki', target: :_blank}
+  %li Prettify github/slack profiles
+  %li Say hello at slack
+  %li How to pick up suitable project
