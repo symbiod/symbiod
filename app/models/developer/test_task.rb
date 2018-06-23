@@ -3,7 +3,9 @@
 module Developer
   # Represents the task description, that should be solved by developer
   class TestTask < ApplicationRecord
+    # TODO: delete after deploy
     self.ignored_columns = %w[role_id]
+
     include AASM
 
     validates :title, :position, :skill_id, presence: true
