@@ -1,6 +1,18 @@
 #!/bin/bash
 
-# Run the latest features image
 git clone https://github.com/howtohireme/give-me-poc-features.git
 cd give-me-poc-features
+
+# Checkout corresponding features branch, if it exists
+# It is required for cases, when we edit `bin/run` file, for example
+# in specific branch, and we want to run its new implementation, instead
+if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+  echo "Using master branch of features"
+else
+  if [ `git branch --list origin/$TRAVIS_BRANCH` ]; then
+    echo "Using $TRAVIS_BRANCH branch of features"
+    git checkout $TRAVIS_BRANCH
+  fi
+fi
+
 bin/run
