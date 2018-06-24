@@ -9,9 +9,11 @@ cd give-me-poc-features
 if [[ "$TRAVIS_BRANCH" == "master" ]]; then
   echo "Using master branch of features"
 else
-  if [ `git branch --list origin/$TRAVIS_BRANCH` ]; then
+  if [ `git branch --list -r origin/$TRAVIS_BRANCH` ]; then
     echo "Using $TRAVIS_BRANCH branch of features"
     git checkout $TRAVIS_BRANCH
+  else
+    echo "There is no features branch for $TRAVIS_BRANCH, using master"
   fi
 fi
 
