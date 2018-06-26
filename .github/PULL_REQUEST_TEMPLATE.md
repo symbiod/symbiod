@@ -1,4 +1,4 @@
-Issue #ID#.
+Issue #ID
 
 ### Description
 
@@ -12,15 +12,13 @@ Explain how to test your PR manually
 * Step 2
 * Step 3
 
-### Features PR url
+### Features PR URL
 
-[PR #ID#](https://github.com/howtohireme/give-me-poc-features/pull/#ID#)
-
-Provide url to features PR if your changes break features.
+[PR #ID](https://github.com/howtohireme/give-me-poc-features/pull/#ID)
 
 ### Checklist
 
-Make sure that all steps a checked before merge
+Make sure that all steps a checked before the merge
 
 - [ ] RSpec tests are passing on CI
 - [ ] Cucumber features are passing localy
