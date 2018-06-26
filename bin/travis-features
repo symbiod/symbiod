@@ -1,6 +1,33 @@
 #!/bin/bash
 
-# Run the latest features image
 git clone https://github.com/howtohireme/give-me-poc-features.git
 cd give-me-poc-features
-bin/run
+
+# Checkout corresponding features branch, if it exists
+# It is required for cases, when we edit `bin/run` file, for example
+# in specific branch, and we want to run its new implementation, instead of master.
+# In addition we also detect the features docker image tag.
+if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+  echo "Using master branch of features"
+  echo "Current branch is master, using 'latest' tag"
+  CURRENT_TAG="latest"
+else
+  if [ `git branch --list -r origin/$TRAVIS_BRANCH` ]; then
+    echo "Using $TRAVIS_BRANCH branch of features"
+    echo "Travis branch is $TRAVIS_BRANCH, using '$TRAVIS_BRANCH' tag"
+    CURRENT_TAG=$TRAVIS_BRANCH 
+    git checkout $TRAVIS_BRANCH
+  else
+    echo "There is no features branch for $TRAVIS_BRANCH, using master"
+    echo "Current branch is master, using 'latest' tag"
+    CURRENT_TAG="latest"
+  fi
+fi
+
+# We don't want to run features for PR builds
+if [[ "$TRAVIS_EVENT_TYPE" == "push" ]]; then
+  export CURRENT_TAG
+  bin/run
+else
+	echo "Skip build for PR event"
+fi

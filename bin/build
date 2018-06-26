@@ -2,6 +2,6 @@
 
 # We need to remove already installed gems by Travis.
 # Otherwise we may get openssl incompatibility error, because
-# the image has different version, than Trvis host system.
+# the image has different OpenSSL version, than Travis host system.
 rm -rf ./vendor/bundle
 docker build --build-arg master_key=$RAILS_MASTER_KEY -t registry.heroku.com/peaceful-refuge-95132/web -f Dockerfile .
