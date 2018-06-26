@@ -24,5 +24,10 @@ else
   fi
 fi
 
-export CURRENT_TAG
-bin/run
+# We don't want to run features for PR builds
+if [[ "$TRAVIS_EVENT_TYPE" == "push" ]]; then
+  export CURRENT_TAG
+  bin/run
+else
+	echo "Skip build for PR event"
+fi
