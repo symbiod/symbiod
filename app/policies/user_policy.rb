@@ -11,7 +11,7 @@ class UserPolicy < DashboardPolicy
   end
 
   def edit?
-    staff? || mentor?
+    staff?
   end
 
   def update?
@@ -31,6 +31,10 @@ class UserPolicy < DashboardPolicy
   end
 
   def remove_role?
+    staff?
+  end
+
+  def manage_roles?
     staff?
   end
 end
