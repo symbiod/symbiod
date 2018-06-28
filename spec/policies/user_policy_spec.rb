@@ -16,6 +16,7 @@ describe UserPolicy do
     it { is_expected.to permit_action(:deactivate) }
     it { is_expected.to permit_action(:add_role) }
     it { is_expected.to permit_action(:remove_role) }
+    it { is_expected.to permit_action(:manage_roles) }
   end
 
   context 'active user' do
@@ -29,5 +30,6 @@ describe UserPolicy do
     it { is_expected.not_to permit_action(:deactivate) }
     it { is_expected.not_to permit_action(:add_role) }
     it { is_expected.not_to permit_action(:remove_role) }
+    it { is_expected.not_to permit_action(:manage_roles) }
   end
 end
