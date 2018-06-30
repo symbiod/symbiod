@@ -70,8 +70,21 @@ Rollbar.configure do |config|
   # Ignore the typical "attacks..."
   config.exception_level_filters.merge!('ActionController::RoutingError' => lambda { |e|
     e.message =~ %r{No route matches \[[A-Z]+\] "/(.+)"}
-    case Regexp.last_match(1)
-    when %w[myadmin phpmyadmin w00tw00t pma cgi-bin xmlrpc.php wp wordpress cfide wizard/profile/favicon.ico]
+    ignored_tokens = %w[
+      myadmin
+      phpmyadmin
+      w00tw00t
+      pma
+      cgi-bin
+      xmlrpc.php
+      wp
+      wordpress
+      cfide
+      wizard/profile/favicon.ico
+      wizard/favicon.ico
+    ]
+
+    if ignored_tokens.include?(Regexp.last_match(1))
       'ignore'
     else
       'warning'
