@@ -165,6 +165,7 @@ GEM
     hashdiff (0.3.7)
     hashie (3.5.7)
     hirb (0.7.3)
+    honeybadger (3.3.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -293,8 +294,6 @@ GEM
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
     rolify (5.2.0)
-    rollbar (2.15.6)
-      multi_json
     rspec-cells (0.3.4)
       cells (>= 4.0.0, < 6.0.0)
       rspec-rails (~> 3.2)
@@ -458,6 +457,7 @@ DEPENDENCIES
   faker
   haml-lint
   haml-rails
+  honeybadger (~> 3.1)
   jbuilder (~> 2.5)
   kaminari
   letter_opener
@@ -475,7 +475,6 @@ DEPENDENCIES
   reform
   reform-rails
   rolify
-  rollbar
   rspec-cells
   rspec-its
   rspec-rails
