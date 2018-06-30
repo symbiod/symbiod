@@ -33,7 +33,7 @@ gem 'slack-ruby-client'
 gem 'sorcery'
 
 gem "octokit", "~> 4.0"
-gem 'rollbar'
+gem 'honeybadger', '~> 3.1'
 gem 'newrelic_rpm'
 gem 'data_migrate'
 gem 'pundit'
