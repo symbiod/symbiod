@@ -5,6 +5,10 @@ module Web
     # Allows to sign in as author or staff by email/password
     class SessionsController < BaseController
       skip_before_action :verify_authenticity_token
+      before_action :check_access
+
+      rescue_from Pundit::NotAuthorizedError,
+                  with: :redirect_to_idea_root
 
       def new
         @user = User.new
@@ -12,9 +16,9 @@ module Web
 
       def create
         if (@user = login(resource_params[:email], resource_params[:password]))
-          redirect_back_or_to(root_landing_url, notice: t('landing.success_login', email: @user.email))
+          redirect_back_or_to idea_root_url, success: "#{t('landing.success_login')} #{@user.email}"
         else
-          flash.now[:alert] = t('landing.failed_login')
+          flash.now[:danger] = t('landing.failed_login')
           render action: 'new'
         end
       end
@@ -23,6 +27,15 @@ module Web
 
       def resource_params
         params.require(:idea_login).permit(:email, :password)
+      end
+
+      def check_access
+        authorize %i[web idea session], "#{action_name}?".to_sym
+      end
+
+      def redirect_to_idea_root
+        flash[:danger] = t('idea.sessions.access.deny')
+        redirect_to idea_root_url
       end
     end
   end

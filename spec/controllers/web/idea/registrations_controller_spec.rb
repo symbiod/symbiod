@@ -46,9 +46,9 @@ describe Web::Idea::RegistrationsController do
         post :create, params: params
       end
 
-      it 'redirects to dashboard root' do
+      it 'redirects to idea root' do
         post :create, params: params
-        expect(response).to redirect_to dashboard_root_url
+        expect(response).to redirect_to idea_root_url
       end
 
       it 'creates new user' do

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     scope as: :idea, module: :idea, constraints: { subdomain: 'idea' } do
       resource :registrations, only: %i[new create]
       resource :sessions, only: %i[new create]
+      resources :proposes, only: %i[index new create]
       root to: 'home#index'
     end
 
@@ -38,6 +39,13 @@ Rails.application.routes.draw do
           put :deactivate
           put :remove_role
           put :add_role
+        end
+      end
+      resources :ideas, expect: :destroy do
+        member do
+          put :activate
+          put :deactivate
+          put :reject
         end
       end
       resources :test_tasks, except: :destroy do

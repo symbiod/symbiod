@@ -3,11 +3,11 @@
 # Allows only staff to manage users
 class UserPolicy < DashboardPolicy
   def index?
-    true
+    not_author?
   end
 
   def show?
-    true
+    not_author?
   end
 
   def edit?

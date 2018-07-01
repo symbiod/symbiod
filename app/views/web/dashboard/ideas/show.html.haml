@@ -1,0 +1,24 @@
+%h3
+  Idea id
+  = @idea.id
+  = link_to t('dashboard.ideas.button.edit'), edit_dashboard_idea_url(@idea),
+                                              class: 'btn btn-info btn-sm' if policy(%i[web dashboard idea]).edit?
+.table-responsive
+  %table.table.table-striped.table-sm
+    %tr
+      %td
+        %b= t('dashboard.ideas.table.name')
+      %td= @idea.name
+    %tr
+      %td
+        %b= t('dashboard.ideas.table.description')
+      %td= markdown(@idea.description)
+    %tr
+      %td
+        %b= t('dashboard.ideas.table.status')
+      %td
+        = cell(Web::Dashboard::IdeaStatusButton, @idea).()
+    %tr
+      %td
+        %b= t('dashboard.ideas.table.author')
+      %td= @idea.author.email

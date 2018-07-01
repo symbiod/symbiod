@@ -15,7 +15,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :active) }
+      let!(:candidate) { create(:user, :developer, :active) }
       before do
         login_user(candidate)
         get :index
@@ -64,7 +64,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :active) }
+      let!(:candidate) { create(:user, :developer, :active) }
       before do
         login_user(candidate)
         get :show, params: { id: candidate.id }

@@ -23,7 +23,7 @@ RSpec.describe Web::Idea::SessionsController, type: :controller do
       end
 
       it 'redirects to main page' do
-        is_expected.to redirect_to(root_landing_url)
+        is_expected.to redirect_to(idea_root_url)
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe Web::Idea::SessionsController, type: :controller do
         expect(logged_in?).to eq false
       end
 
-      it 'redirects to main page' do
+      it 'renders template' do
         is_expected.to render_template(:new)
       end
     end
