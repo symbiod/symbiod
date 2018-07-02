@@ -19,7 +19,7 @@
               - user.roles.each do |role|
                 %li
                   = role.name
-          %td= user.primary_skill.title
+          %td= user.primary_skill&.title
           %td
             = cell(Developer::Dashboard::UserStatusButton, user).()
           %td.col-md-2
