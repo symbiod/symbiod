@@ -2,8 +2,7 @@
 
 module Ops
   module Idea
-    # Handles all business logic regarding adding new member to GitHub.
-    # Besides calling public API, it also markes onboarding step as completed.
+    # This operation send message to Slack channel
     class MessageToSlack < BaseOperation
       step :message_to_slack!
 

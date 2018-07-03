@@ -1,9 +1,9 @@
-%h3 New idea
+%h3 To suggest an idea
 .text-left
-  = simple_form_for  @idea, url: idea_proposes_url do |f|
+  = simple_form_for  idea, url: idea_proposals_url do |f|
     = f.input :name
     = f.input :description, input_html: { rows: 10, 'data-provide': 'markdown' }
     = f.input :private
     = f.input :skip_bootstrapping
     .text-center
-      = f.submit t('idea.proposes.create'), class: 'btn btn-lg btn-secondary'
+      = f.submit t('idea.proposals.propose'), class: 'btn btn-lg btn-secondary'

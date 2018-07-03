@@ -10,7 +10,6 @@
   %body
     = link_to "POC", root_url(subdomain: 'www')
     = link_to "Bootcamp", bootcamp_root_url
-    = link_to "Idea", idea_root_url
     = link_to "Dashboard", dashboard_root_url
 
     This is #{request.subdomain ? request.subdomain : 'POC'}

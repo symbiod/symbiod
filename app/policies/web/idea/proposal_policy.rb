@@ -3,17 +3,13 @@
 module Web
   module Idea
     # Defines access rules to new idea
-    class ProposePolicy < ApplicationPolicy
+    class ProposalPolicy < ApplicationPolicy
       def index?
         true
       end
 
-      def new?
-        user.ideas.size.zero?
-      end
-
       def create?
-        user.ideas.size.zero?
+        user.ideas.empty?
       end
     end
   end

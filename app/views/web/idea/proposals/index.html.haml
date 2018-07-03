@@ -1,0 +1,6 @@
+%br
+- if policy(%i[web idea proposal]).create?
+  = render partial: 'form', locals: { idea: @idea }
+- else
+  %p.lead
+    = t('idea.landing.wait_for_idea_approve')

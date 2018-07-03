@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     scope as: :idea, module: :idea, constraints: { subdomain: 'idea' } do
       resource :registrations, only: %i[new create]
       resource :sessions, only: %i[new create]
-      resources :proposes, only: %i[index new create]
+      resources :proposals, only: %i[index create]
       root to: 'home#index'
     end
 

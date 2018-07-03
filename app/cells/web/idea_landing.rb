@@ -22,7 +22,7 @@ module Web
       if current_user.active?
         ['go_to_dashboard', dashboard_root_url]
       else
-        ['go_to_proposes', idea_proposes_url]
+        ['go_to_proposal', idea_proposals_url]
       end
     end
   end

@@ -8,12 +8,12 @@ en:
       submit: Sign up
       access:
         deny: The user is already logged in
-    proposes:
-      create: Create
+    proposals:
+      propose: Propose
       access:
         deny: The user already has an propose
     landing:
       go_to_dashboard: Go to dashboard
-      go_to_proposes: Go to propose
-      new_propose: New propose
+      go_to_proposal: Go to proposal
       author_log_in: Authtor Log In
+      wait_for_idea_approve: Thank you! We’ll consider your project idea and will back to you soon
