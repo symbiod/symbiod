@@ -11,7 +11,7 @@ en:
     proposals:
       propose: Propose
       access:
-        deny: The user already has an propose
+        deny: Access is denied to proposals
     landing:
       go_to_dashboard: Go to dashboard
       go_to_proposal: Go to proposal

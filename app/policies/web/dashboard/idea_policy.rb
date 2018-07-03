@@ -2,7 +2,7 @@
 
 module Web
   module Dashboard
-    # Allows only staff to manage ideas
+    # Policy manage ideas, full access staff and mentor
     class IdeaPolicy < DashboardPolicy
       def index?
         true
@@ -36,17 +36,21 @@ module Web
         staff_or_mentor?
       end
 
+      def reject?
+        staff_or_mentor?
+      end
+
       # Defines a scope of Ideas, who can be available for acting person
       class Scope < Scope
         def resolve
           if all_ideas?
             ::Idea.all
-          elsif active_and_current_user_ideas?
+          elsif activated_and_current_user_ideas?
             ::Idea.where('author_id = ? OR state = ?', user.id, 'active')
           elsif current_user_ideas?
             ::Idea.where(author_id: user.id)
           elsif active_ideas?
-            ::Idea.actived
+            ::Idea.activated
           end
         end
 
@@ -56,7 +60,7 @@ module Web
           user.has_role?(:staff) || user.has_role?(:mentor)
         end
 
-        def active_and_current_user_ideas?
+        def activated_and_current_user_ideas?
           user.has_role?(:developer) && user.has_role?(:author)
         end
 

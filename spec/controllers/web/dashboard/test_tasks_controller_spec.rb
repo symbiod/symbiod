@@ -81,7 +81,7 @@ describe Web::Dashboard::TestTasksController do
   end
 
   shared_examples '#create' do
-    it 'redirect to dashboard root' do
+    it 'redirect to dashboard test tasks' do
       post :create, params: { developer_test_task: attr }
       expect(response).to redirect_to dashboard_test_tasks_url
     end

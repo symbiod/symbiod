@@ -5,11 +5,17 @@ module Web
     # Defines access rules to new idea
     class ProposalPolicy < ApplicationPolicy
       def index?
-        true
+        user.present?
       end
 
       def create?
-        user.ideas.empty?
+        user&.ideas&.empty? && author?
+      end
+
+      private
+
+      def author?
+        user.has_role? :author
       end
     end
   end

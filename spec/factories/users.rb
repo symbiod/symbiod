@@ -63,6 +63,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_idea do
+      after(:create) do |user|
+        create(:idea, author: user)
+      end
+    end
+
     trait :with_assignment do
       after(:create) do |user|
         create(:developer_test_task_assignment, :uncompleted, developer: user)

@@ -41,7 +41,7 @@ Rails.application.routes.draw do
           put :add_role
         end
       end
-      resources :ideas, expect: :destroy do
+      resources :ideas, except: :destroy do
         member do
           put :activate
           put :deactivate
