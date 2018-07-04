@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_many :approved_users, class_name: 'User', foreign_key: 'approver_id'
   belongs_to :approver, class_name: 'User', optional: true
 
+  has_many :notes, as: :noteable
+
   # TODO: move to some other model, that represents developer explicitly.
   has_one :developer_onboarding, class_name: 'Developer::Onboarding', dependent: :destroy
   has_many :test_task_assignments,
