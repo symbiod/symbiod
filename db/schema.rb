@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_22_190740) do
+ActiveRecord::Schema.define(version: 2018_07_04_051906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 2018_06_22_190740) do
     t.index ["author_id"], name: "index_ideas_on_author_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.text "content"
+    t.integer "noteable_id"
+    t.string "noteable_type"
+    t.integer "commenter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commenter_id"], name: "index_notes_on_commenter_id"
+    t.index ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
     t.integer "idea_id", null: false
@@ -122,10 +133,8 @@ ActiveRecord::Schema.define(version: 2018_06_22_190740) do
     t.string "location"
     t.string "timezone"
     t.string "cv_url"
-    t.bigint "skill_id"
     t.integer "approver_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["skill_id"], name: "index_users_on_skill_id"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

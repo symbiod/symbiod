@@ -17,6 +17,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many :user_skills }
     it { is_expected.to have_many :skills }
     it { is_expected.to have_many :approved_users }
+    it { is_expected.to have_many :notes }
     it { is_expected.to belong_to :approver }
   end
 
