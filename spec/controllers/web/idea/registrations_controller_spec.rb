@@ -4,18 +4,31 @@ require 'rails_helper'
 
 describe Web::Idea::RegistrationsController do
   describe 'GET #new' do
-    before { get :new }
+    let(:user) { create(:user, :author) }
 
-    it 'renders registration form' do
-      expect(response).to render_template :new
+    context 'user is not logged in' do
+      before { get :new }
+
+      it 'renders registration form' do
+        expect(response).to render_template :new
+      end
+
+      it 'returns success status' do
+        expect(response).to be_successful
+      end
+
+      it 'assigns new user' do
+        expect(assigns(:registration)).to be_an(User)
+      end
     end
 
-    it 'returns success status' do
-      expect(response).to be_successful
-    end
+    context 'user is logged in' do
+      before { login_user(user) }
 
-    it 'assigns new user' do
-      expect(assigns(:registration)).to be_an(User)
+      it 'redirects to idea root' do
+        get :new
+        expect(response).to redirect_to idea_root_url
+      end
     end
   end
 

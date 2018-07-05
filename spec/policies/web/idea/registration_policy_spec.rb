@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Web::Idea::RegistrationPolicy do
+describe Ideas::RegistrationPolicy do
   subject { described_class.new(user, nil) }
 
   context 'user exists' do

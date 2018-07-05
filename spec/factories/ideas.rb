@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :idea do
     name { Faker::Company.bs }
     description 'Description'
-    private [false, true].sample
+    private_project [false, true].sample
     skip_bootstrapping [false, true].sample
     author
   end
@@ -19,6 +19,10 @@ FactoryBot.define do
 
   trait :pending do
     state 'pending'
+  end
+
+  trait :rejected do
+    state 'rejected'
   end
 
   trait :all_states do

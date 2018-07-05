@@ -15,7 +15,7 @@ describe Ops::Idea::Submit do
         {
           name: 'name',
           description: 'description',
-          private: true,
+          private_project: true,
           skip_bootstrapping: false
         }
       end
@@ -24,8 +24,8 @@ describe Ops::Idea::Submit do
         expect { subject.call(params: params, author: author) }.to change(::Idea, :count).by(1)
       end
 
-      it 'calls StartScreening operation' do
-        expect(::Web::Idea::SlackMessageJob)
+      it 'calls job SlackMessage' do
+        expect(SlackMessageJob)
           .to receive(:perform_later)
         subject.call(author: author, params: params)
       end
@@ -42,8 +42,8 @@ describe Ops::Idea::Submit do
         expect { subject.call(params: invalid_params, author: author) }.to change(::Idea, :count).by(0)
       end
 
-      it 'does not calls StartScreening operation' do
-        expect(::Web::Idea::SlackMessageJob)
+      it 'does not calls job SlackMessage' do
+        expect(SlackMessageJob)
           .not_to receive(:perform_later)
         subject.call(author: author, params: invalid_params)
       end

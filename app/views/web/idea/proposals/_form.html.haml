@@ -1,4 +1,4 @@
-%h3 To suggest an idea
+%h3= t('idea.proposals.new.header')
 .text-left
   = simple_form_for  idea, url: idea_proposals_url do |f|
     = f.input :name

@@ -1,5 +1,5 @@
 %br
-- if policy(%i[web idea proposal]).create?
+- if policy(%i[ideas proposal]).create?
   = render partial: 'form', locals: { idea: @idea }
 - else
   %p.lead

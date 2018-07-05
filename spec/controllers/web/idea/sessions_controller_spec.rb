@@ -4,9 +4,21 @@ require 'rails_helper'
 
 RSpec.describe Web::Idea::SessionsController, type: :controller do
   describe 'GET #new' do
-    it 'assigns new user' do
-      get :new
-      expect(assigns(:user).class).to eq User
+    context 'user is not loged in' do
+      it 'assigns new user' do
+        get :new
+        expect(assigns(:user).class).to eq User
+      end
+    end
+
+    context 'user is loged in' do
+      let(:user) { create(:user, :author) }
+      before { login_user(user) }
+
+      it 'assigns new user' do
+        get :new
+        expect(response).to redirect_to idea_root_url
+      end
     end
   end
 

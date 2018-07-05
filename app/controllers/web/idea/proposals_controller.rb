@@ -26,11 +26,11 @@ module Web
       private
 
       def idea_params
-        params.require(:idea).permit(:name, :description, :private, :skip_bootstrapping)
+        params.require(:idea).permit(:name, :description, :private_project, :skip_bootstrapping)
       end
 
       def check_access
-        authorize %i[web idea proposal], "#{action_name}?".to_sym
+        authorize %i[ideas proposal], "#{action_name}?".to_sym
       end
 
       def redirect_to_idea_root

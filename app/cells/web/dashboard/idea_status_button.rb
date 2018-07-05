@@ -5,7 +5,7 @@ module Web
     # This cell renders status idea
     class IdeaStatusButton < BaseCell
       def idea_status
-        policy(%i[web dashboard idea]).activate? ? idea_state : model.state
+        policy(%i[dashboard idea]).activate? ? idea_state : model.state
       end
 
       private

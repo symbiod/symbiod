@@ -9,7 +9,7 @@ module Web
       rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       def index
-        @ideas = Web::Dashboard::IdeaPolicy::Scope.new(current_user, ::Idea).resolve.page params[:page]
+        @ideas = ::Dashboard::IdeaPolicy::Scope.new(current_user, ::Idea).resolve.page params[:page]
       end
 
       def show; end
@@ -61,11 +61,11 @@ module Web
       private
 
       def idea_params
-        params.require(:idea).permit(:name, :description, :private, :skip_bootstrapping)
+        params.require(:idea).permit(:name, :description, :private_project, :skip_bootstrapping)
       end
 
       def authorize_role
-        authorize %i[web dashboard idea], "#{action_name}?".to_sym
+        authorize %i[dashboard idea], "#{action_name}?".to_sym
       end
 
       def idea_find

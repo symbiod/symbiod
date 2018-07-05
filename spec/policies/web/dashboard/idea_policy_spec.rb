@@ -11,7 +11,7 @@ shared_examples 'permit main actions' do
   it { is_expected.to permit_action(:update) }
 end
 
-describe Web::Dashboard::IdeaPolicy do
+describe Dashboard::IdeaPolicy do
   subject { described_class.new(user, nil) }
 
   context 'staff user' do

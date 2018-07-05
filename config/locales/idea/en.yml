@@ -2,6 +2,10 @@ en:
   idea:
     sessions:
       submit: Submit
+      new:
+        header: Log in
+        sign_up: Sign up
+        new_user: New to POC?
       access:
         deny: The user is already logged in
     registrations:
@@ -9,6 +13,8 @@ en:
       access:
         deny: The user is already logged in
     proposals:
+      new:
+        header: To suggest an idea
       propose: Propose
       access:
         deny: Access is denied to proposals

@@ -31,7 +31,7 @@ module Web
       end
 
       def check_access
-        authorize %i[web idea registration], "#{action_name}?".to_sym
+        authorize %i[ideas registration], "#{action_name}?".to_sym
       end
 
       def redirect_to_idea_root

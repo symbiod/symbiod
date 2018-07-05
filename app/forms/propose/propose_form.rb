@@ -7,14 +7,14 @@ module Propose
     property :name
     property :description
     property :author_id
-    property :private
+    property :private_project
     property :skip_bootstrapping
 
     validation do
       required(:name).filled
       required(:description).filled
       required(:author_id).filled
-      required(:private).filled
+      required(:private_project).filled
       required(:skip_bootstrapping).filled
     end
   end

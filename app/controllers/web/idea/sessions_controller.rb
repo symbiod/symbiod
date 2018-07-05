@@ -29,8 +29,10 @@ module Web
         params.require(:idea_login).permit(:email, :password)
       end
 
+      # TODO: the method is repeated in the controllers, consider the possibility to render to an external module
+      # https://github.com/howtohireme/give-me-poc/pull/288/files/ad43ef571eaee1aec2a04c576d1c66fa9a3f7817#diff-5481c70ecdd8763a256e81d531381b79
       def check_access
-        authorize %i[web idea session], "#{action_name}?".to_sym
+        authorize %i[ideas session], "#{action_name}?".to_sym
       end
 
       def redirect_to_idea_root

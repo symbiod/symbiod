@@ -7,7 +7,7 @@ shared_examples 'without right on create idea' do
   it { is_expected.not_to permit_action(:create) }
 end
 
-describe Web::Idea::ProposalPolicy do
+describe Ideas::ProposalPolicy do
   subject { described_class.new(user, nil) }
 
   context 'staff user without ideas' do

@@ -18,7 +18,7 @@ module Ops
       end
 
       def send_message_to_slack!(_ctx, model:, **)
-        ::Web::Idea::SlackMessageJob.perform_later(model.id)
+        SlackMessageJob.perform_later(model, 'ideas')
         true
       end
     end

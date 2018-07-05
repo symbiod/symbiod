@@ -1,7 +1,7 @@
 %h3
-  Ideas
+  = t('dashboard.ideas.headers.index')
   = link_to t('dashboard.ideas.button.new'), new_dashboard_idea_url,
-                                             class: 'btn btn-sm btn-info' if policy(%i[web dashboard idea]).new?
+                                             class: 'btn btn-sm btn-info' if policy(%i[dashboard idea]).new?
 %table.table.table-striped.tabke-sm
   %thead
     %tr

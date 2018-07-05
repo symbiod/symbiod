@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Web::Idea::SessionPolicy do
+describe Ideas::SessionPolicy do
   subject { described_class.new(user, nil) }
 
   context 'user exists' do

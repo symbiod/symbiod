@@ -1,8 +1,8 @@
 %h3
-  Idea id
+  = t('dashboard.ideas.headers.show')
   = @idea.id
   = link_to t('dashboard.ideas.button.edit'), edit_dashboard_idea_url(@idea),
-                                              class: 'btn btn-info btn-sm' if policy(%i[web dashboard idea]).edit?
+                                              class: 'btn btn-info btn-sm' if policy(%i[dashboard idea]).edit?
 .table-responsive
   %table.table.table-striped.table-sm
     %tr

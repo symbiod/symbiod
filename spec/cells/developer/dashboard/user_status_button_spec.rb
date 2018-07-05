@@ -8,9 +8,7 @@ describe Developer::Dashboard::UserStatusButton do
 
   controller Web::Dashboard::UsersController
 
-  before do
-    allow(controller).to receive(:current_user).and_return(current_user)
-  end
+  set_current_user
 
   shared_examples 'user staff and candidate not disabled' do
     it 'renders link to activate' do

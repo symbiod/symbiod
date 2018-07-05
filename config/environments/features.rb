@@ -75,7 +75,7 @@ Rails.application.configure do
     enable_starttls_auto: false,
     openssl_verify_mode: 'none'
   }
-  config.action_mailer.default_url_options = { host: 'lvh.me:3000' }
+  config.action_mailer.default_url_options = { host: 'app.com' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

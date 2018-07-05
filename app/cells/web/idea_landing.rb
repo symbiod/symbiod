@@ -11,7 +11,7 @@ module Web
     private
 
     def params_link
-      if current_user
+      if current_user.present?
         author_status
       else
         ['author_log_in', new_idea_sessions_url]
