@@ -30,40 +30,31 @@ describe GithubService do
   end
 
   describe '#invite_member' do
-    let(:user_id)  { 123 }
-    let(:username) { 'super-developer' }
+    let(:user_id)   { 123 }
+    let(:username)  { 'super-developer' }
+    let(:team_name) { 'mentors' }
+    let(:team_id)   { 234 }
+    let(:teams_response) do
+      [
+        { name: team_name, id: team_id }
+      ]
+    end
 
     before do
       allow(client)
         .to receive(:user)
         .with(user_id)
         .and_return(login: username)
+      allow(client)
+        .to receive(:organization_teams)
+        .and_return(teams_response)
     end
 
-    context 'team name is provided' do
-      let(:team) { 'mentors' }
-
-      it 'adds member to organization and team' do
-        allow(client)
-          .to receive(:update_organization_membership)
-          .with(organization, user: username)
-        allow(client)
-          .to receive(:add_team_member)
-          .with(team, username)
-        subject.invite_member(user_id, team)
-      end
-    end
-
-    context 'no team name' do
-      it 'adds member to bootcamp team' do
-        allow(client)
-          .to receive(:update_organization_membership)
-          .with(organization, user: username)
-        allow(client)
-          .to receive(:add_team_member)
-          .with('bootcamp', username)
-        subject.invite_member(user_id)
-      end
+    it 'adds member to organization and team' do
+      allow(client)
+        .to receive(:add_team_membership)
+        .with(team_id, username)
+      subject.invite_member(user_id, team_name)
     end
 
     context 'self-demote exception raised' do
@@ -78,15 +69,22 @@ describe GithubService do
       end
 
       before do
-        expect(client)
-          .to receive(:update_organization_membership)
-          .with(organization, user: username)
+        allow(client)
+          .to receive(:add_team_membership)
+          .with(team_id, username)
           .and_raise(Octokit::Forbidden, bad_response)
       end
 
       it 'does not raise error' do
-        expect { subject.invite_member(user_id) }
+        expect { subject.invite_member(user_id, team_name) }
           .not_to raise_error
+      end
+    end
+
+    context 'no team with defined name found' do
+      it 'raises exception' do
+        expect { subject.invite_member(user_id, 'non-existing-team') }
+          .to raise_error GithubIntegration::NoTeamFoundException
       end
     end
 
@@ -103,13 +101,13 @@ describe GithubService do
 
       before do
         expect(client)
-          .to receive(:update_organization_membership)
-          .with(organization, user: username)
+          .to receive(:add_team_membership)
+          .with(team_id, username)
           .and_raise(Octokit::Forbidden, bad_response)
       end
 
       it 'reraises exception' do
-        expect { subject.invite_member(user_id) }.to raise_error Octokit::Forbidden
+        expect { subject.invite_member(user_id, team_name) }.to raise_error Octokit::Forbidden
       end
     end
   end

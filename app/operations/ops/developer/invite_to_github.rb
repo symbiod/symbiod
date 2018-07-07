@@ -10,8 +10,9 @@ module Ops
       step :mark_step_as_complete!
 
       def add_to_github!(_ctx, user:, **)
-        GithubService.new(ENV['GITHUB_TOKEN'], 'howtohireme')
-                     .invite_member(user.github_uid)
+        GithubService
+          .new(github_config.api_token, github_config.organization)
+          .invite_member(user.github_uid, github_config.default_team)
         true
       end
 
@@ -22,6 +23,12 @@ module Ops
         # - accepted_github_invitation
         # - left_github
         user.developer_onboarding.update!(github: true)
+      end
+
+      private
+
+      def github_config
+        Settings.github
       end
     end
   end
