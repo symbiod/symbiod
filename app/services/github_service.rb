@@ -23,7 +23,8 @@ class GithubService
   # @param team String the name of the team
   # @param username String canonic github username
   def add_user_to_team(team, username)
-    client.add_team_member(team, username)
+    team_id = team_id_by_name(team)
+    client.add_team_membership(team_id, username)
   end
 
   # Sends invite to join the existing organization
@@ -32,7 +33,6 @@ class GithubService
   # @param team String the name of the default team for newcomer
   def invite_member(github_uid, default_team)
     username = user_name_by_id(github_uid)
-    client.update_organization_membership(organization, user: username)
     add_user_to_team(default_team, username)
   rescue Octokit::Forbidden => e
     ignore_exception?(e)
@@ -53,6 +53,13 @@ class GithubService
 
   def user_name_by_id(id)
     client.user(id.to_i)[:login]
+  end
+
+  def team_id_by_name(name)
+    team = client.organization_teams(organization).find { |team| team[:name] == name }
+    raise GithubIntegration::NoTeamFoundException,
+      "Team with name #{name} does not exist at #{organization}" unless team
+    team[:id]
   end
 
   def new_repository_attributes
