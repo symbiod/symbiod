@@ -93,6 +93,27 @@ en:
       finished: finished
       not_finished: not finished
       skill: Skill
+    skills:
+      headers:
+        index: Skills
+        new: New skill
+        edit: Edit skill
+      button:
+        new: New
+        create: Create
+        update: Update
+      table:
+        title: Title
+        status: Status
+      create:
+        success: The skill was created
+        danger: Could not create skill
+      update:
+        success: The skill was updated
+        danger: Could not update skill
+      notice:
+        activate: The skill was activated
+        deactivate: The skill was disabled
     ideas:
       headers:
         show: Idea id
@@ -100,6 +121,7 @@ en:
         edit: Edit idea
         new: New idea
       button:
+        new: New
         update: Update
         create: Create
         reject: Reject
@@ -108,7 +130,7 @@ en:
         danger: Could not update idea
       notice:
         activated: The idea was activated
-        deactivated: The idea was desabled
+        deactivated: The idea was disabled
         rejected: The idea was rejected
       confirm:
         activate: Are you sure to activate?

@@ -1,0 +1,2 @@
+%h3 #{t('dashboard.skills.headers.edit')}: id #{@skill.id}
+= render partial: 'form', locals: { skill: @skill, url: dashboard_skill_url, submit: 'update' }

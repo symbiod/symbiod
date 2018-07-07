@@ -367,13 +367,13 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   end
 
   shared_examples 'dashboard idea #activate tests' do
-    it 'redirects to dashboard ideas' do
+    it 'the idea became active' do
       put :activate, params: { id: idea.id }
       idea.reload
       expect(idea.state).to eq 'active'
     end
 
-    it 'redirects to dashboard ideas' do
+    it 'redirects to dashboard idea' do
       put :activate, params: { id: idea.id }
       expect(response).to redirect_to dashboard_idea_url(idea)
     end
@@ -421,13 +421,13 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   end
 
   shared_examples 'dashboard idea #deactivate tests' do
-    it 'redirects to dashboard ideas' do
+    it 'the idea became disabled' do
       put :deactivate, params: { id: idea.id }
       idea.reload
       expect(idea.state).to eq 'disabled'
     end
 
-    it 'redirects to dashboard ideas' do
+    it 'redirects to dashboard idea' do
       put :deactivate, params: { id: idea.id }
       expect(response).to redirect_to dashboard_idea_url(idea)
     end
@@ -475,13 +475,13 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   end
 
   shared_examples 'dashboard idea #reject tests' do
-    it 'redirects to dashboard ideas' do
+    it 'the idea became rejected' do
       put :reject, params: { id: idea.id }
       idea.reload
       expect(idea.state).to eq 'rejected'
     end
 
-    it 'redirects to dashboard ideas' do
+    it 'redirects to dashboard idea' do
       put :reject, params: { id: idea.id }
       expect(response).to redirect_to dashboard_idea_url(idea)
     end

@@ -1,0 +1,13 @@
+%h3
+  = t('dashboard.skills.headers.index')
+  = link_to t('dashboard.skills.button.new'), new_dashboard_skill_url,
+                                              class: 'btn btn-sm btn-info' if policy(%i[dashboard skill]).new?
+%table.table.table-striped.tabke-sm
+  %thead
+    %tr
+      %th= t('dashboard.skills.table.title')
+      %th= t('dashboard.skills.table.status')
+    - @skills.each do |skill|
+      %tr
+        %td= link_to skill.title, edit_dashboard_skill_url(skill)
+        %td= cell(Web::Dashboard::SkillStatusButton, skill).()
