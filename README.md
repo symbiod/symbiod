@@ -27,3 +27,7 @@ e.g. `http://lvh.me:3000/` or `http://bootcamp.lvh.me:3000/`
 ## Contributing
 
 TBD
+
+## Other documentation
+
+Feel free to explore [our docs](https://github.com/howtohireme/give-me-poc/blob/master/docs)
