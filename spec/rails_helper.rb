@@ -17,7 +17,7 @@ ActiveJob::Base.queue_adapter = :test
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-# Checks for pending migrations and applies them before tests are run.
+# Checks for pending migrgv"_cations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -25,6 +25,7 @@ RSpec.configure do |config|
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
   config.include FactoriesHelper
+  config.extend CellsHelper
 
   Shoulda::Matchers.configure do |shoulda_config|
     shoulda_config.integrate do |with|

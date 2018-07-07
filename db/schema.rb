@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 2018_07_04_051906) do
     t.integer "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "private_project", default: false
+    t.boolean "skip_bootstrapping", default: false
+    t.string "state", null: false
     t.index ["author_id"], name: "index_ideas_on_author_id"
   end
 

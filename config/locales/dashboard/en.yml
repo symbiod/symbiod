@@ -33,7 +33,7 @@ en:
       edit:
         header: Edit user
       access:
-        deny: The user does not have the role of staff
+        deny: The user does not have permission to access this page
       notices:
         activated: The user was activated
         disabled: The user was disabled
@@ -93,3 +93,23 @@ en:
       finished: finished
       not_finished: not finished
       skill: Skill
+    ideas:
+      headers:
+        show: Idea id
+        index: Ideas
+        edit: Edit idea
+        new: New idea
+      button:
+        update: Update
+        create: Create
+        reject: Reject
+      update:
+        success: Idea was updated
+        danger: Could not update idea
+      notice:
+        activated: The idea was activated
+        deactivated: The idea was desabled
+        rejected: The idea was rejected
+      confirm:
+        activate: Are you sure to activate?
+        disable: Are you sure to disable?

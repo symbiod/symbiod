@@ -4,9 +4,12 @@
     %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Ideas
     = csrf_meta_tags
-    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag    '/css/cover.css', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+                          media: 'all',
+                          'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'https://cdn.rawgit.com/xcatliu/simplemde-theme-dark/master/dist/simplemde-theme-dark.min.css'
+    = stylesheet_link_tag '/css/cover.css', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body.text-center
@@ -17,15 +20,13 @@
           %h3.masthead-brand= t('landing.brand')
           %nav.nav.nav-masthead.justify-content-center
             = nav_link t('landing.navigation.home'), root_landing_url, subdomain: 'www', id: 'home'
+            = nav_link t('landing.navigation.idea'), idea_root_url, subdomain: 'idea', id: 'idea'
             = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link' if policy(:dashboard).allowed?
             = link_to t('landing.navigation.logout'), logout_url, method: :delete, class: 'nav-link' if current_user
 
-      %main.inner.cover{:role => "main"}
-        - if flash.alert
-          .alert.alert-danger{role: 'alert'}
-            = raw flash.alert
+      = render partial: 'layouts/shared/dashboard_flashes'
 
-        = yield
+      = yield
 
       %footer.mastfoot.mt-auto
         .inner
@@ -33,3 +34,11 @@
             = t('landing.footer.built_by')
             = succeed ", 2018" do
               = link_to 'HowToHireMe', 'https://howtohireme.ru', target: '_blank'
+  /
+    Bootstrap core JavaScript
+    \==================================================
+  / Placed at the end of the document so the pages load faster
+  / SimpleMDE
+  %script{ src: "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js" }
+  :javascript
+    var simplemde = new SimpleMDE();

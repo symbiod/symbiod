@@ -1,0 +1,19 @@
+%h3
+  = t('dashboard.ideas.headers.index')
+  = link_to t('dashboard.ideas.button.new'), new_dashboard_idea_url,
+                                             class: 'btn btn-sm btn-info' if policy(%i[dashboard idea]).new?
+%table.table.table-striped.tabke-sm
+  %thead
+    %tr
+      %th= t('idea.propose.name')
+      %th= t('idea.propose.status')
+      %th= t('idea.propose.description')
+      %th= t('idea.propose.author')
+    - @ideas.each do |idea|
+      %tr
+        %td= link_to idea.name, dashboard_idea_url(idea)
+        %td= idea.state
+        %td= markdown(idea.description)
+        %td= idea.author.email
+%br
+= paginate @ideas

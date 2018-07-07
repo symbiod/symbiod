@@ -1,0 +1,2 @@
+%h3= t('dashboard.ideas.headers.new')
+= render partial: 'form', locals: { idea: @idea, url: dashboard_ideas_url, submit: 'create' }

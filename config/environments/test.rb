@@ -34,6 +34,8 @@ Rails.application.configure do
 
   config.active_storage.service = :test
 
+  routes.default_url_options = { host: 'lvh.me:3000' }
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.

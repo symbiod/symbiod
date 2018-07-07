@@ -61,6 +61,8 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
+  routes.default_url_options = { host: 'lvh.me:3000' }
+
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "poc_#{Rails.env}"
@@ -73,7 +75,7 @@ Rails.application.configure do
     enable_starttls_auto: false,
     openssl_verify_mode: 'none'
   }
-  config.action_mailer.default_url_options = { host: 'lvh.me:3000' }
+  config.action_mailer.default_url_options = { host: 'app.com' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

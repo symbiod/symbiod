@@ -2,5 +2,24 @@ en:
   idea:
     sessions:
       submit: Submit
+      new:
+        header: Log in
+        sign_up: Sign up
+        new_user: New to POC?
+      access:
+        deny: The user is already logged in
     registrations:
       submit: Sign up
+      access:
+        deny: The user is already logged in
+    proposals:
+      new:
+        header: To suggest an idea
+      propose: Propose
+      access:
+        deny: Access is denied to proposals
+    landing:
+      go_to_dashboard: Go to dashboard
+      go_to_proposal: Go to proposal
+      author_log_in: Authtor Log In
+      wait_for_idea_approve: Thank you! We’ll consider your project idea and will back to you soon

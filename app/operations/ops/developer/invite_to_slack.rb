@@ -2,10 +2,10 @@
 
 module Ops
   module Developer
-    # Handles all business logic regarding adding new member to GitHub.
+    # Handles all business logic regarding adding new member to Slack.
     # Besides calling public API, it also markes onboarding step as completed.
     class InviteToSlack < BaseOperation
-      SLACK_CHANNELS = %w[bootcamp self-development feed].freeze
+      SLACK_CHANNELS = %w[bootcamp self-development feed ideas].freeze
       SLACK_CHANNEL_MENTOR = ['mentors'].freeze
 
       step :add_to_slack!

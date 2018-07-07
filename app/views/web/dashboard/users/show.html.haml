@@ -5,27 +5,22 @@
                                               class: 'btn btn-info btn-sm' if policy(:user).edit?
 .table-responsive
   %table.table.table-striped.table-sm
-
     %tr
       %td
         %b= t('dashboard.users.table.email')
       %td= @user.email
-
     %tr
       %td
         %b= t('dashboard.users.table.full_name')
       %td= @user.full_name
-
     %tr
       %td
         %b= t('dashboard.users.table.github_user')
       %td= @user.github
-
     %tr
       %td
         %b= t('dashboard.users.table.primary_skill')
       %td= @user.primary_skill&.title
-
     %tr
       %td
         %b= t('dashboard.users.table.roles')

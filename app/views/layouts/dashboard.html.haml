@@ -41,12 +41,13 @@
                   = link_to dashboard_test_tasks_url, class: 'nav-link' do
                     %span{ "data-feather": "file" }
                     Test Tasks
+              - if policy(:user).index?
+                %li.nav-item
+                  = link_to dashboard_users_path, class: 'nav-link' do
+                    %span{ "data-feather": "file" }
+                    Users Management
               %li.nav-item
-                = link_to dashboard_users_path, class: 'nav-link' do
-                  %span{ "data-feather": "file" }
-                  Users Management
-              %li.nav-item
-                %a.nav-link{ href: "#" }
+                = link_to dashboard_ideas_path, class: 'nav-link' do
                   %span{ "data-feather": "file" }
                   Ideas
               %li.nav-item
