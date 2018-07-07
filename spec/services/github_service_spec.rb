@@ -36,7 +36,7 @@ describe GithubService do
     let(:team_id)   { 234 }
     let(:teams_response) do
       [
-        {name: team_name, id: team_id}
+        { name: team_name, id: team_id }
       ]
     end
 

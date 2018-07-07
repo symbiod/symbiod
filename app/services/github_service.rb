@@ -56,9 +56,11 @@ class GithubService
   end
 
   def team_id_by_name(name)
-    team = client.organization_teams(organization).find { |team| team[:name] == name }
-    raise GithubIntegration::NoTeamFoundException,
-      "Team with name #{name} does not exist at #{organization}" unless team
+    team = client.organization_teams(organization).find { |t| t[:name] == name }
+    unless team
+      raise GithubIntegration::NoTeamFoundException,
+            "Team with name #{name} does not exist at #{organization}"
+    end
     team[:id]
   end
 
