@@ -3,7 +3,7 @@
   = simple_form_for  idea, url: idea_proposals_url do |f|
     = f.input :name
     = f.input :description, input_html: { rows: 10, 'data-provide': 'markdown' }
-    = f.input :private
+    = f.input :private_project
     = f.input :skip_bootstrapping
     .text-center
       = f.submit t('idea.proposals.propose'), class: 'btn btn-lg btn-secondary'
