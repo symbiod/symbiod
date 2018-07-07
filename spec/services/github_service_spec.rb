@@ -62,7 +62,7 @@ describe GithubService do
         allow(client)
           .to receive(:add_team_member)
           .with('bootcamp', username)
-        subject.invite_member(user_id)
+        subject.invite_member(user_id, 'bootcamp')
       end
     end
 
@@ -85,7 +85,7 @@ describe GithubService do
       end
 
       it 'does not raise error' do
-        expect { subject.invite_member(user_id) }
+        expect { subject.invite_member(user_id, 'bootcamp') }
           .not_to raise_error
       end
     end
@@ -109,7 +109,7 @@ describe GithubService do
       end
 
       it 'reraises exception' do
-        expect { subject.invite_member(user_id) }.to raise_error Octokit::Forbidden
+        expect { subject.invite_member(user_id, 'bootcamp') }.to raise_error Octokit::Forbidden
       end
     end
   end
