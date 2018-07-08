@@ -19,7 +19,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'renders template' do
           expect(response).to render_template :index
@@ -31,12 +31,12 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
 
         it 'assigns all skills' do
           create_list(:skill, 10)
-          expect(assigns(:skills)).to eq Skill.order(title: :asc)
+          expect(assigns(:skills)).to eq Skill.order(id: :desc)
         end
       end
 
       context 'user has role developer or author' do
-        let(:user) { create(:user, %i[developer author].sample, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -61,7 +61,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'renders template' do
           expect(response).to render_template :new
@@ -73,7 +73,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role developer or author' do
-        let(:user) { create(:user, %i[developer author].sample, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -98,7 +98,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'redirect to dashboard skills' do
           post :create, params: { skill: skill_params }
@@ -111,7 +111,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role developer or author' do
-        let(:user) { create(:user, %i[developer author].sample, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           post :create, params: { skill: skill_params }
@@ -153,7 +153,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'renders template' do
           expect(response).to render_template :edit
@@ -169,7 +169,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role developer or author' do
-        let(:user) { create(:user, %i[developer author].sample, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -195,7 +195,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'updates attribute' do
           put :update, params: { id: skill.id, skill: new_skill_params }
@@ -210,7 +210,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role developer or author' do
-        let(:user) { create(:user, %i[developer author].sample, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :update, params: { id: skill.id, skill: new_skill_params }
@@ -250,12 +250,11 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'the skill became active' do
-          put :activate, params: { id: skill.id }
-          skill.reload
-          expect(skill.state).to eq 'active'
+          expect { put :activate, params: { id: skill.id } }
+            .to change { skill.reload.state }.from('disabled').to('active')
         end
 
         it 'redirects to dashboard skills' do
@@ -265,7 +264,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role developer or author' do
-        let(:user) { create(:user, %i[developer author].sample, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :activate, params: { id: skill.id }
@@ -291,12 +290,11 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'the skill became disabled' do
-          put :deactivate, params: { id: skill.id }
-          skill.reload
-          expect(skill.state).to eq 'disabled'
+          expect { put :deactivate, params: { id: skill.id } }
+            .to change { skill.reload.state }.from('active').to('disabled')
         end
 
         it 'redirects to dashboard skills' do
@@ -306,7 +304,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
       end
 
       context 'user has role developer or author' do
-        let(:user) { create(:user, %i[developer author].sample, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :deactivate, params: { id: skill.id }

@@ -8,8 +8,6 @@ class Skill < ApplicationRecord
   has_many :users, through: :user_skills
   has_many :developer_test_tasks, class_name: 'Developer::TestTask'
 
-  scope :activated, -> { where(state: 'active') }
-
   include AASM
 
   aasm column: 'state' do

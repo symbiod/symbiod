@@ -9,7 +9,7 @@ module Web
       rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       def index
-        @skills = Skill.order(title: :asc)
+        @skills = Skill.order(id: :desc)
       end
 
       def new

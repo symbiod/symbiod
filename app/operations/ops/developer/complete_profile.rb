@@ -23,7 +23,7 @@ module Ops
       end
 
       def assign_primary_skill!(_ctx, user:, params:, **)
-        skill = ::Skill.find(params[:primary_skill_id])
+        skill = ::Skill.active.find(params[:primary_skill_id])
         UserSkill.create(user: user, skill: skill, primary: true)
       end
 

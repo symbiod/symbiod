@@ -19,7 +19,7 @@ module Web
       end
 
       def edit
-        @skills = Skill.activated.order(title: :asc)
+        @skills = Skill.active.order(title: :asc)
       end
 
       def update
