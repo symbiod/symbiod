@@ -9,5 +9,5 @@
   = f.input :timezone, as: :time_zone
   = f.input :cv_url
   = f.input :role, collection: Developer::Wizard::ProfileForm::ROLES, include_blank: false
-  = f.input :primary_skill_id, collection: Skill.all, include_blank: false
+  = f.input :primary_skill_id, collection: Skill.active, include_blank: false
   = f.button :submit, t('bootcamp.profile.submit'), type: :submit, class: 'btn btn-lg btn-secondary'

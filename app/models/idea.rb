@@ -8,8 +8,6 @@ class Idea < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_one :project
 
-  scope :activated, -> { where(state: 'active') }
-
   include AASM
 
   aasm column: 'state' do

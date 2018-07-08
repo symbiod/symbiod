@@ -46,6 +46,11 @@
                   = link_to dashboard_users_path, class: 'nav-link' do
                     %span{ "data-feather": "file" }
                     Users Management
+              - if policy(%i[dashboard skill]).index?
+                %li.nav-item
+                  = link_to dashboard_skills_path, class: 'nav-link' do
+                    %span{ "data-feather": "file" }
+                    Skills Management
               %li.nav-item
                 = link_to dashboard_ideas_path, class: 'nav-link' do
                   %span{ "data-feather": "file" }

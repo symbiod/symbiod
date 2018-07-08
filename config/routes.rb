@@ -41,6 +41,12 @@ Rails.application.routes.draw do
           put :add_role
         end
       end
+      resources :skills, except: %i[show destroy] do
+        member do
+          put :activate
+          put :deactivate
+        end
+      end
       resources :ideas, except: :destroy do
         member do
           put :activate

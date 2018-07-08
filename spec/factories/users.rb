@@ -63,6 +63,18 @@ FactoryBot.define do
       end
     end
 
+    trait :staff_or_mentor do
+      after(:create) do |user|
+        user.add_role(%i[staff mentor].sample)
+      end
+    end
+
+    trait :developer_or_author do
+      after(:create) do |user|
+        user.add_role(%i[developer author].sample)
+      end
+    end
+
     trait :with_idea do
       after(:create) do |user|
         create(:idea, author: user)

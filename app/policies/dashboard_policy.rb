@@ -25,10 +25,6 @@ class DashboardPolicy < ApplicationPolicy
     user.has_role? :author
   end
 
-  def staff_or_author?
-    staff? || author?
-  end
-
   def staff_or_mentor?
     staff? || mentor?
   end

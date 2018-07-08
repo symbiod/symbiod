@@ -13,7 +13,7 @@ module Ops
       private
 
       def update_primary_skill!(_ctx, user:, params:, **)
-        skill = ::Skill.find(params[:primary_skill_id])
+        skill = ::Skill.active.find(params[:primary_skill_id])
         user.user_skills.first.update(skill: skill)
       end
     end

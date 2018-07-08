@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Web::Dashboard::IdeaStatusButton do
   subject { described_class.new(idea, context: { controller: controller }).idea_status }
 
-  controller Web::Dashboard::UsersController
+  controller Web::Dashboard::IdeasController
 
   set_current_user
 

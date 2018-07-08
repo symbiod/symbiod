@@ -18,7 +18,9 @@ module Web
         @test_task_assignments = @user.test_task_assignments.order(id: :asc)
       end
 
-      def edit; end
+      def edit
+        @skills = Skill.active.order(title: :asc)
+      end
 
       def update
         result = Ops::Developer::UpdateProfile.call(
