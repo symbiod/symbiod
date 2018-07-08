@@ -1,9 +1,3 @@
----
-name: Feature request
-about: Suggest an idea for this project
-
----
-
 **Value**
 Describe how the requested changes will affect the system. What profit does it bring?
 
