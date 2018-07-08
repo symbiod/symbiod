@@ -3,10 +3,6 @@
 require 'rails_helper'
 
 describe Web::Dashboard::TestTasksController do
-  let(:user) { create(:user, :staff) }
-  let(:candidate) { create(:user, :active) }
-  let(:mentor) { create(:user, :active, :mentor) }
-
   describe 'GET #index' do
     context 'not signed in' do
       before { get :index }
@@ -16,85 +12,80 @@ describe Web::Dashboard::TestTasksController do
       end
     end
 
-    context 'not authorized' do
-      before do
-        login_user(candidate)
-        get :index
-      end
-
-      it 'redirects to dashboard root' do
-        expect(response).to redirect_to dashboard_root_url
-      end
-    end
-
-    context 'staff' do
+    context 'sign in' do
       before do
         login_user(user)
         get :index
       end
 
-      it 'renders template' do
-        expect(response).to render_template :index
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
+
+        it 'redirects to dashboard root' do
+          expect(response).to redirect_to dashboard_root_url
+        end
       end
 
-      it 'returns success status' do
-        expect(response.status).to eq 200
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
+
+        it 'renders template' do
+          expect(response).to render_template :index
+        end
+
+        it 'returns success status' do
+          expect(response.status).to eq 200
+        end
+
+        it 'assigns all test tasks' do
+          create_list(:developer_test_task, 10)
+          expect(assigns(:developer_test_tasks)).to eq Developer::TestTask.order(id: :asc)
+        end
       end
-    end
-  end
-
-  shared_examples '#new' do
-    before { get :new }
-
-    it 'renders template' do
-      expect(response).to render_template :new
-    end
-
-    it 'returns success status' do
-      expect(response.status).to eq 200
     end
   end
 
   describe 'GET #new' do
-    context 'not authorized' do
+    context 'not signed in' do
+      before { get :new }
+
+      it 'redirects to root landing' do
+        expect(response).to redirect_to root_landing_url
+      end
+    end
+
+    context 'sign in' do
       before do
-        login_user(candidate)
+        login_user(user)
         get :new
       end
 
-      it 'redirects to dashboard root' do
-        expect(response).to redirect_to dashboard_root_url
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
+
+        it 'redirects to dashboard root' do
+          expect(response).to redirect_to dashboard_root_url
+        end
       end
-    end
 
-    context 'staff' do
-      before { login_user(user) }
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
-      it_behaves_like '#new'
-    end
+        it 'renders template' do
+          expect(response).to render_template :new
+        end
 
-    context 'mentor' do
-      before { login_user(mentor) }
-
-      it_behaves_like '#new'
-    end
-  end
-
-  shared_examples '#create' do
-    it 'redirects to dashboard test tasks' do
-      post :create, params: { developer_test_task: attr }
-      expect(response).to redirect_to dashboard_test_tasks_url
-    end
-
-    it 'create test task' do
-      expect { post :create, params: { developer_test_task: attr } }.to change(Developer::TestTask, :count).by(1)
+        it 'returns success status' do
+          expect(response.status).to eq 200
+        end
+      end
     end
   end
 
   describe 'POST #create' do
     let!(:skill) { create(:skill) }
     let!(:role) { create(:role) }
-    let!(:attr) do
+    let(:test_task_params) do
       {
         position: 1,
         title: Faker::VForVendetta.quote,
@@ -103,232 +94,241 @@ describe Web::Dashboard::TestTasksController do
         skill_id: skill.id
       }
     end
-    let(:developer_test_task) { Developer::TestTask.new }
 
-    context 'not authorized' do
-      before { login_user(candidate) }
+    context 'not signed in' do
+      let(:user) { create(:user, :staff, :active) }
+      before { post :create, params: { developer_test_task: test_task_params } }
 
-      it 'redirect to dashboard root' do
-        post :create, params: { developer_test_task: attr }
-        expect(response).to redirect_to dashboard_root_url
+      it 'redirects to root landing' do
+        expect(response).to redirect_to root_landing_url
       end
     end
 
-    context 'authorized staff' do
+    context 'signed in' do
       before { login_user(user) }
 
-      it_behaves_like '#create'
-    end
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
-    context 'authorized mentor' do
-      before { login_user(mentor) }
+        it 'redirect to dashboard test tasks' do
+          post :create, params: { developer_test_task: test_task_params }
+          expect(response).to redirect_to dashboard_test_tasks_url
+        end
 
-      it_behaves_like '#create'
-    end
-
-    context 'not passed validation' do
-      let!(:attr) do
-        {
-          position: 1,
-          title: Faker::VForVendetta.quote,
-          description: 'not passed validation',
-          role_id: role.id,
-          skill_id: skill.id
-        }
+        it 'returns success status' do
+          expect { post :create, params: { developer_test_task: test_task_params } }
+            .to change(Developer::TestTask, :count).by(1)
+        end
       end
-      before { login_user(mentor) }
 
-      it 'render new' do
-        post :create, params: { developer_test_task: attr }
-        expect(response).to render_template :new
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
+
+        it 'redirects to dashboard root' do
+          post :create, params: { developer_test_task: test_task_params }
+          expect(response).to redirect_to dashboard_root_url
+        end
       end
-    end
-  end
 
-  shared_examples '#edit' do
-    before { get :edit, params: { id: developer_test_task.id } }
+      context 'not passed validation' do
+        let(:user) { create(:user, :staff, :active) }
+        let!(:test_task_params) do
+          {
+            position: 1,
+            title: Faker::VForVendetta.quote,
+            description: nil,
+            role_name: role.name,
+            skill_id: skill.id
+          }
+        end
 
-    it 'renders template' do
-      expect(response).to render_template :edit
-    end
-
-    it 'returns success status' do
-      expect(response.status).to eq 200
-    end
-
-    it 'assigns developer test task' do
-      expect(assigns(:developer_test_task)).to eq developer_test_task
+        it 'renders new' do
+          post :create, params: { developer_test_task: test_task_params }
+          expect(response).to render_template :new
+        end
+      end
     end
   end
 
   describe 'GET #edit' do
     let(:developer_test_task) { create(:developer_test_task) }
 
-    context 'authorized staff' do
-      before { login_user(user) }
+    context 'not signed in' do
+      before { get :edit, params: { id: developer_test_task.id } }
 
-      it_behaves_like '#edit'
+      it 'redirects to root landing' do
+        expect(response).to redirect_to root_landing_url
+      end
     end
 
-    context 'authorized mentor' do
-      before { login_user(mentor) }
-
-      it_behaves_like '#edit'
-    end
-
-    context 'not authorized' do
-      let!(:developer_test_task) { create(:developer_test_task) }
+    context 'signed in' do
       before do
-        login_user(candidate)
+        login_user(user)
         get :edit, params: { id: developer_test_task.id }
       end
 
-      it 'redirect to dashboard root' do
-        expect(response).to redirect_to dashboard_root_url
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
+
+        it 'renders template' do
+          expect(response).to render_template :edit
+        end
+
+        it 'returns success status' do
+          expect(response.status).to eq 200
+        end
+
+        it 'assigns test task' do
+          expect(assigns(:developer_test_task)).to eq developer_test_task
+        end
       end
-    end
-  end
 
-  shared_examples '#update' do
-    it 'updates attribute' do
-      put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-      developer_test_task.reload
-      expect(developer_test_task.description).to eq attr[:description]
-    end
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
 
-    it 'redirects to index test task' do
-      put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-      expect(response).to redirect_to dashboard_test_tasks_url
+        it 'redirects to dashboard root' do
+          expect(response).to redirect_to dashboard_root_url
+        end
+      end
     end
   end
 
   describe 'PUT #update' do
-    let!(:attr) { { description: "New description_#{developer_test_task.description}" } }
-    let!(:developer_test_task) { create(:developer_test_task) }
+    let(:developer_test_task) { create(:developer_test_task) }
+    let(:new_test_task_params) do
+      {
+        description: "New description_#{developer_test_task.description}"
+      }
+    end
 
-    context 'authorized staff' do
+    context 'not signed in' do
+      let(:user) { create(:user, :staff, :active) }
+      before { put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params } }
+
+      it 'redirects to root landing' do
+        expect(response).to redirect_to root_landing_url
+      end
+    end
+
+    context 'signed in' do
       before { login_user(user) }
 
-      it_behaves_like '#update'
-    end
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
-    context 'authorized mentor' do
-      before { login_user(user) }
+        it 'updates attribute' do
+          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
+          expect(developer_test_task.reload.description).to eq new_test_task_params[:description]
+        end
 
-      it_behaves_like '#update'
-    end
-
-    context 'not authorized' do
-      let!(:actual) { developer_test_task.description }
-      before { login_user(candidate) }
-
-      it 'redirect to dashboard root' do
-        put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-        expect(response).to redirect_to dashboard_root_url
+        it 'redirects to dashboard test tasks' do
+          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
+          expect(response).to redirect_to dashboard_test_tasks_url
+        end
       end
 
-      it 'test task not updated' do
-        put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-        developer_test_task.reload
-        expect(developer_test_task.description).to eq actual
-      end
-    end
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
 
-    context 'not passed validations' do
-      let!(:attr) { { description: 'New description' } }
-      let!(:actual) { developer_test_task.description }
-      before { login_user(user) }
-
-      it 'renders template' do
-        put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-        expect(response).to render_template :edit
+        it 'redirects to dashboard root' do
+          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
+          expect(response).to redirect_to dashboard_root_url
+        end
       end
 
-      it 'test task not updated' do
-        put :update, params: { id: developer_test_task.id, developer_test_task: attr }
-        developer_test_task.reload
-        expect(developer_test_task.description).to eq actual
+      context 'not passed validation' do
+        let(:user) { create(:user, :staff, :active) }
+        let!(:new_test_task_params) do
+          {
+            description: nil
+          }
+        end
+
+        it 'renders edit' do
+          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
+          expect(response).to render_template :edit
+        end
       end
-    end
-  end
-
-  shared_examples '#activate' do
-    before { developer_test_task.reload }
-
-    it 'redirect to index test tasks' do
-      put :activate, params: { id: developer_test_task.id }
-      expect(response).to redirect_to dashboard_test_tasks_url
-    end
-
-    it 'change state test task to activate' do
-      put :activate, params: { id: developer_test_task.id }
-      developer_test_task.reload
-      expect(developer_test_task.state).to eq 'active'
     end
   end
 
   describe 'PUT #activate' do
-    let!(:developer_test_task) { create(:developer_test_task, :disabled) }
+    let(:developer_test_task) { create(:developer_test_task, :disabled) }
 
-    context 'not authorized' do
-      before { login_user(candidate) }
+    context 'not signed in' do
+      let(:user) { create(:user, :staff, :active) }
+      before { put :activate, params: { id: developer_test_task.id } }
 
-      it 'redirect to dashboard root' do
-        put :activate, params: { id: developer_test_task.id }
-        expect(response).to redirect_to dashboard_root_url
+      it 'redirects to root landing' do
+        expect(response).to redirect_to root_landing_url
       end
     end
 
-    context 'authorized staff' do
+    context 'signed in' do
       before { login_user(user) }
 
-      it_behaves_like '#activate'
-    end
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
-    context 'authorized mentor' do
-      before { login_user(mentor) }
+        it 'the test task became active' do
+          expect { put :activate, params: { id: developer_test_task.id } }
+            .to change { developer_test_task.reload.state }.from('disabled').to('active')
+        end
 
-      it_behaves_like '#activate'
-    end
-  end
+        it 'redirects to dashboard test tasks' do
+          put :activate, params: { id: developer_test_task.id }
+          expect(response).to redirect_to dashboard_test_tasks_url
+        end
+      end
 
-  shared_examples '#deactivate' do
-    before { developer_test_task.reload }
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
 
-    it 'redirect to index test tasks' do
-      put :deactivate, params: { id: developer_test_task.id }
-      expect(response).to redirect_to dashboard_test_tasks_url
-    end
-
-    it 'change state test task to disabled' do
-      put :deactivate, params: { id: developer_test_task.id }
-      developer_test_task.reload
-      expect(developer_test_task.state).to eq 'disabled'
+        it 'redirects to dashboard root' do
+          put :activate, params: { id: developer_test_task.id }
+          expect(response).to redirect_to dashboard_root_url
+        end
+      end
     end
   end
 
   describe 'PUT #deactivate' do
     let!(:developer_test_task) { create(:developer_test_task) }
 
-    context 'not authorized' do
-      before { login_user(candidate) }
+    context 'not signed in' do
+      let(:user) { create(:user, :staff, :active) }
+      before { put :deactivate, params: { id: developer_test_task.id } }
 
-      it 'redirect to dashboard root' do
-        put :activate, params: { id: developer_test_task.id }
-        expect(response).to redirect_to dashboard_root_url
+      it 'redirects to root landing' do
+        expect(response).to redirect_to root_landing_url
       end
     end
 
-    context 'authorized staff' do
+    context 'signed in' do
       before { login_user(user) }
 
-      it_behaves_like '#deactivate'
-    end
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
-    context 'authorized mentor' do
-      before { login_user(mentor) }
+        it 'the test task became disabled' do
+          expect { put :deactivate, params: { id: developer_test_task.id } }
+            .to change { developer_test_task.reload.state }.from('active').to('disabled')
+        end
 
-      it_behaves_like '#deactivate'
+        it 'redirects to dashboard test tasks' do
+          put :deactivate, params: { id: developer_test_task.id }
+          expect(response).to redirect_to dashboard_test_tasks_url
+        end
+      end
+
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
+
+        it 'redirects to dashboard root' do
+          put :deactivate, params: { id: developer_test_task.id }
+          expect(response).to redirect_to dashboard_root_url
+        end
+      end
     end
   end
 end

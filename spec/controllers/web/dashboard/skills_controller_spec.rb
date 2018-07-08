@@ -127,7 +127,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
           }
         end
 
-        it 'render new' do
+        it 'renders new' do
           post :create, params: { skill: skill_params }
           expect(response).to render_template :new
         end
