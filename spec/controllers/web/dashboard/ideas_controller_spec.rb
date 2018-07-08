@@ -29,7 +29,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       end
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #index tests'
 
@@ -46,7 +46,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
 
         it 'assigns activated ideas' do
           create_list(:idea, 10, :all_states)
-          expect(assigns(:ideas)).to eq Idea.activated.page 1
+          expect(assigns(:ideas)).to eq Idea.active.page 1
         end
       end
 
@@ -108,7 +108,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       end
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #show tests'
       end
@@ -153,7 +153,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       end
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #new tests'
       end
@@ -175,7 +175,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   end
 
   shared_examples 'dashboard idea #create tests' do
-    it 'redirect to dashboard ideas' do
+    it 'redirects to dashboard ideas' do
       post :create, params: { idea: idea_params }
       expect(response).to redirect_to dashboard_ideas_url
     end
@@ -206,7 +206,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #create tests'
       end
@@ -234,7 +234,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
           }
         end
 
-        it 'render new' do
+        it 'renders new' do
           post :create, params: { idea: idea_params }
           expect(response).to render_template :new
         end
@@ -274,7 +274,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       end
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #edit tests'
       end
@@ -298,8 +298,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   shared_examples 'dashboard idea #update tests' do
     it 'updates attribute' do
       put :update, params: { id: idea.id, idea: new_idea_params }
-      idea.reload
-      expect(idea.description).to eq new_idea_params[:description]
+      expect(idea.reload.description).to eq new_idea_params[:description]
     end
 
     it 'redirects to dashboard ideas' do
@@ -330,7 +329,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #update tests'
       end
@@ -367,12 +366,6 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   end
 
   shared_examples 'dashboard idea #activate tests' do
-    it 'the idea became active' do
-      put :activate, params: { id: idea.id }
-      idea.reload
-      expect(idea.state).to eq 'active'
-    end
-
     it 'redirects to dashboard idea' do
       put :activate, params: { id: idea.id }
       expect(response).to redirect_to dashboard_idea_url(idea)
@@ -380,7 +373,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   end
 
   describe 'GET #activate' do
-    let(:idea) { create(:idea, %i[disabled pending].sample) }
+    let(:idea) { create(:idea, :disabled) }
 
     context 'not signed in' do
       let(:user) { create(:user, :staff, :active) }
@@ -395,22 +388,31 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
-        it_behaves_like 'dashboard idea #activate tests'
-      end
+        context 'created disabled idea' do
+          it 'the idea became active' do
+            expect { put :activate, params: { id: idea.id } }
+              .to change { idea.reload.state }.from('disabled').to('active')
+          end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
+          it_behaves_like 'dashboard idea #activate tests'
+        end
 
-        it 'redirects to dashboard root' do
-          put :activate, params: { id: idea.id }
-          expect(response).to redirect_to dashboard_root_url
+        context 'created pending idea' do
+          let(:idea) { create(:idea, :pending) }
+
+          it 'the idea became active' do
+            expect { put :activate, params: { id: idea.id } }
+              .to change { idea.reload.state }.from('pending').to('active')
+          end
+
+          it_behaves_like 'dashboard idea #activate tests'
         end
       end
 
-      context 'user has role author' do
-        let(:user) { create(:user, :author, :active) }
+      context 'user has role developer or author' do
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :activate, params: { id: idea.id }
@@ -422,9 +424,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
 
   shared_examples 'dashboard idea #deactivate tests' do
     it 'the idea became disabled' do
-      put :deactivate, params: { id: idea.id }
-      idea.reload
-      expect(idea.state).to eq 'disabled'
+      expect { put :deactivate, params: { id: idea.id } }
+        .to change { idea.reload.state }.from('active').to('disabled')
     end
 
     it 'redirects to dashboard idea' do
@@ -449,22 +450,13 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #deactivate tests'
       end
 
       context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
-
-        it 'redirects to dashboard root' do
-          put :deactivate, params: { id: idea.id }
-          expect(response).to redirect_to dashboard_root_url
-        end
-      end
-
-      context 'user has role author' do
-        let(:user) { create(:user, :author, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :deactivate, params: { id: idea.id }
@@ -476,9 +468,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
 
   shared_examples 'dashboard idea #reject tests' do
     it 'the idea became rejected' do
-      put :reject, params: { id: idea.id }
-      idea.reload
-      expect(idea.state).to eq 'rejected'
+      expect { put :reject, params: { id: idea.id } }
+        .to change { idea.reload.state }.from('pending').to('rejected')
     end
 
     it 'redirects to dashboard idea' do
@@ -503,22 +494,13 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       before { login_user(user) }
 
       context 'user has role staff or mentor' do
-        let(:user) { create(:user, %i[staff mentor].sample, :active) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like 'dashboard idea #reject tests'
       end
 
       context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
-
-        it 'redirects to dashboard root' do
-          put :reject, params: { id: idea.id }
-          expect(response).to redirect_to dashboard_root_url
-        end
-      end
-
-      context 'user has role author' do
-        let(:user) { create(:user, :author, :active) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :reject, params: { id: idea.id }

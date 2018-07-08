@@ -49,7 +49,7 @@ module Dashboard
         elsif current_user_ideas?
           ::Idea.where(author_id: user.id)
         elsif active_ideas?
-          ::Idea.activated
+          ::Idea.active
         end
       end
 
