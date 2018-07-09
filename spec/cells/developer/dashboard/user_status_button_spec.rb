@@ -90,6 +90,21 @@ describe Developer::Dashboard::UserStatusButton do
     it_behaves_like 'button state disabled'
   end
 
+  context 'current user staff and candidate status screening completed' do
+    let(:candidate) { create(:user, :screening_completed) }
+
+    it 'renders active status' do
+      expect(subject.user_status).to match(/screening_completed/)
+    end
+
+    it 'renders danger color link' do
+      expect(subject.user_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
+    end
+
+    it_behaves_like 'user staff and candidate not disabled'
+    it_behaves_like 'button state disabled'
+  end
+
   context 'current user staff and candidate status rejected' do
     let(:candidate) { create(:user, :rejected) }
 

@@ -25,7 +25,7 @@
           %td.col-md-2
             = cell(Developer::Dashboard::DisplayProgress, user).()
           %td
-            - if policy(:test_task_assignment).review?(user)
+            - if TestTaskAssignmentPolicy.new(current_user, user).review?
               = link_to t('dashboard.users.link.review_applicant'), dashboard_test_task_assignment_url(user),
                                                                     class: 'btn btn-info btn-sm'
 = paginate @users

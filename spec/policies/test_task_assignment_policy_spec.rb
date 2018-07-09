@@ -3,31 +3,71 @@
 require 'rails_helper'
 
 describe TestTaskAssignmentPolicy do
-  subject { described_class.new(user, nil) }
+  subject { described_class.new(current_user, candidate) }
 
-  context 'staff user' do
-    let(:user) { create(:user, :staff) }
-
+  shared_examples 'access to all' do
     it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_action(:show) }
     it { is_expected.to permit_action(:activate) }
     it { is_expected.to permit_action(:reject) }
+    it { is_expected.to permit_action(:review) }
   end
 
-  context 'active user' do
-    let(:user) { create(:user, :active) }
-
-    it { is_expected.not_to permit_action(:index) }
+  shared_examples 'prohibited except for the index' do
     it { is_expected.not_to permit_action(:show) }
     it { is_expected.not_to permit_action(:activate) }
     it { is_expected.not_to permit_action(:reject) }
+    it { is_expected.not_to permit_action(:review) }
   end
 
-  context 'developer state screening_completed and user staff' do
-    let(:user) { create(:user, :staff) }
-    let(:developer) { create(:user, :screening_completed) }
+  context 'current user status staff' do
+    let(:current_user) { create(:user, :staff) }
 
-    it { is_expected.to permit_action(:review, developer) }
+    context 'candidate status screening_completed' do
+      let(:candidate) { create(:user, :screening_completed) }
+
+      it_behaves_like 'access to all'
+    end
+
+    context 'candidate status not screening_completed' do
+      let(:candidate) { create(:user, :not_screening_completed) }
+
+      it { is_expected.to permit_action(:index) }
+      it_behaves_like 'prohibited except for the index'
+    end
+  end
+
+  context 'current user status mentor' do
+    let(:skill_name) { 'Ruby' }
+    let(:current_user) { create(:user, :mentor, :with_primary_skill, skill_name: skill_name) }
+
+    context 'candidate status screening_completed and primary skill as metor' do
+      let(:candidate) { create(:user, :screening_completed, :with_primary_skill, skill_name: skill_name) }
+
+      it_behaves_like 'access to all'
+    end
+
+    context 'candidate status screening_completed and not primary skill as metor' do
+      let(:candidate) { create(:user, :screening_completed) }
+
+      it { is_expected.to permit_action(:index) }
+      it_behaves_like 'prohibited except for the index'
+    end
+
+    context 'candidate status not screening_completed' do
+      let(:candidate) { create(:user, :not_screening_completed) }
+
+      it { is_expected.to permit_action(:index) }
+      it_behaves_like 'prohibited except for the index'
+    end
+  end
+
+  context 'current user status active' do
+    let(:current_user) { create(:user, :active) }
+    let(:candidate) { create(:user, :screening_completed) }
+
+    it { is_expected.not_to permit_action(:index) }
+    it_behaves_like 'prohibited except for the index'
   end
 
   describe 'scope' do

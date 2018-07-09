@@ -36,8 +36,4 @@ class DashboardPolicy < ApplicationPolicy
   def not_developer?
     staff? || mentor? || author?
   end
-
-  def screening_completed_and_staff_or_mentor?(developer)
-    developer.screening_completed? && staff_or_mentor?
-  end
 end

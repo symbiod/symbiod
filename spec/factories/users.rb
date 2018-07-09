@@ -39,6 +39,10 @@ FactoryBot.define do
       state 'screening_completed'
     end
 
+    trait :not_screening_completed do
+      state %w[profile_completed active disabled rejected policy_accepted].sample
+    end
+
     trait :staff do
       after(:create) do |user|
         user.add_role(:staff)

@@ -55,3 +55,4 @@ describe Dashboard::IdeaPolicy do
     it { is_expected.not_to permit_action(:reject) }
   end
 end
+# TODO: write tests for scope as test task assignment
