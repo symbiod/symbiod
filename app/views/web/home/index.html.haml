@@ -5,3 +5,6 @@
   = link_to t('landing.developer'), bootcamp_root_url, id: 'join-bootcamp', class: 'btn btn-lg btn-secondary'
   -#= link_to t('landing.entrepreneur'), idea_root_url, class: 'btn btn-lg btn-secondary'
 
+= content_for :counter do
+  = render partial: 'web/shared/counter', locals: { developers_size: @developers_size, mentors_size: @mentors_size, projects_size: @projects_size }
+
