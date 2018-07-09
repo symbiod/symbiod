@@ -20,7 +20,7 @@ describe TestTaskAssignmentPolicy do
     it { is_expected.not_to permit_action(:review) }
   end
 
-  context 'current user status staff' do
+  context 'current user has role staff' do
     let(:current_user) { create(:user, :staff) }
 
     context 'candidate status screening_completed' do
@@ -37,7 +37,7 @@ describe TestTaskAssignmentPolicy do
     end
   end
 
-  context 'current user status mentor' do
+  context 'current user has role mentor' do
     let(:skill_name) { 'Ruby' }
     let(:current_user) { create(:user, :mentor, :with_primary_skill, skill_name: skill_name) }
 
@@ -62,8 +62,8 @@ describe TestTaskAssignmentPolicy do
     end
   end
 
-  context 'current user status active' do
-    let(:current_user) { create(:user, :active) }
+  context 'current user has role developer or author' do
+    let(:current_user) { create(:user, :developer_or_author, :active) }
     let(:candidate) { create(:user, :screening_completed) }
 
     it { is_expected.not_to permit_action(:index) }
@@ -94,8 +94,8 @@ describe TestTaskAssignmentPolicy do
       end
     end
 
-    context 'developer' do
-      let(:user) { create(:user, :developer, :with_primary_skill, skill_name: skill_name) }
+    context 'developer or author' do
+      let(:user) { create(:user, :developer_or_author, :with_primary_skill, skill_name: skill_name) }
 
       it 'returns empty collection' do
         expect(subject.resolve).to eq []
