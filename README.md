@@ -26,7 +26,13 @@ e.g. `http://lvh.me:3000/` or `http://bootcamp.lvh.me:3000/`
 
 ## Contributing
 
-TBD
+We have an enormous amount of work and appreciate *any* kind of help, that can be offered.
+
+If you want to take part in the project as developer then [this document](https://github.com/howtohireme/give-me-poc/blob/master/CONTRIBUTING.md) is for you!
+
+If you want to take part as designer of manager don't hesitate to drop us an [email](mailto:opensource@howtohireme.ru).
+
+And don't forget to sign up at [givemepoc.org](http://givemepoc.org) ;)
 
 ## Other documentation
 
