@@ -21,9 +21,9 @@
                   = role.name
           %td= user.primary_skill&.title
           %td
-            = cell(Developer::Dashboard::UserStatusButton, user).()
+            = cell(Developer::Dashboard::UserStatusButton, user)
           %td.col-md-2
-            = cell(Developer::Dashboard::DisplayProgress, user).()
+            = cell(Developer::Dashboard::DisplayProgress, user)
           %td
             - if policy(:test_task_assignment).review?(user)
               = link_to t('dashboard.users.link.review_applicant'), dashboard_test_task_assignment_url(user),

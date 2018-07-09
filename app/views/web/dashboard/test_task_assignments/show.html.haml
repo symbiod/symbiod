@@ -9,14 +9,23 @@
       %tr
         %td Email
         %td= @candidate.email
-      - @candidate.test_task_assignments.each_with_index do |assignment, index|
+      - @candidate.test_task_assignments.each do |assignment|
         %tr
           %td= assignment.test_task.title
           %td= link_to assignment.test_task_result.link, assignment.test_task_result.link, target: '_blank'
       %tr
-        %td= button_to t('dashboard.candidates.activate'), activate_dashboard_test_task_assignment_url(@candidate), method: :put, class: 'btn btn-success'
         %td
-          = simple_form_for(::Developer::TestTaskAssignment.new, url: reject_dashboard_test_task_assignment_url(@candidate), method: :put) do |f|
+          = button_to t('dashboard.candidates.activate'),
+                      activate_dashboard_test_task_assignment_url(@candidate),
+                      method: :put,
+                      class: 'btn btn-success'
+        %td
+          = simple_form_for(::Developer::TestTaskAssignment.new,
+                            url: reject_dashboard_test_task_assignment_url(@candidate),
+                            method: :put) do |f|
             = f.input :feedback
-            = f.button :submit, t('dashboard.candidates.reject'), type: :submit, class: 'btn btn-danger', data: { confirm: t('dashboard.candidates.confirm_rejection') }
+            = f.button :submit, t('dashboard.candidates.reject'),
+                                type: :submit,
+                                class: 'btn btn-danger',
+                                data: { confirm: t('dashboard.candidates.confirm_rejection') }
 

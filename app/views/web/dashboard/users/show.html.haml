@@ -25,7 +25,7 @@
       %td
         %b= t('dashboard.users.table.roles')
       %td
-        = cell(Developer::Dashboard::UserRoles, @user).()
+        = cell(Developer::Dashboard::UserRoles, @user)
     %tr
       %td
         %b= t('dashboard.users.table.task_assignments')
@@ -54,5 +54,5 @@
           - else
             .btn.btn-danger.btn-sm.disabled
               = t('dashboard.developer_test_task.not_finished')
-    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :slack).()
-    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :github).()
+    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :slack)
+    = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :github)
