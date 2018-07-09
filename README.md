@@ -5,7 +5,12 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/test_coverage)](https://codeclimate.com/github/howtohireme/give-me-poc/test_coverage)
 [![Inline docs](http://inch-ci.org/github/howtohireme/give-me-poc.svg?branch=master)](http://inch-ci.org/github/howtohireme/give-me-poc)
 
-The goal of this project is to allow everyone to propose an idea of an opensource, non-profit project and to find a team of developers.
+We want to build a place, where anyone can take part in development of opensource projects, that will help non-profits to bring value to the people.
+
+The approach is that we connect individuals, that have an idea of some useful non-profit project(or event profitable, but tolerant to having the code open to everyone) and developers who wants to participate in those projects.
+
+As a result the author gets the MVP of his project, and developers get experience in real projects(which is very important for beginners).
+Experienced developers will be able to practice in leading teams, managing the project or event hiring our members for their companies.
 
 ## To run the application natively:
 
