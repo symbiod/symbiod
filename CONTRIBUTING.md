@@ -1,5 +1,15 @@
 ## Contribution guidelines
-Checklist before merge:
+
+### Setup
+If you want to contribute to our project, then first of all you need to run it locally.
+Choose between [traditional local setup](https://github.com/howtohireme/give-me-poc#to-run-the-application-natively) and [Vagrant](https://github.com/howtohireme/give-me-poc/blob/master/vagrant/README.md).
+
+### Choose task
+We recommend all newcomers to first pick tasks with `good-first-issue`, that can be found [here](https://github.com/howtohireme/give-me-poc/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
+They are relatively small, straighforward and allow you to get started with the project and explore our codebase.
+
+### Checklist before merge
+When you have done some changes, and want to share them with us - ensure that all development process requirements are satisfied:
 
 * Keep your commits atomic. One commit - one change.
 * Squash commits before merging master.
