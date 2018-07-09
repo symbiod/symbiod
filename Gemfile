@@ -36,7 +36,7 @@ gem "octokit", "~> 4.0"
 gem 'honeybadger', '~> 3.1'
 gem 'newrelic_rpm'
 gem 'data_migrate'
-gem 'pundit'
+gem 'pundit', '~> 2.0.0.beta1'
 gem 'strong_migrations'
 gem 'config'
 
