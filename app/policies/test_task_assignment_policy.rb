@@ -10,17 +10,9 @@ class TestTaskAssignmentPolicy < DashboardPolicy
     current_user_assignment?
   end
 
-  def activate?
-    current_user_assignment?
-  end
-
-  def reject?
-    current_user_assignment?
-  end
-
-  def review?
-    current_user_assignment?
-  end
+  alias activate? show?
+  alias reject? show?
+  alias review? show?
 
   # Defines a scope of Users, who can be available for acting person
   class Scope < Scope

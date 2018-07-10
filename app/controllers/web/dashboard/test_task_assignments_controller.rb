@@ -15,12 +15,14 @@ module Web
 
       def activate
         Ops::Developer::Activate.call(user: @candidate, performer: current_user.id)
-        redirect_to dashboard_test_task_assignments_url, notice: t('dashboard.candidates.notices.activated')
+        redirect_to dashboard_test_task_assignments_url,
+                    flash: { success: "#{t('dashboard.candidates.notices.activated')}: #{@candidate.email}" }
       end
 
       def reject
         Ops::Developer::Reject.call(user: @candidate, feedback: rejection_params[:feedback])
-        redirect_to dashboard_test_task_assignments_url, notice: t('dashboard.candidates.notices.rejected')
+        redirect_to dashboard_test_task_assignments_url,
+                    flash: { success: "#{t('dashboard.candidates.notices.rejected')}: #{@candidate.email}" }
       end
 
       private

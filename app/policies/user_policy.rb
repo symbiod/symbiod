@@ -6,35 +6,16 @@ class UserPolicy < DashboardPolicy
     not_author?
   end
 
-  def show?
-    not_author?
-  end
+  alias show? index?
 
   def edit?
     staff?
   end
 
-  def update?
-    staff?
-  end
-
-  def activate?
-    staff?
-  end
-
-  def deactivate?
-    staff?
-  end
-
-  def add_role?
-    staff?
-  end
-
-  def remove_role?
-    staff?
-  end
-
-  def manage_roles?
-    staff?
-  end
+  alias update? edit?
+  alias activate? edit?
+  alias deactivate? edit?
+  alias add_role? edit?
+  alias remove_role? edit?
+  alias manage_roles? edit?
 end
