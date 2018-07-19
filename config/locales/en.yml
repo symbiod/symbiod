@@ -15,6 +15,10 @@ en:
     logout: 'Logged out'
     title: 'The great oppurtunities'
     body: 'For everyone who has some programming skills or an idea of an awesome project '
+    counters:
+      developers: Developers
+      mentors: Mentors
+      projects: Projects
     developer: 'Join as Developer'
     entrepreneur: 'Entrepreneur'
     alerts:
