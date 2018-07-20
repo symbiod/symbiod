@@ -4,6 +4,6 @@
 # in view "DD-MM-YYY"
 module DateHelper
   def reg_date(user)
-    user.created_at.strftime("%d-%m-%Y")
+    user.created_at.strftime('%d-%m-%Y')
   end
 end
