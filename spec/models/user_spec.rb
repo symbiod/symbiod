@@ -132,4 +132,11 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#registration_date' do
+    context 'user have registratuion date' do
+      it { expect(user.created_at.utc.strftime("%d-%m-%Y"))
+        .to eq Time.now.utc.strftime("%d-%m-%Y") }
+    end
+  end
 end
