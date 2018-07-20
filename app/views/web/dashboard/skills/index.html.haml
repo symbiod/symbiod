@@ -10,4 +10,4 @@
     - @skills.each do |skill|
       %tr
         %td= link_to skill.title, edit_dashboard_skill_url(skill)
-        %td= cell(Web::Dashboard::SkillStatusButton, skill).()
+        %td= cell(Web::Dashboard::SkillStatusButton, skill)

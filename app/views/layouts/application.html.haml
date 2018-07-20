@@ -1,12 +1,14 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
     %title Poc
     = csrf_meta_tags
-    = stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag    '/css/cover.css', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+                          media: 'all',
+                          'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag '/css/cover.css', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body.text-center
@@ -18,19 +20,23 @@
           %nav.nav.nav-masthead.justify-content-center
             = nav_link t('landing.navigation.home'), root_landing_url, subdomain: 'www', id: 'home'
             = nav_link t('landing.navigation.bootcamp'), bootcamp_root_url, subdomain: 'bootcamp', id: 'bootcamp'
-            = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link' if policy(:dashboard).allowed?
+            = link_to t('landing.navigation.dashboard'), dashboard_root_url,
+                                                         class: 'nav-link' if policy(:dashboard).allowed?
             = link_to t('landing.navigation.logout'), logout_url, method: :delete, class: 'nav-link' if current_user
 
-      %main.inner.cover{:role => "main"}
+      %main.inner.cover{ role: 'main' }
         - if flash.alert
-          .alert.alert-danger{role: 'alert'}
+          .alert.alert-danger{ role: 'alert' }
             = raw flash.alert
 
         = yield
+
+      %section.py-5
+        = yield :counter
 
       %footer.mastfoot.mt-auto
         .inner
           %p
             = t('landing.footer.built_by')
-            = succeed ", 2018" do
+            = succeed ', 2018' do
               = link_to 'HowToHireMe', 'https://howtohireme.ru', target: '_blank'

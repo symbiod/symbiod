@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
     %title Ideas
     = csrf_meta_tags
     = stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
@@ -21,7 +21,8 @@
           %nav.nav.nav-masthead.justify-content-center
             = nav_link t('landing.navigation.home'), root_landing_url, subdomain: 'www', id: 'home'
             = nav_link t('landing.navigation.idea'), idea_root_url, subdomain: 'idea', id: 'idea'
-            = link_to t('landing.navigation.dashboard'), dashboard_root_url, class: 'nav-link' if policy(:dashboard).allowed?
+            = link_to t('landing.navigation.dashboard'), dashboard_root_url,
+                                                         class: 'nav-link' if policy(:dashboard).allowed?
             = link_to t('landing.navigation.logout'), logout_url, method: :delete, class: 'nav-link' if current_user
 
       = render partial: 'layouts/shared/dashboard_flashes'
@@ -32,13 +33,13 @@
         .inner
           %p
             = t('landing.footer.built_by')
-            = succeed ", 2018" do
+            = succeed ', 2018' do
               = link_to 'HowToHireMe', 'https://howtohireme.ru', target: '_blank'
   /
     Bootstrap core JavaScript
     \==================================================
   / Placed at the end of the document so the pages load faster
   / SimpleMDE
-  %script{ src: "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js" }
+  %script{ src: 'https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js' }
   :javascript
     var simplemde = new SimpleMDE();

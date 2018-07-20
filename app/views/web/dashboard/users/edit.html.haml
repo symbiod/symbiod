@@ -1,4 +1,4 @@
-%h2= "#{t('dashboard.users.edit.header')}: #{@user.full_name}"
+%h2 #{t('dashboard.users.edit.header')}: #{@user.full_name}
 = simple_form_for @user, url: dashboard_user_url do |f|
   = f.input :email
   = f.input :first_name

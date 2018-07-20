@@ -5,12 +5,9 @@
   %hr
 
   .cell
-    = cell(Developer::Screening::DisplayAssignment, @assignment).()
+    = cell(Developer::Screening::DisplayAssignment, @assignment)
 
 - else
   %h1.cover-heading= t('bootcamp.screening.congrats')
   %p.lead
     = t('bootcamp.screening.wait_for_tasks_review')
-
-  
-

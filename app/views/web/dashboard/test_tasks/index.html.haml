@@ -23,7 +23,7 @@
           %td= developer_test_task.id
           %td
             = link_to developer_test_task.title, edit_dashboard_test_task_url(developer_test_task)
-          %td= cell(Developer::Dashboard::TestTaskStatusButton, developer_test_task).()
+          %td= cell(Developer::Dashboard::TestTaskStatusButton, developer_test_task)
           %td= developer_test_task.position
           %td= developer_test_task.role.try(:name)
           %td= developer_test_task.skill.title

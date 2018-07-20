@@ -1638,7 +1638,7 @@ Style/MethodDefParentheses:
   StyleGuide: '#method-parens'
   Enabled: true
 
-Style/MethodMissing:
+Style/MethodMissingSuper:
   Description: 'Avoid using `method_missing`.'
   StyleGuide: '#no-method-missing'
   Enabled: true
