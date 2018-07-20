@@ -5,7 +5,12 @@ module Web
     module Wizard
       # User must accept policy after registration and before filling profile
       class AcceptPoliciesController < BaseController
-        def edit; end
+        def edit
+          # NOTICE: for some reason having a blank method here causes error,
+          # when before filters are not triggered, and non-authenticated user
+          # is allowed to access this page, which results as an error
+          render :edit
+        end
 
         def update
           result = Ops::Developer::AcceptPolicy.call(
