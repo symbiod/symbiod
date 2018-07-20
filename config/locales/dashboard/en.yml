@@ -17,6 +17,7 @@ en:
       edit_title: Edit your profile
       roles: Available roles
       primary_skill: Primary skill
+      registration_date: Registration date
     candidates:
       notices:
         activated: The candidate was activated
@@ -52,6 +53,7 @@ en:
         roles: Roles
         status: Status
         task_assignments: Task assignments
+        date_registration: Date registration
         tasks: Tasks
         invite_slack: Invite to Slack
         invite_github: Invite to GitHub

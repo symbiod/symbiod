@@ -23,6 +23,10 @@
       %td= @user.primary_skill&.title
     %tr
       %td
+        %b= t('dashboard.users.table.date_registration')
+      %td= human_date(@user)
+    %tr
+      %td
         %b= t('dashboard.users.table.roles')
       %td
         = cell(Developer::Dashboard::UserRoles, @user)

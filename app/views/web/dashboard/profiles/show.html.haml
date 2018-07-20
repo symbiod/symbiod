@@ -24,6 +24,9 @@
       %tr
         %td= t('dashboard.profile.primary_skill')
         %td= @profile.primary_skill.title
+      %tr
+        %td= t('dashboard.profile.registration_date')
+        %td= human_date(@profile)
 
 = link_to t('dashboard.profile.edit.button'), edit_dashboard_profile_url,
   class: 'btn btn-info'
