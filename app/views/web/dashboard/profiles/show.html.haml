@@ -26,7 +26,7 @@
         %td= @profile.primary_skill.title
       %tr
         %td= t('dashboard.profile.registration_date')
-        %td= @profile.created_at.strftime("%d-%m-%Y")
+        %td= reg_date(@profile)
 
 = link_to t('dashboard.profile.edit.button'), edit_dashboard_profile_url,
   class: 'btn btn-info'

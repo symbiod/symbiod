@@ -24,7 +24,7 @@
     %tr
       %td
         %b= t('dashboard.users.table.date_registration')
-      %td= @user.created_at.strftime("%d-%m-%Y")
+      %td= reg_date(@user)
     %tr
       %td
         %b= t('dashboard.users.table.roles')
