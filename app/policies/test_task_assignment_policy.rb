@@ -7,20 +7,12 @@ class TestTaskAssignmentPolicy < DashboardPolicy
   end
 
   def show?
-    staff_or_mentor?
+    current_user_assignment?
   end
 
-  def activate?
-    staff_or_mentor?
-  end
-
-  def reject?
-    staff_or_mentor?
-  end
-
-  def review?(developer)
-    screening_completed_and_staff_or_mentor?(developer)
-  end
+  alias activate? show?
+  alias reject? show?
+  alias review? show?
 
   # Defines a scope of Users, who can be available for acting person
   class Scope < Scope
@@ -33,5 +25,19 @@ class TestTaskAssignmentPolicy < DashboardPolicy
         []
       end
     end
+  end
+
+  private
+
+  def current_user_assignment?
+    staff_assignment? || mentor_assignment?
+  end
+
+  def staff_assignment?
+    staff? && record.screening_completed?
+  end
+
+  def mentor_assignment?
+    mentor? && user.primary_skill == record.primary_skill && record.screening_completed?
   end
 end

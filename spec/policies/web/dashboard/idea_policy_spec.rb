@@ -54,4 +54,45 @@ describe Dashboard::IdeaPolicy do
     it { is_expected.not_to permit_action(:deactivate) }
     it { is_expected.not_to permit_action(:reject) }
   end
+
+  describe 'scope' do
+    subject { described_class::Scope.new(current_user, User) }
+    let(:idea_1) { create(:idea, :disabled) }
+    let(:idea_2) { create(:idea, :active) }
+    let(:idea_3) { create(:idea, :active) }
+
+    context 'current user role staff or mentor' do
+      let(:current_user) { create(:user, :staff_or_mentor, :active) }
+
+      it 'returns all ideas' do
+        expect(subject.resolve).to match_array [idea_1, idea_2, idea_3]
+      end
+    end
+
+    context 'current user role developer' do
+      let(:current_user) { create(:user, :developer, :active) }
+
+      it 'returns activated ideas' do
+        expect(subject.resolve).to match_array [idea_2, idea_3]
+      end
+    end
+
+    context 'current user role developer and author' do
+      let(:current_user) { create(:user, :developer, :author, :active) }
+      let(:idea_4) { create(:idea, :active, author: current_user) }
+
+      it 'returns activated and current author ideas' do
+        expect(subject.resolve).to match_array [idea_2, idea_3, idea_4]
+      end
+    end
+
+    context 'current user role author' do
+      let(:current_user) { create(:user, :author, :active) }
+      let(:idea_4) { create(:idea, :active, author: current_user) }
+
+      it 'returns current author ideas' do
+        expect(subject.resolve).to match_array [idea_4]
+      end
+    end
+  end
 end

@@ -7,37 +7,22 @@ module Dashboard
       true
     end
 
-    def show?
-      true
-    end
+    alias show? index?
 
     def new?
       not_developer?
     end
 
-    def create?
-      not_developer?
-    end
-
-    def edit?
-      not_developer?
-    end
-
-    def update?
-      not_developer?
-    end
+    alias create? new?
+    alias edit? new?
+    alias update? new?
 
     def activate?
       staff_or_mentor?
     end
 
-    def deactivate?
-      staff_or_mentor?
-    end
-
-    def reject?
-      staff_or_mentor?
-    end
+    alias deactivate? activate?
+    alias reject? activate?
 
     # Defines a scope of Ideas, who can be available for acting person
     class Scope < Scope

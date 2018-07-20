@@ -6,27 +6,10 @@ class TestTaskPolicy < DashboardPolicy
     staff_or_mentor?
   end
 
-  def new?
-    staff_or_mentor?
-  end
-
-  def create?
-    staff_or_mentor?
-  end
-
-  def edit?
-    staff_or_mentor?
-  end
-
-  def update?
-    staff_or_mentor?
-  end
-
-  def activate?
-    staff_or_mentor?
-  end
-
-  def deactivate?
-    staff_or_mentor?
-  end
+  alias new? index?
+  alias create? index?
+  alias edit? index?
+  alias update? index?
+  alias activate? index?
+  alias deactivate? index?
 end

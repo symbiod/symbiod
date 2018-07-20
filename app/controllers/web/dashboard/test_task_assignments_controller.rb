@@ -5,7 +5,7 @@ module Web
     # Handles all management logic for newcomers
     class TestTaskAssignmentsController < BaseController
       before_action :candidate, only: %i[show activate reject]
-      before_action :authorize_staff!
+      before_action :authorize_staff!, only: :index
 
       def index
         @candidates = TestTaskAssignmentPolicy::Scope.new(current_user, User).resolve
@@ -15,18 +15,20 @@ module Web
 
       def activate
         Ops::Developer::Activate.call(user: @candidate, performer: current_user.id)
-        redirect_to dashboard_test_task_assignments_url, notice: t('dashboard.candidates.notices.activated')
+        redirect_to dashboard_test_task_assignments_url,
+                    flash: { success: "#{t('dashboard.candidates.notices.activated')}: #{@candidate.email}" }
       end
 
       def reject
         Ops::Developer::Reject.call(user: @candidate, feedback: rejection_params[:feedback])
-        redirect_to dashboard_test_task_assignments_url, notice: t('dashboard.candidates.notices.rejected')
+        redirect_to dashboard_test_task_assignments_url,
+                    flash: { success: "#{t('dashboard.candidates.notices.rejected')}: #{@candidate.email}" }
       end
 
       private
 
       def candidate
-        @candidate ||= User.find(params[:id])
+        @candidate ||= authorize User.find(params[:id]), policy_class: TestTaskAssignmentPolicy
       end
 
       def authorize_staff!
