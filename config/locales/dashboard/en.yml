@@ -53,6 +53,7 @@ en:
         roles: Roles
         status: Status
         task_assignments: Task assignments
+        date_registration: Date registration
         tasks: Tasks
         invite_slack: Invite to Slack
         invite_github: Invite to GitHub
