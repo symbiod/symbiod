@@ -10,7 +10,8 @@ if [[ "$TRAVIS_EVENT_TYPE" == "push" ]]; then
   heroku pg:backups:capture --app peaceful-refuge-95132
   heroku pg:backups:download --app peaceful-refuge-95132
 
-  if [ -x "$(aws --version)" ]; then
+  if ! [ -x "$(aws --version)" ]; then
+    echo "Installing awscli"
     pip install --user awscli
     export PATH=$PATH:$HOME/.local/bin
   fi
