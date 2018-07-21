@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_07_125013) do
+ActiveRecord::Schema.define(version: 2018_07_20_212240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(version: 2018_07_07_125013) do
     t.index ["author_id"], name: "index_ideas_on_author_id"
   end
 
+  create_table "legacy_roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_legacy_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_legacy_roles_on_resource_type_and_resource_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text "content"
     t.integer "noteable_id"
@@ -95,16 +105,6 @@ ActiveRecord::Schema.define(version: 2018_07_07_125013) do
     t.datetime "updated_at", null: false
     t.index ["idea_id"], name: "index_projects_on_idea_id"
     t.index ["slug"], name: "index_projects_on_slug"
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
   create_table "skills", force: :cascade do |t|

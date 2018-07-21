@@ -2,6 +2,8 @@
 
 # The Role using to add roles users
 class Role < ApplicationRecord
+  self.table_name = "legacy_roles"
+
   has_and_belongs_to_many :users, join_table: :users_roles
   has_many :test_tasks, primary_key: :name, foreign_key: 'role_name', class_name: 'Developer::TestTask'
 
