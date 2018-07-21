@@ -1,0 +1,7 @@
+#!/bin/bash
+
+wget https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump -O /tmp/givemepoc_latest.dump
+
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d poc_development /tmp/givemepoc_latest.dump
+
+rm /tmp/givemepoc_latest.dump

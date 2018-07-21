@@ -1,0 +1,10 @@
+#!/bin/bash
+
+heroku pg:backups:capture
+heroku pg:backups:download
+
+aws s3 cp latest.dump s3://givemepoc/latest.dump --acl public-read
+
+rm latest.dump
+
+echo "You can get the latest dump via url: https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump or by running bin/load_dump"
