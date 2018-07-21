@@ -8,7 +8,7 @@
         %td= @profile.email
       %tr
         %td= t('dashboard.profile.github')
-        %td= @profile.github
+        %td= github_link(@profile)
       %tr
         %td= t('dashboard.profile.location')
         %td= @profile.location
