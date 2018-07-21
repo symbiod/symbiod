@@ -5,37 +5,57 @@ module Web
     # This cell renders status idea
     class IdeaStatusButton < BaseCell
       def idea_status
-        policy(%i[dashboard idea]).activate? ? idea_state : model.state
+        link_to button_name,
+                change_state,
+                method: :put,
+                class: "btn btn-#{color_status} btn-sm#{button_status}",
+                data: { confirm: t("dashboard.ideas.confirm.#{confirm_status}") }
       end
 
       private
 
-      def idea_state
-        link_to model.state,
-                change_state,
-                method: :put,
-                class: "btn btn-#{color_status} btn-sm#{button_state}",
-                data: { confirm: t("dashboard.ideas.confirm.#{confirm_status}") }
-      end
-
-      def color_status
-        model.active? ? 'success' : color_not_success_status
-      end
-
-      def color_not_success_status
-        model.pending? ? 'warning' : 'danger'
-      end
-
-      def confirm_status
-        model.active? ? 'disable' : 'activate'
-      end
-
-      def button_state
+      def button_status
         model.rejected? ? ' disabled' : ''
       end
 
+      def button_name
+        if model.pending?
+          t('dashboard.ideas.button.voting')
+        elsif model.active?
+          t('dashboard.ideas.button.disable')
+        else
+          t('dashboard.ideas.button.activate')
+        end
+      end
+
+      def color_status
+        if model.active?
+          'danger'
+        elsif model.pending?
+          'warning'
+        else
+          'success'
+        end
+      end
+
+      def confirm_status
+        if model.pending?
+          'voting'
+        elsif model.active?
+          'disable'
+        else
+          'active'
+        end
+      end
+
       def change_state
-        model.active? ? deactivate_dashboard_idea_url(model) : activate_dashboard_idea_url(model)
+        if model.pending?
+          voting_dashboard_idea_url(model)
+        elsif model.active?
+          deactivate_dashboard_idea_url(model)
+        else
+          activate_dashboard_idea_url(model)
+        end
       end
     end
   end

@@ -9,7 +9,7 @@ module Web
                 change_state,
                 method: :put,
                 class: "btn btn-#{color_status} btn-sm",
-                data: { confirm: t("dashboard.ideas.confirm.#{confirm_status}") }
+                data: { confirm: t("dashboard.skills.confirm.#{confirm_status}") }
       end
 
       private
@@ -19,7 +19,7 @@ module Web
       end
 
       def confirm_status
-        model.active? ? 'disable' : 'activate'
+        model.active? ? 'disable' : 'active'
       end
 
       def change_state

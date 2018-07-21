@@ -48,7 +48,7 @@ describe Web::Dashboard::SkillStatusButton do
       end
 
       it 'renders link to confirm status to disable' do
-        expect(subject).to match(/data-confirm="Are you sure to activate/)
+        expect(subject).to match(/data-confirm="Are you sure to active/)
       end
     end
   end

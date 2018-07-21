@@ -9,6 +9,10 @@ FactoryBot.define do
     author
   end
 
+  trait :voting do
+    state 'voting'
+  end
+
   trait :active do
     state 'active'
   end
@@ -25,7 +29,11 @@ FactoryBot.define do
     state 'rejected'
   end
 
-  trait :all_states do
+  trait :not_voting do
     state %w[pending active disabled].sample
+  end
+
+  trait :all_states do
+    state %w[pending active disabled voting].sample
   end
 end

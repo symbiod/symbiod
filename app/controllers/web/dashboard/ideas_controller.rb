@@ -4,15 +4,18 @@ module Web
   module Dashboard
     # Manage ideas
     class IdeasController < BaseController
-      before_action :idea_find, only: %i[show edit update activate deactivate reject]
-      before_action :authorize_role
+      before_action :idea, only: %i[show edit update voting activate deactivate reject]
+      before_action :authorize_role, only: %i[index new create]
       rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       def index
         @ideas = ::Dashboard::IdeaPolicy::Scope.new(current_user, ::Idea).resolve.page params[:page]
       end
 
-      def show; end
+      def show
+        @count_idea_votes_up = @idea.votes.up.count
+        @count_idea_votes_down = @idea.votes.down.count
+      end
 
       def new
         @idea = ::Idea.new
@@ -38,6 +41,12 @@ module Web
           flash.now[:danger] = t('dashboard.ideas.update.danger')
           render :edit
         end
+      end
+
+      def voting
+        Ops::Idea::Voting.call(idea: @idea)
+        redirect_to dashboard_idea_url(@idea),
+                    flash: { success: "#{t('dashboard.ideas.notice.voting')}: #{@idea.name}" }
       end
 
       def activate
@@ -68,8 +77,9 @@ module Web
         authorize %i[dashboard idea], "#{action_name}?".to_sym
       end
 
-      def idea_find
-        @idea = ::Idea.find(params[:id])
+      def idea
+        @idea ||= ::Idea.find(params[:id])
+        authorize @idea, policy_class: ::Dashboard::IdeaPolicy
       end
     end
   end

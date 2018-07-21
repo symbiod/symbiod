@@ -1,8 +1,9 @@
 %h3
   = t('dashboard.ideas.headers.show')
   = @idea.id
-  = link_to t('dashboard.ideas.button.edit'), edit_dashboard_idea_url(@idea),
-                                              class: 'btn btn-info btn-sm' if policy(%i[dashboard idea]).edit?
+  - if ::Dashboard::IdeaPolicy.new(current_user, @idea).edit?
+    = link_to t('dashboard.ideas.button.edit'), edit_dashboard_idea_url(@idea),
+                                                class: 'btn btn-info btn-sm'
 .table-responsive
   %table.table.table-striped.table-sm
     %tr
@@ -16,9 +17,27 @@
     %tr
       %td
         %b= t('dashboard.ideas.table.status')
-      %td
-        = cell(Web::Dashboard::IdeaStatusButton, @idea)
+      %td= @idea.state
+    - if ::Dashboard::IdeaPolicy.new(current_user, @idea).manage?
+      %tr
+        %td
+          %b= t('dashboard.ideas.table.manage')
+        %td
+          = cell(Web::Dashboard::IdeaStatusButton, @idea)
     %tr
       %td
         %b= t('dashboard.ideas.table.author')
       %td= @idea.author.email
+    - if ::Dashboard::VotePolicy.new(current_user, @idea).voting?
+      %tr
+        %td
+          %b= link_to t('dashboard.ideas.table.votes'), dashboard_idea_votes_url(@idea)
+        %td
+          = @count_idea_votes_up
+          = link_to '+', up_dashboard_idea_vote_url(@idea),
+                        method: :put,
+                        class: 'btn btn-success btn-sm'
+          = link_to '-', down_dashboard_idea_vote_url(@idea),
+                        method: :put,
+                        class: 'btn btn-danger btn-sm'
+          = @count_idea_votes_down

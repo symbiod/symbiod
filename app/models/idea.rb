@@ -8,18 +8,24 @@ class Idea < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_one :project
 
+  has_many :votes
+
   include AASM
 
   aasm column: 'state' do
     state :pending, initial: true
-    state :active, :disabled, :rejected
+    state :voting, :active, :disabled, :rejected
+
+    event :voting do
+      transitions from: :pending, to: :voting
+    end
 
     event :activate do
-      transitions from: %i[pending disabled], to: :active
+      transitions from: %i[voting disabled], to: :active
     end
 
     event :reject do
-      transitions from: :pending, to: :rejected
+      transitions from: %i[pending voting], to: :rejected
     end
 
     event :disable do
