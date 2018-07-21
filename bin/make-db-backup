@@ -6,7 +6,7 @@
 # TODO: we may need to keep track of the latest N dumps, to prevent
 # accidental rewriting of data, in case it was compromised or broken.
 
-if [[ "$TRAVIS_EVENT_TYPE" == "push" ]]; then
+if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]]; then
   heroku pg:backups:capture --app peaceful-refuge-95132
   heroku pg:backups:download --app peaceful-refuge-95132
 
