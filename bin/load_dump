@@ -1,0 +1,11 @@
+#!/bin/bash
+# This script allows you to pull the latest dump from S3 and load it into your
+# development database
+# TODO: we may need to parse current database.yml to find proper database name
+# and access credentials
+
+wget https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump -O /tmp/givemepoc_latest.dump
+
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d poc_development /tmp/givemepoc_latest.dump
+
+rm /tmp/givemepoc_latest.dump

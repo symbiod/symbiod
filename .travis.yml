@@ -24,6 +24,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
+  - bin/make-db-backup
   - bundle exec rspec
   - bundle exec rake db:schema:load && bundle exec rake db:seed
   - bin/build
