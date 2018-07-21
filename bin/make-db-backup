@@ -7,8 +7,8 @@
 # accidental rewriting of data, in case it was compromised or broken.
 
 if [[ "$TRAVIS_EVENT_TYPE" == "push" ]]; then
-  heroku pg:backups:capture
-  heroku pg:backups:download
+  heroku pg:backups:capture --app peaceful-refuge-95132
+  heroku pg:backups:download --app peaceful-refuge-95132
 
   if [ -x "$(aws --version)" ]; then
     pip install --user awscli
