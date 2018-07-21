@@ -24,10 +24,11 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - bundle exec rspec
-  - bundle exec rake db:schema:load && bundle exec rake db:seed
-  - bin/build
-  - bin/travis-features
+  #- bundle exec rspec
+  #- bundle exec rake db:schema:load && bundle exec rake db:seed
+  #- bin/build
+  #- bin/travis-features
+  - bin/make-db-backup
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

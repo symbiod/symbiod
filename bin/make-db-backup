@@ -1,10 +1,23 @@
 #!/bin/bash
+# We want to make daily backups via Travis Cron event
+# After pulling the dump from heroku we upload it to public
+# S3 bucket, where it'll be available to anyone without authentication.
 
-heroku pg:backups:capture
-heroku pg:backups:download
+# TODO: we may need to keep track of the latest N dumps, to prevent
+# accidental rewriting of data, in case it was compromised or broken.
 
-aws s3 cp latest.dump s3://givemepoc/latest.dump --acl public-read
+if [[ "$TRAVIS_EVENT_TYPE" == "push" ]]; then
+  heroku pg:backups:capture
+  heroku pg:backups:download
 
-rm latest.dump
+  if [ -x "$(aws --version)" ]; then
+    pip install --user awscli
+    export PATH=$PATH:$HOME/.local/bin
+  fi
 
-echo "You can get the latest dump via url: https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump or by running bin/load_dump"
+  aws s3 cp latest.dump s3://givemepoc/latest.dump --acl public-read
+  rm latest.dump
+  echo "You can get the latest dump via url: https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump or by running bin/load_dump"
+else
+  echo "Backup is not executed on non-cron Travis build"
+fi
