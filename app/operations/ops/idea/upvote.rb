@@ -6,8 +6,8 @@ module Ops
     class Upvote < Ops::Idea::Vote
       private
 
-      def create_vote!(_ctx, idea:, user:, **)
-        ::Vote.create!(vote_type: 'up', user: user, idea: idea)
+      def vote_action
+        'up'
       end
     end
   end

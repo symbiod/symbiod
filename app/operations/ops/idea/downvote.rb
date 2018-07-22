@@ -6,8 +6,8 @@ module Ops
     class Downvote < Ops::Idea::Vote
       private
 
-      def create_vote!(_ctx, idea:, user:, **)
-        ::Vote.create!(vote_type: 'down', user: user, idea: idea)
+      def vote_action
+        'down'
       end
     end
   end
