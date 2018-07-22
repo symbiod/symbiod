@@ -13,7 +13,6 @@ module Developer
 
     has_many :test_task_assignments, class_name: 'Developer::TestTaskAssignment', foreign_key: 'test_task_id'
     belongs_to :skill
-    belongs_to :role, primary_key: :name, foreign_key: 'role_name'
 
     aasm column: 'state' do
       state :active, initial: true

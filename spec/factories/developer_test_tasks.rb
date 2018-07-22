@@ -7,7 +7,7 @@ FactoryBot.define do
     description { Faker::VForVendetta.speech }
     state 'active'
     skill
-    role
+    role_name 'mentor'
 
     trait :first_position do
       position 1

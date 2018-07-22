@@ -64,7 +64,7 @@ module Web
       end
 
       def find_user_roles
-        @roles = Role.for_test_tasks
+        @roles = Rolable.for_test_tasks
       end
 
       def authorize_staff!

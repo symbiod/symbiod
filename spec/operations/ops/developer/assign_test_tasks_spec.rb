@@ -20,7 +20,7 @@ describe Ops::Developer::AssignTestTasks do
 
       context 'all test tasks are disabled' do
         before do
-          create_list(:developer_test_task, 2, :disabled, skill: skill, role: role)
+          create_list(:developer_test_task, 2, :disabled, skill: skill, role_name: role.name)
         end
 
         it 'does not assign test tasks to user' do
@@ -32,7 +32,7 @@ describe Ops::Developer::AssignTestTasks do
 
       context 'less test tasks exist than required number' do
         before do
-          create(:developer_test_task, skill: skill, role: role)
+          create(:developer_test_task, skill: skill, role_name: role.name)
         end
 
         it 'assigns all existing test tasks to user' do
@@ -47,9 +47,9 @@ describe Ops::Developer::AssignTestTasks do
           # We can't use here create_list since the position field in the factory
           # is shuffled, and in case if we create two first positioned records,
           # then the spec will fail
-          create(:developer_test_task, :first_position, skill: skill, role: role)
-          create(:developer_test_task, :second_position, skill: skill, role: role)
-          create(:developer_test_task, :first_position, skill: skill, role: role)
+          create(:developer_test_task, :first_position, skill: skill, role_name: role.name)
+          create(:developer_test_task, :second_position, skill: skill, role_name: role.name)
+          create(:developer_test_task, :first_position, skill: skill, role_name: role.name)
         end
 
         it 'assigns all existing test tasks to user' do
@@ -63,7 +63,7 @@ describe Ops::Developer::AssignTestTasks do
         let(:another_skill) { create(:skill) }
 
         before do
-          create_list(:developer_test_task, positions + 1, skill: another_skill, role: role)
+          create_list(:developer_test_task, positions + 1, skill: another_skill, role_name: role.name)
         end
 
         it 'does not assign test tasks' do

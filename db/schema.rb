@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_07_23_173209) do
+=======
+ActiveRecord::Schema.define(version: 2018_07_22_130619) do
+>>>>>>> Get rid of rolify
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,13 +112,11 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+    t.string "type"
+    t.integer "user_id"
+    t.index ["type", "user_id"], name: "index_roles_on_type_and_user_id"
+    t.index ["type"], name: "index_roles_on_type"
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -186,8 +188,8 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
-  add_foreign_key "stack_skills", "skills"
-  add_foreign_key "stack_skills", "stacks"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
+  add_foreign_key "stack_skills", "stacks"
+  add_foreign_key "stack_skills", "skills"
 end

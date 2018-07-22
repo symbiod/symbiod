@@ -298,7 +298,6 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
-    rolify (5.2.0)
     rspec-cells (0.3.4)
       cells (>= 4.0.0, < 6.0.0)
       rspec-rails (~> 3.2)
@@ -480,7 +479,6 @@ DEPENDENCIES
   redcarpet
   reform
   reform-rails
-  rolify
   rspec-cells
   rspec-its
   rspec-rails
