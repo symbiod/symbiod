@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Roles
   class Author < Role
     def self.sti_name
-      "Roles::Author"
+      'Roles::Author'
     end
   end
 end

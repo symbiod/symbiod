@@ -7,7 +7,7 @@ require 'sorcery/model'
 class User < ApplicationRecord
   include AASM
   include Rolable
-  
+
   authenticates_with_sorcery!
 
   validates :email, presence: true, uniqueness: true

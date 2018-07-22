@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Roles
   class Mentor < Role
     def self.sti_name
-      "Roles::Mentor"
+      'Roles::Mentor'
     end
   end
 end

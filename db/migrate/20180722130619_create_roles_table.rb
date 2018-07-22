@@ -9,6 +9,6 @@ class CreateRolesTable < ActiveRecord::Migration[5.2]
 
     add_index :roles, :type, algorithm: :concurrently
     add_index :roles, :user_id, algorithm: :concurrently
-    add_index :roles, [:type, :user_id], algorithm: :concurrently
+    add_index :roles, %i[type user_id], algorithm: :concurrently
   end
 end
