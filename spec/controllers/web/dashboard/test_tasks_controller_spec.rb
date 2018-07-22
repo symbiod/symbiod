@@ -89,7 +89,8 @@ describe Web::Dashboard::TestTasksController do
         position: 1,
         title: Faker::VForVendetta.quote,
         description: Faker::VForVendetta.speech,
-        skill_id: skill.id
+        skill_id: skill.id,
+        role_name: 'developer'
       }
     end
 
