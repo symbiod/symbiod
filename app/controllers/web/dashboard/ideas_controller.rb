@@ -12,10 +12,7 @@ module Web
         @ideas = ::Dashboard::IdeaPolicy::Scope.new(current_user, ::Idea).resolve.page params[:page]
       end
 
-      def show
-        @count_idea_votes_up = @idea.votes.up.count
-        @count_idea_votes_down = @idea.votes.down.count
-      end
+      def show; end
 
       def new
         @idea = ::Idea.new
@@ -44,7 +41,7 @@ module Web
       end
 
       def voting
-        Ops::Idea::Voting.call(idea: @idea)
+        Ops::Idea::StartVoting.call(idea: @idea)
         redirect_to dashboard_idea_url(@idea),
                     flash: { success: "#{t('dashboard.ideas.notice.voting')}: #{@idea.name}" }
       end

@@ -3,7 +3,7 @@
 module Ops
   module Idea
     # Operation activate idea
-    class Voting < BaseOperation
+    class StartVoting < BaseOperation
       step :change_state!
 
       private

@@ -86,6 +86,7 @@ describe Dashboard::VotePolicy do
       let(:idea) { create(:idea) }
 
       it_behaves_like 'developer main actions'
+      it { is_expected.not_to permit_action(:voting_panel) }
     end
 
     context 'idea status voting' do
@@ -95,12 +96,14 @@ describe Dashboard::VotePolicy do
         it { is_expected.to permit_action(:index) }
         it { is_expected.to permit_action(:up) }
         it { is_expected.to permit_action(:down) }
+        it { is_expected.to permit_action(:voting_panel) }
       end
 
       context 'current user has voted' do
         let!(:vote) { create(:vote, user: user, idea: idea) }
 
         it_behaves_like 'developer main actions'
+        it { is_expected.to permit_action(:voting_panel) }
       end
     end
 
@@ -108,12 +111,14 @@ describe Dashboard::VotePolicy do
       let(:idea) { create(:idea, :disabled) }
 
       it_behaves_like 'developer main actions'
+      it { is_expected.not_to permit_action(:voting_panel) }
     end
 
     context 'idea status active' do
       let(:idea) { create(:idea, :active) }
 
       it_behaves_like 'developer main actions'
+      it { is_expected.not_to permit_action(:voting_panel) }
     end
   end
 end

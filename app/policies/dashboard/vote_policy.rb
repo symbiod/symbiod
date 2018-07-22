@@ -13,7 +13,7 @@ module Dashboard
 
     alias down? up?
 
-    def voting?
+    def voting_panel?
       record.voting?
     end
 

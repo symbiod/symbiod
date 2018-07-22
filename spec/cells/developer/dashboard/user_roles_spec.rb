@@ -7,9 +7,7 @@ describe Developer::Dashboard::UserRoles do
 
   controller Web::Dashboard::UsersController
 
-  before do
-    allow(controller).to receive(:current_user).and_return(current_user)
-  end
+  set_current_user
 
   context 'current user staff and he can assign/unassign roles' do
     let(:current_user) { create(:user, :active, :staff) }

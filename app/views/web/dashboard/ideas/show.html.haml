@@ -28,16 +28,9 @@
       %td
         %b= t('dashboard.ideas.table.author')
       %td= @idea.author.email
-    - if ::Dashboard::VotePolicy.new(current_user, @idea).voting?
+    - if ::Dashboard::VotePolicy.new(current_user, @idea).voting_panel?
       %tr
         %td
           %b= link_to t('dashboard.ideas.table.votes'), dashboard_idea_votes_url(@idea)
         %td
-          = @count_idea_votes_up
-          = link_to '+', up_dashboard_idea_vote_url(@idea),
-                        method: :put,
-                        class: 'btn btn-success btn-sm'
-          = link_to '-', down_dashboard_idea_vote_url(@idea),
-                        method: :put,
-                        class: 'btn btn-danger btn-sm'
-          = @count_idea_votes_down
+          = cell(Web::Dashboard::VotingPanel, @idea)

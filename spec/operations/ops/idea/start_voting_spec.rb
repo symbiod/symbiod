@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Ops::Idea::Voting do
+describe Ops::Idea::StartVoting do
   subject { described_class }
 
   describe '#call' do
