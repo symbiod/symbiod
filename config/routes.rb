@@ -49,9 +49,16 @@ Rails.application.routes.draw do
       end
       resources :ideas, except: :destroy do
         member do
+          put :voting
           put :activate
           put :deactivate
           put :reject
+        end
+        resources :votes, only: :index do
+          member do
+            put :up
+            put :down
+          end
         end
       end
       resources :test_tasks, except: :destroy do

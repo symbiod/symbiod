@@ -23,6 +23,8 @@ class User < ApplicationRecord
 
   has_many :notes, as: :noteable
 
+  has_many :votes
+
   # TODO: move to some other model, that represents developer explicitly.
   has_one :developer_onboarding, class_name: 'Developer::Onboarding', dependent: :destroy
   has_many :test_task_assignments,

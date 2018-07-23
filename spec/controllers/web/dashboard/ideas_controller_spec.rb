@@ -44,9 +44,9 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
 
         it_behaves_like 'dashboard idea #index tests'
 
-        it 'assigns activated ideas' do
+        it 'assigns voting ideas' do
           create_list(:idea, 10, :all_states)
-          expect(assigns(:ideas)).to eq Idea.active.page 1
+          expect(assigns(:ideas)).to eq Idea.voting.page 1
         end
       end
 
@@ -70,7 +70,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
 
         it 'assigns active and current user ideas' do
           create_list(:idea, 10, :all_states)
-          expect(assigns(:ideas)).to eq Idea.where('author_id = ? OR state = ?', user.id, 'active').page 1
+          expect(assigns(:ideas)).to eq Idea.where('author_id = ? OR state = ?', user.id, 'voting').page 1
         end
       end
     end
@@ -116,13 +116,35 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       context 'user has role developer' do
         let(:user) { create(:user, :developer, :active) }
 
-        it_behaves_like 'dashboard idea #show tests'
+        context 'idea status voting' do
+          let(:idea) { create(:idea, :voting) }
+
+          it_behaves_like 'dashboard idea #show tests'
+        end
+
+        context 'idea status not voting' do
+          let(:idea) { create(:idea, :not_voting) }
+
+          it 'redirects to dashboard root' do
+            expect(response).to redirect_to dashboard_root_url
+          end
+        end
       end
 
       context 'user has role author' do
         let(:user) { create(:user, :author, :active) }
 
-        it_behaves_like 'dashboard idea #show tests'
+        context 'author idea not current user' do
+          it 'redirects to dashboard root' do
+            expect(response).to redirect_to dashboard_root_url
+          end
+        end
+
+        context 'author idea current user' do
+          let(:idea) { create(:idea, author: user) }
+
+          it_behaves_like 'dashboard idea #show tests'
+        end
       end
     end
   end
@@ -290,7 +312,17 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       context 'user has role author' do
         let(:user) { create(:user, :author, :active) }
 
-        it_behaves_like 'dashboard idea #edit tests'
+        context 'author idea not current user' do
+          it 'redirects to dashboard root' do
+            expect(response).to redirect_to dashboard_root_url
+          end
+        end
+
+        context 'author idea current user' do
+          let(:idea) { create(:idea, author: user) }
+
+          it_behaves_like 'dashboard idea #edit tests'
+        end
       end
     end
   end
@@ -346,7 +378,20 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       context 'user has role author' do
         let(:user) { create(:user, :author, :active) }
 
-        it_behaves_like 'dashboard idea #update tests'
+        context 'author idea not current user' do
+          let(:idea) { create(:idea) }
+
+          it 'redirects to dashboard root' do
+            put :update, params: { id: idea.id, idea: new_idea_params }
+            expect(response).to redirect_to dashboard_root_url
+          end
+        end
+
+        context 'author idea current user' do
+          let(:idea) { create(:idea, author: user) }
+
+          it_behaves_like 'dashboard idea #update tests'
+        end
       end
 
       context 'not passed validation' do
@@ -399,15 +444,24 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
           it_behaves_like 'dashboard idea #activate tests'
         end
 
+        context 'created voting idea' do
+          let(:idea) { create(:idea, :voting) }
+
+          it 'the idea became active' do
+            expect { put :activate, params: { id: idea.id } }
+              .to change { idea.reload.state }.from('voting').to('active')
+          end
+
+          it_behaves_like 'dashboard idea #activate tests'
+        end
+
         context 'created pending idea' do
           let(:idea) { create(:idea, :pending) }
 
           it 'the idea became active' do
-            expect { put :activate, params: { id: idea.id } }
-              .to change { idea.reload.state }.from('pending').to('active')
+            put :activate, params: { id: idea.id }
+            expect(response).to redirect_to dashboard_root_url
           end
-
-          it_behaves_like 'dashboard idea #activate tests'
         end
       end
 
@@ -467,11 +521,6 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   end
 
   shared_examples 'dashboard idea #reject tests' do
-    it 'the idea became rejected' do
-      expect { put :reject, params: { id: idea.id } }
-        .to change { idea.reload.state }.from('pending').to('rejected')
-    end
-
     it 'redirects to dashboard idea' do
       put :reject, params: { id: idea.id }
       expect(response).to redirect_to dashboard_idea_url(idea)
@@ -496,7 +545,25 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
       context 'user has role staff or mentor' do
         let(:user) { create(:user, :staff_or_mentor, :active) }
 
-        it_behaves_like 'dashboard idea #reject tests'
+        context 'idea state pending' do
+          it 'the idea became rejected' do
+            expect { put :reject, params: { id: idea.id } }
+              .to change { idea.reload.state }.from('pending').to('rejected')
+          end
+
+          it_behaves_like 'dashboard idea #reject tests'
+        end
+
+        context 'idea state voting' do
+          let(:idea) { create(:idea, :voting) }
+
+          it 'the idea became rejected' do
+            expect { put :reject, params: { id: idea.id } }
+              .to change { idea.reload.state }.from('voting').to('rejected')
+          end
+
+          it_behaves_like 'dashboard idea #reject tests'
+        end
       end
 
       context 'user has role developer' do
@@ -504,6 +571,50 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
 
         it 'redirects to dashboard root' do
           put :reject, params: { id: idea.id }
+          expect(response).to redirect_to dashboard_root_url
+        end
+      end
+    end
+  end
+
+  shared_examples 'dashboard idea #voting tests' do
+    it 'the idea became voting' do
+      expect { put :voting, params: { id: idea.id } }
+        .to change { idea.reload.state }.from('pending').to('voting')
+    end
+
+    it 'redirects to dashboard idea' do
+      put :voting, params: { id: idea.id }
+      expect(response).to redirect_to dashboard_idea_url(idea)
+    end
+  end
+
+  describe 'GET #voting' do
+    let(:idea) { create(:idea, :pending) }
+
+    context 'not signed in' do
+      let(:user) { create(:user, :staff, :active) }
+      before { put :voting, params: { id: idea.id } }
+
+      it 'redirects to root landing' do
+        expect(response).to redirect_to root_landing_url
+      end
+    end
+
+    context 'signed in' do
+      before { login_user(user) }
+
+      context 'user has role staff or mentor' do
+        let(:user) { create(:user, :staff_or_mentor, :active) }
+
+        it_behaves_like 'dashboard idea #voting tests'
+      end
+
+      context 'user has role developer' do
+        let(:user) { create(:user, :developer_or_author, :active) }
+
+        it 'redirects to dashboard root' do
+          put :voting, params: { id: idea.id }
           expect(response).to redirect_to dashboard_root_url
         end
       end

@@ -1,0 +1,10 @@
+%h3= t('dashboard.votes.headers.index')
+%table.table.table-striped.tabke-sm
+  %thead
+    %tr
+      %th= t('dashboard.votes.table.user')
+      %th= t('dashboard.votes.table.vote_type')
+    - @votes.each do |vote|
+      %tr
+        %td= link_to vote.user.email, dashboard_user_url(vote.user)
+        %td= vote.vote_type

@@ -1,5 +1,5 @@
 = idea_status
-- if model.pending?
+- if ::Dashboard::IdeaPolicy.new(current_user, model).reject?
   = link_to t('dashboard.ideas.button.reject'),
             reject_dashboard_idea_url(model),
             method: :put,

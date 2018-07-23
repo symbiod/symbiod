@@ -7,34 +7,79 @@ module Dashboard
       true
     end
 
-    alias show? index?
+    def show?
+      current_user_allow_show?
+    end
 
     def new?
       not_developer?
     end
 
     alias create? new?
-    alias edit? new?
-    alias update? new?
+
+    def edit?
+      current_user_allow_edit?
+    end
+
+    alias update? edit?
+
+    def voting?
+      current_user_allow_voting?
+    end
 
     def activate?
+      current_user_allow_activate?
+    end
+
+    def deactivate?
+      current_user_allow_deactivate?
+    end
+
+    def reject?
+      current_user_allow_reject?
+    end
+
+    def manage?
       staff_or_mentor?
     end
 
-    alias deactivate? activate?
-    alias reject? activate?
+    private
+
+    def current_user_allow_show?
+      staff_or_mentor? || record.voting? && developer? || record.author == user
+    end
+
+    def current_user_allow_edit?
+      staff_or_mentor? || author? && record.author == user
+    end
+
+    def current_user_allow_voting?
+      record.pending? && staff_or_mentor?
+    end
+
+    def current_user_allow_activate?
+      (record.disabled? || record.voting?) && staff_or_mentor?
+    end
+
+    def current_user_allow_deactivate?
+      record.active? && staff_or_mentor?
+    end
+
+    def current_user_allow_reject?
+      (record.pending? || record.voting?) && staff_or_mentor?
+    end
 
     # Defines a scope of Ideas, who can be available for acting person
     class Scope < Scope
       def resolve
         if all_ideas?
           ::Idea.all
-        elsif activated_and_current_user_ideas?
-          ::Idea.where('author_id = ? OR state = ?', user.id, 'active')
+        elsif voting_and_current_user_ideas?
+          ::Idea.where('author_id = ? OR state = ?', user.id, 'voting')
         elsif current_user_ideas?
           ::Idea.where(author_id: user.id)
         elsif active_ideas?
-          ::Idea.active
+          ::Idea.voting
         end
       end
 
@@ -44,7 +89,7 @@ module Dashboard
         user.has_role?(:staff) || user.has_role?(:mentor)
       end
 
-      def activated_and_current_user_ideas?
+      def voting_and_current_user_ideas?
         user.has_role?(:developer) && user.has_role?(:author)
       end
 

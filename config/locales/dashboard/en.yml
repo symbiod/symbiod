@@ -116,7 +116,17 @@ en:
       notice:
         activate: The skill was activated
         deactivate: The skill was disabled
+      confirm:
+        active: Are you sure to active?
+        disable: Are you sure to disable?
     ideas:
+      table:
+        name: Name
+        description: Description
+        status: Status
+        manage: Manage
+        author: Author
+        votes: Votes
       headers:
         show: Idea id
         index: Ideas
@@ -126,14 +136,28 @@ en:
         new: New
         update: Update
         create: Create
+        voting: Voting
+        activate: Activate
+        disable: Disable
         reject: Reject
       update:
         success: Idea was updated
         danger: Could not update idea
       notice:
-        activated: The idea was activated
-        deactivated: The idea was disabled
-        rejected: The idea was rejected
+        voting: The idea change state to voting
+        activated: The idea change state to active
+        deactivated: The idea change state to disabled
+        rejected: The idea change state to rejected
       confirm:
-        activate: Are you sure to activate?
+        voting: Are you sure to voting?
+        active: Are you sure to active?
         disable: Are you sure to disable?
+    votes:
+      headers:
+        index: Index page
+      table:
+        user: User
+        vote_type: Vote type
+      notice:
+        success: Thanks for the vote
+        warning: Sorry, but you already voted for this idea

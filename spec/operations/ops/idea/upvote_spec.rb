@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-describe Ops::Idea::Activate do
+describe Ops::Idea::Upvote do
   subject { described_class }
 
   describe '#call' do
     let(:idea) { create(:idea, :voting) }
-    let(:params) { { idea: idea } }
+    let(:user) { create(:user, :developer, :active) }
+    let(:params) { { idea: idea, user: user } }
 
-    it 'changes idea state' do
+    it 'created vote idea' do
       expect { subject.call(params) }
-        .to change(idea.reload, :state)
-        .from('voting').to('active')
+        .to change(Vote, :count).by(1)
     end
   end
 end
