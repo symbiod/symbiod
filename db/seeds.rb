@@ -37,6 +37,6 @@ end
 end
 
 stack = Stack.create!(name: 'Rails monolith', identifier: 'rails_monolith')
-Skill.where(title: %w[Ruby JavaScript]).each do |skill|
-  StackSkill.create!(stack: stack, skill: skill)
+Skill.where(title: %w[Ruby Front-end]).each do |skill|
+  stack.skills << skill
 end
