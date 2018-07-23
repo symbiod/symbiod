@@ -35,3 +35,8 @@ end
   user.add_role Developer::Wizard::ProfileForm::ROLES.sample
   UserSkill.create!(user: user, skill: Skill.all.sample, primary: true)
 end
+
+stack = Stack.create!(name: 'Rails monolith', identifier: 'rails_monolith')
+Skill.where(title: %w[Ruby JavaScript]).each do |skill|
+  StackSkill.create!(stack: stack, skill: skill)
+end
