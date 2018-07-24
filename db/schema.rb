@@ -10,12 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_07_23_173209) do
-=======
-ActiveRecord::Schema.define(version: 2018_07_22_130619) do
->>>>>>> Get rid of rolify
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
