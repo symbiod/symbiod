@@ -84,14 +84,13 @@ describe Web::Dashboard::TestTasksController do
 
   describe 'POST #create' do
     let!(:skill) { create(:skill) }
-    let!(:role) { create(:role) }
     let(:test_task_params) do
       {
         position: 1,
         title: Faker::VForVendetta.quote,
         description: Faker::VForVendetta.speech,
-        role_name: role.name,
-        skill_id: skill.id
+        skill_id: skill.id,
+        role_name: 'developer'
       }
     end
 
@@ -137,7 +136,6 @@ describe Web::Dashboard::TestTasksController do
             position: 1,
             title: Faker::VForVendetta.quote,
             description: nil,
-            role_name: role.name,
             skill_id: skill.id
           }
         end

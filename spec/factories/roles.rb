@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :role do
-    name 'developer'
+    type 'Roles::Developer'
+    user
   end
 end

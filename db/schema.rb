@@ -24,9 +24,7 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 
-  create_table "data_migrations", id: false, force: :cascade do |t|
-    t.string "version", null: false
-    t.index ["version"], name: "unique_data_migrations", unique: true
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
   create_table "developer_onboardings", force: :cascade do |t|
@@ -108,13 +106,13 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
+    t.string "type"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+    t.index ["type", "user_id"], name: "index_roles_on_type_and_user_id"
+    t.index ["type"], name: "index_roles_on_type"
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "skills", force: :cascade do |t|

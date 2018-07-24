@@ -25,7 +25,7 @@ module Users
       # NOTICE: We do not use `with_any_role` Rolify scope, because it returns array instead of
       # AR relation ATM
       User.joins(:roles, :skills)
-          .where('legacy_roles.name IN (?)', [:mentor])
+          .where('roles.type=?', 'Roles::Mentor')
           .where(user_skills: { skill_id: @applicant.primary_skill.id })
     end
   end

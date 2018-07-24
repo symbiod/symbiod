@@ -2,6 +2,6 @@
   = f.input :title
   = f.input :position, collection: 1..Developer::TestTaskAssignment::MAX_NUMBER_OF_ASSIGNMENTS, include_blank: false
   = f.input :description, input_html: { rows: 10, 'data-provide': 'markdown' }
-  = f.input :role_name, collection: roles, value_method: :name, include_blank: false
+  = f.input :role_name, collection: roles, include_blank: false
   = f.input :skill_id, collection: Skill.all, include_blank: false
   = f.button :submit, class: 'btn btn-info'
