@@ -5,6 +5,7 @@ class CreateRolesTable < ActiveRecord::Migration[5.2]
     create_table :roles do |t|
       t.string :type
       t.integer :user_id
+      t.timestamps
     end
 
     add_index :roles, :type, algorithm: :concurrently
