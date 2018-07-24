@@ -162,10 +162,8 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.string "location"
     t.string "timezone"
     t.string "cv_url"
-    t.bigint "skill_id"
     t.integer "approver_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["skill_id"], name: "index_users_on_skill_id"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
