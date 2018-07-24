@@ -28,8 +28,7 @@ RSpec.describe Roles::RolesManager do
         context 'role is valid' do
           it 'adds role' do
             expect { subject.add(:mentor) }
-              .to(change { user.reload.roles.count })
-              .by(1)
+              .to(change { user.reload.roles.count }.by(1))
           end
 
           context 'role already exists' do
@@ -52,8 +51,7 @@ RSpec.describe Roles::RolesManager do
         context 'when roles exists' do
           it 'removes role' do
             expect { subject.remove(:developer) }
-              .to(change { user.reload.roles.count })
-              .by(-1)
+              .to(change { user.reload.roles.count }.by(-1))
           end
         end
 
