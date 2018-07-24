@@ -8,4 +8,18 @@ RSpec.describe Role, type: :model do
 
     it { is_expected.to validate_inclusion_of(:type).in_array(Rolable.role_class_names) }
   end
+
+  describe '#name' do
+    let(:role) { build(:role) }
+    let(:stubbed_name) { 'Some name' }
+
+    before do
+      allow(Roles::RolesManager)
+        .to receive(:role_name_by_type)
+        .with(Role)
+        .and_return(stubbed_name)
+    end
+
+    its(:name) { is_expected.to eq stubbed_name }
+  end
 end

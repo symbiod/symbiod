@@ -9,6 +9,6 @@ class Role < ApplicationRecord
   validates :type, inclusion: { in: Rolable.role_class_names }
 
   def name
-    ::Rolable::RolesManager.role_name_by_type(self.class)
+    Roles::RolesManager.role_name_by_type(self.class)
   end
 end

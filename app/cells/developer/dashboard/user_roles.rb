@@ -31,7 +31,7 @@ module Developer
       end
 
       def list_roles
-        UserPolicy.new(current_user, nil).manage_roles? ? Rolable::RolesManager.roles : model.roles_name
+        UserPolicy.new(current_user, nil).manage_roles? ? Roles::RolesManager.roles : model.roles_name
       end
     end
   end

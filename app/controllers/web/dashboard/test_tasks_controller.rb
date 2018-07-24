@@ -64,7 +64,7 @@ module Web
       end
 
       def find_user_roles
-        @roles = Rolable::RolesManager::MEMBER_ROLES
+        @roles = Roles::RolesManager::MEMBER_ROLES
       end
 
       def authorize_staff!
