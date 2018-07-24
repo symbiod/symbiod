@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2018_07_23_173209) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,9 +24,7 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 
-  create_table "data_migrations", id: false, force: :cascade do |t|
-    t.string "version", null: false
-    t.index ["version"], name: "unique_data_migrations", unique: true
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
   create_table "developer_onboardings", force: :cascade do |t|
@@ -109,6 +108,8 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
   create_table "roles", force: :cascade do |t|
     t.string "type"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["type", "user_id"], name: "index_roles_on_type_and_user_id"
     t.index ["type"], name: "index_roles_on_type"
     t.index ["user_id"], name: "index_roles_on_user_id"
@@ -161,8 +162,10 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.string "location"
     t.string "timezone"
     t.string "cv_url"
+    t.bigint "skill_id"
     t.integer "approver_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["skill_id"], name: "index_users_on_skill_id"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -183,8 +186,8 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "stack_skills", "skills"
+  add_foreign_key "stack_skills", "stacks"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
-  add_foreign_key "stack_skills", "stacks"
-  add_foreign_key "stack_skills", "skills"
 end
