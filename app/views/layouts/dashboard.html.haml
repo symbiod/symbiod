@@ -36,9 +36,9 @@
                   = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
                     %span{ 'data-feather': 'file' }
                     Applicants
-                    - if count_of_users_pending != 0 && (current_user.has_role? :staff)
+                    - if User.pending_users != 0 && (current_user.has_role? :staff)
                       (
-                      = count_of_users_pending
+                      = User.pending_users
                       )
               - if policy(:test_task).index?
                 %li.nav-item
