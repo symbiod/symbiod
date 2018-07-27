@@ -7,6 +7,6 @@ describe ApplicationHelper do
   let!(:candidate2) { create(:user, :screening_completed) }
 
   it 'return coun of pending users' do
-    expect(count_of_pending_users).to eq "(2)"
+    expect(count_of_pending_users).to eq '(2)'
   end
 end
