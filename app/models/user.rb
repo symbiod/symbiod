@@ -37,7 +37,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :authentications
 
   scope :newer_first, -> { order(id: :desc) }
-  scope :pending_users, -> { where(state: "screening_completed").count }
 
   aasm column: 'state' do
     state :pending, initial: true
