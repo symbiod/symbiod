@@ -72,6 +72,24 @@ RSpec.describe Roles::RolesManager do
           specify { expect(subject.has?(:mentor)).to be false }
         end
       end
+
+      describe '#role_for' do
+        before do
+          user.add_role :mentor
+        end
+
+        context 'user has required role' do
+          it 'returns mentor role' do
+            expect(subject.role_for(:mentor)).to be_kind_of Roles::Mentor
+          end
+        end
+
+        context 'user does not have role' do
+          it 'returns nil' do
+            expect(subject.role_for(:staff)).to eq nil
+          end
+        end
+      end
     end
   end
 end

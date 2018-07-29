@@ -46,5 +46,9 @@ module Roles
     def has?(name)
       @user.roles.where(type: RolesManager.role_class_name(name)).count.positive?
     end
+
+    def role_for(name)
+      @user.roles.find_by(type: RolesManager.role_class_name(name))
+    end
   end
 end
