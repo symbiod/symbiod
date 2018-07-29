@@ -19,7 +19,7 @@ module Web
     end
 
     def author_status
-      if current_user.active?
+      if DashboardPolicy.new(current_user, nil).allowed?
         ['go_to_dashboard', dashboard_root_url]
       else
         ['go_to_proposal', idea_proposals_url]

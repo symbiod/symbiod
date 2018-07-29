@@ -13,7 +13,7 @@ describe Developer::Dashboard::UserRoles do
     let(:current_user) { create(:user, :active, :staff) }
     let(:developer) { create(:user, :developer) }
 
-    it { expect(subject.render_role('developer')).to match(I18n.t('dashboard.users.unassign_role', role: 'developer')) }
+    it { expect(subject.render_role('developer')).to be_kind_of Developer::Dashboard::UserStatusButton }
     it { expect(subject.render_role('staff')).to match(I18n.t('dashboard.users.assign_role', role: 'staff')) }
     it { expect(subject.render_role('author')).to match(I18n.t('dashboard.users.assign_role', role: 'author')) }
     it { expect(subject.render_role('mentor')).to match(I18n.t('dashboard.users.assign_role', role: 'mentor')) }

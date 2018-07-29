@@ -7,7 +7,6 @@
         %th= t('dashboard.users.table.full_name')
         %th= t('dashboard.users.table.roles')
         %th= t('dashboard.users.table.primary_skill')
-        %th= t('dashboard.users.table.status')
         %th= t('dashboard.users.table.progress')
         %th= t('dashboard.users.table.applicants')
       - @users.each do |user|
@@ -20,8 +19,6 @@
                 %li
                   = role.name
           %td= user.primary_skill&.title
-          %td
-            = cell(Developer::Dashboard::UserStatusButton, user)
           %td.col-md-2
             = cell(Developer::Dashboard::DisplayProgress, user)
           %td

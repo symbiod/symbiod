@@ -19,9 +19,7 @@ module Developer
       end
 
       def unassign_link(role)
-        link_to t('dashboard.users.unassign_role', role: role), remove_role_dashboard_user_url(model, role: role),
-                method: :put,
-                data: { confirm: t('dashboard.users.confirm.unassign_role', role: role) }
+        cell(Developer::Dashboard::UserStatusButton, Roles::RolesManager.new(model).role_for(role))
       end
 
       def assign_link(role)
