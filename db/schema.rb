@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_140335) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
     t.index ["type", "user_id"], name: "index_roles_on_type_and_user_id"
     t.index ["type"], name: "index_roles_on_type"
     t.index ["user_id"], name: "index_roles_on_user_id"
