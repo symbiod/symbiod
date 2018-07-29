@@ -11,8 +11,6 @@ class MigrateRolesState < ActiveRecord::Migration[5.2]
     raise ActiveRecord::IrreversibleMigration
   end
 
-  private
-
   class RoleMigrator
     attr_reader :user
 
@@ -34,7 +32,7 @@ class MigrateRolesState < ActiveRecord::Migration[5.2]
     end
 
     def migrate_other_roles
-      [:mentor, :author, :staff].each do |role_name|
+      %i[mentor author staff].each do |role_name|
         next unless user.has_role?(role_name)
         role_object = Roles::RolesManager.new(user).role_for(role_name)
         role_object.update(state: 'active')

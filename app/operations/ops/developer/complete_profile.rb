@@ -4,7 +4,7 @@ module Ops
   module Developer
     # Persists passed data and starts screening
     # bases on chosen technologies
-    class CompleteProfile < BaseOperation
+    class CompleteProfile < ::Ops::Developer::BaseOperation
       NON_USER_PARAMS = %i[primary_skill_id role].freeze
 
       step ->(ctx, user:, **) { ctx[:model] = user }
@@ -28,7 +28,7 @@ module Ops
       end
 
       def complete_profile!(_ctx, user:, **)
-        user.complete_profile!
+        role(user).complete_profile!
       end
 
       def start_screening!(_ctx, user:, **)

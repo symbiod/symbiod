@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # This module provides a backward-compatible interface for the RolesManager class.
-# It's goal is to prevent braking contract introduced by Rolify with existing code.
+# It's goal is to prevent breaking the contract introduced by Rolify with existing code.
 module Rolable
   extend ActiveSupport::Concern
 
@@ -20,6 +20,10 @@ module Rolable
 
   def self.role_class_names
     Roles::RolesManager.roles.map { |name| Roles::RolesManager.role_class_name(name) }
+  end
+
+  def self.member_roles_class_names
+    Roles::RolesManager::MEMBER_ROLES.map { |name| Roles::RolesManager.role_class_name(name) }
   end
 
   def has_role?(name) # rubocop:disable Naming/PredicateName

@@ -10,18 +10,33 @@ describe DashboardPolicy do
     it { is_expected.not_to permit_action(:allowed) }
   end
 
-  context 'pending user' do
-    let(:user) { create(:user) }
+  context 'active developer' do
+    let(:user) { create(:user, :developer, :active) }
+    it { is_expected.to permit_action(:allowed) }
+  end
+
+  context 'disabled developer' do
+    let(:user) { create(:user, :developer, :disabled) }
     it { is_expected.not_to permit_action(:allowed) }
   end
 
-  context 'active user' do
-    let(:user) { create(:user, :active) }
+  context 'active mentor' do
+    let(:user) { create(:user, :mentor, :active) }
     it { is_expected.to permit_action(:allowed) }
   end
 
-  context 'user with staff role' do
+  context 'disabled mentor' do
+    let(:user) { create(:user, :mentor, :disabled) }
+    it { is_expected.not_to permit_action(:allowed) }
+  end
+
+  context 'active staff' do
     let(:user) { create(:user, :staff) }
     it { is_expected.to permit_action(:allowed) }
+  end
+
+  context 'disabled staff' do
+    let(:user) { create(:user, :staff, :disabled) }
+    it { is_expected.not_to permit_action(:allowed) }
   end
 end

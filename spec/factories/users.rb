@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  # TODO: remove this aliases, since the user does not represent role anymore
   factory :user, aliases: %i[author developer] do
     email { Faker::Internet.email }
     github { Faker::Name.last_name }
@@ -9,41 +10,47 @@ FactoryBot.define do
     location { Faker::Address.country }
     timezone { Faker::Address.time_zone }
     cv_url { Faker::Internet.url }
-    state 'pending'
     password 'password'
     salt { 'ExqpVWiDcK2vGfeRjqTx' }
     crypted_password { Sorcery::CryptoProviders::BCrypt.encrypt('password', salt) }
 
-    trait :pending
+    # TODO: this ugly approach is added just for backward compatibility
+    # We need to get rid of it, in favor of one user - multiple roles approach
+    trait :pending do
+      after(:create) { |u| u.roles.first&.update(state: 'pending') }
+    end
 
     trait :policy_accepted do
-      state 'policy_accepted'
+      after(:create) { |u| u.roles.first&.update(state: 'policy_accepted') }
     end
 
     trait :profile_completed do
-      state 'profile_completed'
+      after(:create) { |u| u.roles.first&.update(state: 'profile_completed') }
     end
 
     trait :active do
-      state 'active'
+      after(:create) { |u| u.roles.first&.update(state: 'active') }
     end
 
     trait :disabled do
-      state 'disabled'
+      after(:create) { |u| u.roles.first&.update(state: 'disabled') }
     end
 
     trait :rejected do
-      state 'rejected'
+      after(:create) { |u| u.roles.first&.update(state: 'rejected') }
     end
 
     trait :screening_completed do
-      state 'screening_completed'
+      after(:create) { |u| u.roles.first&.update(state: 'screening_completed') }
     end
 
     trait :not_screening_completed do
-      state %w[profile_completed active disabled rejected policy_accepted].sample
+      after(:create) do |u|
+        u.roles.first&.update(state: %w[profile_completed active disabled rejected policy_accepted].sample)
+      end
     end
 
+    # Roles
     trait :staff do
       after(:create) do |user|
         user.add_role(:staff)

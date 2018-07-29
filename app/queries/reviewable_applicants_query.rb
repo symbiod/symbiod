@@ -10,8 +10,10 @@ class ReviewableApplicantsQuery
 
   def call
     User
-      .screening_completed
-      .joins(:skills)
-      .where(user_skills: { skill_id: mentor.primary_skill.id })
+      .joins(:roles, :skills)
+      .where(
+        user_skills: { skill_id: mentor.primary_skill.id },
+        roles: { state: :screening_completed }
+      )
   end
 end

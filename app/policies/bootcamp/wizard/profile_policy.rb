@@ -5,7 +5,10 @@ module Bootcamp
     # Defines access rules to profile editing wizard page
     class ProfilePolicy < ApplicationPolicy
       def edit?
-        user&.policy_accepted?
+        return unless user
+        user.roles
+            .where(state: 'pending', type: Rolable.member_roles_class_names)
+            .any?
       end
     end
   end

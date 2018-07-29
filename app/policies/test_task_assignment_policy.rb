@@ -18,7 +18,7 @@ class TestTaskAssignmentPolicy < DashboardPolicy
   class Scope < Scope
     def resolve
       if user.has_role? :staff
-        User.screening_completed.all
+        User.joins(:roles).where(roles: { state: :screening_completed })
       elsif user.has_role? :mentor
         ReviewableApplicantsQuery.new(user).call
       else
@@ -34,10 +34,12 @@ class TestTaskAssignmentPolicy < DashboardPolicy
   end
 
   def staff_assignment?
-    staff? && record.screening_completed?
+    staff? && record.roles.where(state: 'screening_completed').any?
   end
 
   def mentor_assignment?
-    mentor? && user.primary_skill == record.primary_skill && record.screening_completed?
+    mentor? &&
+      user.primary_skill == record.primary_skill &&
+      record.roles.where(state: 'screening_completed').any?
   end
 end

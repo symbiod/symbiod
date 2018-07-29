@@ -6,14 +6,15 @@ describe Ops::Developer::Reject do
   subject { described_class }
 
   describe '#call' do
-    let(:user) { create(:user, :screening_completed) }
+    let(:user) { create(:user, :developer, :screening_completed) }
     let(:feedback) { 'some feedback' }
     let!(:assignment) { create(:developer_test_task_assignment, developer: user) }
     let(:params) { { user: user, feedback: feedback } }
+    let(:role) { role_for(user: user, role_name: :developer) }
 
-    it 'changes user state' do
+    it 'changes role state' do
       expect { subject.call(params) }
-        .to change(user.reload, :state)
+        .to change { role.reload.state }
         .from('screening_completed').to('rejected')
     end
 

@@ -4,15 +4,16 @@ module Ops
   module Developer
     # When the candidate is disabled we run a bunch of tasks,
     # including email notification
-    class Disable < BaseOperation
+    class Disable < ::Ops::Developer::BaseOperation
       step :change_state!
       step :send_notifications!
-      # step :start_offboarding!
 
       private
 
+      # TODO: we should pass here a role object, instead of user
+      # in this case we'll not need to find the role each time.
       def change_state!(_ctx, user:, **)
-        user.disable!
+        role(user).disable!
       end
 
       def send_notifications!(_ctx, user:, **)

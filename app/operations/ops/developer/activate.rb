@@ -5,7 +5,7 @@ module Ops
     # When the candidate is approved we run a bunch of tasks.
     # Usually it should happen when staff approves applicant's
     # test task during screening.
-    class Activate < BaseOperation
+    class Activate < ::Ops::Developer::BaseOperation
       step :change_state!
       step :set_approver!
       step :send_notifications!
@@ -13,8 +13,9 @@ module Ops
 
       private
 
+      # TODO: rework by passing role instead of user
       def change_state!(_ctx, user:, **)
-        user.activate!
+        role(user).activate!
       end
 
       def set_approver!(_ctx, user:, performer:, **)

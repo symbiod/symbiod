@@ -4,7 +4,7 @@
 class DashboardPolicy < ApplicationPolicy
   def allowed?
     return false unless user
-    user.active? || user.has_role?(:staff)
+    user.roles.any?(&:active?)
   end
 
   private

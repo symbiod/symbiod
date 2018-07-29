@@ -4,24 +4,25 @@ require 'rails_helper'
 
 describe Ops::Developer::Activate do
   subject { described_class }
-  let(:user) { create(:user, :staff) }
-  let(:candidate) { create(:user, :screening_completed) }
-  let(:params) { { user: candidate, performer: user.id } }
+  let(:performer) { create(:user, :staff) }
+  let(:candidate) { create(:user, :developer, :screening_completed) }
+  let(:params) { { user: candidate, performer: performer.id } }
+  let(:role) { role_for(user: candidate, role_name: :developer) }
 
   describe '#call' do
     it 'changes candidates state' do
       expect { subject.call(params) }
-        .to change { candidate.reload.state }
+        .to change { role.reload.state }
         .from('screening_completed').to('active')
     end
 
-    it 'add approver to candidate' do
+    it 'assigns an approver to the candidate' do
       expect { subject.call(params) }
         .to change { candidate.reload.approver_id }
-        .from(nil).to(user.id)
+        .from(nil).to(performer.id)
     end
 
-    it 'sends email about start of onboarding with sidekiq-job' do
+    it 'sends onboarding notification' do
       expect { subject.call(params) }
         .to have_enqueued_job(ActionMailer::DeliveryJob)
         .with(
@@ -32,7 +33,7 @@ describe Ops::Developer::Activate do
         )
     end
 
-    it 'starts onboarding operation' do
+    it 'starts onboarding' do
       expect(Ops::Developer::Onboarding).to receive(:call).with(user: candidate)
       subject.call(params)
     end
