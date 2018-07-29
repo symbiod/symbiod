@@ -19,8 +19,10 @@ module Developer
       steps.include?(state)
     end
 
+    # When the user has just signed up, he may not have a role and state
+    # for this case we redirect him to the very first step
     def route_for_current_step
-      steps_routes_mapping[state]
+      steps_routes_mapping[state] || steps_routes_mapping[:pending]
     end
 
     def steps
@@ -30,14 +32,14 @@ module Developer
     private
 
     def state
-      ::Roles::RolesManager.new(user).role_for(:developer).state.to_sym
+      ::Roles::RolesManager.new(user).role_for(:developer)&.state&.to_sym
     end
 
     def steps_routes_mapping
       {
-        pending: 'edit_bootcamp_wizard_accept_policy_url',
-        policy_accepted: 'edit_bootcamp_wizard_profile_url',
-        profile_completed: 'bootcamp_wizard_screenings_url',
+        pending: 'edit_bootcamp_wizard_profile_url',
+        profile_completed: 'edit_bootcamp_wizard_accept_policy_url',
+        policy_accepted: 'bootcamp_wizard_screenings_url',
         screening_completed: 'bootcamp_wizard_screenings_url'
       }
     end

@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :role do
     user
+    type 'Roles::Developer'
 
     trait :developer do
       initialize_with { Roles::Developer.new(attributes) }

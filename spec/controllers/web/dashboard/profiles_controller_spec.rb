@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Web::Dashboard::ProfilesController do
-  let(:user) { create(:user, :active) }
+  let(:user) { create(:user, :developer, :active) }
 
   describe 'GET #show' do
     context 'authenticated' do

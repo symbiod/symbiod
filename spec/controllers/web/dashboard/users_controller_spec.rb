@@ -48,7 +48,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
   describe 'GET #show' do
     context 'authorized' do
-      let!(:candidate) { create(:user, :screening_completed) }
+      let!(:candidate) { create(:user, :developer, :screening_completed) }
       before do
         login_user(user)
         get :show, params: { id: candidate.id }
@@ -81,7 +81,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
   end
 
   describe 'GET #edit' do
-    let!(:candidate) { create(:user, :active) }
+    let!(:candidate) { create(:user, :developer, :active) }
 
     context 'not authorized' do
       before do
@@ -124,7 +124,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
         primary_skill_id: skill.id
       }
     end
-    let!(:candidate) { create(:user, :active, :with_primary_skill) }
+    let!(:candidate) { create(:user, :developer, :active, :with_primary_skill) }
 
     context 'not authorized' do
       let(:actual) { candidate.primary_skill }
@@ -144,6 +144,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
     context 'authorized staff' do
       before { login_user(user) }
+
       context 'validates params' do
         it 'redirect to user' do
           put :update, params: { id: candidate.id, user: attr }
@@ -174,7 +175,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
   describe 'PUT #active' do
     context 'authorized' do
-      let!(:candidate) { create(:user, :disabled) }
+      let!(:candidate) { create(:user, :developer, :disabled) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
@@ -194,7 +195,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :active) }
+      let!(:candidate) { create(:user, :developer, :active) }
       before { login_user(candidate) }
 
       it 'redirects to dashboard root' do
@@ -206,7 +207,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
   describe 'PUT #deactivate' do
     context 'authorized' do
-      let(:candidate) { create(:user, :active) }
+      let(:candidate) { create(:user, :developer, :active) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
@@ -221,8 +222,8 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let(:user) { create(:user, :active) }
-      let(:candidate) { create(:user, :active) }
+      let(:user) { create(:user, :developer, :active) }
+      let(:candidate) { create(:user, :developer, :active) }
       before { login_user(user) }
 
       it 'redirect to dashboard root' do
@@ -241,7 +242,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     let(:role) { 'staff' }
 
     context 'authorized' do
-      let!(:candidate) { create(:user, :active) }
+      let!(:candidate) { create(:user, :developer, :active) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
@@ -256,7 +257,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :active) }
+      let!(:candidate) { create(:user, :developer, :active) }
       before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
@@ -270,7 +271,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     let(:role) { 'staff' }
 
     context 'authorized' do
-      let!(:candidate) { create(:user, :active, :staff) }
+      let!(:candidate) { create(:user, :developer, :active, :staff) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
@@ -287,7 +288,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :active) }
+      let!(:candidate) { create(:user, :developer, :active) }
       before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
@@ -297,7 +298,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'removing last role users' do
-      let!(:candidate) { create(:user, :active) }
+      let!(:candidate) { create(:user, :developer, :active) }
       let!(:role) { 'developer' }
       before { login_user(user) }
 

@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Web::Bootcamp::Wizard::AcceptPoliciesController do
   describe 'PUT #update' do
     context 'policy accepted' do
-      let(:user) { create(:user, :pending) }
+      let(:user) { create(:user, :developer, :profile_completed) }
       let(:result) { double(success?: true) }
       before { login_user(user) }
 
@@ -19,12 +19,12 @@ describe Web::Bootcamp::Wizard::AcceptPoliciesController do
 
       it 'redirect to profile edit' do
         put :update, params: { user: { accept_policy: '1' } }
-        expect(response).to redirect_to edit_bootcamp_wizard_profile_url
+        expect(response).to redirect_to bootcamp_wizard_screenings_url
       end
     end
 
     context 'policy not accepted' do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :developer, :profile_completed) }
       before { login_user(user) }
 
       it 'render edit' do
