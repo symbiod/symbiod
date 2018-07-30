@@ -3,8 +3,10 @@
 ## To run the application natively:
 
 * `git clone git@github.com:howtohireme/give-me-poc.git`
+* `cd give-me-poc`
 * `cp config/database.yml.sample config/database.yml`
 * Change the password in `config/database.yml` to your password.
+* `rake db:create`
 * `rake db:schema:load`
 
 ## To run the application with Vagrant:
