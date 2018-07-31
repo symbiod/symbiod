@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_23_173209) do
+ActiveRecord::Schema.define(version: 2018_07_31_103201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,14 +95,26 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.index ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id"
   end
 
+  create_table "project_users", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "user_id"], name: "index_project_users_on_project_id_and_user_id", unique: true
+    t.index ["project_id"], name: "index_project_users_on_project_id"
+    t.index ["user_id"], name: "index_project_users_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
     t.integer "idea_id", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "stack_id"
     t.index ["idea_id"], name: "index_projects_on_idea_id"
     t.index ["slug"], name: "index_projects_on_slug"
+    t.index ["stack_id"], name: "index_projects_on_stack_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -184,6 +196,9 @@ ActiveRecord::Schema.define(version: 2018_07_23_173209) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "project_users", "projects"
+  add_foreign_key "project_users", "users"
+  add_foreign_key "projects", "stacks"
   add_foreign_key "stack_skills", "skills"
   add_foreign_key "stack_skills", "stacks"
   add_foreign_key "user_skills", "skills"

@@ -4,6 +4,7 @@
 class Stack < ApplicationRecord
   has_many :stack_skills
   has_many :skills, through: :stack_skills
+  has_many :projects
 
   validates :name, presence: true
   validates :identifier, presence: true, uniqueness: true
