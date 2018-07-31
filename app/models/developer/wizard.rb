@@ -16,7 +16,7 @@ module Developer
     end
 
     def active?
-      steps.include?(state)
+      steps.include?(state) || state.nil?
     end
 
     # When the user has just signed up, he may not have a role and state

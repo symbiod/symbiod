@@ -8,7 +8,8 @@ module Bootcamp
         return unless user
         user.roles
             .where(state: 'pending', type: Rolable.member_roles_class_names)
-            .any?
+            .any? ||
+        user.roles.where(type: Rolable.member_roles_class_names).empty?
       end
     end
   end
