@@ -4,7 +4,9 @@ module Ops
   module Idea
     # This is the operation of creating a vote for the idea
     class Upvote < Ops::Idea::Vote
-      step :check_possibiility_creating_project!
+      COUNT_VOTES_KICKOFF_PROJECT = 5
+
+      step :try_to_create_project!
 
       private
 
@@ -12,8 +14,8 @@ module Ops
         'up'
       end
 
-      def check_possibiility_creating_project!(_ctx, idea:, **)
-        Ops::Projects::Kickoff.call(idea: idea) if idea.votes.up.count >= Project::COUNT_VOTES_KICKOFF_PROJECT
+      def try_to_create_project!(_ctx, idea:, **)
+        Ops::Projects::Kickoff.call(idea: idea) if idea.votes.up.count >= COUNT_VOTES_KICKOFF_PROJECT
       end
     end
   end

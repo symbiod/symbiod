@@ -17,7 +17,7 @@ module Ops
       def create_project!(_ctx, idea:, **)
         Project.create!(
           name: idea.name,
-          slug: idea.name.downcase.tr(' ', '_'),
+          slug: idea.name.parameterize(separator: '_'),
           stack_id: Stack.find_by(identifier: 'rails_monolith').id,
           idea_id: idea.id
         )

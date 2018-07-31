@@ -11,6 +11,4 @@ class Project < ApplicationRecord
   has_many :users, through: :project_users
 
   belongs_to :stack
-
-  COUNT_VOTES_KICKOFF_PROJECT = 5
 end
