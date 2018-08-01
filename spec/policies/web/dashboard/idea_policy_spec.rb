@@ -18,44 +18,88 @@ describe Dashboard::IdeaPolicy do
       it { is_expected.to permit_action(:manage) }
     end
 
-    context 'idea status pending' do
-      let(:idea) { create(:idea) }
+    context 'author idea current user' do
+      context 'idea status pending' do
+        let(:idea) { create(:idea, author: user) }
 
-      it_behaves_like 'permit main actions'
-      it { is_expected.to permit_action(:voting) }
-      it { is_expected.not_to permit_action(:activate) }
-      it { is_expected.not_to permit_action(:deactivate) }
-      it { is_expected.to permit_action(:reject) }
+        it_behaves_like 'permit main actions'
+        it { is_expected.to permit_action(:voting) }
+        it { is_expected.not_to permit_action(:activate) }
+        it { is_expected.not_to permit_action(:deactivate) }
+        it { is_expected.not_to permit_action(:reject) }
+      end
+
+      context 'idea status voting' do
+        let(:idea) { create(:idea, :voting, author: user) }
+
+        it_behaves_like 'permit main actions'
+        it { is_expected.not_to permit_action(:voting) }
+        it { is_expected.to permit_action(:activate) }
+        it { is_expected.not_to permit_action(:deactivate) }
+        it { is_expected.not_to permit_action(:reject) }
+      end
+
+      context 'idea status disabled' do
+        let(:idea) { create(:idea, :disabled, author: user) }
+
+        it_behaves_like 'permit main actions'
+        it { is_expected.not_to permit_action(:voting) }
+        it { is_expected.to permit_action(:activate) }
+        it { is_expected.not_to permit_action(:deactivate) }
+        it { is_expected.not_to permit_action(:reject) }
+      end
+
+      context 'idea status active' do
+        let(:idea) { create(:idea, :active, author: user) }
+
+        it_behaves_like 'permit main actions'
+        it { is_expected.not_to permit_action(:voting) }
+        it { is_expected.not_to permit_action(:activate) }
+        it { is_expected.to permit_action(:deactivate) }
+        it { is_expected.not_to permit_action(:reject) }
+      end
     end
 
-    context 'idea status voting' do
-      let(:idea) { create(:idea, :voting) }
+    context 'author idea not current user' do
+      context 'idea status pending' do
+        let(:idea) { create(:idea) }
 
-      it_behaves_like 'permit main actions'
-      it { is_expected.not_to permit_action(:voting) }
-      it { is_expected.to permit_action(:activate) }
-      it { is_expected.not_to permit_action(:deactivate) }
-      it { is_expected.to permit_action(:reject) }
-    end
+        it_behaves_like 'permit main actions'
+        it { is_expected.to permit_action(:voting) }
+        it { is_expected.not_to permit_action(:activate) }
+        it { is_expected.not_to permit_action(:deactivate) }
+        it { is_expected.to permit_action(:reject) }
+      end
 
-    context 'idea status disabled' do
-      let(:idea) { create(:idea, :disabled) }
+      context 'idea status voting' do
+        let(:idea) { create(:idea, :voting) }
 
-      it_behaves_like 'permit main actions'
-      it { is_expected.not_to permit_action(:voting) }
-      it { is_expected.to permit_action(:activate) }
-      it { is_expected.not_to permit_action(:deactivate) }
-      it { is_expected.not_to permit_action(:reject) }
-    end
+        it_behaves_like 'permit main actions'
+        it { is_expected.not_to permit_action(:voting) }
+        it { is_expected.to permit_action(:activate) }
+        it { is_expected.not_to permit_action(:deactivate) }
+        it { is_expected.to permit_action(:reject) }
+      end
 
-    context 'idea status active' do
-      let(:idea) { create(:idea, :active) }
+      context 'idea status disabled' do
+        let(:idea) { create(:idea, :disabled) }
 
-      it_behaves_like 'permit main actions'
-      it { is_expected.not_to permit_action(:voting) }
-      it { is_expected.not_to permit_action(:activate) }
-      it { is_expected.to permit_action(:deactivate) }
-      it { is_expected.not_to permit_action(:reject) }
+        it_behaves_like 'permit main actions'
+        it { is_expected.not_to permit_action(:voting) }
+        it { is_expected.to permit_action(:activate) }
+        it { is_expected.not_to permit_action(:deactivate) }
+        it { is_expected.not_to permit_action(:reject) }
+      end
+
+      context 'idea status active' do
+        let(:idea) { create(:idea, :active) }
+
+        it_behaves_like 'permit main actions'
+        it { is_expected.not_to permit_action(:voting) }
+        it { is_expected.not_to permit_action(:activate) }
+        it { is_expected.to permit_action(:deactivate) }
+        it { is_expected.not_to permit_action(:reject) }
+      end
     end
   end
 

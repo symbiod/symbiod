@@ -66,7 +66,11 @@ module Dashboard
     end
 
     def current_user_allow_reject?
-      (record.pending? || record.voting?) && staff_or_mentor?
+      (record.pending? || record.voting?) && staff_or_mentor? && current_user_not_author_idea
+    end
+
+    def current_user_not_author_idea
+      record.author != user
     end
 
     # Defines a scope of Ideas, who can be available for acting person
