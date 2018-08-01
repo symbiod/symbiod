@@ -1,6 +1,6 @@
 %h2
-  User id
-  = @user.id
+  = t('dashboard.users.headers.user')
+  = "##{@user.id}"
   = link_to t('dashboard.users.button.edit'), edit_dashboard_user_url(@user),
                                               class: 'btn btn-info btn-sm' if policy(:user).edit?
 .table-responsive
@@ -42,7 +42,7 @@
         %td
           %b= t('dashboard.users.table.approver')
         %td= link_to @user.approver.full_name, dashboard_user_url(@user.approver)
-%h2 Onboarding progress
+%h2= t('dashboard.users.headers.onboarding_progress')
 .table-responsive
   %table.table.table-striped.table-sm
     %tr
@@ -60,3 +60,20 @@
               = t('dashboard.developer_test_task.not_finished')
     = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :slack)
     = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :github)
+%section.py-5
+  %h2
+    = t('dashboard.users.headers.notes')
+    = link_to t('notes.button.create'), new_dashboard_user_note_url(@user),
+                                        class: 'btn btn-info btn-sm'
+  - @user.notes.each do |note|
+    .row
+      .col-sm-6
+        .card.mb-3
+          .card-header
+            #{t('notes.fields.note')} ##{note.id}
+          .card-body.card-text
+            = markdown(note.content)
+          .card-footer.text-muted
+            = t('notes.fields.commenter')
+            = link_to note.commenter.email,
+                      dashboard_user_url(note.commenter)

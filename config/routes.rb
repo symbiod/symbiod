@@ -40,6 +40,7 @@ Rails.application.routes.draw do
           put :remove_role
           put :add_role
         end
+        resources :notes, only: %i[new create]
       end
       resources :skills, except: %i[show destroy] do
         member do
