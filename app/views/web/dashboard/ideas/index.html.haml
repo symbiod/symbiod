@@ -7,13 +7,11 @@
     %tr
       %th= t('idea.propose.name')
       %th= t('idea.propose.status')
-      %th= t('idea.propose.description')
       %th= t('idea.propose.author')
     - @ideas.each do |idea|
       %tr
         %td= link_to idea.name, dashboard_idea_url(idea)
         %td= idea.state
-        %td= markdown(idea.description)
         %td= idea.author.email
 %br
 = paginate @ideas
