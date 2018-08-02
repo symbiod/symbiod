@@ -64,7 +64,7 @@
   %h2
     = t('dashboard.users.headers.notes')
     = link_to t('notes.button.create'), new_dashboard_user_note_url(@user),
-                                        class: 'btn btn-info btn-sm'
+                                        class: 'btn btn-info btn-sm' if policy(%i[dashboard note]).new?
   - @user.notes.each do |note|
     .row
       .col-sm-6

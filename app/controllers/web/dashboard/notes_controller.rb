@@ -5,6 +5,8 @@ module Web
     # This controlle controls the creation of notes to noteables
     class NotesController < ApplicationController
       before_action :load_noteable, only: %i[new create]
+      before_action :authorize_role
+      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_notable
 
       def new
         @note = @noteable.notes.new
@@ -15,7 +17,7 @@ module Web
         @note = @noteable.notes.new(note_params)
         @note.commenter = current_user
         if @note.save
-          redirect_to send("dashboard_#{@noteable.class.name.downcase}_url", @noteable),
+          redirect_to send("dashboard_#{@noteable.class.name.underscore}_url", @noteable),
                       flash: { success: t('notes.noties.success') }
         else
           flash.now[:danger] = t('notes.noties.danger')
@@ -32,6 +34,15 @@ module Web
       def load_noteable
         resource, id = request.path.split('/')[1, 2]
         @noteable = resource.singularize.classify.constantize.find(id)
+      end
+
+      def authorize_role
+        authorize %i[dashboard note], "#{action_name}?".to_sym
+      end
+
+      def redirect_to_dashboard_notable
+        redirect_to send("dashboard_#{@noteable.class.name.underscore}_url", @noteable),
+                    flash: { danger: t('notes.noties.access_denied') }
       end
     end
   end
