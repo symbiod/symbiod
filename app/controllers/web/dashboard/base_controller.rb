@@ -24,6 +24,10 @@ module Web
         flash[:danger] = t('dashboard.users.access.deny')
         redirect_to dashboard_root_url
       end
+
+      def authorize_role(policy_name)
+        authorize policy_name, "#{action_name}?".to_sym
+      end
     end
   end
 end

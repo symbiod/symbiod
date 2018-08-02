@@ -1,0 +1,12 @@
+- model.notes.each do |note|
+  .row
+    .col-sm-6
+      .card.mb-3
+        .card-header
+          #{t('notes.fields.note')} ##{note.id}
+        .card-body.card-text
+          = markdown(note.content)
+        .card-footer.text-muted
+          = t('notes.fields.commenter')
+          = link_to note.commenter.email,
+                    dashboard_user_url(note.commenter)

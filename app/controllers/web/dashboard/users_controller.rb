@@ -5,7 +5,9 @@ module Web
     # Assigns the role to the user
     class UsersController < BaseController
       before_action :user_find, except: %i[index show]
-      before_action :authorize_role
+      before_action do
+        authorize_role(:user)
+      end
       rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
       rescue_from Ops::Developer::UnassignRole::LastRoleError, with: :redirect_to_dashboard_user
 
@@ -61,10 +63,6 @@ module Web
       end
 
       private
-
-      def authorize_role
-        authorize :user, "#{action_name}?".to_sym
-      end
 
       def user_find
         @user = User.find(params[:id])

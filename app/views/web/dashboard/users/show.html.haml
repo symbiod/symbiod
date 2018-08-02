@@ -65,15 +65,4 @@
     = t('dashboard.users.headers.notes')
     = link_to t('notes.button.create'), new_dashboard_user_note_url(@user),
                                         class: 'btn btn-info btn-sm' if policy(%i[dashboard note]).new?
-  - @user.notes.each do |note|
-    .row
-      .col-sm-6
-        .card.mb-3
-          .card-header
-            #{t('notes.fields.note')} ##{note.id}
-          .card-body.card-text
-            = markdown(note.content)
-          .card-footer.text-muted
-            = t('notes.fields.commenter')
-            = link_to note.commenter.email,
-                      dashboard_user_url(note.commenter)
+  = cell(Web::Dashboard::UserNotes, @user)

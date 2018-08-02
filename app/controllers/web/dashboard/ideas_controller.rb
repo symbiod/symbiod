@@ -5,7 +5,9 @@ module Web
     # Manage ideas
     class IdeasController < BaseController
       before_action :idea, only: %i[show edit update voting activate deactivate reject]
-      before_action :authorize_role, only: %i[index new create]
+      before_action only: %i[index new create] do
+        authorize_role(%i[dashboard idea])
+      end
       rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       def index
@@ -68,10 +70,6 @@ module Web
 
       def idea_params
         params.require(:idea).permit(:name, :description, :private_project, :skip_bootstrapping)
-      end
-
-      def authorize_role
-        authorize %i[dashboard idea], "#{action_name}?".to_sym
       end
 
       def idea

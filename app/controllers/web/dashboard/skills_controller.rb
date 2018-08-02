@@ -5,7 +5,9 @@ module Web
     # This controller manage skills
     class SkillsController < BaseController
       before_action :skill_find, only: %i[edit update activate deactivate]
-      before_action :authorize_role
+      before_action do
+        authorize_role(%i[dashboard skill])
+      end
       rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       def index
@@ -55,10 +57,6 @@ module Web
 
       def skill_params
         params.require(:skill).permit(:title)
-      end
-
-      def authorize_role
-        authorize %i[dashboard skill], "#{action_name}?".to_sym
       end
 
       def skill_find

@@ -10,7 +10,7 @@ describe Web::Dashboard::NotesController, type: :controller do
       before { get :new, params: { user_id: user.id } }
 
       it 'redirects to root landing' do
-        expect(response).to redirect_to dashboard_user_url(user)
+        expect(response).to redirect_to root_landing_url
       end
     end
 
@@ -49,7 +49,7 @@ describe Web::Dashboard::NotesController, type: :controller do
       let(:params_note) { { content: 'Content' } }
 
       it 'redirects to root landing' do
-        expect(response).to redirect_to dashboard_user_url(user)
+        expect(response).to redirect_to root_landing_url
       end
     end
 
