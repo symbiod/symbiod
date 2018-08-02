@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :vote do
     vote_type 'up'
-    idea { create(:idea, :voting) }
-    user { create(:user, :developer, :active) }
+    idea
+    user
   end
 
   trait :down do

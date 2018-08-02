@@ -34,6 +34,9 @@ class User < ApplicationRecord
   has_many :notes, as: :noteable
   belongs_to :approver, class_name: 'User', optional: true
 
+  has_many :project_users
+  has_many :projects, through: :project_users
+
   accepts_nested_attributes_for :authentications
 
   scope :newer_first, -> { order(id: :desc) }
