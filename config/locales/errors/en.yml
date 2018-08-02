@@ -1,0 +1,4 @@
+en:
+  errors:
+    error404:
+      header: 'Sorry! No such page!'
