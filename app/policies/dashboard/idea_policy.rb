@@ -8,7 +8,7 @@ module Dashboard
     end
 
     def show?
-      current_user_allow_show?
+      staff_or_author_record? || record.voting? && developer?
     end
 
     def new?
@@ -18,7 +18,7 @@ module Dashboard
     alias create? new?
 
     def edit?
-      current_user_allow_edit?
+      staff_or_author_record?
     end
 
     alias update? edit?
@@ -44,14 +44,6 @@ module Dashboard
     end
 
     private
-
-    def current_user_allow_show?
-      staff_or_mentor? || record.voting? && developer? || record.author == user
-    end
-
-    def current_user_allow_edit?
-      staff_or_mentor? || author? && record.author == user
-    end
 
     def current_user_allow_voting?
       record.pending? && staff_or_mentor?

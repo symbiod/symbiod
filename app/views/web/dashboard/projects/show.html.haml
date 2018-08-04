@@ -1,0 +1,27 @@
+%h3
+  #{t('dashboard.projects.headers.show')} ##{@project.id}
+  - if ::Dashboard::ProjectPolicy.new(current_user, @project).edit?
+    = link_to t('dashboard.projects.button.edit'), edit_dashboard_project_url(@project),
+                                                   class: 'btn btn-info btn-sm'
+
+.table-responsive
+  %table.table.table-striped.table-sm
+    %tr
+      %td
+        %b= t('dashboard.projects.table.name')
+      %td= @project.name
+    %tr
+      %td
+        %b= t('dashboard.projects.table.author')
+      %td= link_to @project.author.email, dashboard_user_url(@project.author)
+    %tr
+      %td
+        %b= t('dashboard.projects.table.stack')
+      %td= @project.stack.name
+    %tr
+      %td
+        %b= t('dashboard.projects.table.developers')
+      %td
+        %ul.list-unstyled
+          - @project.users.each do |user|
+            %li= link_to user.email, dashboard_user_url(user)

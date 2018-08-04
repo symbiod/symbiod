@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_140335) do
     t.datetime "updated_at", null: false
     t.bigint "stack_id"
     t.index ["idea_id"], name: "index_projects_on_idea_id"
-    t.index ["slug"], name: "index_projects_on_slug"
+    t.index ["slug"], name: "index_projects_on_slug", unique: true
     t.index ["stack_id"], name: "index_projects_on_stack_id"
   end
 

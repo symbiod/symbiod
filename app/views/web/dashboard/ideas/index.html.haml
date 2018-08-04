@@ -2,7 +2,7 @@
   = t('dashboard.ideas.headers.index')
   = link_to t('dashboard.ideas.button.new'), new_dashboard_idea_url,
                                              class: 'btn btn-sm btn-info' if policy(%i[dashboard idea]).new?
-%table.table.table-striped.tabke-sm
+%table.table.table-striped.table-sm
   %thead
     %tr
       %th= t('idea.propose.name')

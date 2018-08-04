@@ -234,10 +234,10 @@ describe Dashboard::IdeaPolicy do
 
   describe 'scope' do
     subject { described_class::Scope.new(current_user, User) }
-    let(:idea_1) { create(:idea, :disabled) }
-    let(:idea_2) { create(:idea, :active) }
-    let(:idea_3) { create(:idea, :active) }
-    let(:idea_4) { create(:idea, :voting) }
+    let!(:idea_1) { create(:idea, :disabled) }
+    let!(:idea_2) { create(:idea, :active) }
+    let!(:idea_3) { create(:idea, :active) }
+    let!(:idea_4) { create(:idea, :voting) }
 
     context 'current user role staff or mentor' do
       let(:current_user) { create(:user, :staff_or_mentor, :active) }

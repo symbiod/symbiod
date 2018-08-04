@@ -29,7 +29,8 @@
       %td
         %b= t('dashboard.users.table.roles')
       %td
-        = cell(Developer::Dashboard::UserRoles, @user)
+        %ul.list-unstyled
+          = cell(Developer::Dashboard::UserRoles, @user)
     %tr
       %td
         %b= t('dashboard.users.table.task_assignments')

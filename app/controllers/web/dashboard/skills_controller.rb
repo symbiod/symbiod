@@ -8,7 +8,6 @@ module Web
       before_action do
         authorize_role(%i[dashboard skill])
       end
-      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       def index
         @skills = Skill.order(id: :desc)

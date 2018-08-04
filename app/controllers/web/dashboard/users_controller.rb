@@ -8,7 +8,6 @@ module Web
       before_action do
         authorize_role(:user)
       end
-      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
       rescue_from Ops::Developer::UnassignRole::LastRoleError, with: :redirect_to_dashboard_user
 
       def index
