@@ -5,7 +5,9 @@ module Web
     # Handles all management logic for newcomers
     class TestTaskAssignmentsController < BaseController
       before_action :candidate, only: %i[show activate reject]
-      before_action :authorize_staff!, only: :index
+      before_action only: :index do
+        authorize_role(:test_task_assignment)
+      end
 
       def index
         @candidates = TestTaskAssignmentPolicy::Scope.new(current_user, User).resolve
@@ -29,10 +31,6 @@ module Web
 
       def candidate
         @candidate ||= authorize User.find(params[:id]), policy_class: TestTaskAssignmentPolicy
-      end
-
-      def authorize_staff!
-        authorize :test_task_assignment, "#{action_name}?".to_sym
       end
 
       def rejection_params

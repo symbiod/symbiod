@@ -82,7 +82,7 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
     end
   end
 
-  describe 'GET #create' do
+  describe 'POST #create' do
     let(:skill_params) { { title: 'Title' } }
 
     context 'not signed in' do

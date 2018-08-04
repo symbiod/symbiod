@@ -6,7 +6,9 @@ module Web
     class TestTasksController < BaseController
       before_action :find_test_task, only: %i[edit update activate deactivate]
       before_action :find_user_roles, only: %i[index new edit]
-      before_action :authorize_staff!
+      before_action do
+        authorize_role(:test_task)
+      end
 
       def index
         @developer_test_tasks = Developer::TestTask.order(id: :asc)
@@ -65,10 +67,6 @@ module Web
 
       def find_user_roles
         @roles = Roles::RolesManager::MEMBER_ROLES
-      end
-
-      def authorize_staff!
-        authorize :test_task, "#{action_name}?".to_sym
       end
     end
   end

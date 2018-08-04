@@ -25,3 +25,13 @@ en:
       not_authenticated_dashboard_access: 'You should sign in before accessing Dashboard'
     footer:
       built_by: 'Proudly built by'
+  notes:
+    fields:
+      commenter: Commenter
+      note: Note
+    buttons:
+      create: Create
+    noties:
+      danger: Not all fields are filled in the note
+      success: Note was successfully created
+      access_denied: Not enough rights to create a note

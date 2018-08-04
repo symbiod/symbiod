@@ -4,8 +4,10 @@ module Web
   module Dashboard
     # Assigns the role to the user
     class UsersController < BaseController
-      before_action :user_find, except: :index
-      before_action :authorize_role
+      before_action :user_find, except: %i[index show]
+      before_action do
+        authorize_role(:user)
+      end
       rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
       rescue_from Ops::Developer::UnassignRole::LastRoleError, with: :redirect_to_dashboard_user
 
@@ -15,6 +17,7 @@ module Web
 
       def show
         @roles = Role.all
+        @user = User.includes(:notes).find(params[:id])
         @test_task_assignments = @user.test_task_assignments.order(id: :asc)
       end
 
@@ -60,10 +63,6 @@ module Web
       end
 
       private
-
-      def authorize_role
-        authorize :user, "#{action_name}?".to_sym
-      end
 
       def user_find
         @user = User.find(params[:id])

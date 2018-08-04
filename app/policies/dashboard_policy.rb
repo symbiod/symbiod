@@ -10,19 +10,19 @@ class DashboardPolicy < ApplicationPolicy
   private
 
   def developer?
-    user.has_role? :developer
+    user&.has_role? :developer
   end
 
   def staff?
-    user.has_role? :staff
+    user&.has_role? :staff
   end
 
   def mentor?
-    user.has_role? :mentor
+    user&.has_role? :mentor
   end
 
   def author?
-    user.has_role? :author
+    user&.has_role? :author
   end
 
   def staff_or_mentor?

@@ -70,6 +70,10 @@ en:
           account_was_disabled: Your givemepoc.org account was disabled
       button:
         edit: Edit
+      headers:
+        notes: Notes
+        user: User
+        onboarding_progress: Onboarding progress
     developer_test_task:
       link:
         confirm:
