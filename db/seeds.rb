@@ -1,6 +1,18 @@
 require 'faker'
 require 'yaml'
 
+def create_user(number)
+  User.create!(
+    email: "test0#{number}@gmail.com",
+    github: Faker::Name.last_name,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    location: Faker::Address.country,
+    timezone: Faker::Address.time_zone,
+    cv_url: Faker::Internet.url
+  )
+end
+
 skills = YAML.load_file('data/skills.yml')
 
 skills.each do |skill|
@@ -18,18 +30,11 @@ tasks.each do |task_attributes|
   Developer::TestTask.find_or_create_by!(task_attributes)
 end
 
-9.times do |i|
-  user = User.create!(
-    email: "test0#{i}@gmail.com",
-    github: Faker::Name.last_name,
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    location: Faker::Address.country,
-    timezone: Faker::Address.time_zone,
-    cv_url: Faker::Internet.url,
-    state: %w[pending active disabled screening_completed].sample
-  )
+# Create members
+5.times do |i|
+  user = create_user(i)
   user.add_role Developer::Wizard::ProfileForm::ROLES.sample
+  user.roles.last.update(state: %w[pending active disabled screening_completed].sample)
   UserSkill.create!(user: user, skill: Skill.all.sample, primary: true)
 end
 
