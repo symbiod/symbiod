@@ -12,7 +12,7 @@ describe Web::Dashboard::HomeController do
     end
 
     context 'pending user' do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :developer) }
       before { login_user(user) }
 
       it 'redirects to root landing page' do
@@ -21,7 +21,7 @@ describe Web::Dashboard::HomeController do
     end
 
     context 'active user' do
-      let(:user) { create(:user, :active) }
+      let(:user) { create(:user, :developer, :active) }
       before { login_user(user) }
 
       it 'renders template' do
@@ -36,7 +36,7 @@ describe Web::Dashboard::HomeController do
     end
 
     context 'staff' do
-      let(:user) { create(:user, :staff) }
+      let(:user) { create(:user, :developer, :staff) }
       before { login_user(user) }
 
       it 'renders template' do

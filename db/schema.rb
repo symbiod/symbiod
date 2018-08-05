@@ -167,7 +167,6 @@ ActiveRecord::Schema.define(version: 2018_08_04_140335) do
     t.string "github"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "state"
     t.string "crypted_password"
     t.string "salt"
     t.string "first_name"

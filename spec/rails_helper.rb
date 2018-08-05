@@ -11,6 +11,7 @@ require 'rspec/rails'
 require 'rspec/its'
 require 'pundit/rspec'
 require 'sidekiq/testing'
+require 'aasm/rspec'
 
 Sidekiq::Testing.fake!
 ActiveJob::Base.queue_adapter = :test
@@ -25,6 +26,7 @@ RSpec.configure do |config|
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
   config.include FactoriesHelper
+  config.include RolesHelper
   config.extend CellsHelper
 
   Shoulda::Matchers.configure do |shoulda_config|

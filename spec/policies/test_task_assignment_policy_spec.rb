@@ -24,13 +24,13 @@ describe TestTaskAssignmentPolicy do
     let(:current_user) { create(:user, :staff) }
 
     context 'candidate status screening_completed' do
-      let(:candidate) { create(:user, :screening_completed) }
+      let(:candidate) { create(:user, :developer, :screening_completed) }
 
       it_behaves_like 'access to all'
     end
 
     context 'candidate status not screening_completed' do
-      let(:candidate) { create(:user, :not_screening_completed) }
+      let(:candidate) { create(:user, :developer, :not_screening_completed) }
 
       it { is_expected.to permit_action(:index) }
       it_behaves_like 'prohibited except for the index'
@@ -41,21 +41,21 @@ describe TestTaskAssignmentPolicy do
     let(:skill_name) { 'Ruby' }
     let(:current_user) { create(:user, :mentor, :with_primary_skill, skill_name: skill_name) }
 
-    context 'candidate status screening_completed and primary skill as metor' do
-      let(:candidate) { create(:user, :screening_completed, :with_primary_skill, skill_name: skill_name) }
+    context 'candidate is reviewable by mentor' do
+      let(:candidate) { create(:user, :developer, :screening_completed, :with_primary_skill, skill_name: skill_name) }
 
       it_behaves_like 'access to all'
     end
 
-    context 'candidate status screening_completed and not primary skill as metor' do
-      let(:candidate) { create(:user, :screening_completed) }
+    context 'candidate is not reviewable by mentor' do
+      let(:candidate) { create(:user, :developer, :screening_completed) }
 
       it { is_expected.to permit_action(:index) }
       it_behaves_like 'prohibited except for the index'
     end
 
     context 'candidate status not screening_completed' do
-      let(:candidate) { create(:user, :not_screening_completed) }
+      let(:candidate) { create(:user, :developer, :not_screening_completed) }
 
       it { is_expected.to permit_action(:index) }
       it_behaves_like 'prohibited except for the index'
@@ -64,7 +64,7 @@ describe TestTaskAssignmentPolicy do
 
   context 'current user has role developer or author' do
     let(:current_user) { create(:user, :developer_or_author, :active) }
-    let(:candidate) { create(:user, :screening_completed) }
+    let(:candidate) { create(:user, :developer, :screening_completed) }
 
     it { is_expected.not_to permit_action(:index) }
     it_behaves_like 'prohibited except for the index'
@@ -73,10 +73,10 @@ describe TestTaskAssignmentPolicy do
   describe 'scope' do
     subject { described_class::Scope.new(user, User) }
     let(:skill_name) { 'Ruby' }
-    let!(:applicant_1) { create(:user, :screening_completed, :with_primary_skill, skill_name: skill_name) }
-    let!(:applicant_2) { create(:user, :screening_completed, :with_primary_skill, skill_name: 'Java') }
-    let!(:applicant_3) { create(:user, :screening_completed) }
-    let!(:applicant_4) { create(:user, :profile_completed, :with_primary_skill, skill_name: skill_name) }
+    let!(:applicant_1) { create(:user, :developer, :screening_completed, :with_primary_skill, skill_name: skill_name) }
+    let!(:applicant_2) { create(:user, :developer, :screening_completed, :with_primary_skill, skill_name: 'Java') }
+    let!(:applicant_3) { create(:user, :developer, :screening_completed) }
+    let!(:applicant_4) { create(:user, :developer, :profile_completed, :with_primary_skill, skill_name: skill_name) }
 
     context 'staff' do
       let(:user) { create(:user, :staff) }

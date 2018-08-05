@@ -12,63 +12,63 @@ describe Developer::Dashboard::UserStatusButton do
 
   shared_examples 'user staff and candidate not disabled' do
     it 'renders link to activate' do
-      expect(subject.user_status).to match(/activate/)
+      expect(subject.role_status).to match(/activate/)
     end
 
     it 'renders link to confirm status to activate' do
-      expect(subject.user_status).to match(/data-confirm="Are you sure to activate/)
+      expect(subject.role_status).to match(/data-confirm="Are you sure to activate/)
     end
   end
 
   shared_examples 'button state disabled' do
     it 'renders disabled button' do
-      expect(subject.user_status).to match(/ disabled/)
+      expect(subject.role_status).to match(/ disabled/)
     end
   end
 
   context 'current user staff and candidate status active' do
-    let(:candidate) { create(:user, :active) }
+    let(:candidate) { create(:role, :developer, :active) }
 
     it 'renders active status' do
-      expect(subject.user_status).to match(/active/)
+      expect(subject.role_status).to match(/active/)
     end
 
     it 'renders success color link' do
-      expect(subject.user_status).to match(/<a class="btn btn-success btn-sm"/)
+      expect(subject.role_status).to match(/<a class="btn btn-success btn-sm"/)
     end
 
     it 'renders link to disable' do
-      expect(subject.user_status).to match(/deactivate/)
+      expect(subject.role_status).to match(/deactivate/)
     end
 
     it 'renders link to confirm status to disable' do
-      expect(subject.user_status).to match(/data-confirm="Are you sure to disable/)
+      expect(subject.role_status).to match(/data-confirm="Are you sure to disable/)
     end
   end
 
   context 'current user staff and candidate status not active' do
-    let(:candidate) { create(:user, :disabled) }
+    let(:candidate) { create(:role, :developer, :disabled) }
 
     it 'renders active status' do
-      expect(subject.user_status).to match(/disabled/)
+      expect(subject.role_status).to match(/disabled/)
     end
 
     it 'renders danger color link' do
-      expect(subject.user_status).to match(/<a class="btn btn-danger btn-sm"/)
+      expect(subject.role_status).to match(/<a class="btn btn-danger btn-sm"/)
     end
 
     it_behaves_like 'user staff and candidate not disabled'
   end
 
   context 'current user staff and candidate status pending' do
-    let(:candidate) { create(:user) }
+    let(:candidate) { create(:role, :developer, :pending) }
 
     it 'renders active status' do
-      expect(subject.user_status).to match(/pending/)
+      expect(subject.role_status).to match(/pending/)
     end
 
     it 'renders warning color link' do
-      expect(subject.user_status).to match(/<a class="btn btn-warning btn-sm disabled"/)
+      expect(subject.role_status).to match(/<a class="btn btn-warning btn-sm disabled"/)
     end
 
     it_behaves_like 'user staff and candidate not disabled'
@@ -76,14 +76,14 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status profile completed' do
-    let(:candidate) { create(:user, :profile_completed) }
+    let(:candidate) { create(:role, :developer, :profile_completed) }
 
     it 'renders active status' do
-      expect(subject.user_status).to match(/profile_completed/)
+      expect(subject.role_status).to match(/profile_completed/)
     end
 
     it 'renders danger color link' do
-      expect(subject.user_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
+      expect(subject.role_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
     end
 
     it_behaves_like 'user staff and candidate not disabled'
@@ -91,14 +91,14 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status screening completed' do
-    let(:candidate) { create(:user, :screening_completed) }
+    let(:candidate) { create(:role, :developer, :screening_completed) }
 
     it 'renders active status' do
-      expect(subject.user_status).to match(/screening_completed/)
+      expect(subject.role_status).to match(/screening_completed/)
     end
 
     it 'renders danger color link' do
-      expect(subject.user_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
+      expect(subject.role_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
     end
 
     it_behaves_like 'user staff and candidate not disabled'
@@ -106,14 +106,14 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status rejected' do
-    let(:candidate) { create(:user, :rejected) }
+    let(:candidate) { create(:role, :developer, :rejected) }
 
     it 'renders active status' do
-      expect(subject.user_status).to match(/rejected/)
+      expect(subject.role_status).to match(/rejected/)
     end
 
     it 'renders danger color link' do
-      expect(subject.user_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
+      expect(subject.role_status).to match(/<a class="btn btn-danger btn-sm disabled"/)
     end
 
     it_behaves_like 'user staff and candidate not disabled'
@@ -122,14 +122,14 @@ describe Developer::Dashboard::UserStatusButton do
 
   context 'current user status active and candidate status active' do
     let!(:current_user) { create(:user, :active) }
-    let(:candidate) { create(:user, :active) }
+    let(:candidate) { create(:role, :developer, :active) }
 
     it 'renders status active' do
-      expect(subject.user_status).to match(/active/)
+      expect(subject.role_status).to match(/active/)
     end
 
     it 'does not renders link' do
-      expect(subject.user_status).not_to match(/a class=/)
+      expect(subject.role_status).not_to match(/a class=/)
     end
   end
 end

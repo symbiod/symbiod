@@ -55,6 +55,8 @@ module Web
                     flash: { success: "#{params[:role].capitalize} #{t('dashboard.users.notices.add_role')}" }
       end
 
+      # TODO: remove this action, from now it is unsafe to remove roles.
+      # instead we should prefer to disable active roles.
       def remove_role
         Ops::Developer::RemoveRole.call(user: @user, role: params[:role], size: @user.roles.size)
         redirect_to dashboard_user_url(@user),

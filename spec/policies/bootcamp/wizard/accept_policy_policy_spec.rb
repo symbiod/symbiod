@@ -10,8 +10,8 @@ describe Bootcamp::Wizard::AcceptPolicyPolicy do
     it { is_expected.not_to permit_action(:edit) }
   end
 
-  context 'pending user' do
-    let(:user) { create(:user) }
+  context 'user with complete_profile' do
+    let(:user) { create(:user, :developer, :profile_completed) }
     it { is_expected.to permit_action(:edit) }
   end
 end

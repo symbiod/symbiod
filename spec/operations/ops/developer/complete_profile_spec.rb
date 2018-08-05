@@ -6,12 +6,13 @@ describe Ops::Developer::CompleteProfile do
   subject { described_class }
 
   describe '.call' do
-    let(:user) { create(:user, :policy_accepted) }
+    let(:user) { create(:user) }
     let(:skill) { create(:skill) }
+    let(:role) { role_for(user: user, role_name: :developer) }
     let(:non_user_params) do
       {
         primary_skill_id: skill.id,
-        role: 'mentor'
+        role: 'developer'
       }
     end
 
@@ -25,10 +26,9 @@ describe Ops::Developer::CompleteProfile do
           .to(params[:first_name])
       end
 
-      it 'changes user state' do
-        expect { subject.call(user: user, params: params) }
-          .to change(user.reload, :state)
-          .to('profile_completed')
+      it 'changes role state' do
+        subject.call(user: user, params: params)
+        expect(role.state).to eq('profile_completed')
       end
 
       it 'creates primary user skill' do
@@ -62,11 +62,6 @@ describe Ops::Developer::CompleteProfile do
       it 'does not update profile' do
         expect { subject.call(user: user, params: params) }
           .not_to(change { user.reload.first_name })
-      end
-
-      it 'does not change user state' do
-        expect { subject.call(user: user, params: params) }
-          .not_to change(user.reload, :state)
       end
 
       it 'does not create primary skill for user' do

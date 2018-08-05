@@ -16,6 +16,7 @@ module Ops
           result.valid?
         end
 
+        # TODO: rework passing role
         def complete_screening!(_ctx, user:, **)
           Finish.call(user: user)
         end

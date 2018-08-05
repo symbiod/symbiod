@@ -6,7 +6,7 @@ module Developer
     class UserStatusButton < BaseCell
       STATE_DISABLED_BUTTON = %w[pending profile_completed rejected policy_accepted screening_completed].freeze
 
-      def user_status
+      def role_status
         policy(:user).activate? ? user_state : model.state
       end
 

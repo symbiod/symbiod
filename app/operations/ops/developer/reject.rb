@@ -11,8 +11,9 @@ module Ops
 
       private
 
+      # TODO: rework with passing the role
       def change_state!(_ctx, user:, **)
-        user.reject!
+        role(user).reject!
       end
 
       def persist_feedback!(_ctx, user:, feedback:, **)

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'aasm/rspec'
 
 RSpec.describe User, type: :model do
   subject(:user) { create(:user) }
@@ -21,50 +20,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many :project_users }
     it { is_expected.to have_many :projects }
     it { is_expected.to belong_to :approver }
-  end
-
-  describe 'users default state' do
-    it 'users default have state pending' do
-      expect(user).to have_state(:pending)
-    end
-  end
-
-  describe 'changes in users states' do
-    it 'accept policy' do
-      expect(user)
-        .to transition_from(:pending).to(:policy_accepted)
-                                     .on_event(:accept_policy)
-    end
-
-    it 'completes profile' do
-      expect(user)
-        .to transition_from(:policy_accepted).to(:profile_completed).on_event(:complete_profile)
-    end
-
-    it 'completes screening' do
-      expect(user)
-        .to transition_from(:profile_completed).to(:screening_completed)
-                                               .on_event(:complete_screening)
-    end
-
-    it 'activate user' do
-      expect(user)
-        .to transition_from(:screening_completed).to(:active)
-                                                 .on_event(:activate)
-      expect(user)
-        .to transition_from(:disabled).to(:active)
-                                      .on_event(:activate)
-    end
-
-    it 'disable user' do
-      expect(user)
-        .to transition_from(:active).to(:disabled)
-                                    .on_event(:disable)
-    end
-
-    it 'reject user' do
-      expect(user).to transition_from(:screening_completed).to(:rejected).on_event(:reject)
-    end
   end
 
   describe 'changes in users roles' do

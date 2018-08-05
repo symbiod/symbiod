@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 describe Web::Bootcamp::Wizard::ProfilesController do
-  let!(:user) { create(:user, :policy_accepted) }
+  let!(:user) { create(:user, :developer, :pending) }
+
   describe 'GET #edit' do
     context 'authenticated' do
       before { login_user(user) }

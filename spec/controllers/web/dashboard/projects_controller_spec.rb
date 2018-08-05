@@ -29,13 +29,13 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       end
 
       context 'current user has role staff or mentor' do
-        let(:user) { create(:user, :active, :staff_or_mentor) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it_behaves_like '#index'
       end
 
       context 'current user has role developer or author' do
-        let(:user) { create(:user, :active, :developer_or_author) }
+        let(:user) { create(:user, :developer_or_author, :active) }
 
         it_behaves_like '#index'
       end
@@ -69,14 +69,14 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       end
 
       context 'current user has role staff or mentor' do
-        let(:user) { create(:user, :active, :staff_or_mentor) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
         let(:idea) { create(:idea, :with_project) }
 
         it_behaves_like '#show'
       end
 
       context 'current user has role developer' do
-        let!(:user) { create(:user, :active, :developer) }
+        let!(:user) { create(:user, :developer, :active) }
         let!(:idea) { create(:idea, :with_project) }
 
         context 'user member project' do
@@ -97,7 +97,7 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       end
 
       context 'current user has role author' do
-        let!(:user) { create(:user, :active, :author) }
+        let!(:user) { create(:user, :author, :active) }
 
         context 'user author project' do
           let(:idea) { create(:idea, :with_project, author: user) }
@@ -143,14 +143,14 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       end
 
       context 'current user has role staff or mentor' do
-        let(:user) { create(:user, :active, :staff_or_mentor) }
+        let(:user) { create(:user, :staff_or_mentor, :active) }
         let(:idea) { create(:idea, :with_project) }
 
         it_behaves_like '#edit'
       end
 
       context 'current user has role developer' do
-        let!(:user) { create(:user, :active, :developer) }
+        let!(:user) { create(:user, :developer, :active) }
         let!(:idea) { create(:idea, :with_project) }
 
         context 'user member project' do
@@ -173,7 +173,7 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       end
 
       context 'current user has role author' do
-        let!(:user) { create(:user, :active, :author) }
+        let!(:user) { create(:user, :author, :active) }
 
         context 'user author project' do
           let(:idea) { create(:idea, :with_project, author: user) }
@@ -233,7 +233,7 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       before { login_user(user) }
 
       context 'current user has role staff or mentor' do
-        let!(:user) { create(:user, :active, :staff_or_mentor) }
+        let!(:user) { create(:user, :staff_or_mentor, :active) }
         let!(:idea) { create(:idea, :with_project) }
 
         context 'project have valid params' do
@@ -246,7 +246,7 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       end
 
       context 'current user has role developer' do
-        let!(:user) { create(:user, :active, :developer) }
+        let!(:user) { create(:user, :developer, :active) }
         let!(:idea) { create(:idea, :with_project) }
 
         context 'user member project' do
@@ -270,7 +270,7 @@ describe Web::Dashboard::ProjectsController, type: :controller do
       end
 
       context 'current user has role author' do
-        let!(:user) { create(:user, :active, :author) }
+        let!(:user) { create(:user, :author, :active) }
 
         context 'user author project' do
           let!(:idea) { create(:idea, :with_project, author: user) }

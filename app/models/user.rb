@@ -5,7 +5,6 @@ require 'sorcery/model'
 # Represents any user in the system
 # ATM it has `developer_onboarding` association, that should be moved to some other model.
 class User < ApplicationRecord
-  include AASM
   include Rolable
 
   authenticates_with_sorcery!
@@ -40,36 +39,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :authentications
 
   scope :newer_first, -> { order(id: :desc) }
-
-  aasm column: 'state' do
-    state :pending, initial: true
-    state :policy_accepted, :profile_completed, :screening_completed, :active,
-          :disabled, :rejected
-
-    event :accept_policy do
-      transitions from: :pending, to: :policy_accepted
-    end
-
-    event :complete_profile do
-      transitions from: :policy_accepted, to: :profile_completed
-    end
-
-    event :complete_screening do
-      transitions from: :profile_completed, to: :screening_completed
-    end
-
-    event :activate do
-      transitions from: %i[screening_completed disabled], to: :active
-    end
-
-    event :disable do
-      transitions from: :active, to: :disabled
-    end
-
-    event :reject do
-      transitions from: :screening_completed, to: :rejected
-    end
-  end
 
   def github_uid
     authentications.github.first&.uid

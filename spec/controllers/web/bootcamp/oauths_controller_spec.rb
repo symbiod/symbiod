@@ -53,7 +53,7 @@ describe Web::Bootcamp::OauthsController do
 
         it 'redirects to accept policy wizard' do
           post :callback, params: oauth_params
-          expect(response).to redirect_to edit_bootcamp_wizard_accept_policy_url
+          expect(response).to redirect_to edit_bootcamp_wizard_profile_url
         end
       end
 

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Web::Dashboard::NotesController, type: :controller do
-  let(:user) { create(:user, :active, :developer) }
+  let(:user) { create(:user, :developer, :active) }
 
   describe 'GET #new' do
     context 'not signed in' do
@@ -21,7 +21,7 @@ describe Web::Dashboard::NotesController, type: :controller do
       end
 
       context 'current user has role staff or mentor' do
-        let(:current_user) { create(:user, :active, :staff_or_mentor) }
+        let(:current_user) { create(:user, :staff_or_mentor, :active) }
 
         it 'renders template' do
           expect(response).to render_template :new
@@ -33,7 +33,7 @@ describe Web::Dashboard::NotesController, type: :controller do
       end
 
       context 'current user has role developer or author' do
-        let(:current_user) { create(:user, :active, :developer_or_author) }
+        let(:current_user) { create(:user, :developer_or_author, :active) }
 
         it 'redirects to user page' do
           expect(response).to redirect_to dashboard_user_url(user)
@@ -60,7 +60,7 @@ describe Web::Dashboard::NotesController, type: :controller do
         let(:params_note) { { content: 'Contents' } }
 
         context 'current user has role staff or mentor' do
-          let(:current_user) { create(:user, :active, :staff_or_mentor) }
+          let(:current_user) { create(:user, :staff_or_mentor, :active) }
 
           it 'created note' do
             expect { post :create, params: { user_id: user.id, note: params_note } }
@@ -74,7 +74,7 @@ describe Web::Dashboard::NotesController, type: :controller do
         end
 
         context 'current user has role developer or author' do
-          let(:current_user) { create(:user, :active, :developer_or_author) }
+          let(:current_user) { create(:user, :developer_or_author, :active) }
 
           it 'not created note' do
             expect { post :create, params: { user_id: user.id, note: params_note } }
@@ -92,7 +92,7 @@ describe Web::Dashboard::NotesController, type: :controller do
         let(:invalid_params_note) { { content: '' } }
 
         context 'user has role staff or mentor' do
-          let(:current_user) { create(:user, :active, :staff_or_mentor) }
+          let(:current_user) { create(:user, :staff_or_mentor, :active) }
 
           it 'not created note' do
             expect { post :create, params: { user_id: user.id, note: invalid_params_note } }

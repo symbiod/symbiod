@@ -11,12 +11,13 @@ module Ops
 
         private
 
+        # TODO: rework by passing role instead of user
         def all_tasks_completed?(_ctx, user:, **)
           user.test_tasks_completed?
         end
 
         def complete_screening!(_ctx, user:, **)
-          user.complete_screening!
+          role(user).complete_screening!
         end
 
         def screening_completed_notification!(_ctx, user:, **)

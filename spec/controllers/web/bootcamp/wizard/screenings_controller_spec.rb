@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Web::Bootcamp::Wizard::ScreeningsController do
   describe 'GET #index' do
     context 'authenticated' do
-      let(:user) { create(:user, :profile_completed, :with_assignment) }
+      let(:user) { create(:user, :developer, :policy_accepted, :with_assignment) }
       before { login_user(user) }
 
       it 'renders template' do
@@ -42,7 +42,7 @@ describe Web::Bootcamp::Wizard::ScreeningsController do
   end
 
   describe 'PUT #update' do
-    let(:user) { create(:user, :profile_completed, :with_assignment) }
+    let(:user) { create(:user, :developer, :policy_accepted, :with_assignment) }
     let(:assignment) { user.test_task_assignments.last }
     let(:params) do
       {

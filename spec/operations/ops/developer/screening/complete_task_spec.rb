@@ -13,7 +13,7 @@ describe Ops::Developer::Screening::CompleteTask do
   end
 
   describe '#call' do
-    let(:user) { create(:user, :profile_completed) }
+    let(:user) { create(:user, :developer, :policy_accepted) }
     let!(:assignment) { create(:developer_test_task_assignment, :uncompleted, developer: user) }
 
     context 'valid params' do

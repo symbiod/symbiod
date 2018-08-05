@@ -4,17 +4,18 @@ require 'rails_helper'
 
 describe Ops::Developer::Screening::Finish do
   describe '#call' do
-    let(:user) { create(:user, :profile_completed) }
+    let(:user) { create(:user, :developer, :policy_accepted) }
+    let(:role) { role_for(user: user, role_name: :developer) }
 
     context 'screening completed' do
       before { allow(user).to receive(:test_tasks_completed?).and_return(true) }
 
-      it 'changes user state' do
+      it 'changes role state' do
         expect { described_class.call(user: user) }
-          .to change { user.state }.to('screening_completed')
+          .to change { role.reload.state }.to('screening_completed')
       end
 
-      it 'sends email about completed screening' do
+      it 'sends notification about completed screening' do
         expect do
           described_class.call(user: user)
         end.to have_enqueued_job(ActionMailer::DeliveryJob)
@@ -30,9 +31,9 @@ describe Ops::Developer::Screening::Finish do
     context 'screening is not completed' do
       before { allow(user).to receive(:test_tasks_completed?).and_return(false) }
 
-      it 'does not change user state' do
+      it 'does not change role state' do
         expect { described_class.call(user: user) }
-          .not_to change(user, :state)
+          .not_to change(role, :state)
       end
 
       it 'does not send email' do
