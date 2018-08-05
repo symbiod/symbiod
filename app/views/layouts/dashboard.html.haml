@@ -30,57 +30,57 @@
               %li.nav-item
                 %a.nav-link{ href: dashboard_root_url }
                   %span{ 'data-feather': 'home' }
-                  Dashboard
+                  = t('dashboard.navigation.dashboard')
               - if policy(:test_task_assignment).index?
                 %li.nav-item
                   = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
                     %span{ 'data-feather': 'file' }
-                    Applicants
+                    = t('dashboard.navigation.applicants')
                     = count_of_pending_users
               - if policy(:test_task).index?
                 %li.nav-item
                   = link_to dashboard_test_tasks_url, class: 'nav-link' do
                     %span{ 'data-feather': 'file' }
-                    Test Tasks
+                    = t('dashboard.navigation.test_tasks')
               - if policy(:user).index?
                 %li.nav-item
-                  = link_to dashboard_users_path, class: 'nav-link' do
+                  = link_to dashboard_users_url, class: 'nav-link' do
                     %span{ 'data-feather': 'file' }
-                    Users Management
+                    = t('dashboard.navigation.users')
               - if policy(%i[dashboard skill]).index?
                 %li.nav-item
-                  = link_to dashboard_skills_path, class: 'nav-link' do
+                  = link_to dashboard_skills_url, class: 'nav-link' do
                     %span{ 'data-feather': 'file' }
-                    Skills Management
+                    = t('dashboard.navigation.skills')
               %li.nav-item
-                = link_to dashboard_ideas_path, class: 'nav-link' do
+                = link_to dashboard_ideas_url, class: 'nav-link' do
                   %span{ 'data-feather': 'file' }
-                  Ideas
+                  = t('dashboard.navigation.ideas')
               %li.nav-item
-                %a.nav-link{ href: '#' }
+                = link_to dashboard_projects_url, class: 'nav-link' do
                   %span{ 'data-feather': 'shopping-cart' }
-                  Projects
+                  = t('dashboard.navigation.projects')
               %li.nav-item
                 %a.nav-link{ href: '#' }
                   %span{ 'data-feather': 'users' }
-                  Reports
+                  = t('dashboard.navigation.reports')
               %li.nav-item
                 %a.nav-link{ href: '#' }
                   %span{ 'data-feather': 'bar-chart-2' }
-                  Analytics
+                  = t('dashboard.navigation.analytics')
               %li.nav-item
                 %a.nav-link{ href: '#' }
                   %span{ 'data-feather': 'layers' }
-                  Activity
+                  = t('dashboard.navigation.activity')
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
-              %span My projects
+              %span= t('dashboard.navigation.my_projects')
               %a.d-flex.align-items-center.text-muted{ href: '#' }
                 %span{ 'data-feather': 'plus-circle' }
             %ul.nav.flex-column.mb-2
               %li.nav-item
                 %a.nav-link{ href: '#' }
                   %span{ 'data-feather': 'file-text' }
-                  Mentored
+                  = t('dashboard.navigation.mentored')
         %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{ role: 'main' }
           = render partial: 'layouts/shared/dashboard_flashes'
 

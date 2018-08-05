@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
 
   belongs_to :idea
+  has_one :author, through: :idea
 
   has_many :project_users
   has_many :users, through: :project_users

@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :project do
     name { Faker::Company.name }
-    slug { Faker::Internet.slug }
+    slug { Faker::Internet.slug(name, '_') }
     idea
     stack
   end

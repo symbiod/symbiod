@@ -1,0 +1,6 @@
+%h2 #{t('dashboard.projects.headers.edit')} ##{@project.id}
+= simple_form_for @project, url: dashboard_project_url do |f|
+  = f.input :name
+  = f.input :slug
+  = f.input :stack_id, collection: @stacks, include_blank: false
+  = f.button :submit, class: 'btn btn-info'

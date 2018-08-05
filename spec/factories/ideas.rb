@@ -36,4 +36,10 @@ FactoryBot.define do
   trait :all_states do
     state %w[pending active disabled voting].sample
   end
+
+  trait :with_project do
+    after(:create) do |idea|
+      create(:project, idea: idea)
+    end
+  end
 end

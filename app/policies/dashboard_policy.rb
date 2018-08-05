@@ -36,4 +36,8 @@ class DashboardPolicy < ApplicationPolicy
   def not_developer?
     staff? || mentor? || author?
   end
+
+  def staff_or_author_record?
+    staff_or_mentor? || record.author == user
+  end
 end

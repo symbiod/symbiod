@@ -68,6 +68,7 @@ Rails.application.routes.draw do
           put :deactivate
         end
       end
+      resources :projects, only: %i[index show edit update]
       resource :profile, only: %i[show edit update]
       root to: 'home#index'
     end

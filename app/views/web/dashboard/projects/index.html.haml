@@ -1,0 +1,13 @@
+%h3= t('dashboard.projects.headers.index')
+
+%table.table.table-striped.table-sm
+  %thead
+    %tr
+      %th= t('dashboard.projects.table.id')
+      %th= t('dashboard.projects.table.name')
+      %th= t('dashboard.projects.table.author')
+    - @projects.each do |project|
+      %tr
+        %td ##{project.id}
+        %td= link_to project.name, dashboard_project_url(project)
+        %td= link_to project.author.email, dashboard_user_url(project.author)

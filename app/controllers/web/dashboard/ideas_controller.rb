@@ -8,7 +8,6 @@ module Web
       before_action only: %i[index new create] do
         authorize_role(%i[dashboard idea])
       end
-      rescue_from Pundit::NotAuthorizedError, with: :redirect_to_dashboard_root
 
       def index
         @ideas = ::Dashboard::IdeaPolicy::Scope.new(current_user, ::Idea).resolve.page params[:page]

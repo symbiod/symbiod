@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :stack do
     name { Faker::App.author }
-    identifier { Faker::App.name }
+    identifier { Faker::Internet.slug }
 
     trait :rails_monolith do
       identifier 'rails_monolith'

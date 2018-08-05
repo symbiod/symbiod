@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Web::Dashboard::VotesController, type: :controller do
+  before { create(:stack, :rails_monolith) }
+
   describe 'GET #index' do
     context 'not signed in' do
       let(:idea) { create(:idea, :voting) }

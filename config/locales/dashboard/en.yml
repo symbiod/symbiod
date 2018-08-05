@@ -2,6 +2,18 @@ en:
   dashboard:
     navigation:
       profile: Profile
+      dashboard: Dashboard
+      applicants: Applicants
+      test_tasks: Test Tasks
+      users: Users management
+      skills: Skills management
+      ideas: Ideas
+      projects: Projects
+      reports: Reports
+      analytics: Analytics
+      activity: Activity
+      my_projects: My projects
+      mentored: Mentored
     profile:
       edit:
         title: Edit your profile
@@ -165,3 +177,17 @@ en:
       notice:
         success: Thanks for the vote
         warning: Sorry, but you already voted for this idea
+    projects:
+      update:
+        success: Project was success updated
+        danger: Could not update project
+      headers:
+        index: Index
+        show: Show
+        edit: Edit
+      table:
+        id: Id
+        name: Name
+        author: Author
+        stack: Stack
+        developers: Developers
