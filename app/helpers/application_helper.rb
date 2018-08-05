@@ -1,5 +1,6 @@
 module ApplicationHelper
   def count_of_pending_users
-    "(#{User.screening_completed.count})" if User.screening_completed.any?
+    pending_applications = Role.where(state: :screening_completed).count
+    "(#{pending_applications})" unless pending_applications.zero?
   end
 end
