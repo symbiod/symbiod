@@ -1,0 +1,9 @@
+%p.lead
+  = t('bootcamp.screening.uncompleted')
+%p
+  Hello, #{@user.full_name}
+
+  It looks like you haven't completed our sign up wizard.
+  Follow the
+  = link_to 'link', @url
+  to do that, and you will be able to get some real-world experience!
