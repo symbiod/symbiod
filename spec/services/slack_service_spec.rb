@@ -6,8 +6,9 @@ require './app/services/slack_integration/invite_user'
 require './app/services/slack_service'
 
 describe SlackService do
-  subject { described_class.new(token) }
+  subject { described_class.new(token, slack_config) }
   let(:token) { '123456' }
+  let(:slack_config) { Settings.slack }
   let(:channels) { %w[channel1 channel2 channel3] }
 
   describe '#invite' do
@@ -45,10 +46,11 @@ describe SlackService do
     describe '#post_to_channel' do
       let(:channel) { 'channel' }
       let(:message) { 'message' }
+      let(:username) { double }
 
       it 'calls postMessage method' do
         expect(client).to receive(:chat_postMessage)
-          .with(channel: channel, text: message, as_user: false, username: 'Idea Bot')
+          .with(channel: channel, text: message, as_user: false, username: slack_config.bot_name)
           .once
         subject.post_to_channel(channel, message)
       end
@@ -57,6 +59,19 @@ describe SlackService do
     describe '#invite_to_channel' do
       let(:channel) { 'channel' }
       let(:email)   { 'email' }
+      let(:users_data) do
+        { 'members' => [
+          { 'id' => '1', 'profile' => { 'email' => 'email1' } },
+          { 'id' => '2', 'profile' => { 'email' => 'email' } }
+        ] }
+      end
+
+      let(:channels_data) do
+        { 'channels' => [
+          { 'id' => '1', 'name' => 'channel1' },
+          { 'id' => '2', 'name' => 'channel' }
+        ] }
+      end
 
       before do
         allow(client).to receive(:conversations_list).and_return(channels_data)
@@ -64,20 +79,6 @@ describe SlackService do
       end
 
       context 'channel and user exists' do
-        let(:users_data) do
-          { 'members' => [
-            { 'id' => '1', 'profile' => { 'email' => 'email1' } },
-            { 'id' => '2', 'profile' => { 'email' => 'email' } }
-          ] }
-        end
-
-        let(:channels_data) do
-          { 'channels' => [
-            { 'id' => '1', 'name' => 'channel1' },
-            { 'id' => '2', 'name' => 'channel' }
-          ] }
-        end
-
         it 'calls coversations_invite with proper args' do
           expect(client).to receive(:conversations_invite).with(channel: '2', users: '2').once
           subject.invite_to_channel(channel, email)
@@ -119,6 +120,32 @@ describe SlackService do
 
         it 'raises error' do
           expect { subject.invite_to_channel(channel, email) }.to raise_error(SlackIntegration::FailedApiCallException)
+        end
+      end
+
+      context 'user already joined channel' do
+        it 'does not raise error' do
+          allow(client)
+            .to receive(:conversations_invite)
+            .with(any_args)
+            .and_raise(
+              Slack::Web::Api::Errors::SlackError,
+              'cant_invite_self'
+            )
+          expect { subject.invite_to_channel(channel, email) }.not_to raise_error
+        end
+      end
+
+      context 'other error occures during invitation' do
+        it 'reraises error' do
+          allow(client)
+            .to receive(:conversations_invite)
+            .with(any_args)
+            .and_raise(
+              Slack::Web::Api::Errors::SlackError,
+              'some_other_error'
+            )
+          expect { subject.invite_to_channel(channel, email) }.to raise_error(Slack::Web::Api::Errors::SlackError)
         end
       end
     end

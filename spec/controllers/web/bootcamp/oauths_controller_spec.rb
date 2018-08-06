@@ -7,7 +7,7 @@ describe Web::Bootcamp::OauthsController do
     it 'redirects to provider' do
       get :oauth, params: { provider: 'github' }
       expect(response).to redirect_to(
-        'https://github.com/login/oauth/authorize?client_id=468027b7e7a78b3afaa3&display&redirect_uri=http%3A%2F%2Fbootcamp.lvh.me%3A3000%2Foauth%2Fcallback%3Fprovider%3Dgithub&response_type=code&scope&state'
+        "https://github.com/login/oauth/authorize?client_id=#{Settings.github.oauth.client_id}&display&redirect_uri=http%3A%2F%2Fbootcamp.lvh.me%3A3000%2Foauth%2Fcallback%3Fprovider%3Dgithub&response_type=code&scope&state"
       )
     end
   end

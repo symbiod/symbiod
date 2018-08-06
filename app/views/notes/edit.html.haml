@@ -1,0 +1,5 @@
+= render partial: 'notes/form',
+         locals: { note: @note,
+                   url: send("dashboard_#{@noteable.class.name.downcase}_note_url"),
+                   noteable: @noteable,
+                   submit: 'update' }

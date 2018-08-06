@@ -4,23 +4,30 @@ require 'rails_helper'
 
 RSpec.describe Staff::ScreeningCompletedMailer, type: :mailer do
   describe 'notify' do
+    subject { Staff::ScreeningCompletedMailer.notify(user.id) }
     let(:user) { create(:user, :with_primary_skill) }
-    let(:mail) { Staff::ScreeningCompletedMailer.notify(user.id) }
     let(:recipients) { create_list(:user, 2) }
 
-    it 'renders the subject' do
-      expect(mail.subject).to eq("#{I18n.t('bootcamp.screening.completed')}, #{user.full_name}")
-    end
+    its(:subject) { is_expected.to eq("#{I18n.t('bootcamp.screening.completed')}, #{user.full_name}") }
+    its(:from) { is_expected.to eq([Settings.notifications.email.default_from]) }
 
-    it 'renders the sender email' do
-      expect(mail.from).to eq(['givemepoc@gmail.com'])
-    end
+    describe '#to' do
+      before do
+        query_object = double(call: recipients)
+        expect(Users::ScreeningCompletedNotificationRecipientsQuery)
+          .to receive(:new).and_return(query_object)
+      end
 
-    it 'gets list of recipients' do
-      query_object = double(call: recipients)
-      expect(Users::ScreeningCompletedNotificationRecipientsQuery)
-        .to receive(:new).and_return(query_object)
-      expect(mail.to).to eq recipients.map(&:email)
+      its(:to) { is_expected.to eq recipients.map(&:email) }
+
+      it 'renders link to github' do
+        expect(subject.body.encoded)
+          .to match("<a target=\"_blank\" href=\"https://github.com/#{user_github}\">#{user_github}</a>")
+      end
     end
+  end
+
+  def user_github
+    CGI.escapeHTML(user.github)
   end
 end

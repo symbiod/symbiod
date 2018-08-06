@@ -19,7 +19,39 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many :notes }
     it { is_expected.to have_many :project_users }
     it { is_expected.to have_many :projects }
-    it { is_expected.to belong_to :approver }
+    it { is_expected.to belong_to(:approver).optional }
+  end
+
+  describe '.with_role_and_state' do
+    subject { described_class.with_role_and_state(role, state) }
+    let!(:user1) { create(:user, :developer, :profile_completed) }
+    let!(:user2) { create(:user, :developer, :policy_accepted) }
+    let!(:user3) { create(:user, :author, :pending) }
+    let!(:user4) { create(:user, :staff, :active) }
+
+    context 'developer with profile_completed' do
+      let(:role) { :developer }
+      let(:state) { :profile_completed }
+      it { is_expected.to eq [user1] }
+    end
+
+    context 'developer with policy_accepted' do
+      let(:role) { :developer }
+      let(:state) { :policy_accepted }
+      it { is_expected.to eq [user2] }
+    end
+
+    context 'pending author' do
+      let(:role) { :author }
+      let(:state) { :pending }
+      it { is_expected.to eq [user3] }
+    end
+
+    context 'active staff' do
+      let(:role) { :staff }
+      let(:state) { :active }
+      it { is_expected.to eq [user4] }
+    end
   end
 
   describe 'changes in users roles' do

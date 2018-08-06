@@ -14,15 +14,15 @@ module Web
       if current_user.present?
         author_status
       else
-        ['author_log_in', new_idea_sessions_url]
+        ['author_log_in', new_idea_wizard_registrations_url]
       end
     end
 
     def author_status
-      if DashboardPolicy.new(current_user, nil).allowed?
+      if DashboardPolicy.new(current_user, nil).index?
         ['go_to_dashboard', dashboard_root_url]
       else
-        ['go_to_proposal', idea_proposals_url]
+        ['go_to_proposal', public_send(Author::Wizard.new(current_user).route_for_current_step)]
       end
     end
   end

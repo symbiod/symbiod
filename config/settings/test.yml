@@ -1,2 +1,6 @@
 github:
   organization: 'bootcamp-test'
+  oauth:
+    client_id: '123456'
+    secret: 'qwerty'
+    callback_domain: 'http://bootcamp.lvh.me:3000'

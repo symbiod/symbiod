@@ -4,8 +4,9 @@
 # Some methods are used during new member onboarding, others are required
 # for new project kick-off.
 class SlackService
-  def initialize(token)
+  def initialize(token, slack_config = {})
     @token = token
+    @slack_config = slack_config
   end
 
   # We invite new registred member to our Slack
@@ -19,7 +20,7 @@ class SlackService
 
   # When the new idea is submitted we notify developers through Slack
   def post_to_channel(channel, message)
-    client.chat_postMessage(channel: channel, text: message, as_user: false, username: 'Idea Bot')
+    client.chat_postMessage(channel: channel, text: message, as_user: false, username: @slack_config.bot_name)
   end
 
   # At the moment of new project kick-off we invite all interested members to its channel
@@ -29,6 +30,8 @@ class SlackService
     channel = channel_by_name(channel_name)
     raise SlackIntegration::FailedApiCallException, "Channel with name '#{channel}' was not found" unless channel
     client.conversations_invite(channel: channel['id'], users: user['id'])
+  rescue Slack::Web::Api::Errors::SlackError => e
+    handle_exception(e)
   end
 
   # For each new project we create a separate channel
@@ -59,5 +62,10 @@ class SlackService
 
   def id_channels(channels)
     channels.map { |channel| channel_by_name(channel)['id'] }.join(',')
+  end
+
+  def handle_exception(exception)
+    return true if exception.message == 'cant_invite_self'
+    raise
   end
 end

@@ -14,8 +14,14 @@ module Ops
         'up'
       end
 
-      def try_to_create_project!(_ctx, idea:, **)
-        Ops::Projects::Kickoff.call(idea: idea) if idea.votes.up.count >= COUNT_VOTES_KICKOFF_PROJECT
+      def try_to_create_project!(options, idea:, **)
+        return if can_kickoff_project?(idea)
+        Ops::Idea::Activate.call(idea: idea)
+        options['project'] = idea.project
+      end
+
+      def can_kickoff_project?(idea)
+        idea.votes.up.count < COUNT_VOTES_KICKOFF_PROJECT
       end
     end
   end

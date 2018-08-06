@@ -1,0 +1,6 @@
+%br
+- if current_user.ideas.empty?
+  = render partial: 'form', locals: { idea: @idea }
+- else
+  %p.lead
+    = t('idea.landing.wait_for_idea_approve')

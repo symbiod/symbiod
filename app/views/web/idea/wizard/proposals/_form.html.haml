@@ -1,0 +1,9 @@
+%h3= t('idea.proposals.new.header')
+.text-left
+  = simple_form_for idea, url: idea_wizard_proposals_url do |f|
+    = f.input :name
+    = f.input :description, input_html: { id: 'markdown-editor' }
+    = f.input :private_project
+    = f.input :skip_bootstrapping
+    .text-center
+      = f.submit t('idea.proposals.propose'), class: 'btn btn-lg btn-secondary'

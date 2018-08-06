@@ -31,13 +31,15 @@ gem 'simple_form'
 gem 'slack-ruby-client'
 gem 'sorcery'
 
-gem "octokit", "~> 4.0"
+gem 'octokit', '~> 4.0'
 gem 'honeybadger', '~> 3.1'
 gem 'newrelic_rpm'
 gem 'data_migrate'
 gem 'pundit', '~> 2.0.0.beta1'
 gem 'strong_migrations'
+gem 'clockwork'
 gem 'config'
+gem 'recaptcha'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
@@ -67,8 +69,10 @@ group :development do
 end
 
 group :test do
+  gem 'clockwork-test'
+  gem 'database_cleaner'
   gem 'faker'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
   gem 'database_cleaner'
   gem 'webmock'
   gem 'simplecov', require: false

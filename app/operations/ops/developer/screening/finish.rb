@@ -8,6 +8,7 @@ module Ops
         step :all_tasks_completed?
         success :complete_screening!
         success :screening_completed_notification!
+        success :screening_completed_message_to_slack!
 
         private
 
@@ -22,6 +23,10 @@ module Ops
 
         def screening_completed_notification!(_ctx, user:, **)
           Staff::ScreeningCompletedMailer.notify(user.id).deliver_later
+        end
+
+        def screening_completed_message_to_slack!(_ctx, user:, **)
+          ::Developer::Screening::MessageToSlackJob.perform_later(user.id)
         end
       end
     end

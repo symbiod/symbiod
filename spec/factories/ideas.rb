@@ -4,9 +4,17 @@ FactoryBot.define do
   factory :idea do
     name { Faker::Company.bs }
     description 'Description'
-    private_project [false, true].sample
-    skip_bootstrapping [false, true].sample
+    private_project false
+    skip_bootstrapping false
     author
+  end
+
+  trait :private_project do
+    private_project true
+  end
+
+  trait :skip_bootstrapping do
+    skip_bootstrapping true
   end
 
   trait :voting do

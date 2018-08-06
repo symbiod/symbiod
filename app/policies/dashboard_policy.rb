@@ -2,7 +2,7 @@
 
 # Allows only staff to manage newcomers applications
 class DashboardPolicy < ApplicationPolicy
-  def allowed?
+  def index?
     return false unless user
     user.roles.any?(&:active?)
   end
@@ -10,19 +10,19 @@ class DashboardPolicy < ApplicationPolicy
   private
 
   def developer?
-    user&.has_role? :developer
+    user&.has_role?(:developer) && user&.role(:developer)&.active?
   end
 
   def staff?
-    user&.has_role? :staff
+    user&.has_role?(:staff) && user&.role(:staff)&.active?
   end
 
   def mentor?
-    user&.has_role? :mentor
+    user&.has_role?(:mentor) && user&.role(:mentor)&.active?
   end
 
   def author?
-    user&.has_role? :author
+    user&.has_role?(:author) && user&.role(:author)&.active?
   end
 
   def staff_or_mentor?

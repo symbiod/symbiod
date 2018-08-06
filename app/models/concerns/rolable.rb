@@ -16,6 +16,10 @@ module Rolable
     def self.with_any_role(name)
       with_role(name)
     end
+
+    def self.with_role_and_state(role, state)
+      with_role(role).where(roles: { state: state })
+    end
   end
 
   def self.role_class_names
@@ -39,10 +43,14 @@ module Rolable
   end
 
   def roles_name
-    roles.pluck(:type).map { |r| Roles::RolesManager.role_name_by_type(r) }
+    roles.pluck(:type).map { |r| Roles::RolesManager.role_name_by_type(r) }.sort
   end
 
   def role_class_name(name)
     Roles::RolesManager.role_class_name(name)
+  end
+
+  def role(name)
+    roles.map { |r| r if r.name == name.to_s }.compact.first
   end
 end

@@ -413,12 +413,18 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   shared_examples 'dashboard idea #activate tests' do
     it 'redirects to dashboard idea' do
       put :activate, params: { id: idea.id }
-      expect(response).to redirect_to dashboard_idea_url(idea)
+      expect(response).to redirect_to dashboard_project_url(idea.project)
+    end
+
+    it 'project created' do
+      expect { put :activate, params: { id: idea.id } }
+        .to change(Project, :count).by(1)
     end
   end
 
   describe 'GET #activate' do
     let(:idea) { create(:idea, :disabled) }
+    before { create(:stack, :rails_monolith) }
 
     context 'not signed in' do
       let(:user) { create(:user, :staff, :active) }
@@ -430,7 +436,10 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
     end
 
     context 'signed in' do
-      before { login_user(user) }
+      before do
+        create(:user, :mentor, :active)
+        login_user(user)
+      end
 
       context 'user has role staff or mentor' do
         let(:user) { create(:user, :staff_or_mentor, :active) }

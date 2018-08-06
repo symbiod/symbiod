@@ -1,3 +1,4 @@
+dist: xenial
 language: ruby
 sudo: true
 
@@ -13,9 +14,12 @@ services:
   - docker
   - redis-server
 
+addons:
+  postgresql: '10'
+
 before_install:
   - gem update --system
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database travis_ci_test;'
   - cp config/database.yml.travis config/database.yml
 
 before_script:
@@ -26,7 +30,8 @@ before_script:
 script:
   - bin/make-db-backup
   - bundle exec rspec
-  - bundle exec rake db:schema:load && bundle exec rake db:seed
+  - bin/test-migrations
+  - bundle exec rake db:seed
   - bin/build
   - bin/travis-features
 
@@ -39,5 +44,3 @@ deploy:
     on:
       branch:
         - master
-
-

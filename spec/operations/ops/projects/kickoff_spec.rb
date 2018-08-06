@@ -4,22 +4,18 @@ require 'rails_helper'
 
 describe Ops::Projects::Kickoff do
   subject { described_class }
+  let!(:service) { double }
 
   describe '#call' do
     before do
       create(:stack, :rails_monolith)
+      create(:user, :mentor, :active)
       create_list(:vote, 2, idea: idea)
       create_list(:vote, 3, :down, idea: idea)
     end
 
     let(:idea) { create(:idea, :voting) }
     let(:params) { { idea: idea } }
-
-    it 'changes idea state' do
-      expect { subject.call(params) }
-        .to change(idea.reload, :state)
-        .from('voting').to('active')
-    end
 
     it 'create project' do
       expect { subject.call(params) }
@@ -28,7 +24,19 @@ describe Ops::Projects::Kickoff do
 
     it 'add users to project' do
       subject.call(params)
-      expect(idea.project.users.count).to eq 2
+      expect(idea.project.users.count).to eq 3
+    end
+
+    it 'run job to create slack channel' do
+      expect(::Projects::CreateSlackChannelJob)
+        .to receive(:perform_later)
+      subject.call(params)
+    end
+
+    it 'run job to create github team' do
+      expect(::Projects::GenerateGithubTeamJob)
+        .to receive(:perform_later)
+      subject.call(params)
     end
   end
 end

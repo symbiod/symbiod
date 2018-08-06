@@ -4,6 +4,8 @@ en:
       profile: Profile
       dashboard: Dashboard
       applicants: Applicants
+      survey_responses: Feedbacks
+      feedback_questions: Questions
       test_tasks: Test Tasks
       users: Users management
       skills: Skills management
@@ -77,9 +79,19 @@ en:
           activate: Are you sure to activate?
         review_applicant: Review applicant
       mailers:
+        hello: Hello
         disabled:
-          subject: Your givemepoc.org account was disabled
-          account_was_disabled: Your givemepoc.org account was disabled
+          subject: Account was disabled
+          account_was_disabled: Your account was disabled
+        rejected:
+          subject: Your request was rejected
+        uncompleted:
+          subject: Uncompleted screening
+          title: Your screening is not completed
+          text_one: It looks like you haven't completed our sign up wizard. Follow the
+          link: link
+          text_two: to do that, and you will be able to get some real-world experience!
+        feedback: Feedback
       button:
         edit: Edit
       headers:
@@ -176,6 +188,7 @@ en:
         vote_type: Vote type
       notice:
         success: Thanks for the vote
+        success_project: Thanks for the decisive voice, the project was created
         warning: Sorry, but you already voted for this idea
     projects:
       update:
@@ -191,3 +204,47 @@ en:
         author: Author
         stack: Stack
         developers: Developers
+    roles:
+      notices:
+        deactivated: Role was deactivated
+        activated: Role was activated
+    survey_responses:
+      empty_questions: Sorry, but the list of questions is empty
+      mailers:
+        text: You can click on the link to view the
+      tables:
+        users: Users
+      notices:
+        success: Thank you for your feedback
+        feedback: Please leave a feedback about onboarding
+        completed: User left feedback after onboarding
+      headers:
+        new: We will be glad if you leave feedback
+        show: This feedback by
+        index: Feedbacks users
+      links:
+        feedback: feedback
+      buttons:
+        create: Leave feedback
+    feedback_questions:
+      notices:
+        success:
+          create: Question was success created
+          update: Question was success updated
+          destroy: Question was deleted
+        danger:
+          create: Question was not created
+          update: Question was not updated
+      tables:
+        description: Question
+        key_name: Key name
+      headers:
+        index: All feedback questions
+        edit: Edit question
+        new: New question
+      buttons:
+        create: Create
+        update: Update
+        cancel: Cancel
+      confirm:
+        destroy: Are you sure to delete this question?

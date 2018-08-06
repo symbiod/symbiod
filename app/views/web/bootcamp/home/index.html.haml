@@ -7,7 +7,7 @@
     - if wizard.active?
       = link_to t('bootcamp.landing.proceed_with_wizard'), current_wizard_step_url,
                                                            class: 'btn btn-lg btn-secondary'
-    - elsif DashboardPolicy.new(current_user, nil).allowed?
+    - elsif DashboardPolicy.new(current_user, nil).index?
       = link_to t('bootcamp.landing.go_to_dashboard'), dashboard_root_url,
                                                        class: 'btn btn-lg btn-secondary'
     - else

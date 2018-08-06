@@ -12,7 +12,7 @@ describe Developer::Dashboard::UserStatusButton do
 
   shared_examples 'user staff and candidate not disabled' do
     it 'renders link to activate' do
-      expect(subject.role_status).to match(/activate/)
+      expect(subject.role_status).to match(/role_activation/)
     end
 
     it 'renders link to confirm status to activate' do
@@ -38,7 +38,7 @@ describe Developer::Dashboard::UserStatusButton do
     end
 
     it 'renders link to disable' do
-      expect(subject.role_status).to match(/deactivate/)
+      expect(subject.role_status).to match(/role_deactivation/)
     end
 
     it 'renders link to confirm status to disable' do

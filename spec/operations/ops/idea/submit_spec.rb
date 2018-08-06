@@ -25,7 +25,7 @@ describe Ops::Idea::Submit do
       end
 
       it 'calls job SlackMessage' do
-        expect(SlackMessageJob)
+        expect(Ideas::MessageToSlackJob)
           .to receive(:perform_later)
         subject.call(author: author, params: params)
       end
@@ -43,7 +43,7 @@ describe Ops::Idea::Submit do
       end
 
       it 'does not calls job SlackMessage' do
-        expect(SlackMessageJob)
+        expect(Ideas::MessageToSlackJob)
           .not_to receive(:perform_later)
         subject.call(author: author, params: invalid_params)
       end

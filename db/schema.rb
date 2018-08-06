@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_04_140335) do
+ActiveRecord::Schema.define(version: 2018_08_18_121100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(version: 2018_08_04_140335) do
   end
 
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
+  create_table "developer_onboarding_feedback_questions", force: :cascade do |t|
+    t.string "description", null: false
+    t.string "key_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key_name"], name: "index_developer_onboarding_feedback_questions_on_key_name", unique: true
+  end
+
+  create_table "developer_onboarding_survey_responses", force: :cascade do |t|
+    t.jsonb "feedback", null: false
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_developer_onboarding_survey_responses_on_role_id", unique: true
   end
 
   create_table "developer_onboardings", force: :cascade do |t|
@@ -100,6 +116,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_140335) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "mentor", default: false
     t.index ["project_id", "user_id"], name: "index_project_users_on_project_id_and_user_id", unique: true
     t.index ["project_id"], name: "index_project_users_on_project_id"
     t.index ["user_id"], name: "index_project_users_on_user_id"
@@ -175,6 +192,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_140335) do
     t.string "timezone"
     t.string "cv_url"
     t.integer "approver_id"
+    t.datetime "last_screening_followup_date", default: -> { "CURRENT_TIMESTAMP" }
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -196,6 +214,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_140335) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "developer_onboarding_survey_responses", "roles"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "stacks"

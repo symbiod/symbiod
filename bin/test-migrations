@@ -1,0 +1,27 @@
+#!/bin/bash
+# The goal of this script if to validate,
+# if the migrations don't fail on production db and can be deployed safely.
+# In order to do that we load the latest public dump into the travis database
+# and apply schema and data migrations, to be sure that they don't fail.
+
+# Import the latest dump to the database
+# TODO: reuse existing script that loads dump into the database
+#./load_dump
+
+# Here the database is recreated, since there can be existing tables after past operations
+bundle exec rake db:drop && bundle exec rake db:create
+
+wget https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump -O /tmp/givemepoc_latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -d travis_ci_test /tmp/givemepoc_latest.dump
+
+# Run migrations and ensure that they do not fail
+bundle exec rake db:migrate:with_data
+exit_status=$?
+
+# Cleanup the database
+DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load
+
+# Always return the status of migration command
+exit $exit_status
+
+

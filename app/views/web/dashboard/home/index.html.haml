@@ -1,3 +1,8 @@
+- if policy(%i[dashboard survey_response]).new?
+  .alert.alert-warning.alert-dismissible
+    %a.close{ href: '#', 'data-dismiss': 'alert', 'arial-label': 'close' }
+      &times;
+    = link_to t('dashboard.survey_responses.notices.feedback'), new_dashboard_survey_response_url
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
   %h1.h2 Dashboard
   .btn-toolbar.mb-2.mb-md-0

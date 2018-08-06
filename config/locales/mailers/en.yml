@@ -1,0 +1,10 @@
+en:
+  mailers:
+    developer:
+      onboarding_started:
+        feedback: We would also like you to leave feedback about onboarding
+                  by answering a few
+        questions: questions
+      onboarding:
+        survey_responses:
+          subject: User left feedback after onboarding

@@ -21,7 +21,7 @@ describe TestTaskAssignmentPolicy do
   end
 
   context 'current user has role staff' do
-    let(:current_user) { create(:user, :staff) }
+    let(:current_user) { create(:user, :staff, :active) }
 
     context 'candidate status screening_completed' do
       let(:candidate) { create(:user, :developer, :screening_completed) }
@@ -39,7 +39,7 @@ describe TestTaskAssignmentPolicy do
 
   context 'current user has role mentor' do
     let(:skill_name) { 'Ruby' }
-    let(:current_user) { create(:user, :mentor, :with_primary_skill, skill_name: skill_name) }
+    let(:current_user) { create(:user, :mentor, :with_primary_skill, :active, skill_name: skill_name) }
 
     context 'candidate is reviewable by mentor' do
       let(:candidate) { create(:user, :developer, :screening_completed, :with_primary_skill, skill_name: skill_name) }
@@ -79,7 +79,7 @@ describe TestTaskAssignmentPolicy do
     let!(:applicant_4) { create(:user, :developer, :profile_completed, :with_primary_skill, skill_name: skill_name) }
 
     context 'staff' do
-      let(:user) { create(:user, :staff) }
+      let(:user) { create(:user, :staff, :active) }
 
       it 'returns all applicants' do
         expect(subject.resolve).to match_array [applicant_1, applicant_2, applicant_3]
@@ -87,7 +87,7 @@ describe TestTaskAssignmentPolicy do
     end
 
     context 'mentor' do
-      let(:user) { create(:user, :mentor, :with_primary_skill, skill_name: skill_name) }
+      let(:user) { create(:user, :mentor, :with_primary_skill, :active, skill_name: skill_name) }
 
       it 'returns matching applicants' do
         expect(subject.resolve).to match_array [applicant_1]
@@ -95,7 +95,7 @@ describe TestTaskAssignmentPolicy do
     end
 
     context 'developer or author' do
-      let(:user) { create(:user, :developer_or_author, :with_primary_skill, skill_name: skill_name) }
+      let(:user) { create(:user, :developer_or_author, :with_primary_skill, :active, skill_name: skill_name) }
 
       it 'returns empty collection' do
         expect(subject.resolve).to eq []
