@@ -419,6 +419,7 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
 
   describe 'GET #activate' do
     let(:idea) { create(:idea, :disabled) }
+    before { create(:stack, :rails_monolith) }
 
     context 'not signed in' do
       let(:user) { create(:user, :staff, :active) }

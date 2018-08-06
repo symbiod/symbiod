@@ -15,12 +15,6 @@ describe Ops::Projects::Kickoff do
     let(:idea) { create(:idea, :voting) }
     let(:params) { { idea: idea } }
 
-    it 'changes idea state' do
-      expect { subject.call(params) }
-        .to change(idea.reload, :state)
-        .from('voting').to('active')
-    end
-
     it 'create project' do
       expect { subject.call(params) }
         .to change(Project, :count).by(1)
