@@ -72,6 +72,8 @@ GEM
       cells (>= 4.1.6, < 5.0.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    clockwork (2.0.3)
+      tzinfo
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -455,6 +457,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   cells-haml
   cells-rails
+  clockwork
   coffee-rails (~> 4.2)
   config
   data_migrate
@@ -508,4 +511,4 @@ RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

@@ -31,13 +31,14 @@ gem 'simple_form'
 gem 'slack-ruby-client'
 gem 'sorcery'
 
-gem "octokit", "~> 4.0"
+gem 'octokit', '~> 4.0'
 gem 'honeybadger', '~> 3.1'
 gem 'newrelic_rpm'
 gem 'data_migrate'
 gem 'pundit', '~> 2.0.0.beta1'
 gem 'strong_migrations'
 gem 'config'
+gem 'clockwork'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
