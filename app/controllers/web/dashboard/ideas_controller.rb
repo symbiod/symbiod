@@ -49,7 +49,7 @@ module Web
 
       def activate
         Ops::Idea::Activate.call(idea: @idea)
-        redirect_to dashboard_idea_url(@idea),
+        redirect_to dashboard_project_url(@idea.project),
                     flash: { success: "#{t('dashboard.ideas.notice.activated')}: #{@idea.name}" }
       end
 

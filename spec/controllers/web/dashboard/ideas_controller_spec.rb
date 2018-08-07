@@ -413,7 +413,12 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
   shared_examples 'dashboard idea #activate tests' do
     it 'redirects to dashboard idea' do
       put :activate, params: { id: idea.id }
-      expect(response).to redirect_to dashboard_idea_url(idea)
+      expect(response).to redirect_to dashboard_project_url(idea.project)
+    end
+
+    it 'project created' do
+      expect { put :activate, params: { id: idea.id } }
+        .to change(Project, :count).by(1)
     end
   end
 

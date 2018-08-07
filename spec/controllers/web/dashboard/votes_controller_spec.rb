@@ -95,14 +95,35 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
         context 'user has role developer' do
           let(:user) { create(:user, :developer, :active) }
 
-          it 'redirects to root landing' do
-            put :up, params: { idea_id: idea.id, id: 1 }
-            expect(response).to redirect_to dashboard_idea_url(idea)
+          context 'idea has no votes' do
+            it 'redirects to idea page' do
+              put :up, params: { idea_id: idea.id, id: 1 }
+              expect(response).to redirect_to dashboard_idea_url(idea)
+            end
+
+            it 'vote was created' do
+              expect { put :up, params: { idea_id: idea.id, id: 1 } }
+                .to change(Vote, :count).by(1)
+            end
           end
 
-          it 'vote was created' do
-            expect { put :up, params: { idea_id: idea.id, id: 1 } }
-              .to change(Vote, :count).by(1)
+          context 'idea has 4 votes' do
+            before { create_list(:vote, 4, idea: idea) }
+
+            it 'project was created' do
+              expect { put :up, params: { idea_id: idea.id, id: 1 } }
+                .to change(Project, :count).by(1)
+            end
+
+            it 'redirects to project page' do
+              put :up, params: { idea_id: idea.id, id: 1 }
+              expect(response).to redirect_to dashboard_project_url(idea.project)
+            end
+
+            it 'vote was created' do
+              expect { put :up, params: { idea_id: idea.id, id: 1 } }
+                .to change(Vote, :count).by(1)
+            end
           end
         end
       end

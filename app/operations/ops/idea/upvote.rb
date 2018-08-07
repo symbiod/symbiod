@@ -14,8 +14,12 @@ module Ops
         'up'
       end
 
-      def try_to_create_project!(_ctx, idea:, **)
-        Ops::Idea::Activate.call(idea: idea) if idea.votes.up.count >= COUNT_VOTES_KICKOFF_PROJECT
+      def try_to_create_project!(options, idea:, **)
+        if idea.votes.up.count < COUNT_VOTES_KICKOFF_PROJECT
+          return options['redirect_to'] = { url: 'idea', model: idea, flash: 'success' }
+        end
+        Ops::Idea::Activate.call(idea: idea)
+        options['redirect_to'] = { url: 'project', model: idea.project, flash: 'success_project' }
       end
     end
   end
