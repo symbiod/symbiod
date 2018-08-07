@@ -13,7 +13,7 @@ describe Ops::Idea::Upvote do
     let(:params) { { idea: idea, user: user } }
 
     context 'idea has no votes' do
-      let(:result) { { url: 'idea', model: idea, flash: 'success' } }
+      let(:result) { nil }
 
       it 'created vote idea' do
         expect { subject.call(params) }
@@ -26,13 +26,13 @@ describe Ops::Idea::Upvote do
       end
 
       it 'return result idea' do
-        expect(subject.call(params)['redirect_to']).to eq result
+        expect(subject.call(params)['project']).to eq result
       end
     end
 
-    context 'idea has 4 votes' do
-      before { create_list(:vote, 4, idea: idea) }
-      let(:result) { { url: 'project', model: idea.project, flash: 'success_project' } }
+    context 'idea needs one vote for activation' do
+      before { create_list(:vote, subject::COUNT_VOTES_KICKOFF_PROJECT - 1, idea: idea) }
+      let(:result) { idea.project }
 
       it 'created vote idea' do
         expect { subject.call(params) }
@@ -45,7 +45,7 @@ describe Ops::Idea::Upvote do
       end
 
       it 'return result idea' do
-        expect(subject.call(params)['redirect_to']).to eq result
+        expect(subject.call(params)['project']).to eq result
       end
     end
   end
