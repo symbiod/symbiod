@@ -2,6 +2,6 @@
 
 # Base mailer class, email 'from' defined
 class ApplicationMailer < ActionMailer::Base
-  default from: 'givemepoc@gmail.com'
+  default from: Settings.notifications.email.default_from
   layout 'mailer'
 end
