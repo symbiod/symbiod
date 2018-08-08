@@ -7,6 +7,7 @@ module Ops
       step :activate_idea!
       step :create_project!
       step :add_users_to_project!
+      step :generate_project_slack_channel!
 
       private
 
@@ -27,6 +28,11 @@ module Ops
         idea.votes.up.each do |vote|
           idea.project.users << vote.user
         end
+      end
+
+      def generate_project_slack_channel!(_ctx, idea:, **)
+        ::Projects::CreateSlackChannelJob.perform_later(idea.project.id)
+        true
       end
     end
   end
