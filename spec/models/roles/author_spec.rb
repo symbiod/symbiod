@@ -12,20 +12,15 @@ RSpec.describe Roles::Author do
   end
 
   describe 'changes in role states' do
-    it 'accept policy' do
+    it 'accepts policy' do
       expect(role)
         .to transition_from(:pending).to(:policy_accepted)
                                      .on_event(:accept_policy)
     end
 
-    it 'completes profile' do
-      expect(role)
-        .to transition_from(:policy_accepted).to(:profile_completed).on_event(:complete_profile)
-    end
-
     it 'activate role' do
       expect(role)
-        .to transition_from(:profile_completed).to(:active)
+        .to transition_from(:policy_accepted).to(:active)
                                                .on_event(:activate)
       expect(role)
         .to transition_from(:disabled).to(:active)
@@ -39,7 +34,7 @@ RSpec.describe Roles::Author do
     end
 
     it 'reject role' do
-      expect(role).to transition_from(:profile_completed).to(:rejected).on_event(:reject)
+      expect(role).to transition_from(:policy_accepted).to(:rejected).on_event(:reject)
     end
   end
 end

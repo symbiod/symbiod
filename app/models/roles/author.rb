@@ -9,27 +9,22 @@ module Roles
 
     aasm column: 'state' do
       state :pending, initial: true
-      state :policy_accepted, :profile_completed, :active,
-            :disabled, :rejected
+      state :policy_accepted, :active, :disabled, :rejected
 
       event :accept_policy do
         transitions from: :pending, to: :policy_accepted
       end
 
-      event :complete_profile do
-        transitions from: :policy_accepted, to: :profile_completed
+      event :activate do
+        transitions from: %i[policy_accepted disabled], to: :active
       end
 
-      event :activate do
-        transitions from: %i[profile_completed disabled], to: :active
+      event :reject do
+        transitions from: :policy_accepted, to: :rejected
       end
 
       event :disable do
         transitions from: :active, to: :disabled
-      end
-
-      event :reject do
-        transitions from: :profile_completed, to: :rejected
       end
     end
   end
