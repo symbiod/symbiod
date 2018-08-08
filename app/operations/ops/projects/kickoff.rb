@@ -4,16 +4,11 @@ module Ops
   module Projects
     # This is the operation of creating a project from the idea
     class Kickoff < BaseOperation
-      step :activate_idea!
       step :create_project!
       step :add_users_to_project!
       step :generate_project_slack_channel!
 
       private
-
-      def activate_idea!(_ctx, idea:, **)
-        Ops::Idea::Activate.call(idea: idea)
-      end
 
       def create_project!(_ctx, idea:, **)
         Project.create!(

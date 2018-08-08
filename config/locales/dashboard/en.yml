@@ -176,6 +176,7 @@ en:
         vote_type: Vote type
       notice:
         success: Thanks for the vote
+        success_project: Thanks for the decisive voice, the project was created
         warning: Sorry, but you already voted for this idea
     projects:
       update:

@@ -6,6 +6,7 @@ describe Ops::Idea::Activate do
   subject { described_class }
 
   describe '#call' do
+    before { create(:stack, :rails_monolith) }
     let(:idea) { create(:idea, :voting) }
     let(:params) { { idea: idea } }
 
@@ -13,6 +14,11 @@ describe Ops::Idea::Activate do
       expect { subject.call(params) }
         .to change(idea.reload, :state)
         .from('voting').to('active')
+    end
+
+    it 'starting create project' do
+      expect(Ops::Projects::Kickoff).to receive(:call).with(idea: idea)
+      subject.call(params)
     end
   end
 end
