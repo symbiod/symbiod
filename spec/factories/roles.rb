@@ -31,6 +31,10 @@ FactoryBot.define do
       state 'pending'
     end
 
+    trait :policy_accepted do
+      state 'policy_accepted'
+    end
+
     trait :active do
       state 'active'
     end

@@ -14,12 +14,19 @@ en:
         deny: The user is already logged in
     proposals:
       new:
-        header: To suggest an idea
+        header: Suggest an awesome project
       propose: Propose
       access:
         deny: Access is denied to proposals
     landing:
+      title: Have an awesome project idea?
+      body: We can provide you a development team, with designers, managers and quality assurance engineers for free!
       go_to_dashboard: Go to dashboard
       go_to_proposal: Go to proposal
-      author_log_in: Authtor Log In
+      author_log_in: Offer an idea
       wait_for_idea_approve: Thank you! We’ll consider your project idea and will back to you soon
+    wizard:
+      mailers:
+        activated:
+          subject: You account was activated
+
