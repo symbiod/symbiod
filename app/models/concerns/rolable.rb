@@ -39,7 +39,7 @@ module Rolable
   end
 
   def roles_name
-    roles.pluck(:type).map { |r| Roles::RolesManager.role_name_by_type(r) }
+    roles.pluck(:type).map { |r| Roles::RolesManager.role_name_by_type(r) }.sort
   end
 
   def role_class_name(name)
