@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe Ops::Projects::Kickoff do
   subject { described_class }
+  let!(:service) { double }
 
   describe '#call' do
     before do
@@ -15,12 +16,6 @@ describe Ops::Projects::Kickoff do
     let(:idea) { create(:idea, :voting) }
     let(:params) { { idea: idea } }
 
-    it 'changes idea state' do
-      expect { subject.call(params) }
-        .to change(idea.reload, :state)
-        .from('voting').to('active')
-    end
-
     it 'create project' do
       expect { subject.call(params) }
         .to change(Project, :count).by(1)
@@ -29,6 +24,12 @@ describe Ops::Projects::Kickoff do
     it 'add users to project' do
       subject.call(params)
       expect(idea.project.users.count).to eq 2
+    end
+
+    it 'run job to create slack channel' do
+      expect(::Projects::CreateSlackChannelJob)
+        .to receive(:perform_later)
+      subject.call(params)
     end
   end
 end

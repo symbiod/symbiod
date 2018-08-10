@@ -95,14 +95,14 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
         context 'user has role developer' do
           let(:user) { create(:user, :developer, :active) }
 
-          it 'redirects to root landing' do
+          it 'redirects to idea page' do
             put :up, params: { idea_id: idea.id, id: 1 }
             expect(response).to redirect_to dashboard_idea_url(idea)
           end
 
-          it 'vote was created' do
-            expect { put :up, params: { idea_id: idea.id, id: 1 } }
-              .to change(Vote, :count).by(1)
+          it 'run operation up vote' do
+            expect(Ops::Idea::Upvote).to receive(:call).with(idea: idea, user: user).and_return('')
+            put :up, params: { idea_id: idea.id, id: 1 }
           end
         end
       end
@@ -180,9 +180,9 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
             expect(response).to redirect_to dashboard_idea_url(idea)
           end
 
-          it 'vote was created' do
-            expect { put :down, params: { idea_id: idea.id, id: 1 } }
-              .to change(Vote, :count).by(1)
+          it 'run operation down vote' do
+            expect(Ops::Idea::Downvote).to receive(:call).with(idea: idea, user: user)
+            put :down, params: { idea_id: idea.id, id: 1 }
           end
         end
       end

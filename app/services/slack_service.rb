@@ -29,6 +29,8 @@ class SlackService
     channel = channel_by_name(channel_name)
     raise SlackIntegration::FailedApiCallException, "Channel with name '#{channel}' was not found" unless channel
     client.conversations_invite(channel: channel['id'], users: user['id'])
+  rescue Slack::Web::Api::Errors::SlackError => e
+    handle_exception(e)
   end
 
   # For each new project we create a separate channel
@@ -59,5 +61,10 @@ class SlackService
 
   def id_channels(channels)
     channels.map { |channel| channel_by_name(channel)['id'] }.join(',')
+  end
+
+  def handle_exception(exception)
+    return true if exception.message == 'cant_invite_self'
+    raise
   end
 end

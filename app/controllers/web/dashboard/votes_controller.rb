@@ -12,9 +12,14 @@ module Web
       end
 
       def up
-        Ops::Idea::Upvote.call(idea: @idea, user: current_user)
-        redirect_to dashboard_idea_url(@idea),
-                    flash: { success: t('dashboard.votes.notice.success') }
+        result = Ops::Idea::Upvote.call(idea: @idea, user: current_user)
+        if result['project']
+          redirect_to dashboard_project_url(@idea.project),
+                      flash: { success: t('dashboard.votes.notice.success_project') }
+        else
+          redirect_to dashboard_idea_url(@idea),
+                      flash: { success: t('dashboard.votes.notice.success') }
+        end
       end
 
       def down
