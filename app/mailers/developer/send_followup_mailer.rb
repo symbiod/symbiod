@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Staff
+module Developer
   # Sends reminder for uncompleted screening
-  class Staff::ScreeningUncomplitedReminderMailer < ApplicationMailer
+  class Developer::SendFollowupMailer < ApplicationMailer
     def notify(user)
       @user = user
       @url = bootcamp_root_url
