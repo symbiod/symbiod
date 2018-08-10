@@ -16,6 +16,11 @@ RSpec.describe Staff::ScreeningCompletedMailer, type: :mailer do
       expect(mail.from).to eq(['givemepoc@gmail.com'])
     end
 
+    it 'renders link to github' do
+      expect(mail.body.encoded)
+      .to match("<a target=\"_blank\" href=\"https://github.com/#{user.github}\">#{user.github}</a>")
+    end
+
     it 'gets list of recipients' do
       query_object = double(call: recipients)
       expect(Users::ScreeningCompletedNotificationRecipientsQuery)

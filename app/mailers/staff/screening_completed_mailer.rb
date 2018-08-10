@@ -3,6 +3,8 @@
 module Staff
   # Sends mail notify about completed of screening
   class ScreeningCompletedMailer < ApplicationMailer
+    add_template_helper(ProfileHelper)
+
     default to: -> { Users::ScreeningCompletedNotificationRecipientsQuery.new(@user).call.pluck(:email) }
 
     def notify(user_id)
