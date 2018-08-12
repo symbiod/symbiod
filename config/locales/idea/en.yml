@@ -26,6 +26,16 @@ en:
       author_log_in: Offer an idea
       wait_for_idea_approve: Thank you! We’ll consider your project idea and will back to you soon
     wizard:
+      policy:
+        title: Our policy
+        body:
+          By accept this you approve your agreement with our policy located at
+          <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>.
+          <br />
+          Following policy is required for all project authors.
+        accept: I accept
+        submit: Submit
+        must_be_accepted: You should accept the policy for further steps.
       mailers:
         activated:
           subject: You account was activated
