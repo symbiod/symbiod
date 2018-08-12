@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Web::Idea::ProposalsController do
+describe Web::Idea::Wizard::ProposalsController do
   let!(:user) { create(:user, :author) }
   describe 'GET #index' do
     context 'authenticated' do
@@ -45,7 +45,7 @@ describe Web::Idea::ProposalsController do
 
         it 'redirects to proposals' do
           post :create, params: { idea: idea_params }
-          expect(response).to redirect_to idea_proposals_url
+          expect(response).to redirect_to idea_wizard_proposals_url
         end
       end
 

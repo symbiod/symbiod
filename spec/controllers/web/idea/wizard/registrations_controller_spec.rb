@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Web::Idea::RegistrationsController do
+describe Web::Idea::Wizard::RegistrationsController do
   describe 'GET #new' do
     let(:user) { create(:user, :author) }
 
