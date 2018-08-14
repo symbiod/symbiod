@@ -19,6 +19,12 @@ class GithubService
     client.create_repository(repo_name, new_repository_attributes)
   end
 
+  # Creates team
+  # @param team_name String
+  def create_team(team_name)
+    client.create_team(organization, new_team_options(team_name))
+  end
+
   # Add existing organization member to the existing team
   # @param team String the name of the team
   # @param username String canonic github username
@@ -67,6 +73,14 @@ class GithubService
   def new_repository_attributes
     {
       organization: organization
+    }
+  end
+
+  def new_team_options(team_name)
+    {
+      name: team_name,
+      description: team_name,
+      privacy: 'closed'
     }
   end
 

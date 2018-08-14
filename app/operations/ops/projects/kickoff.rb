@@ -6,7 +6,9 @@ module Ops
     class Kickoff < BaseOperation
       step :create_project!
       step :add_users_to_project!
+      step :add_mentor_to_project!
       step :generate_project_slack_channel!
+      step :generate_project_github_team!
 
       private
 
@@ -25,9 +27,23 @@ module Ops
         end
       end
 
+      def add_mentor_to_project!(_ctx, idea:, **)
+        ProjectUser.create!(user: any_mentor, project: idea.project, mentor: true)
+        true
+      end
+
       def generate_project_slack_channel!(_ctx, idea:, **)
         ::Projects::CreateSlackChannelJob.perform_later(idea.project.id)
         true
+      end
+
+      def generate_project_github_team!(_ctx, idea:, **)
+        ::Projects::GenerateGithubTeamJob.perform_later(idea.project.id)
+        true
+      end
+
+      def any_mentor
+        User.with_role(:mentor).sample
       end
     end
   end
