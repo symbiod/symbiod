@@ -6,6 +6,12 @@ module Users
   # Additionally we notify mentors, who has the same specialization, as user.
   class ScreeningUncompletedNotificationUsersQuery
     def call
+      incompleted_users
+    end
+
+    private
+
+    def incompleted_users
       User
         .joins(:roles)
         .where(roles: { type: 'Roles::Developer',
