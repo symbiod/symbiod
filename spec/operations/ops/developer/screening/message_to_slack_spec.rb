@@ -40,5 +40,19 @@ describe Ops::Developer::Screening::MessageToSlack do
         subject.call(params)
       end
     end
+
+    context 'some other exception occured' do
+      it 'handles exception properly' do
+        allow(service)
+          .to receive(:post_to_channel)
+          .with(channel, message)
+          .and_raise(
+            SlackIntegration::FailedApiCallException,
+            'some other message'
+          )
+        expect { subject.call(params) }
+          .to raise_error SlackIntegration::FailedApiCallException, 'some other message'
+      end
+    end
   end
 end
