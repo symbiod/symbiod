@@ -3,7 +3,7 @@
 module Ops
   module Projects
     # This base operation to generate project
-    class GenerateProject < BaseOperation
+    class BaseProjectGenerationOperation < BaseOperation
       private
 
       def members_project(project)

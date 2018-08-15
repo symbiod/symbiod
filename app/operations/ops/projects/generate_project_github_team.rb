@@ -3,7 +3,7 @@
 module Ops
   module Projects
     # This operation creates github team for project
-    class GenerateProjectGithubTeam < GenerateProject
+    class GenerateProjectGithubTeam < BaseProjectGenerationOperation
       step :create_team!
       step :add_members_to_team!
 
@@ -12,7 +12,7 @@ module Ops
       def create_team!(_ctx, project:, **)
         GithubService
           .new(github_config.api_token, github_config.organization)
-          .create_team(project.name)
+          .create_team(project.name, privacy(project))
         true
       end
 
@@ -27,6 +27,10 @@ module Ops
 
       def github_config
         Settings.github
+      end
+
+      def privacy(project)
+        project.idea.private_project ? 'secret' : 'closed'
       end
     end
   end

@@ -21,8 +21,8 @@ class GithubService
 
   # Creates team
   # @param team_name String
-  def create_team(team_name)
-    client.create_team(organization, new_team_options(team_name))
+  def create_team(team_name, privacy)
+    client.create_team(organization, new_team_options(team_name, privacy))
   end
 
   # Add existing organization member to the existing team
@@ -76,11 +76,11 @@ class GithubService
     }
   end
 
-  def new_team_options(team_name)
+  def new_team_options(team_name, privacy)
     {
       name: team_name,
       description: team_name,
-      privacy: 'closed'
+      privacy: privacy
     }
   end
 

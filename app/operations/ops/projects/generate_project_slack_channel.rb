@@ -3,7 +3,7 @@
 module Ops
   module Projects
     # This is the operation of creating a project channel to slack
-    class GenerateProjectSlackChannel < GenerateProject
+    class GenerateProjectSlackChannel < BaseProjectGenerationOperation
       step :create_slack_channel!
       step :invite_members!
 
