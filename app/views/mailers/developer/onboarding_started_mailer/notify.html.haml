@@ -1,7 +1,6 @@
-%p.lead
-  Hello #{@user.full_name}!
-%p
-  = t('bootcamp.onboarding.started')
+%h1= t('bootcamp.onboarding.started')
+%hr
+%p #{t('dashboard.users.mailers.hello')} #{@user.full_name}!
 %ul
   %li Read #{link_to 'wiki', 'https://github.com/howtohireme/wiki', target: :_blank}
   %li Fill Github/Slack profiles according to our guidelines
