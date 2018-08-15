@@ -21,7 +21,7 @@ module Ops
       def activate_idea_author!(_ctx, idea:, **)
         # TODO: rewrite with a author relation directly to the role
         author = idea.author.roles.find_by(type: 'Roles::Author')
-        return true unless author.policy_accepted?
+        return true unless author&.policy_accepted?
         Ops::Author::Activate.call(author: author)
       end
     end

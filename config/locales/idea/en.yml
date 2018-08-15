@@ -36,6 +36,8 @@ en:
         accept: I accept
         submit: Submit
         must_be_accepted: You should accept the policy for further steps.
+      proposals:
+        fill_all_fields: Fill all fields to submit the idea
       mailers:
         activated:
           subject: You account was activated

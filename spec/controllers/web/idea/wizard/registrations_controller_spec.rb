@@ -27,15 +27,20 @@ describe Web::Idea::Wizard::RegistrationsController do
 
       it 'redirects to idea root' do
         get :new
-        expect(response).to redirect_to idea_root_url
+        expect(response).to redirect_to public_send(Author::Wizard.new(user).route_for_current_step)
       end
     end
   end
 
   describe 'POST #create' do
     let(:permitted_params) { ActionController::Parameters.new(params[:user]).permit! }
+    let(:author) { create(:user, :author, :pending) }
     let(:result) { double(success?: true) }
-    before { allow(permitted_params).to receive(:permitted?).and_return(true) }
+
+    before do
+      allow(permitted_params).to receive(:permitted?).and_return(true)
+      allow(result).to receive(:[]).with(:model).and_return(author)
+    end
 
     context 'valid params' do
       let(:params) do
@@ -61,7 +66,7 @@ describe Web::Idea::Wizard::RegistrationsController do
 
       it 'redirects to idea root' do
         post :create, params: params
-        expect(response).to redirect_to idea_root_url
+        expect(response).to redirect_to public_send(Author::Wizard.new(author).route_for_current_step)
       end
 
       it 'creates new user' do

@@ -5,11 +5,6 @@ module Web
     module Wizard
       # This controller allows you to create an idea from a public page
       class ProposalsController < BaseController
-        before_action :check_access
-
-        rescue_from Pundit::NotAuthorizedError,
-                    with: :redirect_to_idea_root
-
         def index
           @idea = ::Idea.new
         end
@@ -20,6 +15,7 @@ module Web
             redirect_to idea_wizard_proposals_url
           else
             @idea = result[:model]
+            flash.now[:alert] = t('idea.wizard.proposals.fill_all_fields')
             render :index
           end
         end
@@ -28,15 +24,6 @@ module Web
 
         def idea_params
           params.require(:idea).permit(:name, :description, :private_project, :skip_bootstrapping)
-        end
-
-        def check_access
-          authorize %i[ideas proposal], "#{action_name}?".to_sym
-        end
-
-        def redirect_to_idea_root
-          flash[:danger] = t('idea.proposals.access.deny')
-          redirect_to idea_root_url
         end
       end
     end

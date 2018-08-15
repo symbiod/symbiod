@@ -17,6 +17,8 @@ module Ops
         params[:author_id] = author.id
       end
 
+      # TODO: Most probably we need first to post the message to some channel
+      # where staff only is present.
       def send_message_to_slack!(_ctx, model:, **)
         ::Ideas::MessageToSlackJob.perform_later(model.id)
       end

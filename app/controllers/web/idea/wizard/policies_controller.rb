@@ -4,7 +4,7 @@ module Web
   module Idea
     module Wizard
       # Requires to accept policy by author
-      class PoliciesController < BaseController
+      class PoliciesController < ::Web::Idea::Wizard::BaseController
         def edit
         end
 
