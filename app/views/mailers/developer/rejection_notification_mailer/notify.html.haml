@@ -1,6 +1,4 @@
-%p.lead
-  = @user.full_name
-%p
-  = t('bootcamp.screening.rejection')
-%p
-  = @feedback
+%h1= t('dashboard.users.mailers.rejected.subject')
+%hr
+%p #{t('dashboard.users.mailers.hello')} #{@user.full_name}!
+%p #{t('dashboard.users.mailers.feedback')}: #{@feedback}
