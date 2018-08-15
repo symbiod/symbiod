@@ -9,8 +9,10 @@ module Developer
 
     def perform()
       @users = Users::ScreeningUncompletedNotificationUsersQuery.new.call
-      @users.each do |user|
-        Developer::SendFollowupMailer.notify(user.id).deliver_later
+      if @users
+        @users.each do |user|
+          Ops::Developer::UncompletedUsers.call(user: user)
+        end
       end
     end
   end
