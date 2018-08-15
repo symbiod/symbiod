@@ -48,7 +48,7 @@ describe SlackService do
 
       it 'calls postMessage method' do
         expect(client).to receive(:chat_postMessage)
-          .with(channel: channel, text: message, as_user: false, username: 'Idea Bot')
+          .with(channel: channel, text: message, as_user: false, username: 'Notifications Bot')
           .once
         subject.post_to_channel(channel, message)
       end

@@ -19,7 +19,7 @@ class SlackService
 
   # When the new idea is submitted we notify developers through Slack
   def post_to_channel(channel, message)
-    client.chat_postMessage(channel: channel, text: message, as_user: false, username: 'Idea Bot')
+    client.chat_postMessage(channel: channel, text: message, as_user: false, username: slack_config.bot_name)
   end
 
   # At the moment of new project kick-off we invite all interested members to its channel
@@ -66,5 +66,9 @@ class SlackService
   def handle_exception(exception)
     return true if exception.message == 'cant_invite_self'
     raise
+  end
+
+  def slack_config
+    Settings.slack
   end
 end

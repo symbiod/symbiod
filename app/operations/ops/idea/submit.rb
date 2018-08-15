@@ -9,7 +9,7 @@ module Ops
       step Contract::Build(constant: ::Propose::ProposeForm)
       step Contract::Validate()
       step Contract::Persist()
-      step :send_message_to_slack!
+      success :send_message_to_slack!
 
       private
 
@@ -18,8 +18,7 @@ module Ops
       end
 
       def send_message_to_slack!(_ctx, model:, **)
-        SlackMessageJob.perform_later(model, 'ideas')
-        true
+        ::Ideas::MessageToSlackJob.perform_later(model.id)
       end
     end
   end
