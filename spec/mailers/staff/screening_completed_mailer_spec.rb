@@ -18,7 +18,7 @@ RSpec.describe Staff::ScreeningCompletedMailer, type: :mailer do
 
     it 'renders link to github' do
       expect(mail.body.encoded)
-        .to match("<a target=\"_blank\" href=\"https://github.com/#{user.github}\">#{user.github}</a>")
+        .to match("<a target=\"_blank\" href=\"https://github.com/#{user_github}\">#{user_github}</a>")
     end
 
     it 'gets list of recipients' do
@@ -27,5 +27,9 @@ RSpec.describe Staff::ScreeningCompletedMailer, type: :mailer do
         .to receive(:new).and_return(query_object)
       expect(mail.to).to eq recipients.map(&:email)
     end
+  end
+
+  def user_github
+    CGI.escapeHTML(user.github)
   end
 end

@@ -9,6 +9,7 @@ describe Ops::Projects::Kickoff do
   describe '#call' do
     before do
       create(:stack, :rails_monolith)
+      create(:user, :mentor, :active)
       create_list(:vote, 2, idea: idea)
       create_list(:vote, 3, :down, idea: idea)
     end
@@ -23,11 +24,17 @@ describe Ops::Projects::Kickoff do
 
     it 'add users to project' do
       subject.call(params)
-      expect(idea.project.users.count).to eq 2
+      expect(idea.project.users.count).to eq 3
     end
 
     it 'run job to create slack channel' do
       expect(::Projects::CreateSlackChannelJob)
+        .to receive(:perform_later)
+      subject.call(params)
+    end
+
+    it 'run job to create github team' do
+      expect(::Projects::GenerateGithubTeamJob)
         .to receive(:perform_later)
       subject.call(params)
     end
