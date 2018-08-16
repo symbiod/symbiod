@@ -9,9 +9,9 @@ module Developer
 
     def perform()
       @users = Users::ScreeningUncompletedNotificationUsersQuery.new.call
-      if @users
+      if @users.present?
         @users.each do |user|
-          Ops::Developer::UncompletedUsers.call(user: User.first)
+          Ops::Developer::UncompletedUsers.call(user: user)
         end
       end
     end
