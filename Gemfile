@@ -37,8 +37,8 @@ gem 'newrelic_rpm'
 gem 'data_migrate'
 gem 'pundit', '~> 2.0.0.beta1'
 gem 'strong_migrations'
-gem 'config'
 gem 'clockwork'
+gem 'config'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
@@ -72,6 +72,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'webmock'
-  gem 'simplecov', require: false
   gem 'clockwork-test'
+  gem 'simplecov', require: false
 end

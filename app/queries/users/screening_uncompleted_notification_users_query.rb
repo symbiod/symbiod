@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Users
-  # Allows to find users, who should be notified about new applicant.
-  # We should notify all staff members.
-  # Additionally we notify mentors, who has the same specialization, as user.
+  # Allows to find users, who should be notified about uncompleted screenting.
   class ScreeningUncompletedNotificationUsersQuery
     def call
       incompleted_users
