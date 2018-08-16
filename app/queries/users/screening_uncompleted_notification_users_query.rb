@@ -19,6 +19,7 @@ module Users
                                   profile_completed
                                   policy_accepted
                                   screening_completed] } )
+        .where('users.created_at > ?', 3.days.ago)
     end
   end
 end
