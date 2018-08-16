@@ -10,10 +10,9 @@ describe Ops::Developer::UncompletedUsers do
     let(:params) { { user: user } }
 
     it 'sends invitation to Github' do
-      expect(::Developer::SendFollowupJob)
-        .to receive(:perform_later)
-        .with(user.id)
-      subject.call(params)
+      expect { subject.call(user: params[:user], params: params) }
+        .to have_enqueued_job(ActionMailer::DeliveryJob)
+        .with('Developer::SendFollowupMailer', 'notify', 'deliver_now', user.id)
     end
   end
 end

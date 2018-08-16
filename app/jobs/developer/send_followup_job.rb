@@ -11,7 +11,7 @@ module Developer
       @users = Users::ScreeningUncompletedNotificationUsersQuery.new.call
       if @users
         @users.each do |user|
-          Ops::Developer::UncompletedUsers.call(user: user)
+          Ops::Developer::UncompletedUsers.call(user: User.first)
         end
       end
     end

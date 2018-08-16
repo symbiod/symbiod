@@ -4,13 +4,12 @@ module Ops
   module Developer
     # Marks user as completed screening and notifies about new results
     class UncompletedUsers < BaseOperation
-      success :screening_uncompleted_notification!
+      step :screening_uncompleted_notification!
 
       private
 
       def screening_uncompleted_notification!(_ctx, user:, **)
-        ::Developer::SendFollowupJob.perform_later(user.id)
-        true
+        ::Developer::SendFollowupMailer.notify(user.id).deliver_later
       end
     end
   end
