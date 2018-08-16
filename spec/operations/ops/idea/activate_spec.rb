@@ -6,7 +6,11 @@ describe Ops::Idea::Activate do
   subject { described_class }
 
   describe '#call' do
-    before { create(:stack, :rails_monolith) }
+    before do
+      create(:stack, :rails_monolith)
+      create(:user, :mentor, :active)
+    end
+
     let(:idea) { create(:idea, :voting) }
     let(:params) { { idea: idea } }
 

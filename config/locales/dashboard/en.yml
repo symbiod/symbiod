@@ -78,8 +78,12 @@ en:
         review_applicant: Review applicant
       mailers:
         disabled:
-          subject: Your givemepoc.org account was disabled
-          account_was_disabled: Your givemepoc.org account was disabled
+          subject: Account was disabled
+          account_was_disabled: Your account was disabled
+        rejected:
+          subject: Your request was rejected
+        feedback: Feedback
+        hello: Hello
       button:
         edit: Edit
       headers:

@@ -436,7 +436,10 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
     end
 
     context 'signed in' do
-      before { login_user(user) }
+      before do
+        create(:user, :mentor, :active)
+        login_user(user)
+      end
 
       context 'user has role staff or mentor' do
         let(:user) { create(:user, :staff_or_mentor, :active) }
