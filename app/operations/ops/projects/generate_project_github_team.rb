@@ -4,16 +4,23 @@ module Ops
   module Projects
     # This operation creates github team for project
     class GenerateProjectGithubTeam < BaseProjectGenerationOperation
-      step :create_team!
-      step :add_members_to_team!
+      success :create_repo!
+      success :create_team!
+      success :add_members_to_team!
 
       private
+
+      def create_repo!(_ctx, project:, **)
+        return if project.idea.skip_bootstrapping
+        GithubService
+          .new(github_config.api_token, github_config.organization)
+          .create_repository(project.slug)
+      end
 
       def create_team!(_ctx, project:, **)
         GithubService
           .new(github_config.api_token, github_config.organization)
-          .create_team(project.name, privacy(project))
-        true
+          .create_team(project.name, privacy(project), repo_names(project))
       end
 
       def add_members_to_team!(_ctx, project:, **)
@@ -22,7 +29,6 @@ module Ops
             .new(github_config.api_token, github_config.organization)
             .add_user_to_team(project.name, member.github)
         end
-        true
       end
 
       def github_config
@@ -31,6 +37,10 @@ module Ops
 
       def privacy(project)
         project.idea.private_project ? 'secret' : 'closed'
+      end
+
+      def repo_names(project)
+        project.idea.skip_bootstrapping ? [] : ["#{github_config.organization}/#{project.slug}"]
       end
     end
   end
