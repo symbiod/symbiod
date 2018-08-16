@@ -29,7 +29,7 @@ describe Ops::Idea::StartVoting do
         end
       end
 
-      context  'author is already activated' do
+      context 'author is already activated' do
         let(:author_state) { :active }
 
         it 'does not activate author' do

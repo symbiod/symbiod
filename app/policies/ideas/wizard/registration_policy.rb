@@ -7,8 +7,8 @@ module Ideas
       def create?
         user.nil?
       end
-      alias_method :new?, :create?
-      alias_method :authorized?, :create?
+      alias new? create?
+      alias authorized? create?
     end
   end
 end

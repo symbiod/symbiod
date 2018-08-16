@@ -21,7 +21,7 @@ RSpec.describe Roles::Author do
     it 'activate role' do
       expect(role)
         .to transition_from(:policy_accepted).to(:active)
-                                               .on_event(:activate)
+                                             .on_event(:activate)
       expect(role)
         .to transition_from(:disabled).to(:active)
                                       .on_event(:activate)

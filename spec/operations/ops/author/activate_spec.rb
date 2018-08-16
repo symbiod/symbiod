@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Ops::Author::Activate do
@@ -7,7 +9,7 @@ RSpec.describe Ops::Author::Activate do
   describe 'call' do
     it 'changes role state' do
       expect { subject }
-        .to change { author.reload.state}
+        .to change { author.reload.state }
         .from('policy_accepted')
         .to('active')
     end
