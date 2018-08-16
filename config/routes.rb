@@ -42,6 +42,8 @@ Rails.application.routes.draw do
         end
         resources :notes, only: %i[new create]
       end
+      resources :role_activation, only: :update
+      resources :role_deactivation, only: :update
       resources :skills, except: %i[show destroy] do
         member do
           put :activate

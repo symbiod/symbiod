@@ -13,4 +13,8 @@ class Role < ApplicationRecord
   def name
     Roles::RolesManager.role_name_by_type(self.class)
   end
+
+  def is?(role_name)
+    name == role_name.to_s
+  end
 end

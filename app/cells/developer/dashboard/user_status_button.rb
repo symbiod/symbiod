@@ -24,6 +24,7 @@ module Developer
       end
 
       def color_not_success_status
+        return 'danger' if model.is?(:staff)
         model.pending? ? 'warning' : 'danger'
       end
 
@@ -36,7 +37,7 @@ module Developer
       end
 
       def change_state
-        model.active? ? deactivate_dashboard_user_url(model) : activate_dashboard_user_url(model)
+        model.active? ? dashboard_role_deactivation_url(model) : dashboard_role_activation_url(model)
       end
     end
   end
