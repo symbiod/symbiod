@@ -8,7 +8,7 @@ describe Developer::SendFollowupJob do
 
     it 'calls InviteToSlack operation' do
       expect(Ops::Developer::UncompletedUsers).to receive(:call).with(user: user)
-      described_class.perform_now()
+      described_class.perform_now
     end
   end
 end

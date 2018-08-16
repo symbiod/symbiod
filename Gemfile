@@ -73,5 +73,4 @@ group :test do
   gem 'database_cleaner'
   gem 'webmock'
   gem 'simplecov', require: false
-  gem 'clockwork-test'
 end

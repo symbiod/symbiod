@@ -2,7 +2,7 @@
 
 module Developer
   # Sends reminder for uncompleted screening
-  class Developer::SendFollowupMailer < ApplicationMailer
+  class SendFollowupMailer < ApplicationMailer
     def notify(user_id)
       @user = User.find(user_id)
       @url = bootcamp_root_url

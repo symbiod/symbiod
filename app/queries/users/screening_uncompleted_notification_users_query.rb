@@ -18,7 +18,7 @@ module Users
                         state: %i[pending
                                   profile_completed
                                   policy_accepted
-                                  screening_completed] } )
+                                  screening_completed] })
         .where('users.created_at > ?', 3.days.ago)
     end
   end
