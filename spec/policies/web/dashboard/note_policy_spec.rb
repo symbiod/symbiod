@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_literal_string: true
-
 require 'rails_helper'
 
 describe Dashboard::NotePolicy do
