@@ -19,7 +19,7 @@ module Ideas
       private
 
       def author?
-        user.has_role? :author
+        user&.has_role? :author
       end
     end
   end
