@@ -5,9 +5,7 @@ module Developer
   class SendFollowupMailer < ApplicationMailer
     def notify(user_id)
       @user = User.find(user_id)
-      @url = bootcamp_root_url
-      # change subject!!!
-      mail(to: @user.email, subject: 'Uncompleted screening')
+      mail(to: @user.email, subject: t('dashboard.users.mailers.uncompleted.subject'))
     end
   end
 end

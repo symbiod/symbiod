@@ -82,6 +82,8 @@ en:
           account_was_disabled: Your account was disabled
         rejected:
           subject: Your request was rejected
+        uncompleted:
+          subject: Uncompleted screening
         feedback: Feedback
         hello: Hello
       button:

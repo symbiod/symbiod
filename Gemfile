@@ -68,10 +68,10 @@ group :development do
 end
 
 group :test do
+  gem 'clockwork-test'
+  gem 'database_cleaner'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'database_cleaner'
-  gem 'webmock'
-  gem 'clockwork-test'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
