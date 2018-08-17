@@ -4,12 +4,12 @@ module Users
   # Allows to find users, who should be notified about uncompleted screenting.
   class ScreeningUncompletedUsersQuery
     def call
-      incompleted_users
+      uncompleted_users
     end
 
     private
 
-    def incompleted_users
+    def uncompleted_users
       User.joins(:roles)
           .where(roles: { type: 'Roles::Developer',
                           state: %i[pending
