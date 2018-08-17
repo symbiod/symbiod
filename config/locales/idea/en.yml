@@ -6,6 +6,7 @@ en:
         header: Log in
         sign_up: Sign up
         new_user: New to POC?
+        have_account: Already have account?
       access:
         deny: The user is already logged in
     registrations:

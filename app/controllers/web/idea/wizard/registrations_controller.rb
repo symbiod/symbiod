@@ -10,6 +10,7 @@ module Web
         end
 
         def create
+          protect_against_robots
           result = Ops::Author::SignUp.call(params: author_params)
           if result.success?
             login(author_params[:email], author_params[:password])
@@ -21,6 +22,11 @@ module Web
         end
 
         private
+
+        def protect_against_robots
+          @registration = User.new
+          render :new unless verify_recaptcha(model: @registration)
+        end
 
         def current_route_for_new_user(result)
           public_send(Author::Wizard.new(result[:model]).route_for_current_step)

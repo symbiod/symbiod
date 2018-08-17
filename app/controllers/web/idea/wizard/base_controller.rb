@@ -3,7 +3,9 @@
 module Web
   module Idea
     module Wizard
-      # Requires to accept policy by author
+      # Base class for all wizard steps
+      # Provides ability to redirect to the next step automatically
+      # if currect page does not match current step
       class BaseController < ::Web::Idea::BaseController
         before_action :redirect_to_current_step
 

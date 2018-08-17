@@ -5,4 +5,6 @@
   = f.input :location
   = f.input :timezone, as: :time_zone
   = f.input :password
-  = f.button :submit, t('idea.registrations.submit'), type: :submit, class: 'btn btn-lg btn-secondary'
+  = invisible_recaptcha_tags text: t('idea.registrations.submit'), class: 'btn btn-lg btn-secondary'
+
+= link_to t('idea.sessions.new.have_account'), new_idea_sessions_url
