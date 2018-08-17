@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::UncompletedUsers do
+describe Ops::Developer::SendScreeningFollowup do
   subject { described_class }
 
   describe '#call' do

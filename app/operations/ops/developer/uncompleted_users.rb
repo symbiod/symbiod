@@ -3,7 +3,7 @@
 module Ops
   module Developer
     # Marks user as completed screening and notifies about new results
-    class UncompletedUsers < BaseOperation
+    class SendScreeningFollowup < BaseOperation
       step :screening_uncompleted_notification!
 
       private

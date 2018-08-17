@@ -15,7 +15,7 @@ module Developer
     def perform
       @users = Users::ScreeningUncompletedNotificationUsersQuery.new.call
       @users.each do |user|
-        Ops::Developer::UncompletedUsers.call(user: user)
+        Ops::Developer::SendScreeningFollowup.call(user: user)
       end
     end
   end
