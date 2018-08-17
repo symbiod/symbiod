@@ -1,0 +1,9 @@
+%h1
+  = t('dashboard.survey_responses.notices.completed')
+%hr
+%p Email: #{mail_to @user.email}
+%p Github: #{github_link(@user)}
+%p
+  You can click on the link to view the
+  = link_to t('dashboard.survey_responses.links.feedback'),
+            dashboard_survey_response_url(@user.survey_response), target: :_blank

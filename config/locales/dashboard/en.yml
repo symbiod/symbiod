@@ -4,6 +4,7 @@ en:
       profile: Profile
       dashboard: Dashboard
       applicants: Applicants
+      survey_responses: Feedbacks
       test_tasks: Test Tasks
       users: Users management
       skills: Skills management
@@ -204,9 +205,15 @@ en:
       notices:
         success: Thank you for your feedback
         feedback: Please leave a feedback about onboarding
+        completed: User left feedback after onboarding
       headers:
         new: We will be glad if you leave feedback
         show: This feedback by
+        index: Feedbacks users
       questions:
         question_1: First question
         question_2: Second question
+      links:
+        feedback: feedback
+      buttons:
+        create: Leave feedback

@@ -7,8 +7,6 @@ module Developer
       serialize :feedback, SurveyResponseSerializer
       store_accessor :feedback, :question_1, :question_2
 
-      validates :question_1, :question_2, presence: true
-
       belongs_to :user
     end
   end

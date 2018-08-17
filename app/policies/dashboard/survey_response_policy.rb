@@ -3,9 +3,11 @@
 module Dashboard
   # Policy feedback users after onboarding
   class SurveyResponsePolicy < DashboardPolicy
-    def show?
+    def index?
       staff_or_mentor?
     end
+
+    alias show? index?
 
     def new?
       user.survey_response.nil?

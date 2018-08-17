@@ -1,0 +1,7 @@
+%h2= t('dashboard.survey_responses.headers.index')
+
+.table-responsive
+  %table.table.table-striped.table-sm
+    - @survey_responses.each do |survey_response|
+      %tr
+        %td= link_to survey_response.user.full_name, dashboard_survey_response_url(survey_response)

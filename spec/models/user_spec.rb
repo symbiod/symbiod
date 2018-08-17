@@ -19,7 +19,8 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many :notes }
     it { is_expected.to have_many :project_users }
     it { is_expected.to have_many :projects }
-    it { is_expected.to belong_to :approver }
+    it { is_expected.to have_one :survey_response }
+    it { is_expected.to belong_to(:approver).optional }
   end
 
   describe '.with_role_and_state' do

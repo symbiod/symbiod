@@ -9,6 +9,10 @@ module Web
         authorize_role(%i[dashboard survey_response])
       end
 
+      def index
+        @survey_responses = Developer::Onboarding::SurveyResponse.all
+      end
+
       def show; end
 
       def new
@@ -16,11 +20,12 @@ module Web
       end
 
       def create
-        @survey_response = Developer::Onboarding::SurveyResponse.new(survey_response_params)
-        if @survey_response.save
+        result = Ops::Developer::Onboarding::SubmitSurveyResponse.call(params: survey_response_params)
+        if result.success?
           redirect_to dashboard_root_url,
                       flash: { success: t('dashboard.survey_responses.notices.success') }
         else
+          @survey_response = result['contract.default']
           render 'new'
         end
       end
