@@ -9,7 +9,7 @@ module Ops
       private
 
       def screening_uncompleted_notification!(_ctx, user:, **)
-        ::Developer::SendFollowupMailer.notify(user.id).deliver_later
+        ::Developer::Screening::SendFollowupMailer.notify(user.id).deliver_later
       end
     end
   end

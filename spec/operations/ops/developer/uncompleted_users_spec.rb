@@ -12,7 +12,7 @@ describe Ops::Developer::UncompletedUsers do
     it 'sends email to uncompleted users' do
       expect { subject.call(user: params[:user], params: params) }
         .to have_enqueued_job(ActionMailer::DeliveryJob)
-        .with('Developer::SendFollowupMailer', 'notify', 'deliver_now', user.id)
+        .with('Developer::Screening::SendFollowupMailer', 'notify', 'deliver_now', user.id)
     end
   end
 end

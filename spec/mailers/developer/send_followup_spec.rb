@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Developer::SendFollowupMailer, type: :mailer do
+RSpec.describe Developer::Screening::SendFollowupMailer, type: :mailer do
   describe 'notify' do
     let(:user) { create(:user) }
-    let(:mail) { Developer::SendFollowupMailer.notify(user.id) }
+    let(:mail) { Developer::Screening::SendFollowupMailer.notify(user.id) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Uncompleted screening')
