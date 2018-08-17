@@ -1,0 +1,9 @@
+%h2
+  = t('dashboard.survey_responses.headers.show')
+  = link_to @survey_response.user.full_name, dashboard_user_url(@survey_response.user)
+.table-responsive
+  %table.table.table-striped.table-sm
+    - @survey_response.feedback.each do |key, value|
+      %tr
+        %td.col-sm-4= t("dashboard.survey_responses.questions.#{key}")
+        %td= value

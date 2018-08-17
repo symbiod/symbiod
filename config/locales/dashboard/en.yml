@@ -200,3 +200,13 @@ en:
       notices:
         deactivated: Role was deactivated
         activated: Role was activated
+    survey_responses:
+      notices:
+        success: Thank you for your feedback
+        feedback: Please leave a feedback about onboarding
+      headers:
+        new: We will be glad if you leave feedback
+        show: This feedback by
+      questions:
+        question_1: First question
+        question_2: Second question

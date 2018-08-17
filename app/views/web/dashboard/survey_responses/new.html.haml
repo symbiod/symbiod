@@ -1,0 +1,6 @@
+%h2= t('dashboard.survey_responses.headers.new')
+= simple_form_for @survey_response, url: dashboard_survey_responses_url do |f|
+  = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
+  = f.input :question_1
+  = f.input :question_2
+  = f.button :submit, class: 'btn btn-info'

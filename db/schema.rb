@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_14_174755) do
+ActiveRecord::Schema.define(version: 2018_08_16_205546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 2018_08_14_174755) do
   end
 
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
+  create_table "developer_onboarding_survey_responses", force: :cascade do |t|
+    t.jsonb "feedback", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_developer_onboarding_survey_responses_on_user_id", unique: true
   end
 
   create_table "developer_onboardings", force: :cascade do |t|
@@ -197,6 +205,7 @@ ActiveRecord::Schema.define(version: 2018_08_14_174755) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "developer_onboarding_survey_responses", "users"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "stacks"
