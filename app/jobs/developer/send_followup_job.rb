@@ -13,7 +13,7 @@ module Developer
     queue_as :default
 
     def perform
-      @users = Users::ScreeningUncompletedNotificationUsersQuery.new.call
+      @users = Users::ScreeningUncompletedUsersQuery.new.call
       @users.each do |user|
         Ops::Developer::SendScreeningFollowup.call(user: user)
       end

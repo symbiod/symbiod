@@ -2,7 +2,7 @@
 
 module Users
   # Allows to find users, who should be notified about uncompleted screenting.
-  class ScreeningUncompletedNotificationUsersQuery
+  class ScreeningUncompletedUsersQuery
     def call
       incompleted_users
     end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Users::ScreeningUncompletedNotificationUsersQuery do
+describe Users::ScreeningUncompletedUsersQuery do
   subject { described_class.new.call }
 
   describe '#call return array' do
