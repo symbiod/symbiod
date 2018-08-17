@@ -13,7 +13,7 @@ module Web
           result = Ops::Author::SignUp.call(params: author_params)
           if result.success?
             login(author_params[:email], author_params[:password])
-            redirect_to current_route_for_new_user
+            redirect_to current_route_for_new_user(result)
           else
             @registration = result[:model]
             render :new
@@ -22,7 +22,7 @@ module Web
 
         private
 
-        def current_route_for_new_user
+        def current_route_for_new_user(result)
           public_send(Author::Wizard.new(result[:model]).route_for_current_step)
         end
 
