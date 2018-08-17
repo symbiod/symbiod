@@ -2,8 +2,9 @@
 
 require 'rails_helper'
 
-describe Web::Idea::ProposalsController do
-  let!(:user) { create(:user, :author) }
+describe Web::Idea::Wizard::ProposalsController do
+  let!(:user) { create(:user, :author, :pending) }
+
   describe 'GET #index' do
     context 'authenticated' do
       before { login_user(user) }
@@ -22,7 +23,7 @@ describe Web::Idea::ProposalsController do
     context 'non-authenticated' do
       it 'redirects to root idea landing' do
         get :index
-        expect(response).to redirect_to idea_root_url
+        expect(response).to redirect_to public_send(Author::Wizard.new(nil).route_for_current_step)
       end
     end
   end
@@ -45,7 +46,7 @@ describe Web::Idea::ProposalsController do
 
         it 'redirects to proposals' do
           post :create, params: { idea: idea_params }
-          expect(response).to redirect_to idea_proposals_url
+          expect(response).to redirect_to idea_wizard_proposals_url
         end
       end
 
@@ -64,7 +65,7 @@ describe Web::Idea::ProposalsController do
 
       it 'redirects to root idea landing' do
         post :create, params: { idea: idea_params }
-        expect(response).to redirect_to idea_root_url
+        expect(response).to redirect_to public_send(Author::Wizard.new(nil).route_for_current_step)
       end
     end
   end

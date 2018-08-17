@@ -1,0 +1,9 @@
+%h1.cover-heading= t('idea.wizard.policy.title')
+%p.link
+  = raw t('idea.wizard.policy.body')
+
+= simple_form_for(current_user, method: :put, remote: false, url: idea_wizard_policy_url) do |f|
+  = f.input_field :accept_policy, as: :boolean, checked: false
+  = t('idea.wizard.policy.accept')
+  %br
+  = f.button :submit, t('idea.wizard.policy.submit'), type: :submit, class: 'btn btn-lg btn-secondary'

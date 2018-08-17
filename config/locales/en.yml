@@ -19,7 +19,7 @@ en:
       developers: Developers
       mentors: Mentors
       projects: Projects
-    developer: 'Join as Developer'
+    developer: 'Developer'
     entrepreneur: 'Entrepreneur'
     alerts:
       not_authenticated_dashboard_access: 'You should sign in before accessing Dashboard'
