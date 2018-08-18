@@ -3,7 +3,18 @@
     .col-sm-6
       .card.mb-3
         .card-header
-          #{t('notes.fields.note')} ##{note.id}
+          .row
+            .col
+              #{t('notes.fields.note')} ##{note.id}
+            .col.text-right
+              - if Dashboard::NotePolicy.new(current_user, note).edit?
+                = link_to edit_dashboard_user_note_url(model, note) do
+                  %i.fa.fa-pencil
+              - if policy(%i[dashboard note]).destroy?
+                = link_to dashboard_user_note_url(model, note),
+                          method: :delete,
+                          data: { confirm: t('notes.noties.confirm.destroy') } do
+                  %i.fa.fa-remove
         .card-body.card-text
           = markdown(note.content)
         .card-footer.text-muted

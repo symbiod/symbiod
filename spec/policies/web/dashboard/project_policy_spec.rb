@@ -20,14 +20,14 @@ describe Dashboard::ProjectPolicy do
   end
 
   context 'current user has role staff or mentor' do
-    let(:user) { create(:user, :active, :staff_or_mentor) }
+    let(:user) { create(:user, :staff_or_mentor, :active) }
     let(:idea) { create(:idea, :with_project) }
 
     it_behaves_like 'permit main actions'
   end
 
   context 'current user has role author' do
-    let!(:user) { create(:user, :active, :author) }
+    let!(:user) { create(:user, :author, :active) }
 
     context 'user author project' do
       let(:idea) { create(:idea, :with_project, author: user) }
@@ -43,7 +43,7 @@ describe Dashboard::ProjectPolicy do
   end
 
   context 'current user has role developer' do
-    let!(:user) { create(:user, :active, :developer) }
+    let!(:user) { create(:user, :developer, :active) }
     let!(:idea) { create(:idea, :with_project) }
 
     context 'user member project' do
@@ -68,7 +68,7 @@ describe Dashboard::ProjectPolicy do
     let!(:idea_4) { create(:idea, :with_project) }
 
     context 'current user has role staff or mentor' do
-      let(:current_user) { create(:user, :active, :staff_or_mentor) }
+      let(:current_user) { create(:user, :staff_or_mentor, :active) }
 
       it 'returns all projects' do
         expect(subject.resolve)
@@ -77,7 +77,7 @@ describe Dashboard::ProjectPolicy do
     end
 
     context 'current user has role author' do
-      let(:current_user) { create(:user, :active, :author) }
+      let(:current_user) { create(:user, :author, :active) }
 
       it 'return projects where user author' do
         expect(subject.resolve)
@@ -87,7 +87,7 @@ describe Dashboard::ProjectPolicy do
 
     context 'current user has role developer' do
       before { create(:project_user, project: idea_4.project, user: current_user) }
-      let(:current_user) { create(:user, :active, :developer) }
+      let(:current_user) { create(:user, :developer, :active) }
 
       it 'returns projects where current user member' do
         expect(subject.resolve)
