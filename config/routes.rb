@@ -44,7 +44,7 @@ Rails.application.routes.draw do
           put :remove_role
           put :add_role
         end
-        resources :notes, only: %i[new create]
+        resources :notes, except: %i[index]
       end
       resources :role_activation, only: :update
       resources :role_deactivation, only: :update
