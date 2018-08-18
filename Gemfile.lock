@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/thoughtbot/shoulda-matchers
+  remote: https://github.com/thoughtbot/shoulda-matchers.git
   revision: 7f070cbab458d4a1a00e9566611f5a94f7704464
   specs:
     shoulda-matchers (3.1.2)

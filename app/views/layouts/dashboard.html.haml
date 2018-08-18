@@ -23,8 +23,8 @@
         %li.nav-item
           = link_to t('dashboard.navigation.logout'), logout_url, method: :delete, class: 'nav-link'
     .container-fluid
-      .row
-        %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+      .row.d-flex
+        .col-md-2.d-none.d-md-block.bg-light.sidebar.pt-5
           .sidebar-sticky
             %ul.nav.flex-column
               %li.nav-item
@@ -37,10 +37,15 @@
                     %span{ 'data-feather': 'file' }
                     = t('dashboard.navigation.applicants')
                     = count_of_pending_users
+              - if policy(%i[dashboard feedback_question]).index?
+                %li.nav-item
+                  = link_to dashboard_feedback_questions_url, class: 'nav-link' do
+                    %span{ 'data-feather': 'list' }
+                    = t('dashboard.navigation.feedback_questions')
               - if policy(%i[dashboard survey_response]).index?
                 %li.nav-item
                   = link_to dashboard_survey_responses_url, class: 'nav-link' do
-                    %span{ 'data-feather': 'file' }
+                    %span{ 'data-feather': 'list' }
                     = t('dashboard.navigation.survey_responses')
               - if policy(:test_task).index?
                 %li.nav-item

@@ -5,18 +5,21 @@ module Web
     # This controller manage feedback users after onboarding
     class SurveyResponsesController < BaseController
       before_action :survey_response_find, only: :show
+      before_action :questions_find, only: %i[new create]
       before_action do
         authorize_role(%i[dashboard survey_response])
       end
 
       def index
-        @survey_responses = Developer::Onboarding::SurveyResponse.all
+        @survey_responses = Developer::Onboarding::SurveyResponse.page params[:page]
       end
 
       def show; end
 
       def new
-        @survey_response = Developer::Onboarding::SurveyResponse.new
+        @survey_response = Developer::Onboarding::SurveyResponseForm.new(
+          Developer::Onboarding::SurveyResponse.new
+        )
       end
 
       def create
@@ -38,8 +41,12 @@ module Web
 
       def survey_response_params
         params
+          .permit(developer_onboarding_survey_response: {})
           .require(:developer_onboarding_survey_response)
-          .permit(:user_id, :question_1, :question_2)
+      end
+
+      def questions_find
+        @questions = Developer::Onboarding::FeedbackQuestion.all
       end
     end
   end

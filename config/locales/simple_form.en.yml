@@ -29,8 +29,3 @@ en:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
-    labels:
-      developer_onboarding_survey_response:
-        question_1: First question
-        question_2: Second question
-

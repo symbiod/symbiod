@@ -5,6 +5,7 @@ en:
       dashboard: Dashboard
       applicants: Applicants
       survey_responses: Feedbacks
+      feedback_questions: Questions
       test_tasks: Test Tasks
       users: Users management
       skills: Skills management
@@ -202,6 +203,7 @@ en:
         deactivated: Role was deactivated
         activated: Role was activated
     survey_responses:
+      empty_questions: Sorry, but the list of questions is empty
       notices:
         success: Thank you for your feedback
         feedback: Please leave a feedback about onboarding
@@ -210,10 +212,29 @@ en:
         new: We will be glad if you leave feedback
         show: This feedback by
         index: Feedbacks users
-      questions:
-        question_1: First question
-        question_2: Second question
       links:
         feedback: feedback
       buttons:
         create: Leave feedback
+    feedback_questions:
+      notices:
+        success:
+          create: Question was success created
+          update: Question was success updated
+          destroy: Question was deleted
+        danger:
+          create: Question was not created
+          update: Question was not updated
+      tables:
+        description: Question
+        key_name: Key name
+      headers:
+        index: All feedback questions
+        edit: Edit question
+        new: New question
+      buttons:
+        create: Create
+        update: Update
+        cancel: Cancel
+      confirm:
+        destroy: Are you sure to delete this question?
