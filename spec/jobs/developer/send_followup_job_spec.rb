@@ -7,7 +7,8 @@ describe Developer::SendFollowupJob do
     let(:user) { create(:user, :developer, :pending) }
 
     it 'calls InviteToSlack operation' do
-      expect(Ops::Developer::SendScreeningFollowup).to receive(:call).with(user: user)
+      expect(Ops::Developer::Screening::SendScreeningFollowup)
+        .to receive(:call).with(user: user)
       described_class.perform_now
     end
   end

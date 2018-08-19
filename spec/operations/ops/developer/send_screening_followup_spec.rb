@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::SendScreeningFollowup do
+describe Ops::Developer::Screening::SendScreeningFollowup do
   subject { described_class }
 
   describe '#call' do
