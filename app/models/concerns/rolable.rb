@@ -16,6 +16,10 @@ module Rolable
     def self.with_any_role(name)
       with_role(name)
     end
+
+    def self.with_role_and_state(role, state)
+      with_role(role).where(roles: { state: state })
+    end
   end
 
   def self.role_class_names
