@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require './app/models/developer/onboarding'
-require './app/operations/ops/developer/uncompleted_users'
+require './app/operations/ops/developer/send_screening_followup'
 
 module Developer
   class SendFollowupJob < ApplicationJob
