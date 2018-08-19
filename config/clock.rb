@@ -6,6 +6,6 @@ require_relative '../config/environment'
 
 module Clockwork
   every(3.day, 'SendFollowupJob', at: '10:00') do
-    Developer::SendFollowupJob.perform_later
+    Developer::Screening::SendFollowupJob.perform_later
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Developer::SendFollowupJob do
+describe Developer::Screening::SendFollowupJob do
   describe '#perform' do
     let(:user) { create(:user, :developer, :pending) }
 
