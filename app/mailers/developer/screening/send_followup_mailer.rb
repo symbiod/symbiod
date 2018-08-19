@@ -2,7 +2,7 @@
 
 module Developer
   module Screening
-  # Sends reminder for uncompleted screening
+    # Sends reminder for uncompleted screening
     class SendFollowupMailer < ApplicationMailer
       def notify(user_id)
         @user = User.find(user_id)
