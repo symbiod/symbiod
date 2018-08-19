@@ -6,8 +6,7 @@ module Developer
     class SendFollowupMailer < ApplicationMailer
       def notify(user_id)
         @user = User.find(user_id)
-        @mail = mail(to: @user.email, subject: t('dashboard.users.mailers.uncompleted.subject'))
-        @user.update_attribute(:last_screening_followup_date, @mail.date)
+        mail(to: @user.email, subject: t('dashboard.users.mailers.uncompleted.subject'))
       end
     end
   end
