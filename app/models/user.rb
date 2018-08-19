@@ -39,6 +39,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :authentications
 
   scope :newer_first, -> { order(id: :desc) }
+  after_create :set_last_screening_followup_date
 
   def github_uid
     authentications.github.first&.uid
@@ -58,5 +59,9 @@ class User < ApplicationRecord
 
   def primary_skill
     skills.find_by(user_skills: { primary: true })
+  end
+
+  def set_last_screening_followup_date
+    update_attribute(:last_screening_followup_date, DateTime.now)
   end
 end

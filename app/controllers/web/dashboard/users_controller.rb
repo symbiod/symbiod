@@ -76,7 +76,8 @@ module Web
 
       def user_params
         params.require(:user).permit(:email, :first_name, :last_name, :location,
-                                     :timezone, :cv_url, :github, :primary_skill_id)
+                                     :timezone, :cv_url, :github, :primary_skill_id,
+                                     :last_screening_followup_date)
       end
     end
   end
