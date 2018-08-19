@@ -18,9 +18,5 @@ RSpec.describe Developer::Screening::SendFollowupMailer, type: :mailer do
     it 'renders the sender email' do
       expect(mail.from).to eq(['givemepoc@gmail.com'])
     end
-
-    # it 'last sent date eq date email' do
-    #   expect(user.last_screening_followup_date).to eq(mail.date)
-    # end
   end
 end

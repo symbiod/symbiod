@@ -62,6 +62,6 @@ class User < ApplicationRecord
   end
 
   def set_last_screening_followup_date
-    update_attribute(:last_screening_followup_date, DateTime.now)
+		update_attribute(:last_screening_followup_date, Time.now.strftime('%Y-%m-%d'))
   end
 end
