@@ -5,11 +5,11 @@ module Staff
   class SurveyResponseCompletedMailer < ApplicationMailer
     add_template_helper(ProfileHelper)
 
-    default to: -> { Users::ScreeningCompletedNotificationRecipientsQuery.new(@user).call.pluck(:email) }
+    default to: -> { User.with_role(:staff).pluck(:email) }
 
     def notify(user_id)
       @user = User.find(user_id)
-      mail(subject: t('dashboard.survey_responses.notices.completed'))
+      mail(subject: 'User left feedback after onboarding')
     end
   end
 end

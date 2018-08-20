@@ -23,15 +23,15 @@ describe Dashboard::SurveyResponsePolicy do
       it { is_expected.not_to permit_action(:create) }
     end
 
-    context 'user has role staff or mentor' do
-      let(:user) { create(:user, :staff_or_mentor, :active) }
+    context 'user has role staff' do
+      let(:user) { create(:user, :staff, :active) }
 
       it_behaves_like 'allow index and show'
       it_behaves_like 'denied create feedback'
     end
 
-    context 'user has role developer or author' do
-      let(:user) { create(:user, :developer_or_author, :active) }
+    context 'user has role not staff' do
+      let(:user) { create(:user, :without_an_staff, :active) }
 
       it_behaves_like 'denied index and show'
       it_behaves_like 'denied create feedback'
@@ -44,15 +44,15 @@ describe Dashboard::SurveyResponsePolicy do
       it { is_expected.to permit_action(:create) }
     end
 
-    context 'user has role staff or mentor' do
-      let(:user) { create(:user, :staff_or_mentor, :active) }
+    context 'user has role staff' do
+      let(:user) { create(:user, :staff, :active) }
 
       it_behaves_like 'allow index and show'
       it_behaves_like 'allow create feedback'
     end
 
-    context 'user has role developer or author' do
-      let(:user) { create(:user, :developer_or_author, :active) }
+    context 'user has role not staff' do
+      let(:user) { create(:user, :without_an_staff, :active) }
 
       it_behaves_like 'denied index and show'
       it_behaves_like 'allow create feedback'

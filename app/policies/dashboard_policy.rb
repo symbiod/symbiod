@@ -2,7 +2,7 @@
 
 # Allows only staff to manage newcomers applications
 class DashboardPolicy < ApplicationPolicy
-  def allowed?
+  def index?
     return false unless user
     user.roles.any?(&:active?)
   end

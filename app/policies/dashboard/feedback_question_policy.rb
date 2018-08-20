@@ -4,7 +4,7 @@ module Dashboard
   # This policy manage access to manage questions feedback
   class FeedbackQuestionPolicy < DashboardPolicy
     def index?
-      staff_or_mentor?
+      staff?
     end
 
     alias new? index?

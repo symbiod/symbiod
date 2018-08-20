@@ -17,7 +17,7 @@ module Web
       private
 
       def check_permissions_for_dashboard_access
-        not_authenticated unless DashboardPolicy.new(current_user, nil).allowed?
+        not_authenticated unless DashboardPolicy.new(current_user, nil).index?
       end
 
       def redirect_to_dashboard_root

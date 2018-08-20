@@ -10,7 +10,7 @@ module Web
       end
 
       def index
-        @questions = Developer::Onboarding::FeedbackQuestion.all
+        @questions = Developer::Onboarding::FeedbackQuestion.order(id: :asc)
       end
 
       def new

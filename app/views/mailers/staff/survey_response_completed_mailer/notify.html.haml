@@ -4,6 +4,6 @@
 %p Email: #{mail_to @user.email}
 %p Github: #{github_link(@user)}
 %p
-  You can click on the link to view the
+  = t('dashboard.survey_responses.mailers.text')
   = link_to t('dashboard.survey_responses.links.feedback'),
             dashboard_survey_response_url(@user.survey_response), target: :_blank

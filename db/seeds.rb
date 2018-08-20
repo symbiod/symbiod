@@ -31,11 +31,12 @@ tasks.each do |task_attributes|
 end
 
 # Create members
-5.times do |i|
+55.times do |i|
   user = create_user(i)
   user.add_role Developer::Wizard::ProfileForm::ROLES.sample
   user.roles.last.update(state: %w[pending active disabled screening_completed].sample)
   UserSkill.create!(user: user, skill: Skill.all.sample, primary: true)
+  Developer::Onboarding::SurveyResponse.create!(user_id: user.id, feedback: { test: 'ffff', test2: 'fff' })
 end
 
 stack = Stack.create!(name: 'Rails monolith', identifier: 'rails_monolith')

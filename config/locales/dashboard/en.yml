@@ -204,6 +204,10 @@ en:
         activated: Role was activated
     survey_responses:
       empty_questions: Sorry, but the list of questions is empty
+      mailers:
+        text: You can click on the link to view the
+      tables:
+        users: Users
       notices:
         success: Thank you for your feedback
         feedback: Please leave a feedback about onboarding

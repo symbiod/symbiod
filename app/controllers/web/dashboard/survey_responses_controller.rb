@@ -11,24 +11,22 @@ module Web
       end
 
       def index
-        @survey_responses = Developer::Onboarding::SurveyResponse.page params[:page]
+        @survey_responses = Developer::Onboarding::SurveyResponse.order(id: :desc).page params[:page]
       end
 
       def show; end
 
       def new
-        @survey_response = Developer::Onboarding::SurveyResponseForm.new(
-          Developer::Onboarding::SurveyResponse.new
-        )
+        @survey_response = Developer::Onboarding::SurveyResponse.new
       end
 
       def create
-        result = Ops::Developer::Onboarding::SubmitSurveyResponse.call(params: survey_response_params)
-        if result.success?
+        @survey_response = Developer::Onboarding::SurveyResponse.new(survey_response_params)
+        if @survey_response.save
+          Staff::SurveyResponseCompletedMailer.notify(@survey_response.user.id).deliver_later
           redirect_to dashboard_root_url,
                       flash: { success: t('dashboard.survey_responses.notices.success') }
         else
-          @survey_response = result['contract.default']
           render 'new'
         end
       end
@@ -46,7 +44,7 @@ module Web
       end
 
       def questions_find
-        @questions = Developer::Onboarding::FeedbackQuestion.all
+        @questions = Developer::Onboarding::FeedbackQuestion.order(id: :asc)
       end
     end
   end

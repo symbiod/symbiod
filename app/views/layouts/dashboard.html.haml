@@ -27,70 +27,52 @@
         .col-md-2.d-none.d-md-block.bg-light.sidebar.pt-5
           .sidebar-sticky
             %ul.nav.flex-column
-              %li.nav-item
-                %a.nav-link{ href: dashboard_root_url }
-                  %span{ 'data-feather': 'home' }
-                  = t('dashboard.navigation.dashboard')
-              - if policy(:test_task_assignment).index?
-                %li.nav-item
-                  = link_to dashboard_test_task_assignments_url, class: 'nav-link' do
-                    %span{ 'data-feather': 'file' }
-                    = t('dashboard.navigation.applicants')
-                    = count_of_pending_users
-              - if policy(%i[dashboard feedback_question]).index?
-                %li.nav-item
-                  = link_to dashboard_feedback_questions_url, class: 'nav-link' do
-                    %span{ 'data-feather': 'list' }
-                    = t('dashboard.navigation.feedback_questions')
-              - if policy(%i[dashboard survey_response]).index?
-                %li.nav-item
-                  = link_to dashboard_survey_responses_url, class: 'nav-link' do
-                    %span{ 'data-feather': 'list' }
-                    = t('dashboard.navigation.survey_responses')
-              - if policy(:test_task).index?
-                %li.nav-item
-                  = link_to dashboard_test_tasks_url, class: 'nav-link' do
-                    %span{ 'data-feather': 'file' }
-                    = t('dashboard.navigation.test_tasks')
-              - if policy(:user).index?
-                %li.nav-item
-                  = link_to dashboard_users_url, class: 'nav-link' do
-                    %span{ 'data-feather': 'file' }
-                    = t('dashboard.navigation.users')
-              - if policy(%i[dashboard skill]).index?
-                %li.nav-item
-                  = link_to dashboard_skills_url, class: 'nav-link' do
-                    %span{ 'data-feather': 'file' }
-                    = t('dashboard.navigation.skills')
-              %li.nav-item
-                = link_to dashboard_ideas_url, class: 'nav-link' do
-                  %span{ 'data-feather': 'file' }
-                  = t('dashboard.navigation.ideas')
-              %li.nav-item
-                = link_to dashboard_projects_url, class: 'nav-link' do
-                  %span{ 'data-feather': 'shopping-cart' }
-                  = t('dashboard.navigation.projects')
-              %li.nav-item
-                %a.nav-link{ href: '#' }
-                  %span{ 'data-feather': 'users' }
-                  = t('dashboard.navigation.reports')
-              %li.nav-item
-                %a.nav-link{ href: '#' }
-                  %span{ 'data-feather': 'bar-chart-2' }
-                  = t('dashboard.navigation.analytics')
-              %li.nav-item
-                %a.nav-link{ href: '#' }
-                  %span{ 'data-feather': 'layers' }
-                  = t('dashboard.navigation.activity')
+              = nav_item_link t('dashboard.navigation.dashboard'),
+                              dashboard_root_url,
+                              icon: 'home'
+              = nav_item_link "#{t('dashboard.navigation.applicants')} #{count_applicants}",
+                              dashboard_feedback_questions_url,
+                              policy_name: :test_task_assignment,
+                              icon: 'users'
+              = nav_item_link t('dashboard.navigation.feedback_questions'),
+                              dashboard_feedback_questions_url,
+                              policy_name: %i[dashboard feedback_question]
+              = nav_item_link t('dashboard.navigation.survey_responses'),
+                              dashboard_survey_responses_url,
+                              policy_name: %i[dashboard survey_response]
+              = nav_item_link t('dashboard.navigation.test_tasks'),
+                              dashboard_test_tasks_url,
+                              policy_name: :test_task
+              = nav_item_link t('dashboard.navigation.users'),
+                              dashboard_users_url,
+                              policy_name: :user,
+                              icon: 'users'
+              = nav_item_link t('dashboard.navigation.skills'),
+                              dashboard_skills_url,
+                              policy_name: %i[dashboard skill]
+              = nav_item_link t('dashboard.navigation.ideas'),
+                              dashboard_ideas_url,
+                              icon: 'info'
+              = nav_item_link t('dashboard.navigation.projects'),
+                              dashboard_projects_url,
+                              icon: 'shopping-bag'
+              = nav_item_link t('dashboard.navigation.reports'),
+                              '#',
+                              icon: 'file-text'
+              = nav_item_link t('dashboard.navigation.analytics'),
+                              '#',
+                              icon: 'bar-chart-2'
+              = nav_item_link t('dashboard.navigation.activity'),
+                              '#',
+                              icon: 'layers'
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
               %span= t('dashboard.navigation.my_projects')
               %a.d-flex.align-items-center.text-muted{ href: '#' }
                 %span{ 'data-feather': 'plus-circle' }
             %ul.nav.flex-column.mb-2
-              %li.nav-item
-                %a.nav-link{ href: '#' }
-                  %span{ 'data-feather': 'file-text' }
-                  = t('dashboard.navigation.mentored')
+              = nav_item_link t('dashboard.navigation.mentored'),
+                              '#',
+                              icon: 'file-text'
         %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{ role: 'main' }
           = render partial: 'layouts/shared/dashboard_flashes'
 
