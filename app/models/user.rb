@@ -9,8 +9,6 @@ class User < ApplicationRecord
 
   authenticates_with_sorcery!
 
-  after_create :set_last_screening_followup_date
-
   validates :email, presence: true, uniqueness: true
 
   # Member role
@@ -60,9 +58,5 @@ class User < ApplicationRecord
 
   def primary_skill
     skills.find_by(user_skills: { primary: true })
-  end
-
-  def set_last_screening_followup_date
-    update(last_screening_followup_date: Time.now)
   end
 end
