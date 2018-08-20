@@ -19,7 +19,6 @@ en:
       wait_for_tasks_review: Let us check you answers, and we'll be back to you soon.
       completed: Screening was completed
       rejection: You were rejected
-      uncompleted: Screening was uncompleted
     onboarding:
       started: Onboarding started!
     policy:

@@ -1,9 +1,9 @@
 %p.lead
-  = t('bootcamp.screening.uncompleted')
+  = t('dashboard.users.mailers.uncompleted.title')
 %p
-  Hello, #{@user.full_name}
+  #{t('dashboard.users.mailers.hello')} #{@user.full_name}
 
-  It looks like you haven't completed our sign up wizard.
-  Follow the
+%p
+  #{t('dashboard.users.mailers.uncompleted.text_one')}
   = link_to 'link', bootcamp_root_url
-  to do that, and you will be able to get some real-world experience!
+  #{t('dashboard.users.mailers.uncompleted.text_two')}
