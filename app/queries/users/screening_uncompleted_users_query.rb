@@ -14,8 +14,7 @@ module Users
           .where(roles: { type: 'Roles::Developer',
                           state: %i[pending
                                     profile_completed
-                                    policy_accepted
-                                    screening_completed] })
+                                    policy_accepted] })
           .where('users.created_at > ? AND
                   users.last_screening_followup_date > ?', 3.days.ago, 3.days.ago)
     end
