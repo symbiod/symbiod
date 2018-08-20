@@ -13,7 +13,7 @@ RSpec.describe Staff::ScreeningCompletedMailer, type: :mailer do
     end
 
     it 'renders the sender email' do
-      expect(mail.from).to eq(['givemepoc@gmail.com'])
+      expect(mail.from).to eq [Settings.email]
     end
 
     it 'renders link to github' do

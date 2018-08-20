@@ -12,11 +12,11 @@ RSpec.describe Developer::RejectionNotificationMailer, type: :mailer do
     end
 
     it 'renders the receiver email' do
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq [user.email]
     end
 
     it 'renders the sender email' do
-      expect(mail.from).to eq(['givemepoc@gmail.com'])
+      expect(mail.from).to eq [Settings.email]
     end
   end
 end
