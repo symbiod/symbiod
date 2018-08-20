@@ -11,6 +11,10 @@ describe ProfileHelper do
 
   describe 'github_link' do
     it { expect(github_link(user))
-           .to eq "<a target=\"_blank\" href=\"https://github.com/#{user.github}\">#{user.github}</a>" }
+           .to eq "<a target=\"_blank\" href=\"https://github.com/#{user_github}\">#{user_github}</a>" }
+  end
+
+  def user_github
+    CGI.escapeHTML(user.github)
   end
 end
