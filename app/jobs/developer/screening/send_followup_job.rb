@@ -2,12 +2,11 @@
 
 module Developer
   module Screening
+    # Select users with status
+    # "pending, profile_completed, policy_accepted,
+    # screening_completed"
+    # and runs mailer for users who have this status
     class SendFollowupJob < ApplicationJob
-      # Select users with status
-      # "pending, profile_completed, policy_accepted,
-      # screening_completed"
-      # and runs mailer for users who have this status
-
       queue_as :default
 
       def perform
