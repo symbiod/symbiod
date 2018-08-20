@@ -11,8 +11,9 @@ module Developer
 
       private
 
+      # Used &, because validation in specs falling
       def fill_key_name
-        self.key_name = key_name.parameterize(separator: '_')
+        self.key_name = key_name&.parameterize(separator: '_')
       end
     end
   end

@@ -56,7 +56,7 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:feedback) { create(:survey_response, "#{question.key_name}": 'Answer 1') }
+    let!(:feedback) { create(:survey_response, "#{question.key_name}": 'Answer 1') }
 
     context 'not signed in' do
       before { get :show, params: { id: feedback.id } }
