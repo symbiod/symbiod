@@ -11,7 +11,7 @@ module Ops
         private
 
         def screening_uncompleted_notification!(_ctx, user:, **)
-          @mail = ::Developer::Screening::SendFollowupMailer.notify(user.id).deliver_later
+          ::Developer::Screening::SendFollowupMailer.notify(user.id).deliver_later
         end
 
         def update_user_last_screening_followup_date!(_ctx, user:, **)

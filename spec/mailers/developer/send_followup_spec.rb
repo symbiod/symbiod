@@ -8,7 +8,7 @@ RSpec.describe Developer::Screening::SendFollowupMailer, type: :mailer do
     let(:mail) { Developer::Screening::SendFollowupMailer.notify(user.id) }
 
     it 'renders the subject' do
-      expect(mail.subject).to eq('Uncompleted screening')
+      expect(mail.subject).to eq("#{I18n.t('dashboard.users.mailers.uncompleted.subject')}")
     end
 
     it 'renders the receiver email' do
