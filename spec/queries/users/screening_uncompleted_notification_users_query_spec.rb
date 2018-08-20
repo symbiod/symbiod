@@ -16,7 +16,7 @@ describe Users::ScreeningUncompletedUsersQuery do
     let(:candidate7) { create(:user, :developer, :not_screening_completed) }
 
     it 'returns only correct recipients' do
-      is_expected.to match_array [candidate, candidate1, candidate2, candidate6]
+      is_expected.to match_array [candidate, candidate1, candidate2]
     end
   end
 
