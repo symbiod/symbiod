@@ -15,8 +15,7 @@ module Users
                           state: %i[pending
                                     profile_completed
                                     policy_accepted] })
-          .where('users.created_at > ? AND
-                  users.last_screening_followup_date > ?', 3.days.ago, 3.days.ago)
+          .where('users.last_screening_followup_date > ?', 3.days.ago)
     end
   end
 end
