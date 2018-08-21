@@ -19,7 +19,7 @@ en:
       developers: Developers
       mentors: Mentors
       projects: Projects
-    developer: 'Join as Developer'
+    developer: 'Developer'
     entrepreneur: 'Entrepreneur'
     alerts:
       not_authenticated_dashboard_access: 'You should sign in before accessing Dashboard'
@@ -31,7 +31,15 @@ en:
       note: Note
     buttons:
       create: Create
+      update: Update
     noties:
-      danger: Not all fields are filled in the note
-      success: Note was successfully created
+      danger:
+        create: Not all fields are filled in the note
+        update: Not all fields are filled in the note
+      success:
+        create: Note was successfully created
+        update: Note was successfully updated
+        destroy: Note was successfully deleted
+      confirm:
+        destroy: Are you sure to delete this note?
       access_denied: Not enough rights to create a note

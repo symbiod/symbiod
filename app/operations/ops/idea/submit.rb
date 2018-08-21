@@ -9,7 +9,7 @@ module Ops
       step Contract::Build(constant: ::Propose::ProposeForm)
       step Contract::Validate()
       step Contract::Persist()
-      step :send_message_to_slack!
+      success :send_message_to_slack!
 
       private
 
@@ -17,9 +17,10 @@ module Ops
         params[:author_id] = author.id
       end
 
+      # TODO: Most probably we need first to post the message to some channel
+      # where staff only is present.
       def send_message_to_slack!(_ctx, model:, **)
-        SlackMessageJob.perform_later(model, 'ideas')
-        true
+        ::Ideas::MessageToSlackJob.perform_later(model.id)
       end
     end
   end

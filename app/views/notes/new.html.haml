@@ -1,3 +1,5 @@
-= simple_form_for @note, url: send("dashboard_#{@noteable.class.name.downcase}_notes_url", @noteable) do |f|
-  = f.input :content, input_html: { rows: 10, 'data-provide': 'markdown' }
-  = f.submit t('notes.buttons.create'), class: 'btn btn-info'
+= render partial: 'notes/form',
+         locals: { note: @note,
+                   url: send("dashboard_#{@noteable.class.name.downcase}_notes_url"),
+                   noteable: @noteable,
+                   submit: 'create' }

@@ -1,0 +1,10 @@
+= simple_form_for @registration, url: idea_wizard_registrations_url do |f|
+  = f.input :email
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :location
+  = f.input :timezone, as: :time_zone
+  = f.input :password
+  = invisible_recaptcha_tags text: t('idea.registrations.submit'), class: 'btn btn-lg btn-secondary'
+
+= link_to t('idea.sessions.new.have_account'), new_idea_sessions_url

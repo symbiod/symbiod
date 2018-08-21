@@ -6,6 +6,7 @@ en:
         header: Log in
         sign_up: Sign up
         new_user: New to POC?
+        have_account: Already have account?
       access:
         deny: The user is already logged in
     registrations:
@@ -14,12 +15,31 @@ en:
         deny: The user is already logged in
     proposals:
       new:
-        header: To suggest an idea
+        header: Suggest an awesome project
       propose: Propose
       access:
         deny: Access is denied to proposals
     landing:
+      title: Have an awesome project idea?
+      body: We can provide you a development team, with designers, managers and quality assurance engineers for free!
       go_to_dashboard: Go to dashboard
       go_to_proposal: Go to proposal
-      author_log_in: Authtor Log In
+      author_log_in: Offer an idea
       wait_for_idea_approve: Thank you! We’ll consider your project idea and will back to you soon
+    wizard:
+      policy:
+        title: Our policy
+        body:
+          By accept this you approve your agreement with our policy located at
+          <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>.
+          <br />
+          Following policy is required for all project authors.
+        accept: I accept
+        submit: Submit
+        must_be_accepted: You should accept the policy for further steps.
+      proposals:
+        fill_all_fields: Fill all fields to submit the idea
+      mailers:
+        activated:
+          subject: You account was activated
+

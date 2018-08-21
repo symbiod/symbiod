@@ -32,17 +32,20 @@ describe GithubService do
   describe '#create_team' do
     let(:team_name) { 'team_name' }
     let(:privacy) { 'closed' }
+    let(:repo_names) { ['team_name'] }
     let(:params) do
       {
         name: 'team_name',
         description: 'team_name',
+        permission: 'push',
+        repo_names: ['team_name'],
         privacy: 'closed'
       }
     end
 
     it 'calls #create_team in Github api client' do
       allow(client).to receive(:create_team).with(organization, params)
-      subject.create_team(team_name, privacy)
+      subject.create_team(team_name, privacy, repo_names)
     end
   end
 

@@ -2,3 +2,10 @@ github:
   organization: 'howtohireme'
   default_team: 'bootcamp'
   api_token: <%= ENV['GITHUB_TOKEN'] %>
+slack:
+  channel_ideas: 'ideas'
+  channel_new_applications: 'bootcamp-recruiting'
+  bot_name: 'Notifications Bot'
+notifications:
+  email:
+    default_from: 'givemepoc@gmail.com'

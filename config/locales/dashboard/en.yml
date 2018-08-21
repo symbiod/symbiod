@@ -201,3 +201,7 @@ en:
         author: Author
         stack: Stack
         developers: Developers
+    roles:
+      notices:
+        deactivated: Role was deactivated
+        activated: Role was activated

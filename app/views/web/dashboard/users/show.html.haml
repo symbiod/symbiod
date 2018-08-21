@@ -64,6 +64,8 @@
 %section.py-5
   %h2
     = t('dashboard.users.headers.notes')
-    = link_to t('notes.button.create'), new_dashboard_user_note_url(@user),
-                                        class: 'btn btn-info btn-sm' if policy(%i[dashboard note]).new?
+    - if policy(%i[dashboard note]).new?
+      = link_to new_dashboard_user_note_url(@user) do
+        %small
+          %i.fa.fa-sticky-note-o
   = cell(Web::Dashboard::UserNotes, @user)

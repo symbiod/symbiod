@@ -4,8 +4,9 @@
 # Some methods are used during new member onboarding, others are required
 # for new project kick-off.
 class SlackService
-  def initialize(token)
+  def initialize(token, slack_config = {})
     @token = token
+    @slack_config = slack_config
   end
 
   # We invite new registred member to our Slack
@@ -19,7 +20,7 @@ class SlackService
 
   # When the new idea is submitted we notify developers through Slack
   def post_to_channel(channel, message)
-    client.chat_postMessage(channel: channel, text: message, as_user: false, username: 'Idea Bot')
+    client.chat_postMessage(channel: channel, text: message, as_user: false, username: @slack_config.bot_name)
   end
 
   # At the moment of new project kick-off we invite all interested members to its channel

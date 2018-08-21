@@ -27,6 +27,6 @@ describe Web::IdeaLanding do
     let(:current_user) { nil }
     let(:user) { nil }
 
-    it { expect(subject.render_link).to match('Authtor Log In</a>') }
+    it { expect(subject.render_link).to match('Offer an idea</a>') }
   end
 end

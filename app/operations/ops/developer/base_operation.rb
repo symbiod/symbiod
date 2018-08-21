@@ -17,7 +17,7 @@ module Ops
       private
 
       def role_for(user:, role_name:, **)
-        Roles::RolesManager.new(user).role_for(role_name)
+        ::Roles::RolesManager.new(user).role_for(role_name)
       end
     end
   end

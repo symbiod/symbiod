@@ -48,6 +48,7 @@ module Roles
     end
 
     def role_for(name)
+      return unless @user
       @user.roles.find_by(type: RolesManager.role_class_name(name))
     end
   end
