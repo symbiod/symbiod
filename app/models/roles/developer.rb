@@ -7,6 +7,11 @@ module Roles
       'Roles::Developer'
     end
 
+    has_one :survey_response,
+            class_name: 'Developer::Onboarding::SurveyResponse',
+            foreign_key: 'role_id',
+            dependent: :destroy
+
     aasm column: 'state' do
       state :pending, initial: true
       state :profile_completed, :policy_accepted, :screening_completed, :active,

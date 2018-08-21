@@ -9,6 +9,6 @@
     - @survey_responses.each do |survey_response|
       %tr
         %td= survey_response.id
-        %td= link_to survey_response.user.full_name, dashboard_survey_response_url(survey_response)
+        %td= link_to survey_response.newcomer.full_name, dashboard_survey_response_url(survey_response)
 
 = paginate @survey_responses

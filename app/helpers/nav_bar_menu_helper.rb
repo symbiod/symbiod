@@ -3,7 +3,7 @@
 # Providers methods for rendering nav bar menu on layout dashboard
 module NavBarMenuHelper
   def nav_item_link(title, url, policy_name: :dashboard, icon: 'list')
-    return unless policy(policy_name).index?
+    return unless Pundit.policy(current_user, policy_name).index?
     content_tag(:li, class: 'nav-item') do
       link_to(url, class: 'nav-link') do
         concat(content_tag(:span, nil, 'data-feather': icon))

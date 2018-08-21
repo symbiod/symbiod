@@ -9,7 +9,7 @@ module Staff
 
     def notify(user_id)
       @user = User.find(user_id)
-      mail(subject: 'User left feedback after onboarding')
+      mail(subject: t('mailers.developer.onboarding.survey_responses.subject'))
     end
   end
 end

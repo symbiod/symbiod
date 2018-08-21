@@ -10,8 +10,10 @@ describe ProfileHelper do
   end
 
   describe 'github_link' do
-    it { expect(github_link(user))
-           .to eq "<a target=\"_blank\" href=\"https://github.com/#{user_github}\">#{user_github}</a>" }
+    it {
+      expect(github_link(user))
+        .to eq "<a target=\"_blank\" href=\"https://github.com/#{user_github}\">#{user_github}</a>"
+    }
   end
 
   def user_github

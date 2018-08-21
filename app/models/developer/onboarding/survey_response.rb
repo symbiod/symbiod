@@ -18,7 +18,8 @@ module Developer
         super(attributes)
       end
 
-      belongs_to :user
+      belongs_to :role
+      has_one :newcomer, through: :role, source: :user
     end
   end
 end

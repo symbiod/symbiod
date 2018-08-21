@@ -1,7 +1,7 @@
 .border-bottom.mb-3.pb-2
   %h2
     = t('dashboard.survey_responses.headers.show')
-    = link_to @survey_response.user.full_name, dashboard_user_url(@survey_response.user)
+    = link_to @survey_response.newcomer.full_name, dashboard_user_url(@survey_response.newcomer)
 .table-responsive
   %table.table.table-striped.table-sm
     - @survey_response.feedback.each do |key, value|

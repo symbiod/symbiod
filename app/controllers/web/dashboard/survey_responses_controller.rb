@@ -23,7 +23,7 @@ module Web
       def create
         @survey_response = Developer::Onboarding::SurveyResponse.new(survey_response_params)
         if @survey_response.save
-          Staff::SurveyResponseCompletedMailer.notify(@survey_response.user.id).deliver_later
+          Staff::SurveyResponseCompletedMailer.notify(@survey_response.newcomer.id).deliver_later
           redirect_to dashboard_root_url,
                       flash: { success: t('dashboard.survey_responses.notices.success') }
         else
@@ -41,6 +41,7 @@ module Web
         params
           .permit(developer_onboarding_survey_response: {})
           .require(:developer_onboarding_survey_response)
+          .merge(role_id: current_user.role(:developer).id)
       end
 
       def questions_find

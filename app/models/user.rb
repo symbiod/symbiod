@@ -30,8 +30,6 @@ class User < ApplicationRecord
   # Staff and mentor role
   has_many :approved_users, class_name: 'User', foreign_key: 'approver_id'
 
-  has_one :survey_response, class_name: 'Developer::Onboarding::SurveyResponse', dependent: :destroy
-
   has_many :notes, as: :noteable
   belongs_to :approver, class_name: 'User', optional: true
 

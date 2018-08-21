@@ -101,7 +101,7 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
       end
 
       context 'user has not feedback' do
-        let(:user) { create(:user, :sample_role, :active) }
+        let(:user) { create(:user, :developer, :active) }
         before { get :new }
 
         it 'renders template' do
@@ -112,9 +112,9 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
       end
 
       context 'user has feedback' do
-        let(:user) { create(:user, :sample_role, :active) }
+        let(:user) { create(:user, :developer, :active) }
         before do
-          create(:survey_response, user: user, "#{question.key_name}": 'Answer 1')
+          create(:survey_response, role: user.role(:developer), "#{question.key_name}": 'Answer 1')
           get :new
         end
 
@@ -125,10 +125,9 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
 
   describe 'POST #create' do
     context 'not signed in' do
-      let(:user) { create(:user, :sample_role, :active) }
+      let(:user) { create(:user, :developer, :active) }
       let(:params) do
         {
-          user_id: user.id,
           "#{question.key_name}": 'Answer 1'
         }
       end
@@ -142,13 +141,12 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
         login_user(user)
       end
 
-      context 'user has not feedback' do
-        let!(:user) { create(:user, :sample_role, :active) }
+      context 'user has role developer without feedback' do
+        let!(:user) { create(:user, :developer, :active) }
 
         context 'valid params' do
           let(:params) do
             {
-              user_id: user.id,
               "#{question.key_name}": 'Answer 1'
             }
           end
@@ -178,7 +176,6 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
         context 'invalid params' do
           let(:params) do
             {
-              user_id: user.id,
               "#{question.key_name}": ''
             }
           end
@@ -190,12 +187,24 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
         end
       end
 
-      context 'user has feedback' do
+      context 'user has role developer with feedback' do
         let(:user) { create(:user, :sample_role, :active) }
-        let(:feedback) { create(:survey_response, user: user, "#{question.key_name}": 'Answer 1') }
+        let(:feedback) { create(:survey_response, role: user.role(:developer), "#{question.key_name}": 'Answer 1') }
         let(:params) do
           {
-            user_id: user.id,
+            "#{question.key_name}": 'Answer 1'
+          }
+        end
+        before { post :create, params: { developer_onboarding_survey_response: params } }
+
+        it_behaves_like 'redirects to dashboard'
+      end
+
+      context 'user has role not developer' do
+        let(:user) { create(:user, :without_an_developer, :active) }
+
+        let(:params) do
+          {
             "#{question.key_name}": 'Answer 1'
           }
         end

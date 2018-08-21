@@ -2,7 +2,6 @@
   %h2= t('dashboard.survey_responses.headers.new')
 - unless @questions.empty?
   = simple_form_for @survey_response, url: dashboard_survey_responses_url do |f|
-    = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
     - @questions.each do |question|
       = f.input question.key_name.to_sym, label: question.description, as: :text, input_html: { rows: 3 }
     = f.submit t('dashboard.survey_responses.buttons.create'), class: 'btn btn-info'

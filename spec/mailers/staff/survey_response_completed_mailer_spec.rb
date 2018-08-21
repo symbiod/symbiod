@@ -7,11 +7,11 @@ RSpec.describe Staff::SurveyResponseCompletedMailer, type: :mailer do
   let!(:question) { create(:feedback_question) }
 
   describe 'notify' do
-    let(:user) { create(:user, :with_primary_skill) }
+    let(:user) { create(:user, :developer, :active) }
     let(:recipients) { User.with_role(:staff) }
     before do
       create(:user, :staff, :active)
-      create(:survey_response, user: user, "#{question.key_name}": 'Answer 1')
+      create(:survey_response, role: user.role(:developer), "#{question.key_name}": 'Answer 1')
     end
 
     its(:subject) { is_expected.to eq I18n.t('dashboard.survey_responses.notices.completed') }

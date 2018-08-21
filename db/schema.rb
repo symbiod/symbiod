@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 2018_08_18_121100) do
 
   create_table "developer_onboarding_survey_responses", force: :cascade do |t|
     t.jsonb "feedback", null: false
-    t.bigint "user_id"
+    t.bigint "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_developer_onboarding_survey_responses_on_user_id", unique: true
+    t.index ["role_id"], name: "index_developer_onboarding_survey_responses_on_role_id", unique: true
   end
 
   create_table "developer_onboardings", force: :cascade do |t|
@@ -213,7 +213,7 @@ ActiveRecord::Schema.define(version: 2018_08_18_121100) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
-  add_foreign_key "developer_onboarding_survey_responses", "users"
+  add_foreign_key "developer_onboarding_survey_responses", "roles"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "stacks"
