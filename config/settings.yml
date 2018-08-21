@@ -2,4 +2,3 @@ github:
   organization: 'howtohireme'
   default_team: 'bootcamp'
   api_token: <%= ENV['GITHUB_TOKEN'] %>
-email: 'givemepoc@gmail.com'

@@ -16,7 +16,7 @@ RSpec.describe Developer::DisabledNotificationMailer, type: :mailer do
     end
 
     it 'renders the sender email' do
-      expect(mail.from).to eq [Settings.email]
+      expect(mail.from).to eq ['givemepoc@gmail.com']
     end
   end
 end
