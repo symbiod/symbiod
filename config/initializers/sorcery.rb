@@ -114,9 +114,9 @@ Rails.application.config.sorcery.configure do |config|
   # config.facebook.api_version = "v2.3"
   # config.facebook.parse = :json
   #
-  config.github.key = ENV['GITHUB_CLIENT_ID'].chomp if ENV['GITHUB_CLIENT_ID']
-  config.github.secret = ENV['GITHUB_SECRET'].chomp if ENV['GITHUB_SECRET']
-  config.github.callback_url = "#{ENV['GITHUB_CALLBACK_DOMAIN']}/oauth/callback?provider=github".chomp
+  config.github.key = Settings.github.oauth.client_id.chomp if Settings.github.oauth.client_id
+  config.github.secret = Settings.github.oauth.secret.chomp if Settings.github.oauth.secret
+  config.github.callback_url = "#{Settings.github.oauth.callback_domain}/oauth/callback?provider=github".chomp
   config.github.user_info_mapping = { email: 'email', github: 'login' }
   # config.github.scope = ""
   #
