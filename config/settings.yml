@@ -2,6 +2,11 @@ github:
   organization: 'howtohireme'
   default_team: 'bootcamp'
   api_token: <%= ENV['GITHUB_TOKEN'] %>
+  oauth:
+    client_id: <%= ENV['GITHUB_CLIENT_ID'] %>
+    secret: <%= ENV['GITHUB_SECRET'] %>
+    callback_domain: <%= ENV['GITHUB_CALLBACK_DOMAIN'] %>
+
 slack:
   channel_ideas: 'ideas'
   channel_new_applications: 'bootcamp-recruiting'
