@@ -9,7 +9,6 @@ module Ops
       SLACK_CHANNEL_MENTOR = ['mentors'].freeze
 
       step :add_to_slack!
-      success :mark_step_as_complete!
 
       def add_to_slack!(_ctx, user:, **)
         # TODO: where can we get a name of user at this step?
@@ -17,10 +16,6 @@ module Ops
         true
       rescue SlackIntegration::FailedApiCallException => e
         handle_exception(e)
-      end
-
-      def mark_step_as_complete!(_ctx, user:, **)
-        user.developer_onboarding.update!(slack: true)
       end
 
       def handle_exception(exception)

@@ -18,12 +18,5 @@ describe Ops::Developer::InviteToGithub do
       expect(service).to receive(:invite_member).with(user.github_uid, Settings.github.default_team)
       subject.call(params)
     end
-
-    it 'marks onboarding step as completed' do
-      allow(service).to receive(:invite_member).with(user.github_uid, Settings.github.default_team)
-      expect { subject.call(params) }
-        .to change { user.developer_onboarding.reload.github }
-        .from(false).to(true)
-    end
   end
 end

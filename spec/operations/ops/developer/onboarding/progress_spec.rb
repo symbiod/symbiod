@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::OnboardingProgress do
+describe Ops::Developer::Onboarding::Progress do
   subject { described_class.new(user).percent }
   let(:user) { create(:user) }
   let(:params) { { user: user } }

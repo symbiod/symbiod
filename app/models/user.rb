@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def progress
-    Ops::Developer::OnboardingProgress.new(self).percent
+    Ops::Developer::Onboarding::Progress.new(self).percent
   end
 
   def primary_skill

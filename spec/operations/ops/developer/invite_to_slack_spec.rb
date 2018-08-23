@@ -60,12 +60,5 @@ describe Ops::Developer::InviteToSlack do
           .to raise_error SlackIntegration::FailedApiCallException, 'some other message'
       end
     end
-
-    it 'marks onboarding step as completed' do
-      allow(service).to receive(:invite).with(any_args)
-      expect { subject.call(params) }
-        .to change { user.developer_onboarding.reload.slack }
-        .from(false).to(true)
-    end
   end
 end
