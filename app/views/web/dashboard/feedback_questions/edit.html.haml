@@ -1,0 +1,4 @@
+.border-bottom.mb-3.pb-2
+  %h2= t('dashboard.feedback_questions.headers.edit')
+= render partial: 'form',
+         locals: { question: @question, url: dashboard_feedback_question_url, submit: 'update' }

@@ -1,0 +1,14 @@
+%h2= t('dashboard.survey_responses.headers.index')
+
+.table-responsive
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th #
+        %th= t('dashboard.survey_responses.tables.users')
+    - @survey_responses.each do |survey_response|
+      %tr
+        %td= survey_response.id
+        %td= link_to survey_response.newcomer.full_name, dashboard_survey_response_url(survey_response)
+
+= paginate @survey_responses

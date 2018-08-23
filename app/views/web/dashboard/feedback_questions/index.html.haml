@@ -1,0 +1,23 @@
+%h2= t('dashboard.feedback_questions.headers.index')
+
+.table-responsive
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th #
+        %th
+          = t('dashboard.feedback_questions.tables.description')
+          = link_to new_dashboard_feedback_question_url do
+            %i.fa.fa-plus-square
+              %th= t('dashboard.feedback_questions.tables.key_name')
+              %th
+    - @questions.each do |question|
+      %tr
+        %td= question.id
+        %td= question.description
+        %td= link_to question.key_name, edit_dashboard_feedback_question_url(question)
+        %td
+          = link_to dashboard_feedback_question_url(question),
+                    method: :delete,
+                    data: { confirm: t('dashboard.feedback_questions.confirm.destroy') } do
+            %i.fa.fa-trash

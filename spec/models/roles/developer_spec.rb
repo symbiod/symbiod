@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe Roles::Developer do
   subject(:role) { build_stubbed(:role, :developer) }
 
+  it { is_expected.to have_one :survey_response }
+
   describe 'role default state' do
     it 'is pending' do
       expect(role).to have_state(:pending)

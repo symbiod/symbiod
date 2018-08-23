@@ -1,0 +1,6 @@
+= simple_form_for question, url: url do |f|
+  = f.input :description, as: :text, input_html: { rows: 4 }
+  = f.input :key_name
+  = f.submit t("dashboard.feedback_questions.buttons.#{submit}"), class: 'btn btn-lg btn-info'
+  = link_to t('dashboard.feedbacks.buttons.cancel'),
+            dashboard_feedback_questions_url, class: 'btn btn-lg btn-info'
