@@ -72,7 +72,9 @@ group :test do
   gem 'clockwork-test'
   gem 'database_cleaner'
   gem 'faker'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
+  gem 'database_cleaner'
+  gem 'webmock'
   gem 'simplecov', require: false
   gem 'webmock'
 end

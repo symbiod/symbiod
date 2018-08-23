@@ -8,6 +8,9 @@
 # TODO: reuse existing script that loads dump into the database
 #./load_dump
 
+# Here the database is recreated, since there can be existing tables after past operations
+bundle exec rake db:drop && bundle exec rake db:create
+
 wget https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump -O /tmp/givemepoc_latest.dump
 pg_restore --verbose --clean --no-acl --no-owner -d travis_ci_test /tmp/givemepoc_latest.dump
 

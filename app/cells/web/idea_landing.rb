@@ -19,7 +19,7 @@ module Web
     end
 
     def author_status
-      if DashboardPolicy.new(current_user, nil).allowed?
+      if DashboardPolicy.new(current_user, nil).index?
         ['go_to_dashboard', dashboard_root_url]
       else
         ['go_to_proposal', public_send(Author::Wizard.new(current_user).route_for_current_step)]

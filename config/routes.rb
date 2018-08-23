@@ -48,6 +48,8 @@ Rails.application.routes.draw do
       end
       resources :role_activation, only: :update
       resources :role_deactivation, only: :update
+      resources :survey_responses, only: %i[index show new create]
+      resources :feedback_questions, except: %i[show]
       resources :skills, except: %i[show destroy] do
         member do
           put :activate
