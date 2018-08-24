@@ -3,6 +3,7 @@
 module Ops
   module Developer
     class Onboarding
+      # This operation create feedback an mark step to onboarding
       class CreateSurveyResponse < BaseOperation
         step Model(::Developer::Onboarding::SurveyResponse, :new)
         step :create_survey_response!
@@ -21,7 +22,7 @@ module Ops
         end
 
         def mark_feedback_completed!(_ctx, user:, **)
-          user.developer_onboarding.update!(feedback_completed: true)
+          user.developer_onboarding.feedback_complete!
         end
       end
     end

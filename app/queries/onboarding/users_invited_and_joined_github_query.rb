@@ -2,11 +2,11 @@
 
 module Onboarding
   # Find users where invited status to slack - false
-  class UsersNotInvitedToSlackQuery
+  class UsersInvitedAndJoinedGithubQuery
     def self.call
       User
         .joins(:developer_onboarding)
-        .where(developer_onboardings: { slack_completed: false })
+        .where(developer_onboardings: { github_status: %w[github_invited github_joined] })
     end
   end
 end

@@ -34,9 +34,9 @@ module Ops
         def tasks_after_onboarding_completed
           return [] unless @user.developer_onboarding
           [
-            @user.developer_onboarding.slack_completed,
-            @user.developer_onboarding.github_completed,
-            @user.developer_onboarding.feedback_completed
+            @user.developer_onboarding.slack_joined?,
+            @user.developer_onboarding.github_joined?,
+            @user.developer_onboarding.feedback_completed?
           ]
         end
       end

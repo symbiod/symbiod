@@ -9,6 +9,9 @@ module Ops
       SLACK_CHANNEL_MENTOR = ['mentors'].freeze
 
       step :add_to_slack!
+      step :mark_step_as_invited!
+
+      private
 
       def add_to_slack!(_ctx, user:, **)
         # TODO: where can we get a name of user at this step?
@@ -18,12 +21,14 @@ module Ops
         handle_exception(e)
       end
 
+      def mark_step_as_invited!(_ctx, user:, **)
+        user.developer_onboarding.slack_invite!
+      end
+
       def handle_exception(exception)
         return true if exception.message == 'Unsuccessful invite api call: {"ok"=>false, "error"=>"already_invited"}'
         raise
       end
-
-      private
 
       def channels(user)
         if SlackPolicy.new(user, nil).able_to_join_channel?(:mentor)

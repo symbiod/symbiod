@@ -69,9 +69,10 @@ en:
         task_assignments: Task assignments
         date_registration: Date registration
         tasks: Tasks
-        slack_completed: Invite to Slack
-        github_completed: Invite to GitHub
-        feedback_completed: Give feedback
+        pending: pending
+        invited: invited
+        joined: joined
+        left: left
         completed: completed
         not_completed: not completed
       link:

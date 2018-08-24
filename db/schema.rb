@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 2018_08_23_215142) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "feedback_completed", default: false
-    t.boolean "slack_completed", default: false
-    t.boolean "github_completed", default: false
+    t.string "feedback_status"
+    t.string "slack_status"
+    t.string "github_status"
   end
 
   create_table "developer_test_task_assignments", force: :cascade do |t|

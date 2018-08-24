@@ -21,7 +21,9 @@ module Web
       end
 
       def create
-        result = Ops::Developer::Onboarding::CreateSurveyResponse.call(user: current_user, params: survey_response_params)
+        result = Ops::Developer::Onboarding::CreateSurveyResponse.call(
+          user: current_user, params: survey_response_params
+        )
         if result.success?
           redirect_to dashboard_root_url,
                       flash: { success: t('dashboard.survey_responses.notices.success') }
