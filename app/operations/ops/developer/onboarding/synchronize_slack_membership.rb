@@ -3,7 +3,7 @@
 module Ops
   module Developer
     class Onboarding
-      # Here check members by organization GitHub
+      # Here check members by team Slack
       class SynchronizeSlackMembership < ::Ops::Developer::BaseOperation
         step :check_membership!
         failure :mark_step_as_left!
@@ -12,7 +12,7 @@ module Ops
         private
 
         def check_membership!(_ctx, user:, **)
-          SlackService.new(ENV['SLACK_TOKEN']).member_team?(user.email)
+          SlackService.new(ENV['SLACK_TOKEN']).team_member?(user.email)
         end
 
         def mark_step_as_left!(_ctx, user:, **)

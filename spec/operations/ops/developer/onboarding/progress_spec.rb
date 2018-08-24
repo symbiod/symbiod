@@ -19,7 +19,7 @@ describe Ops::Developer::Onboarding::Progress do
     context 'user have all completed tasks' do
       before do
         create(:developer_test_task_assignment, :completed, developer: user)
-        create(:developer_onboarding, :invited_to_slack, :invited_to_github, user: user)
+        create(:developer_onboarding, :joined_to_slack, :joined_to_github, :feedback_completed, user: user)
       end
 
       it 'progress 100%' do

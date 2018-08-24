@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Onboarding
-  # Find users where invited status to slack - false
+  # Find users where invited and joined status to Slack
   class UsersInvitedAndJoinedSlackQuery
     def self.call
       User

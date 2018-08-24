@@ -39,7 +39,7 @@ class SlackService
     client.conversations_create(name: channel_name, is_private: false)
   end
 
-  def member_team?(email)
+  def team_member?(email)
     all_emails_team.include?(email)
   end
 

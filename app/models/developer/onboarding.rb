@@ -3,6 +3,7 @@
 module Developer
   # Holds the results of onboarding steps.
   class Onboarding < ApplicationRecord
+    # TODO: delete this
     self.ignored_columns = %w[github slack]
 
     include AASM

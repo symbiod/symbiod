@@ -124,11 +124,14 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
   end
 
   describe 'POST #create' do
+    before { create(:developer_onboarding, user: user) }
+
     context 'not signed in' do
       let(:user) { create(:user, :developer, :active) }
       let(:params) do
         {
-          "#{question.key_name}": 'Answer 1'
+          "#{question.key_name}": 'Answer 1',
+          role_id: user.role(:developer).id
         }
       end
       before { post :create, params: { developer_onboarding_survey_response: params } }
@@ -145,21 +148,18 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
         let!(:user) { create(:user, :developer, :active) }
 
         context 'valid params' do
+          let(:result_double) { double(success?: true) }
           let(:params) do
             {
-              "#{question.key_name}": 'Answer 1'
+              "#{question.key_name}": 'Answer 1',
+              role_id: user.role(:developer).id
             }
           end
 
-          it 'run send email' do
-            expect { post :create, params: { developer_onboarding_survey_response: params } }
-              .to have_enqueued_job(ActionMailer::DeliveryJob)
-              .with(
-                'Staff::SurveyResponseCompletedMailer',
-                'notify',
-                'deliver_now',
-                user.id
-              )
+          it 'run operation create survey response' do
+            expect(Ops::Developer::Onboarding::CreateSurveyResponse)
+              .to receive(:call).with(any_args).and_return(result_double)
+            post :create, params: { developer_onboarding_survey_response: params }
           end
 
           it 'created survey response' do
