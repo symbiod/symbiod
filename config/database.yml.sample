@@ -1,14 +1,14 @@
 default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
-  user: postgres
-  password: root
+  host: <%= ENV.fetch('PGHOST') { 'localhost ' } %>
+  user: <%= ENV.fetch('PGUSER') { 'postgres' } %>
+  password: <%= ENV.fetch('PGPASS') { 'root' } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: poc_development
+  database: <%= ENV.fetch('PGDATABASE') { 'poc_development' } %>
 
 test:
   <<: *default
@@ -21,5 +21,5 @@ production:
 
 features:
   <<: *default
-  host: <%= ENV['DATABASE_HOST'] %>
+  host: <%= ENV['PGHOST'] { 'localhost' } %>
   database: poc_features
