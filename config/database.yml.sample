@@ -12,7 +12,7 @@ development:
 
 test:
   <<: *default
-  database: poc_test
+  database: <%= ENV.fetch('PGDATABASE') { 'poc_test' } %>
 
 production:
   url: <%= ENV['DATABASE_URL'] %>
