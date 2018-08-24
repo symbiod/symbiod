@@ -13,11 +13,13 @@ module Developer
       private
 
       def invite_status
-        model.developer_onboarding.try(@options[:resource]) ? 'invited' : 'uninvited'
+        return 'not_completed' unless model.developer_onboarding
+        model.developer_onboarding[@options[:resource]] ? 'completed' : 'not_completed'
       end
 
       def color_status
-        model.developer_onboarding.try(@options[:resource]) ? 'success' : 'danger'
+        return 'danger' unless model.developer_onboarding
+        model.developer_onboarding[@options[:resource]] ? 'success' : 'danger'
       end
     end
   end

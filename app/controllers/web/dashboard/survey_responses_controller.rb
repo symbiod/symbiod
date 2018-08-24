@@ -21,12 +21,12 @@ module Web
       end
 
       def create
-        @survey_response = Developer::Onboarding::SurveyResponse.new(survey_response_params)
-        if @survey_response.save
-          Staff::SurveyResponseCompletedMailer.notify(@survey_response.newcomer.id).deliver_later
+        result = Ops::Developer::Onboarding::CreateSurveyResponse.call(user: current_user, params: survey_response_params)
+        if result.success?
           redirect_to dashboard_root_url,
                       flash: { success: t('dashboard.survey_responses.notices.success') }
         else
+          @survey_response = result[:model]
           render 'new'
         end
       end

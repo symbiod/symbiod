@@ -16,15 +16,28 @@ module Ops
         private
 
         def total_steps
-          total = @user.test_task_assignments.size || Ops::Developer::Screening::NUMBER_OF_ASSIGNED_TEST_TASKS
-          # We add 2 because of slack and github
-          total + 2
+          count_test_tasks + ::Developer::Onboarding::COUNT_TASKS
+        end
+
+        def count_test_tasks
+          @user.test_task_assignments.size || Ops::Developer::Screening::NUMBER_OF_ASSIGNED_TEST_TASKS
         end
 
         def steps_done
-          steps = @user.test_task_assignments.map(&:completed?) +
-                  [@user.developer_onboarding.try(:slack), @user.developer_onboarding.try(:github)]
-          steps.count { |i| i }
+          (test_tasks_completed + tasks_after_onboarding_completed).count { |i| i }
+        end
+
+        def test_tasks_completed
+          @user.test_task_assignments.map(&:completed?)
+        end
+
+        def tasks_after_onboarding_completed
+          return [] unless @user.developer_onboarding
+          [
+            @user.developer_onboarding.slack_completed,
+            @user.developer_onboarding.github_completed,
+            @user.developer_onboarding.feedback_completed
+          ]
         end
       end
     end

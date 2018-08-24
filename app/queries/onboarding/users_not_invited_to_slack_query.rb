@@ -6,7 +6,7 @@ module Onboarding
     def self.call
       User
         .joins(:developer_onboarding)
-        .where(developer_onboardings: { slack: false })
+        .where(developer_onboardings: { slack_completed: false })
     end
   end
 end

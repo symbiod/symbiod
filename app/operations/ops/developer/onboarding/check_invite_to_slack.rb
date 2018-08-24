@@ -15,7 +15,7 @@ module Ops
         end
 
         def set_onboarding_to_github!(_ctx, user:, **)
-          user.developer_onboarding.update!(slack: true)
+          user.developer_onboarding.update!(slack_completed: true)
         end
       end
     end
