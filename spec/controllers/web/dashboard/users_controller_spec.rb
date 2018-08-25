@@ -276,8 +276,8 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
       it 'calls Activate operation' do
         expect(Ops::Member::RemoveRole).to receive(:call).with(user: candidate,
-                                                                  role: role,
-                                                                  size: candidate.roles.size)
+                                                               role: role,
+                                                               size: candidate.roles.size)
         put :remove_role, params: { id: candidate.id, role: role, size: candidate.roles.size }
       end
 
