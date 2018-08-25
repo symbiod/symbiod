@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::AcceptPolicy do
+describe Ops::Member::AcceptPolicy do
   subject { described_class }
-  let(:user) { create(:user, :developer, :profile_completed) }
-  let(:role) { role_for(user: user, role_name: :developer) }
+  let(:user) { create(:user, :member, :profile_completed) }
+  let(:role) { role_for(user: user, role_name: :member) }
 
   describe '#call' do
     it 'changes role state if policy accepted' do

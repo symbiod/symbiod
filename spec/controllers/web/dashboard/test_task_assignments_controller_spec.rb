@@ -20,7 +20,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
       end
 
       context 'not authorized' do
-        let(:user) { create(:user, :developer, :active) }
+        let(:user) { create(:user, :member, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -39,7 +39,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
         end
 
         it 'assigns candidates' do
-          candidates = create_list(:user, 2, :developer, :screening_completed)
+          candidates = create_list(:user, 2, :member, :screening_completed)
           expect(assigns(:candidates)).to match_array candidates
         end
       end
@@ -47,7 +47,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
       context 'mentor' do
         let(:user) { create(:user, :mentor, :active, :with_primary_skill, skill_name: skill_name) }
         let!(:reviewable_candidates) do
-          create_list(:user, 2, :developer, :screening_completed, :with_primary_skill, skill_name: skill_name)
+          create_list(:user, 2, :member, :screening_completed, :with_primary_skill, skill_name: skill_name)
         end
         let(:skill_name) { 'Ruby' }
 
@@ -67,7 +67,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
   end
 
   describe 'GET #show' do
-    let(:candidate) { create(:user, :developer, :screening_completed, :with_assignment) }
+    let(:candidate) { create(:user, :member, :screening_completed, :with_assignment) }
 
     before do
       login_user(user)
@@ -91,7 +91,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
     end
 
     context 'not authorized' do
-      let(:user) { create(:user, :developer, :active) }
+      let(:user) { create(:user, :member, :active) }
 
       it 'redirect to dashboard root' do
         expect(response).to redirect_to dashboard_root_url
@@ -100,14 +100,14 @@ describe Web::Dashboard::TestTaskAssignmentsController do
   end
 
   describe 'PUT #activate' do
-    let(:candidate) { create(:user, :developer, :screening_completed, :with_assignment) }
+    let(:candidate) { create(:user, :member, :screening_completed, :with_assignment) }
     before { login_user(user) }
 
     context 'authorized' do
       let(:user) { create(:user, :staff) }
 
       it 'calls Activate operation' do
-        expect(Ops::Developer::Activate).to receive(:call).with(user: candidate, performer: user.id)
+        expect(Ops::Member::Activate).to receive(:call).with(user: candidate, performer: user.id)
         put :activate, params: { id: candidate.id }
       end
 
@@ -118,7 +118,7 @@ describe Web::Dashboard::TestTaskAssignmentsController do
     end
 
     context 'not authorized' do
-      let(:user) { create(:user, :developer, :active) }
+      let(:user) { create(:user, :member, :active) }
 
       it 'redirect to dashboard root' do
         put :activate, params: { id: candidate.id }
@@ -128,28 +128,28 @@ describe Web::Dashboard::TestTaskAssignmentsController do
   end
 
   describe 'PUT #reject' do
-    let(:candidate) { create(:user, :developer, :screening_completed, :with_assignment) }
+    let(:candidate) { create(:user, :member, :screening_completed, :with_assignment) }
     before { login_user(user) }
 
     context 'authorized' do
       let(:user) { create(:user, :staff) }
 
       it 'calls Reject operation' do
-        expect(Ops::Developer::Reject).to receive(:call).with(user: candidate, feedback: '')
-        put :reject, params: { id: candidate.id, developer_test_task_assignment: { feedback: '' } }
+        expect(Ops::Member::Reject).to receive(:call).with(user: candidate, feedback: '')
+        put :reject, params: { id: candidate.id, member_test_task_assignment: { feedback: '' } }
       end
 
       it 'redirects to applicants list' do
-        put :reject, params: { id: candidate.id, developer_test_task_assignment: { feedback: 'some text' } }
+        put :reject, params: { id: candidate.id, member_test_task_assignment: { feedback: 'some text' } }
         expect(response).to redirect_to dashboard_test_task_assignments_url
       end
     end
 
     context 'not authorized' do
-      let(:user) { create(:user, :developer, :active) }
+      let(:user) { create(:user, :member, :active) }
 
       it 'redirect to dashboard root' do
-        put :reject, params: { id: candidate.id, developer_test_task_assignment: { feedback: 'some text' } }
+        put :reject, params: { id: candidate.id, member_test_task_assignment: { feedback: 'some text' } }
         expect(response).to redirect_to dashboard_root_url
       end
     end

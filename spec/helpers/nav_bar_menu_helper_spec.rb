@@ -5,9 +5,9 @@ require 'rails_helper'
 describe NavBarMenuHelper do
   describe '#count_applicants' do
     context 'pending applications exist' do
-      let!(:candidate1) { create(:user, :developer, :screening_completed) }
-      let!(:candidate2) { create(:user, :developer, :screening_completed) }
-      let!(:candidate3) { create(:user, :developer, :active) }
+      let!(:candidate1) { create(:user, :member, :screening_completed) }
+      let!(:candidate2) { create(:user, :member, :screening_completed) }
+      let!(:candidate3) { create(:user, :member, :active) }
 
       it 'returns positive number of pending users' do
         expect(count_applicants).to eq '(2)'
@@ -23,7 +23,7 @@ describe NavBarMenuHelper do
 
   describe '#nav_item_link' do
     context 'user denied access to page' do
-      let(:current_user) { create(:user, :developer, :active) }
+      let(:current_user) { create(:user, :member, :active) }
       let(:policy_name) { :test_task_assignment }
 
       it 'returns nil' do

@@ -12,8 +12,8 @@ describe SlackPolicy do
     it { is_expected.to permit_action(:able_to_join_channel, role) }
   end
 
-  context 'developer user' do
-    let(:user) { create(:user, :developer) }
+  context 'member user' do
+    let(:user) { create(:user, :member) }
 
     it { is_expected.not_to permit_action(:able_to_join_channel, role) }
   end

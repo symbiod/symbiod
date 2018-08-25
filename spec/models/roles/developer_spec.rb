@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Roles::Developer do
-  subject(:role) { build_stubbed(:role, :developer) }
+RSpec.describe Roles::Member do
+  subject(:role) { build_stubbed(:role, :member) }
 
   it { is_expected.to have_one :survey_response }
 

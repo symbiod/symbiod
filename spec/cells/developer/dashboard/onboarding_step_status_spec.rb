@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-describe Developer::Dashboard::OnboardingStepStatus do
+describe Member::Dashboard::OnboardingStepStatus do
   subject { described_class }
 
   context 'user status slack invited' do
     let(:user) { create(:user) }
-    before { create(:developer_onboarding, :invited_to_slack, user: user) }
+    before { create(:member_onboarding, :invited_to_slack, user: user) }
 
     it 'renders warning color' do
       expect(subject.new(user, resource: :slack_status).onboarding_step_status)
@@ -22,7 +22,7 @@ describe Developer::Dashboard::OnboardingStepStatus do
 
   context 'user status slack pending' do
     let(:user) { create(:user) }
-    before { create(:developer_onboarding, user: user) }
+    before { create(:member_onboarding, user: user) }
 
     it 'renders danger color' do
       expect(subject.new(user, resource: :slack_status).onboarding_step_status)

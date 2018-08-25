@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::Screening::Finish do
+describe Ops::Member::Screening::Finish do
   describe '#call' do
-    let(:user) { create(:user, :developer, :policy_accepted) }
-    let(:role) { role_for(user: user, role_name: :developer) }
+    let(:user) { create(:user, :member, :policy_accepted) }
+    let(:role) { role_for(user: user, role_name: :member) }
 
     context 'screening completed' do
       before { allow(user).to receive(:test_tasks_completed?).and_return(true) }

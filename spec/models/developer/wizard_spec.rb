@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Developer::Wizard do
+describe Member::Wizard do
   subject { described_class.new(user) }
   let!(:user) { create(:user) }
 
@@ -16,7 +16,7 @@ describe Developer::Wizard do
     end
 
     context 'user has role' do
-      let!(:role) { create(:role, :developer, user: user, state: state) }
+      let!(:role) { create(:role, :member, user: user, state: state) }
 
       describe '#completed?' do
         context 'user is pending' do

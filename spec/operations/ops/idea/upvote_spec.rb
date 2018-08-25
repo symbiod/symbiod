@@ -12,7 +12,7 @@ describe Ops::Idea::Upvote do
     end
 
     let(:idea) { create(:idea, :voting) }
-    let(:user) { create(:user, :developer, :active) }
+    let(:user) { create(:user, :member, :active) }
     let(:params) { { idea: idea, user: user } }
 
     context 'idea has no votes' do

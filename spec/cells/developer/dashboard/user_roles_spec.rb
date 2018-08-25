@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-describe Developer::Dashboard::UserRoles do
-  subject { described_class.new(developer, context: { controller: controller }) }
+describe Member::Dashboard::UserRoles do
+  subject { described_class.new(member, context: { controller: controller }) }
 
   controller Web::Dashboard::UsersController
 
@@ -11,9 +11,9 @@ describe Developer::Dashboard::UserRoles do
 
   context 'current user staff and he can assign/unassign roles' do
     let(:current_user) { create(:user, :active, :staff) }
-    let(:developer) { create(:user, :developer) }
+    let(:member) { create(:user, :member) }
 
-    it { expect(subject.render_role('developer')).to be_kind_of Developer::Dashboard::UserStatusButton }
+    it { expect(subject.render_role('member')).to be_kind_of Member::Dashboard::UserStatusButton }
     it { expect(subject.render_role('staff')).to match(I18n.t('dashboard.users.assign_role', role: 'staff')) }
     it { expect(subject.render_role('author')).to match(I18n.t('dashboard.users.assign_role', role: 'author')) }
     it { expect(subject.render_role('mentor')).to match(I18n.t('dashboard.users.assign_role', role: 'mentor')) }
@@ -22,12 +22,12 @@ describe Developer::Dashboard::UserRoles do
 
   context 'current user mentor and he can not assign/unassign roles' do
     let(:current_user) { create(:user, :active, :mentor) }
-    let(:developer) { create(:user, :developer) }
+    let(:member) { create(:user, :member) }
 
-    it { expect(subject.render_role('developer')).to match('developer') }
+    it { expect(subject.render_role('member')).to match('member') }
     it { expect(subject.render_role('staff')).to match('staff') }
     it { expect(subject.render_role('author')).to match('author') }
     it { expect(subject.render_role('mentor')).to match('mentor') }
-    it { expect(subject.send(:list_roles).size).to eq developer.roles.size }
+    it { expect(subject.send(:list_roles).size).to eq member.roles.size }
   end
 end

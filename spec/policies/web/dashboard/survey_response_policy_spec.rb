@@ -21,9 +21,9 @@ describe Dashboard::SurveyResponsePolicy do
   end
 
   context 'user has feedback' do
-    context 'user has role developer' do
-      let(:user) { create(:user, :developer, :active) }
-      before { create(:survey_response, role: user.role(:developer)) }
+    context 'user has role member' do
+      let(:user) { create(:user, :member, :active) }
+      before { create(:survey_response, role: user.role(:member)) }
 
       it_behaves_like 'denied index and show'
       it_behaves_like 'denied create feedback'
@@ -38,8 +38,8 @@ describe Dashboard::SurveyResponsePolicy do
       it_behaves_like 'denied create feedback'
     end
 
-    context 'user has role developer' do
-      let(:user) { create(:user, :developer, :active) }
+    context 'user has role member' do
+      let(:user) { create(:user, :member, :active) }
 
       it_behaves_like 'denied index and show'
       it { is_expected.to permit_action(:new) }

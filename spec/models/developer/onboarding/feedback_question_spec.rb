@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Developer::Onboarding::FeedbackQuestion, type: :model do
+RSpec.describe Member::Onboarding::FeedbackQuestion, type: :model do
   subject(:question) { create(:feedback_question) }
 
   it { is_expected.to validate_presence_of :description }

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Developer::UpdateUserForm do
+describe Member::UpdateUserForm do
   subject { described_class.new(model) }
   let(:model) { User.new }
   let(:errors) { subject.errors.messages.keys }

@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::InviteToSlack do
+describe Ops::Member::InviteToSlack do
   subject       { described_class }
-  let(:user)    { create(:user, :developer) }
+  let(:user)    { create(:user, :member) }
   let(:params)  { { user: user } }
   let(:channels) { %w[bootcamp self-development feed ideas] }
   let(:service) { double }
-  before { user.create_developer_onboarding }
+  before { user.create_member_onboarding }
 
   describe '#call' do
     before do
@@ -32,8 +32,8 @@ describe Ops::Developer::InviteToSlack do
         end
       end
 
-      context 'is developer' do
-        let(:user) { create(:user, :developer, :active) }
+      context 'is member' do
+        let(:user) { create(:user, :member, :active) }
         let(:channels) { %w[bootcamp self-development feed ideas] }
 
         it 'invites member to Slack' do
@@ -43,7 +43,7 @@ describe Ops::Developer::InviteToSlack do
 
         it 'users change slack status' do
           allow(service).to receive(:invite).with(user, channels)
-          expect { subject.call(params) }.to change { user.developer_onboarding.reload.slack_status }
+          expect { subject.call(params) }.to change { user.member_onboarding.reload.slack_status }
             .from('slack_pending').to('slack_invited')
         end
       end

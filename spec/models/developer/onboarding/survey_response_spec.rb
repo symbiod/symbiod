@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Developer::Onboarding::SurveyResponse, type: :model do
+RSpec.describe Member::Onboarding::SurveyResponse, type: :model do
   subject { described_class.new }
   before { create(:feedback_question, key_name: 'question_1') }
 

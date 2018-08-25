@@ -15,7 +15,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :developer, :active) }
+      let!(:candidate) { create(:user, :member, :active) }
       before do
         login_user(candidate)
         get :index
@@ -48,7 +48,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
   describe 'GET #show' do
     context 'authorized' do
-      let!(:candidate) { create(:user, :developer, :screening_completed) }
+      let!(:candidate) { create(:user, :member, :screening_completed) }
       before do
         login_user(user)
         get :show, params: { id: candidate.id }
@@ -64,7 +64,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :developer, :active) }
+      let!(:candidate) { create(:user, :member, :active) }
       before do
         login_user(candidate)
         get :show, params: { id: candidate.id }
@@ -81,7 +81,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
   end
 
   describe 'GET #edit' do
-    let!(:candidate) { create(:user, :developer, :active) }
+    let!(:candidate) { create(:user, :member, :active) }
 
     context 'not authorized' do
       before do
@@ -124,7 +124,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
         primary_skill_id: skill.id
       }
     end
-    let!(:candidate) { create(:user, :developer, :active, :with_primary_skill) }
+    let!(:candidate) { create(:user, :member, :active, :with_primary_skill) }
 
     context 'not authorized' do
       let(:actual) { candidate.primary_skill }
@@ -175,11 +175,11 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
   describe 'PUT #active' do
     context 'authorized' do
-      let!(:candidate) { create(:user, :developer, :disabled) }
+      let!(:candidate) { create(:user, :member, :disabled) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
-        expect(Ops::Developer::Activate).to receive(:call).with(user: candidate, performer: user.id)
+        expect(Ops::Member::Activate).to receive(:call).with(user: candidate, performer: user.id)
         put :activate, params: { id: candidate.id }
       end
 
@@ -195,7 +195,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :developer, :active) }
+      let!(:candidate) { create(:user, :member, :active) }
       before { login_user(candidate) }
 
       it 'redirects to dashboard root' do
@@ -207,11 +207,11 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
 
   describe 'PUT #deactivate' do
     context 'authorized' do
-      let(:candidate) { create(:user, :developer, :active) }
+      let(:candidate) { create(:user, :member, :active) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
-        expect(Ops::Developer::Disable).to receive(:call).with(user: candidate)
+        expect(Ops::Member::Disable).to receive(:call).with(user: candidate)
         put :deactivate, params: { id: candidate.id }
       end
 
@@ -222,8 +222,8 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let(:user) { create(:user, :developer, :active) }
-      let(:candidate) { create(:user, :developer, :active) }
+      let(:user) { create(:user, :member, :active) }
+      let(:candidate) { create(:user, :member, :active) }
       before { login_user(user) }
 
       it 'redirect to dashboard root' do
@@ -242,11 +242,11 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     let(:role) { 'staff' }
 
     context 'authorized' do
-      let!(:candidate) { create(:user, :developer, :active) }
+      let!(:candidate) { create(:user, :member, :active) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
-        expect(Ops::Developer::AssignRole).to receive(:call).with(user: candidate, role: role)
+        expect(Ops::Member::AssignRole).to receive(:call).with(user: candidate, role: role)
         put :add_role, params: { id: candidate.id, role: role }
       end
 
@@ -257,7 +257,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :developer, :active) }
+      let!(:candidate) { create(:user, :member, :active) }
       before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
@@ -271,11 +271,11 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     let(:role) { 'staff' }
 
     context 'authorized' do
-      let!(:candidate) { create(:user, :developer, :active, :staff) }
+      let!(:candidate) { create(:user, :member, :active, :staff) }
       before { login_user(user) }
 
       it 'calls Activate operation' do
-        expect(Ops::Developer::RemoveRole).to receive(:call).with(user: candidate,
+        expect(Ops::Member::RemoveRole).to receive(:call).with(user: candidate,
                                                                   role: role,
                                                                   size: candidate.roles.size)
         put :remove_role, params: { id: candidate.id, role: role, size: candidate.roles.size }
@@ -288,7 +288,7 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'not authorized' do
-      let!(:candidate) { create(:user, :developer, :active) }
+      let!(:candidate) { create(:user, :member, :active) }
       before { login_user(candidate) }
 
       it 'redirect to dashboard root' do
@@ -298,8 +298,8 @@ RSpec.describe Web::Dashboard::UsersController, type: :controller do
     end
 
     context 'removing last role users' do
-      let!(:candidate) { create(:user, :developer, :active) }
-      let!(:role) { 'developer' }
+      let!(:candidate) { create(:user, :member, :active) }
+      let!(:role) { 'member' }
       before { login_user(user) }
 
       it 'redirect to user' do

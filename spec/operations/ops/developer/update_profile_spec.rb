@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::UpdateProfile do
+describe Ops::Member::UpdateProfile do
   subject { described_class }
 
   describe '.call' do

@@ -39,8 +39,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         end
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member, :active) }
 
         it_behaves_like 'dashboard idea #index tests'
 
@@ -62,8 +62,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         end
       end
 
-      context 'user has roles author and developer' do
-        let(:user) { create(:user, :developer, :author, :active) }
+      context 'user has roles author and member' do
+        let(:user) { create(:user, :member, :author, :active) }
         let(:idea) { create(:idea, author: user) }
 
         it_behaves_like 'dashboard idea #index tests'
@@ -113,8 +113,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         it_behaves_like 'dashboard idea #show tests'
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member, :active) }
 
         context 'idea status voting' do
           let(:idea) { create(:idea, :voting) }
@@ -180,8 +180,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         it_behaves_like 'dashboard idea #new tests'
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -233,8 +233,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         it_behaves_like 'dashboard idea #create tests'
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member, :active) }
 
         it 'redirects to dashboard root' do
           post :create, params: { idea: idea_params }
@@ -301,8 +301,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         it_behaves_like 'dashboard idea #edit tests'
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -366,8 +366,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         it_behaves_like 'dashboard idea #update tests'
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member, :active) }
 
         it 'redirects to dashboard root' do
           put :update, params: { id: idea.id, idea: new_idea_params }
@@ -474,8 +474,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :activate, params: { id: idea.id }
@@ -518,8 +518,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         it_behaves_like 'dashboard idea #deactivate tests'
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :deactivate, params: { id: idea.id }
@@ -575,8 +575,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         end
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :reject, params: { id: idea.id }
@@ -619,8 +619,8 @@ RSpec.describe Web::Dashboard::IdeasController, type: :controller do
         it_behaves_like 'dashboard idea #voting tests'
       end
 
-      context 'user has role developer' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :voting, params: { id: idea.id }

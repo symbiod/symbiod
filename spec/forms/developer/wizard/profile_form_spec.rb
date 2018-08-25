@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Developer::Wizard::ProfileForm do
+describe Member::Wizard::ProfileForm do
   subject { described_class.new(model) }
   let(:model) { User.new }
   let(:errors) { subject.errors.messages.keys }

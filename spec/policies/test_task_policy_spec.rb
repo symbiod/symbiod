@@ -17,8 +17,8 @@ describe TestTaskPolicy do
     it { is_expected.to permit_action(:deactivate) }
   end
 
-  context 'user has role developer or author' do
-    let!(:user) { create(:user, :developer_or_author, :active) }
+  context 'user has role member or author' do
+    let!(:user) { create(:user, :member_or_author, :active) }
 
     it { is_expected.not_to permit_action(:index) }
     it { is_expected.not_to permit_action(:new) }

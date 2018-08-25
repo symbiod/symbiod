@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :developer_onboarding, class: 'Developer::Onboarding' do
+  factory :member_onboarding, class: 'Member::Onboarding' do
     user
     slack_status 'slack_pending'
     github_status 'github_pending'

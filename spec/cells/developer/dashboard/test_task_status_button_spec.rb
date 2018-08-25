@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-describe Developer::Dashboard::TestTaskStatusButton do
-  subject { described_class.new(developer_test_task, context: { controller: controller }).test_task_status }
+describe Member::Dashboard::TestTaskStatusButton do
+  subject { described_class.new(member_test_task, context: { controller: controller }).test_task_status }
 
   controller Web::Dashboard::TestTasksController
 
   context 'test task status active' do
-    let(:developer_test_task) { create(:developer_test_task) }
+    let(:member_test_task) { create(:member_test_task) }
 
     it 'renders active status' do
       expect(subject).to match(/active/)
@@ -28,7 +28,7 @@ describe Developer::Dashboard::TestTaskStatusButton do
   end
 
   context 'test task status disabled' do
-    let(:developer_test_task) { create(:developer_test_task, :disabled) }
+    let(:member_test_task) { create(:member_test_task, :disabled) }
 
     it 'renders active status' do
       expect(subject).to match(/disabled/)

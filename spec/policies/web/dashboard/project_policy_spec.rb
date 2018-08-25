@@ -42,8 +42,8 @@ describe Dashboard::ProjectPolicy do
     end
   end
 
-  context 'current user has role developer' do
-    let!(:user) { create(:user, :developer, :active) }
+  context 'current user has role member' do
+    let!(:user) { create(:user, :member, :active) }
     let!(:idea) { create(:idea, :with_project) }
 
     context 'user member project' do
@@ -85,9 +85,9 @@ describe Dashboard::ProjectPolicy do
       end
     end
 
-    context 'current user has role developer' do
+    context 'current user has role member' do
       before { create(:project_user, project: idea_4.project, user: current_user) }
-      let(:current_user) { create(:user, :developer, :active) }
+      let(:current_user) { create(:user, :member, :active) }
 
       it 'returns projects where current user member' do
         expect(subject.resolve)

@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Web::Bootcamp::Wizard::ScreeningsController do
   describe 'GET #index' do
     context 'authenticated' do
-      let(:user) { create(:user, :developer, :policy_accepted, :with_assignment) }
+      let(:user) { create(:user, :member, :policy_accepted, :with_assignment) }
       before { login_user(user) }
 
       it 'renders template' do
@@ -42,12 +42,12 @@ describe Web::Bootcamp::Wizard::ScreeningsController do
   end
 
   describe 'PUT #update' do
-    let(:user) { create(:user, :developer, :policy_accepted, :with_assignment) }
+    let(:user) { create(:user, :member, :policy_accepted, :with_assignment) }
     let(:assignment) { user.test_task_assignments.last }
     let(:params) do
       {
         id: assignment.id,
-        developer_test_task_result: {
+        member_test_task_result: {
           link: 'some_value'
         }
       }
@@ -58,7 +58,7 @@ describe Web::Bootcamp::Wizard::ScreeningsController do
       let(:result) { double(success?: true) }
 
       it 'calls CompleteTask action' do
-        expect(Ops::Developer::Screening::CompleteTask)
+        expect(Ops::Member::Screening::CompleteTask)
           .to receive(:call)
           .with(user: user, assignment_id: assignment.id.to_s, params: { 'link' => 'some_value' })
           .and_return(result)
@@ -75,7 +75,7 @@ describe Web::Bootcamp::Wizard::ScreeningsController do
       let(:params) do
         {
           id: assignment.id,
-          developer_test_task_result: {
+          member_test_task_result: {
             link: nil
           }
         }

@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-describe Developer::Screening::DisplayAssignment do
+describe Member::Screening::DisplayAssignment do
   subject { described_class.new(assignment) }
-  let(:assignment) { create(:developer_test_task_assignment, :uncompleted) }
+  let(:assignment) { create(:member_test_task_assignment, :uncompleted) }
 
   describe '#assignment' do
     context 'test_task_result is assigned' do
-      let(:test_task_result) { create(:developer_test_task_result) }
+      let(:test_task_result) { create(:member_test_task_result) }
 
       before do
         assignment.test_task_result = test_task_result

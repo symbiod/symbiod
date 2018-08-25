@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::CompleteProfile do
+describe Ops::Member::CompleteProfile do
   subject { described_class }
 
   describe '.call' do
     let(:user) { create(:user) }
     let(:skill) { create(:skill) }
-    let(:role) { role_for(user: user, role_name: :developer) }
+    let(:role) { role_for(user: user, role_name: :member) }
     let(:non_user_params) do
       {
         primary_skill_id: skill.id,
-        role: 'developer'
+        role: 'member'
       }
     end
 
@@ -39,7 +39,7 @@ describe Ops::Developer::CompleteProfile do
       end
 
       it 'calls StartScreening operation' do
-        expect(Ops::Developer::Screening::Start)
+        expect(Ops::Member::Screening::Start)
           .to receive(:call)
           .with(user: user)
         subject.call(user: user, params: params)
@@ -70,7 +70,7 @@ describe Ops::Developer::CompleteProfile do
       end
 
       it 'does not call StartScreening operation' do
-        expect(Ops::Developer::Screening::Start)
+        expect(Ops::Member::Screening::Start)
           .not_to receive(:call)
           .with(user: user)
         subject.call(user: user, params: params)

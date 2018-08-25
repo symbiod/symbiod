@@ -70,7 +70,7 @@ describe GithubService do
 
   describe '#invite_member' do
     let(:user_id)   { 123 }
-    let(:username)  { 'super-developer' }
+    let(:username)  { 'super-member' }
     let(:team_name) { 'mentors' }
     let(:team_id)   { 234 }
     let(:teams_response) do
@@ -103,7 +103,7 @@ describe GithubService do
           url: 'https://api.github.com/orgs/howtohireme/memberships/Mehonoshin',
           status: 403,
           response_header: {},
-          body: 'You cannot demote yourself. Admins must be demoted by another admin. // See: https://developer.github.com/v3/orgs/members/#add-or-update-organization-membership'
+          body: 'You cannot demote yourself. Admins must be demoted by another admin. // See: https://member.github.com/v3/orgs/members/#add-or-update-organization-membership'
         }
       end
 

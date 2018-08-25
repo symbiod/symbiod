@@ -35,8 +35,8 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -72,8 +72,8 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -110,8 +110,8 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           post :create, params: { skill: skill_params }
@@ -168,8 +168,8 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -209,8 +209,8 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :update, params: { id: skill.id, skill: new_skill_params }
@@ -263,8 +263,8 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :activate, params: { id: skill.id }
@@ -303,8 +303,8 @@ RSpec.describe Web::Dashboard::SkillsController, type: :controller do
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           put :deactivate, params: { id: skill.id }

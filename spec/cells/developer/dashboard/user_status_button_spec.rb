@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Developer::Dashboard::UserStatusButton do
+describe Member::Dashboard::UserStatusButton do
   subject { described_class.new(candidate, context: { controller: controller }) }
   let(:current_user) { create(:user, :active, :staff) }
 
@@ -27,7 +27,7 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status active' do
-    let(:candidate) { create(:role, :developer, :active) }
+    let(:candidate) { create(:role, :member, :active) }
 
     it 'renders active status' do
       expect(subject.role_status).to match(/active/)
@@ -47,7 +47,7 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status not active' do
-    let(:candidate) { create(:role, :developer, :disabled) }
+    let(:candidate) { create(:role, :member, :disabled) }
 
     it 'renders active status' do
       expect(subject.role_status).to match(/disabled/)
@@ -61,7 +61,7 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status pending' do
-    let(:candidate) { create(:role, :developer, :pending) }
+    let(:candidate) { create(:role, :member, :pending) }
 
     it 'renders active status' do
       expect(subject.role_status).to match(/pending/)
@@ -76,7 +76,7 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status profile completed' do
-    let(:candidate) { create(:role, :developer, :profile_completed) }
+    let(:candidate) { create(:role, :member, :profile_completed) }
 
     it 'renders active status' do
       expect(subject.role_status).to match(/profile_completed/)
@@ -91,7 +91,7 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status screening completed' do
-    let(:candidate) { create(:role, :developer, :screening_completed) }
+    let(:candidate) { create(:role, :member, :screening_completed) }
 
     it 'renders active status' do
       expect(subject.role_status).to match(/screening_completed/)
@@ -106,7 +106,7 @@ describe Developer::Dashboard::UserStatusButton do
   end
 
   context 'current user staff and candidate status rejected' do
-    let(:candidate) { create(:role, :developer, :rejected) }
+    let(:candidate) { create(:role, :member, :rejected) }
 
     it 'renders active status' do
       expect(subject.role_status).to match(/rejected/)
@@ -122,7 +122,7 @@ describe Developer::Dashboard::UserStatusButton do
 
   context 'current user status active and candidate status active' do
     let!(:current_user) { create(:user, :active) }
-    let(:candidate) { create(:role, :developer, :active) }
+    let(:candidate) { create(:role, :member, :active) }
 
     it 'renders status active' do
       expect(subject.role_status).to match(/active/)

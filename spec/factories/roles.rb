@@ -3,12 +3,12 @@
 FactoryBot.define do
   factory :role do
     user
-    type 'Roles::Developer'
+    type 'Roles::Member'
 
     # traits by role type
-    trait :developer do
-      initialize_with { Roles::Developer.new(attributes) }
-      type 'Roles::Developer'
+    trait :member do
+      initialize_with { Roles::Member.new(attributes) }
+      type 'Roles::Member'
     end
 
     trait :mentor do

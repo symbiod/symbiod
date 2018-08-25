@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Ops::Developer::Screening::CompleteTask do
+describe Ops::Member::Screening::CompleteTask do
   subject { described_class }
 
   shared_examples 'assigns model to context' do
@@ -13,8 +13,8 @@ describe Ops::Developer::Screening::CompleteTask do
   end
 
   describe '#call' do
-    let(:user) { create(:user, :developer, :policy_accepted) }
-    let!(:assignment) { create(:developer_test_task_assignment, :uncompleted, developer: user) }
+    let(:user) { create(:user, :member, :policy_accepted) }
+    let!(:assignment) { create(:member_test_task_assignment, :uncompleted, member: user) }
 
     context 'valid params' do
       let(:params) { Hash[link: 'some answer'] }
@@ -28,11 +28,11 @@ describe Ops::Developer::Screening::CompleteTask do
       it 'creates result record' do
         expect do
           subject.call(user: user, assignment_id: assignment.id, params: params)
-        end.to change(Developer::TestTaskResult, :count).by(1)
+        end.to change(Member::TestTaskResult, :count).by(1)
       end
 
       it 'calls Finish operation' do
-        expect(::Ops::Developer::Screening::Finish)
+        expect(::Ops::Member::Screening::Finish)
           .to receive(:call).with(user: user)
         subject.call(user: user, assignment_id: assignment.id, params: params)
       end
@@ -52,11 +52,11 @@ describe Ops::Developer::Screening::CompleteTask do
       it 'does not create result record' do
         expect do
           subject.call(user: user, assignment_id: assignment.id, params: params)
-        end.not_to change(Developer::TestTaskResult, :count)
+        end.not_to change(Member::TestTaskResult, :count)
       end
 
       it 'does not call Finish operation' do
-        expect(::Ops::Developer::Screening::Finish)
+        expect(::Ops::Member::Screening::Finish)
           .not_to receive(:call).with(user: user)
         subject.call(user: user, assignment_id: assignment.id, params: params)
       end

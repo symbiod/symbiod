@@ -76,7 +76,7 @@ describe Web::Bootcamp::OauthsController do
       end
 
       it 'does not start screening' do
-        expect(Ops::Developer::Screening::Start)
+        expect(Ops::Member::Screening::Start)
           .not_to receive(:call).with(any_args)
       end
     end
