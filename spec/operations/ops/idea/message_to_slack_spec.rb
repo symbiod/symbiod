@@ -4,16 +4,16 @@ require 'rails_helper'
 
 describe Ops::Idea::MessageToSlack do
   subject { described_class }
-  let(:idea) { create(:idea) }
-  let(:message) do
+  let!(:idea) { create(:idea) }
+  let!(:message) do
     <<-MESSAGE.gsub(/^[\s\t]*/, '').gsub(/[\s\t]*\n/, ' ').strip
       <!here> New idea was added:
       #{Rails.application.routes.url_helpers.dashboard_idea_url(id: idea.id)}
     MESSAGE
   end
-  let(:channel) { 'ideas' }
-  let(:params)  { { idea: idea } }
-  let(:service) { double }
+  let!(:channel) { Settings.slack.ideas_channel }
+  let!(:params)  { { idea: idea } }
+  let!(:service) { double }
 
   describe '#call' do
     before do

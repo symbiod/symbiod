@@ -12,7 +12,7 @@ module Ops
         def message_to_slack!(_ctx, applicant:, **)
           SlackService
             .new(ENV['SLACK_TOKEN'], slack_config)
-            .post_to_channel(slack_config.channel_new_applications, message_to_channel(applicant.id))
+            .post_to_channel(slack_config.new_applications_channel, message_to_channel(applicant.id))
           true
         rescue SlackIntegration::FailedApiCallException => e
           handle_exception(e)

@@ -17,19 +17,34 @@ describe Ops::Developer::InviteToSlack do
 
     context 'user was not invited before' do
       context 'is mentor' do
-        let(:user) { create(:user, :mentor) }
+        let(:user) { create(:user, :mentor, :active) }
         let(:channels) { %w[bootcamp self-development feed ideas mentors] }
 
         it 'invites member to Slack' do
           expect(service).to receive(:invite).with(user, channels)
           subject.call(params)
         end
+
+        it 'users change slack status' do
+          allow(service).to receive(:invite).with(user, channels)
+          expect { subject.call(params) }.to change { user.developer_onboarding.reload.slack_status }
+            .from('slack_pending').to('slack_invited')
+        end
       end
 
       context 'is developer' do
+        let(:user) { create(:user, :developer, :active) }
+        let(:channels) { %w[bootcamp self-development feed ideas] }
+
         it 'invites member to Slack' do
           expect(service).to receive(:invite).with(user, channels)
           subject.call(params)
+        end
+
+        it 'users change slack status' do
+          allow(service).to receive(:invite).with(user, channels)
+          expect { subject.call(params) }.to change { user.developer_onboarding.reload.slack_status }
+            .from('slack_pending').to('slack_invited')
         end
       end
     end
@@ -59,13 +74,6 @@ describe Ops::Developer::InviteToSlack do
         expect { subject.call(params) }
           .to raise_error SlackIntegration::FailedApiCallException, 'some other message'
       end
-    end
-
-    it 'marks onboarding step as completed' do
-      allow(service).to receive(:invite).with(any_args)
-      expect { subject.call(params) }
-        .to change { user.developer_onboarding.reload.slack }
-        .from(false).to(true)
     end
   end
 end

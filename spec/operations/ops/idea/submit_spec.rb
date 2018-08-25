@@ -5,10 +5,10 @@ require 'rails_helper'
 describe Ops::Idea::Submit do
   subject { described_class }
 
-  describe '.call' do
-    let(:author) { create(:user, :author) }
-    let(:idea) { create(:idea) }
-    let(:message) { 'Idea was added' }
+  describe '#call' do
+    let!(:author) { create(:user, :author) }
+    let!(:idea) { create(:idea) }
+    let!(:message) { 'Idea was added' }
 
     context 'valid profile data provided' do
       let(:params) do

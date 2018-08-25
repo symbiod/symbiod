@@ -5,6 +5,10 @@ module Ops
   class BaseOperation < Trailblazer::Operation
     private
 
+    def github_config
+      Settings.github
+    end
+
     def slack_config
       Settings.slack
     end

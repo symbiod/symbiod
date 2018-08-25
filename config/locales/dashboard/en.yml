@@ -69,10 +69,12 @@ en:
         task_assignments: Task assignments
         date_registration: Date registration
         tasks: Tasks
-        invite_slack: Invite to Slack
-        invite_github: Invite to GitHub
+        pending: pending
         invited: invited
-        uninvited: uninvited
+        joined: joined
+        left: left
+        completed: completed
+        not_completed: not completed
       link:
         confirm:
           disable: Are you sure to disable?
@@ -114,8 +116,8 @@ en:
       description: Description
       button:
         new: New test Task
-      finished: finished
-      not_finished: not finished
+      completed: completed
+      not_completed: not completed
       skill: Skill
     skills:
       headers:

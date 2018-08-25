@@ -8,8 +8,9 @@ github:
     callback_domain: <%= ENV['GITHUB_CALLBACK_DOMAIN'] %>
 
 slack:
-  channel_ideas: 'ideas'
-  channel_new_applications: 'bootcamp-recruiting'
+  default_channel: 'bootcamp'
+  ideas_channel: 'ideas'
+  new_applications_channel: 'bootcamp-recruiting'
   bot_name: 'Notifications Bot'
 notifications:
   email:
