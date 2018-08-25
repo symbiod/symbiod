@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # This add role to user
     class AssignRole < BaseOperation
       step :add_role!

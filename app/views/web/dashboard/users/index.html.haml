@@ -20,7 +20,7 @@
                   = role.name
           %td= user.primary_skill&.title
           %td.col-md-2
-            = cell(Developer::Dashboard::DisplayProgress, user)
+            = cell(Member::Dashboard::DisplayProgress, user)
           %td
             - if TestTaskAssignmentPolicy.new(current_user, user).review?
               = link_to t('dashboard.users.link.review_applicant'), dashboard_test_task_assignment_url(user),

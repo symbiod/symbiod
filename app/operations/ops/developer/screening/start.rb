@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     module Screening
-      # Screening process assings test tasks for developer
+      # Screening process assings test tasks for member
       class Start < BaseOperation
         NUMBER_OF_ASSIGNED_TEST_TASKS = 2
 
@@ -12,7 +12,7 @@ module Ops
         private
 
         def assign_test_tasks!(_ctx, user:, **)
-          Ops::Developer::AssignTestTasks.call(user: user, positions: NUMBER_OF_ASSIGNED_TEST_TASKS)
+          Ops::Member::AssignTestTasks.call(user: user, positions: NUMBER_OF_ASSIGNED_TEST_TASKS)
         end
       end
     end

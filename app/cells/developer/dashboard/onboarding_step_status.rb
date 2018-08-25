@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   module Dashboard
     # This cell renders status invite to slack or github
     class OnboardingStepStatus < BaseCell
@@ -24,7 +24,7 @@ module Developer
         # Here we accept the name of the model field in @options[:resourse]
         # and bring it to the form without the prefix, since we have the following
         # statuses: slack_pending, github_left, and so on.
-        return 'pending' unless model.developer_onboarding
+        return 'pending' unless model.member_onboarding
         resource_status
       end
 
@@ -33,12 +33,12 @@ module Developer
         # and bring it to the form without the prefix, since we have the following
         # statuses: slack_pending, github_left, and so on and take the value from
         # the hash for the button color
-        return 'danger' unless model.developer_onboarding
+        return 'danger' unless model.member_onboarding
         STATUS[resource_status.to_sym]
       end
 
       def resource_status
-        model.developer_onboarding[@options[:resource]].gsub(/\w*_/, '')
+        model.member_onboarding[@options[:resource]].gsub(/\w*_/, '')
       end
     end
   end

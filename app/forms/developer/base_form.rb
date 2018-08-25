@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Developer
-  # Contains additional fields, that are required for developer
+module Member
+  # Contains additional fields, that are required for member
   # We do not use it directly anywhere, just inherit specific forms
   # from this one
   class BaseForm < BaseUserForm

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './app/models/developer/onboarding'
+require './app/models/member/onboarding'
 
-module Developer
+module Member
   class Onboarding
     # Runs onboarding step in asyncronous manner.
     # Allows to retry if the step failure is caused by
@@ -12,7 +12,7 @@ module Developer
 
       def perform(user_id)
         user = User.find(user_id)
-        Ops::Developer::InviteToSlack.call(user: user)
+        Ops::Member::InviteToSlack.call(user: user)
       end
     end
   end

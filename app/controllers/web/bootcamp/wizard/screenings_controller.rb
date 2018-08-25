@@ -23,7 +23,7 @@ module Web
         private
 
         def complete_task
-          Ops::Developer::Screening::CompleteTask.call(
+          Ops::Member::Screening::CompleteTask.call(
             user: current_user,
             assignment_id: params[:id],
             params: assignment_result.to_hash
@@ -31,7 +31,7 @@ module Web
         end
 
         def assignment_result
-          params.require(:developer_test_task_result).permit(:link)
+          params.require(:member_test_task_result).permit(:link)
         end
 
         def policy_class

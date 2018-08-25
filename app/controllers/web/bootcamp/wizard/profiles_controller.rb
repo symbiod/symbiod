@@ -6,12 +6,12 @@ module Web
       # Allows user to fill his profile during the sign up process
       class ProfilesController < BaseController
         def edit
-          @profile = ::Developer::Wizard::ProfileForm.new(current_user)
+          @profile = ::Member::Wizard::ProfileForm.new(current_user)
           render :edit
         end
 
         def update
-          result = Ops::Developer::CompleteProfile.call(
+          result = Ops::Member::CompleteProfile.call(
             user: current_user,
             params: profile_params
           )
@@ -28,7 +28,7 @@ module Web
 
         def profile_params
           params
-            .require(:developer_wizard_profile)
+            .require(:member_wizard_profile)
             .permit(:first_name, :last_name, :location,
                     :timezone, :cv_url, :role, :primary_skill_id)
         end

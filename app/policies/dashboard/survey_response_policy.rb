@@ -10,8 +10,8 @@ module Dashboard
     alias show? index?
 
     def new?
-      return unless developer?
-      user.role(:developer).survey_response.nil?
+      return unless member?
+      user.role(:member).survey_response.nil?
     end
 
     alias create? new?

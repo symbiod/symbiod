@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # Persists passed data and starts screening
     # bases on chosen technologies
-    class CompleteProfile < ::Ops::Developer::BaseOperation
+    class CompleteProfile < ::Ops::Member::BaseOperation
       NON_USER_PARAMS = %i[primary_skill_id role].freeze
 
       step ->(ctx, user:, **) { ctx[:model] = user }
-      step Contract::Build(constant: ::Developer::Wizard::ProfileForm)
+      step Contract::Build(constant: ::Member::Wizard::ProfileForm)
       step Contract::Validate()
       step Contract::Persist()
       success :assign_initial_role!
@@ -33,7 +33,7 @@ module Ops
 
       # TODO: move to accept policy operation
       def start_screening!(_ctx, user:, **)
-        Ops::Developer::Screening::Start.call(user: user)
+        Ops::Member::Screening::Start.call(user: user)
       end
     end
   end

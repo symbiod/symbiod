@@ -10,7 +10,7 @@ module Ops
       step :change_state!
       step :activate_idea_author!
       # TODO: here we need to send message to common channel
-      # with developers, who can vote for ideas.
+      # with members, who can vote for ideas.
 
       private
 

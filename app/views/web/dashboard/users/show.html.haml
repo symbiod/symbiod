@@ -30,7 +30,7 @@
         %b= t('dashboard.users.table.roles')
       %td
         %ul.list-unstyled
-          = cell(Developer::Dashboard::UserRoles, @user)
+          = cell(Member::Dashboard::UserRoles, @user)
     %tr
       %td
         %b= t('dashboard.users.table.task_assignments')
@@ -55,10 +55,10 @@
         %td
           - if test_task_assignment.completed?
             .btn.btn-success.btn-sm.disabled
-              = t('dashboard.developer_test_task.completed')
+              = t('dashboard.member_test_task.completed')
           - else
             .btn.btn-danger.btn-sm.disabled
-              = t('dashboard.developer_test_task.not_completed')
+              = t('dashboard.member_test_task.not_completed')
     = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :slack_status)
     = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :github_status)
     = cell(Developer::Dashboard::OnboardingStepStatus, @user, resource: :feedback_status)

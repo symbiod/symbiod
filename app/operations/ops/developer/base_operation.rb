@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
-    # Handles common functionality, used for for developer/mentor roles
+  module Member
+    # Handles common functionality, used for for member/mentor roles
     class BaseOperation < ::Ops::BaseOperation
-      # We do this trick, to differenciate developer and mentor
+      # We do this trick, to differenciate member and mentor
       # since they both reuse the same operations for screening and
       # onboarding
-      # NOTICE: Keep in mind, that it can break, if developer will also have a
+      # NOTICE: Keep in mind, that it can break, if member will also have a
       # mentor role.
       def role(user)
-        role_for(user: user, role_name: :developer) ||
+        role_for(user: user, role_name: :member) ||
           role_for(user: user, role_name: :mentor)
       end
 

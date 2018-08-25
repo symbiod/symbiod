@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # When the candidate is disabled we run a bunch of tasks,
     # including email notification
-    class Disable < ::Ops::Developer::BaseOperation
+    class Disable < ::Ops::Member::BaseOperation
       step :change_state!
       step :send_notifications!
 
@@ -17,7 +17,7 @@ module Ops
       end
 
       def send_notifications!(_ctx, user:, **)
-        ::Developer::DisabledNotificationMailer.notify(user.id).deliver_later
+        ::Member::DisabledNotificationMailer.notify(user.id).deliver_later
       end
     end
   end

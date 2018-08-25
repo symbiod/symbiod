@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     module Screening
       # Persists the result of completed task
       class CompleteTask < BaseOperation

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   # Holds the results of onboarding steps.
   class Onboarding < ApplicationRecord
     # TODO: delete this

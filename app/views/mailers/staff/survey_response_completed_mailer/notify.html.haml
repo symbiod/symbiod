@@ -6,5 +6,5 @@
 %p
   = t('dashboard.survey_responses.mailers.text')
   = link_to t('dashboard.survey_responses.links.feedback'),
-            dashboard_survey_response_url(@user.role(:developer).survey_response),
+            dashboard_survey_response_url(@user.role(:member).survey_response),
             target: :_blank

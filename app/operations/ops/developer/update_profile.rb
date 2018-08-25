@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # This class to update user primary skill and params when editing user
     class UpdateProfile < BaseOperation
       step ->(ctx, user:, **) { ctx[:model] = user }
-      step Contract::Build(constant: ::Developer::UpdateUserForm)
+      step Contract::Build(constant: ::Member::UpdateUserForm)
       step Contract::Validate()
       step Contract::Persist()
       success :update_primary_skill!

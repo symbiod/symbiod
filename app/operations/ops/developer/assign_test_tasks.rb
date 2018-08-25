@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # Get random test task depending on skill and position
     class AssignTestTasks < BaseOperation
       step :create_test_task_assignments!
@@ -21,7 +21,7 @@ module Ops
         # we need probably to pass which role do we want to assign.
         # ATM not sure how to figure out that.
         (1..@positions).inject([]) do |test_tasks, position|
-          test_tasks << ::Developer::TestTask.active.where(
+          test_tasks << ::Member::TestTask.active.where(
             position: position,
             role_name: @user.roles_name.first,
             skill_id: @user.primary_skill.id

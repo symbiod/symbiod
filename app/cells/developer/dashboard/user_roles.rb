@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   module Dashboard
     # This cell renders user roles
     class UserRoles < BaseCell
@@ -19,7 +19,7 @@ module Developer
       end
 
       def unassign_link(role)
-        cell(Developer::Dashboard::UserStatusButton, Roles::RolesManager.new(model).role_for(role))
+        cell(Member::Dashboard::UserStatusButton, Roles::RolesManager.new(model).role_for(role))
       end
 
       def assign_link(role)

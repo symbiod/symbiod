@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   module Dashboard
     # This cell rennder status test task
     class TestTaskStatusButton < BaseCell
@@ -9,7 +9,7 @@ module Developer
                 change_state,
                 method: :put,
                 class: "btn btn-#{color_status} btn-sm",
-                data: { confirm: t("dashboard.developer_test_task.link.confirm.#{confirm_status}") }
+                data: { confirm: t("dashboard.member_test_task.link.confirm.#{confirm_status}") }
       end
 
       private

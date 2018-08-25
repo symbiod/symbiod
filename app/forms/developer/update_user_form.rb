@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   # Contains additional fields, that can be updated by staff.
-  class UpdateUserForm < ::Developer::BaseForm
+  class UpdateUserForm < ::Member::BaseForm
     property :email
     property :github
 

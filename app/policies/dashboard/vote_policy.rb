@@ -20,7 +20,7 @@ module Dashboard
     private
 
     def current_user_allow_voting?
-      developer? && user.votes.where(idea_id: record.id).empty? && record.voting?
+      member? && user.votes.where(idea_id: record.id).empty? && record.voting?
     end
   end
 end

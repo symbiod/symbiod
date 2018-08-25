@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # Just changes state to rejected and sends notification
     # to the reject candidate.
     class Reject < BaseOperation
@@ -22,7 +22,7 @@ module Ops
       end
 
       def notify_candidate!(_ctx, user:, feedback:, **)
-        ::Developer::RejectionNotificationMailer.notify(user.id, feedback).deliver_later
+        ::Member::RejectionNotificationMailer.notify(user.id, feedback).deliver_later
       end
     end
   end

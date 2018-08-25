@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # Handles all business logic regarding adding new member to Slack.
     # Besides calling public API, it also markes onboarding step as completed.
     class InviteToSlack < BaseOperation
@@ -22,7 +22,7 @@ module Ops
       end
 
       def mark_step_as_invited!(_ctx, user:, **)
-        user.developer_onboarding.slack_invite!
+        user.member_onboarding.slack_invite!
       end
 
       def handle_exception(exception)

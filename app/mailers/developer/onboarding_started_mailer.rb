@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   # Sends mail to notify about start of onboarding
   class OnboardingStartedMailer < ApplicationMailer
     def notify(user_id)

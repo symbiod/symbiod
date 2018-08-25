@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   # Keeps track of all wizard steps and allows to find
   # a path where user should be redirected to complete
   # current step
@@ -8,7 +8,7 @@ module Developer
     private
 
     def role_name
-      :developer
+      :member
     end
 
     def steps_routes_mapping

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # Removes the role from user
     class RemoveRole < BaseOperation
       step :remove_role!
@@ -10,7 +10,7 @@ module Ops
 
       def remove_role!(_ctx, user:, role:, size:, **)
         return user.remove_role role if size > 1
-        raise Ops::Developer::UnassignRole::LastRoleError
+        raise Ops::Member::UnassignRole::LastRoleError
       end
     end
   end

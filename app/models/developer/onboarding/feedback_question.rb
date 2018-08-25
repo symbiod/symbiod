@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   class Onboarding
     # This model is questions feedbacks
     class FeedbackQuestion < ApplicationRecord

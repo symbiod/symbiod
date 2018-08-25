@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # This is master onboarding operation
     # It triggers different steps of onboarding
     # TODO: consider making a namespace 'Onboarding' and
@@ -14,16 +14,16 @@ module Ops
       private
 
       def setup_onboarding(_ctx, user:, **)
-        user.create_developer_onboarding
+        user.create_member_onboarding
       end
 
       def invite_to_slack!(_ctx, user:, **)
-        ::Developer::Onboarding::SlackJob.perform_later(user.id)
+        ::Member::Onboarding::SlackJob.perform_later(user.id)
         true
       end
 
       def invite_to_github!(_ctx, user:, **)
-        ::Developer::Onboarding::GithubJob.perform_later(user.id)
+        ::Member::Onboarding::GithubJob.perform_later(user.id)
         true
       end
     end

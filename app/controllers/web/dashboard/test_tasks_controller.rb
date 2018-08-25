@@ -11,19 +11,19 @@ module Web
       end
 
       def index
-        @developer_test_tasks = Developer::TestTask.order(id: :asc)
+        @member_test_tasks = Member::TestTask.order(id: :asc)
       end
 
       def new
-        @developer_test_task = Developer::TestTask.new
+        @member_test_task = Member::TestTask.new
       end
 
       def create
-        @developer_test_task = Developer::TestTask.new(developer_test_task_params)
-        if @developer_test_task.save
+        @member_test_task = Member::TestTask.new(member_test_task_params)
+        if @member_test_task.save
           redirect_to dashboard_test_tasks_url,
-                      flash: { success: "#{t('dashboard.developer_test_task.notices.create')}:
-                                        #{@developer_test_task.title}" }
+                      flash: { success: "#{t('dashboard.member_test_task.notices.create')}:
+                                        #{@member_test_task.title}" }
         else
           render 'new'
         end
@@ -32,37 +32,37 @@ module Web
       def edit; end
 
       def update
-        if @developer_test_task.update(developer_test_task_params)
+        if @member_test_task.update(member_test_task_params)
           redirect_to dashboard_test_tasks_url,
-                      flash: { success: "#{t('dashboard.developer_test_task.notices.update')}:
-                                        #{@developer_test_task.title}" }
+                      flash: { success: "#{t('dashboard.member_test_task.notices.update')}:
+                                        #{@member_test_task.title}" }
         else
           render 'edit'
         end
       end
 
       def activate
-        @developer_test_task.activate!
+        @member_test_task.activate!
         redirect_to dashboard_test_tasks_url,
-                    flash: { success: "#{t('dashboard.developer_test_task.notices.activated')}:
-                                      #{@developer_test_task.title}" }
+                    flash: { success: "#{t('dashboard.member_test_task.notices.activated')}:
+                                      #{@member_test_task.title}" }
       end
 
       def deactivate
-        @developer_test_task.disable!
+        @member_test_task.disable!
         redirect_to dashboard_test_tasks_url,
-                    flash: { success: "#{t('dashboard.developer_test_task.notices.deactivated')}:
-                                      #{@developer_test_task.title}" }
+                    flash: { success: "#{t('dashboard.member_test_task.notices.deactivated')}:
+                                      #{@member_test_task.title}" }
       end
 
       private
 
-      def developer_test_task_params
-        params.require(:developer_test_task).permit(:title, :description, :position, :role_name, :skill_id)
+      def member_test_task_params
+        params.require(:member_test_task).permit(:title, :description, :position, :role_name, :skill_id)
       end
 
       def find_test_task
-        @developer_test_task = Developer::TestTask.find(params[:id])
+        @member_test_task = Member::TestTask.find(params[:id])
       end
 
       def find_user_roles

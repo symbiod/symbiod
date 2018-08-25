@@ -2,12 +2,12 @@
 
 module Roles
   # This class incapsulates all roles-related logic.
-  # It handles complex convertion between human readable role `developer` and
-  # its class name `Roles::Developer`, that is stored inside the AR STI models.
+  # It handles complex convertion between human readable role `member` and
+  # its class name `Roles::Member`, that is stored inside the AR STI models.
   # TODO: maybe rename it to the repository?
   class RolesManager
     ROLES_NAMESPACE = 'Roles::'
-    MEMBER_ROLES = %w[developer mentor].freeze
+    MEMBER_ROLES = %w[member mentor].freeze
     OTHER_ROLES = %w[staff author].freeze
 
     def self.roles
@@ -15,13 +15,13 @@ module Roles
     end
 
     # Returns class name for the specified role
-    # e.g. `developer` => `Roles::Developer`
+    # e.g. `member` => `Roles::Member`
     def self.role_class_name(role)
       "#{ROLES_NAMESPACE}#{role.to_s.classify}"
     end
 
     # Returns humand readable role name by its class name
-    # e.g. `Roles::Developer` => `developer`
+    # e.g. `Roles::Member` => `member`
     def self.role_name_by_type(role_class)
       role_class.to_s.demodulize.underscore
     end

@@ -1,5 +1,5 @@
-module Developer
+module Member
   def self.table_name_prefix
-    'developer_'
+    'member_'
   end
 end

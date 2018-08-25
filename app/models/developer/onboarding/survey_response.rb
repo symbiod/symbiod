@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   class Onboarding
     # This model feedback users
     class SurveyResponse < ApplicationRecord
@@ -10,7 +10,7 @@ module Developer
       # feedback questions each time when the object is initialized
       def initialize(attributes)
         class << self
-          Developer::Onboarding::FeedbackQuestion.all.each do |question|
+          Member::Onboarding::FeedbackQuestion.all.each do |question|
             store_accessor :feedback, question.key_name.to_sym
             validates question.key_name.to_sym, presence: true
           end

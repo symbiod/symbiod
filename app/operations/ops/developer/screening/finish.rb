@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     module Screening
       # Marks user as completed screening and notifies about new results
       class Finish < BaseOperation
@@ -26,7 +26,7 @@ module Ops
         end
 
         def screening_completed_message_to_slack!(_ctx, user:, **)
-          ::Developer::Screening::MessageToSlackJob.perform_later(user.id)
+          ::Member::Screening::MessageToSlackJob.perform_later(user.id)
         end
       end
     end

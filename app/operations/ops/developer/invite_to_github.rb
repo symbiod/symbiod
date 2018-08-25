@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # Handles all business logic regarding adding new member to GitHub.
     # Besides calling public API, it also markes onboarding step as completed.
     class InviteToGithub < BaseOperation
@@ -17,7 +17,7 @@ module Ops
       end
 
       def mark_step_as_invited!(_ctx, user:, **)
-        user.developer_onboarding.github_invite!
+        user.member_onboarding.github_invite!
       end
     end
   end

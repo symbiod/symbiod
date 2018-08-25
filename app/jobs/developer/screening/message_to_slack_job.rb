@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   module Screening
     # Runs send message to slack channel about screening completed.
     class MessageToSlackJob < ApplicationJob
@@ -8,7 +8,7 @@ module Developer
 
       def perform(applicant_id)
         applicant = ::User.find(applicant_id)
-        Ops::Developer::Screening::MessageToSlack.call(applicant: applicant)
+        Ops::Member::Screening::MessageToSlack.call(applicant: applicant)
       end
     end
   end

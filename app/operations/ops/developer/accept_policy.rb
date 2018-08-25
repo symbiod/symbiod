@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     # When user accept policy, save it in state
-    class AcceptPolicy < ::Ops::Developer::BaseOperation
+    class AcceptPolicy < ::Ops::Member::BaseOperation
       step :accept_policy!
 
       private

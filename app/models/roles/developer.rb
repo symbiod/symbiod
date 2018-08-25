@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Roles
-  # Describes developer role
-  class Developer < Role
+  # Describes member role
+  class Member < Role
     def self.sti_name
-      'Roles::Developer'
+      'Roles::Member'
     end
 
     has_one :survey_response,
-            class_name: 'Developer::Onboarding::SurveyResponse',
+            class_name: 'Member::Onboarding::SurveyResponse',
             foreign_key: 'role_id',
             dependent: :destroy
 

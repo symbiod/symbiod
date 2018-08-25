@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   module Dashboard
     # This cell renders progress bar user
     class DisplayProgress < BaseCell
