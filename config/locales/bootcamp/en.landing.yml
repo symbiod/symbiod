@@ -1,7 +1,7 @@
 en:
   bootcamp:
     landing:
-      title: Upgrade your developer skills
+      title: Upgrade your member skills
       body: Take part in real-life non-profit opensource projects
       github_login: Sign in via GitHub
       unfilled_github_email: Please fill your github profile according to our <a href='https://github.com/howtohireme/wiki/wiki/First-Steps' target='_blank'>guidelines</a>
@@ -9,7 +9,7 @@ en:
       go_to_dashboard: Go to Dashboard
       account_disabled: Unfortunately, your account is disabled
     profile:
-      title: Fill your developer profile
+      title: Fill your member profile
       body: We prefer to work with real people who has real names
       submit: Submit
     screening:

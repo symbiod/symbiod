@@ -94,7 +94,7 @@ en:
         notes: Notes
         user: User
         onboarding_progress: Onboarding progress
-    developer_test_task:
+    member_test_task:
       link:
         confirm:
           disable: Are you sure to disable?
@@ -199,7 +199,7 @@ en:
         name: Name
         author: Author
         stack: Stack
-        developers: Developers
+        members: Members
     roles:
       notices:
         deactivated: Role was deactivated
