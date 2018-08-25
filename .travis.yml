@@ -19,13 +19,13 @@ addons:
 
 before_install:
   - gem update --system
-  - psql -c 'create database travis_ci_test;'
-  - cp config/database.yml.travis config/database.yml
+  - cp config/database.yml.sample config/database.yml
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - bundle exec rake db:create
 
 script:
   - bin/make-db-backup
