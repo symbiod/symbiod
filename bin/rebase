@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# This script provides convenient way to update your current branch with the
+# latest master changes.
+
+function rebase() {
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  if [[ "$BRANCH" == "master" ]]; then
+    echo '********** Update master'
+    git pull --rebase origin master
+  else
+    echo 'Update branch'
+    git checkout master
+    git pull --rebase origin master
+    git checkout $BRANCH
+  fi
+}
+
+echo "********** Pull the latest changes"
+rebase
+
+echo "********** Install gems"
+bundle install
+
+echo "********** Flush db"
+RAILS_ENV=development DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rake db:schema:load db:seed
+
+echo "********** Flush redis"
+redis-cli FLUSHALL
+
+# NOTICE: you can use this construction for OS-specific actions
+#unamestr=`uname`
+#if [[ "$unamestr" == 'Linux' ]]; then
+#elif [[ "$unamestr" == 'Darwin' ]]; then
+#fi
