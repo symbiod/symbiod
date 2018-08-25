@@ -8,7 +8,6 @@ module Developer
 
       def perform
         users = ::Onboarding::UsersInvitedAndJoinedSlackQuery.call
-        return if users.blank?
         users.each { |user| ::Ops::Developer::Onboarding::SynchronizeSlackMembership.call(user: user) }
       end
     end

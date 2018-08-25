@@ -7,7 +7,7 @@ module Ops
       class CreateSurveyResponse < BaseOperation
         step Model(::Developer::Onboarding::SurveyResponse, :new)
         step :create_survey_response!
-        success :send_notify_to_staffs!
+        success :send_notify_to_staff!
         success :mark_feedback_completed!
 
         private
@@ -17,7 +17,7 @@ module Ops
           model.save
         end
 
-        def send_notify_to_staffs!(_ctx, user:, **)
+        def send_notify_to_staff!(_ctx, user:, **)
           Staff::SurveyResponseCompletedMailer.notify(user.id).deliver_later
         end
 

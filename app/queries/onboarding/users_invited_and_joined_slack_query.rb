@@ -2,11 +2,13 @@
 
 module Onboarding
   # Find users where invited and joined status to Slack
-  class UsersInvitedAndJoinedSlackQuery
-    def self.call
-      User
-        .joins(:developer_onboarding)
-        .where(developer_onboardings: { slack_status: %w[slack_invited slack_joined] })
+  class UsersInvitedAndJoinedSlackQuery < BaseOnboardingQuery
+    class << self
+      private
+
+      def query_condition
+        { slack_status: %w[slack_invited slack_joined] }
+      end
     end
   end
 end

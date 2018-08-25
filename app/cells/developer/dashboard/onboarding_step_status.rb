@@ -21,13 +21,24 @@ module Developer
       private
 
       def invite_status
+        # Here we accept the name of the model field in @options[:resourse]
+        # and bring it to the form without the prefix, since we have the following
+        # statuses: slack_pending, github_left, and so on.
         return 'pending' unless model.developer_onboarding
-        model.developer_onboarding[@options[:resource]].gsub(/\w*_/, '')
+        resource_status
       end
 
       def color_status
+        # Here we accept the name of the model field in @options[:resourse]
+        # and bring it to the form without the prefix, since we have the following
+        # statuses: slack_pending, github_left, and so on and take the value from
+        # the hash for the button color
         return 'danger' unless model.developer_onboarding
-        STATUS[model.developer_onboarding[@options[:resource]].gsub(/\w*_/, '').to_sym]
+        STATUS[resource_status.to_sym]
+      end
+
+      def resource_status
+        model.developer_onboarding[@options[:resource]].gsub(/\w*_/, '')
       end
     end
   end

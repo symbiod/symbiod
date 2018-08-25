@@ -8,7 +8,6 @@ module Developer
 
       def perform
         users = ::Onboarding::UsersInvitedAndJoinedGithubQuery.call
-        return if users.blank?
         users.each { |user| ::Ops::Developer::Onboarding::SynchronizeGithubMembership.call(user: user) }
       end
     end
