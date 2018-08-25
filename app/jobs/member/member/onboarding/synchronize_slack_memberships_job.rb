@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   class Onboarding
     # This job check invite to Slack in asyncronous manner.
     class SynchronizeSlackMembershipsJob < ApplicationJob
@@ -8,7 +8,7 @@ module Developer
 
       def perform
         users = ::Onboarding::UsersInvitedAndJoinedSlackQuery.call
-        users.each { |user| ::Ops::Developer::Onboarding::SynchronizeSlackMembership.call(user: user) }
+        users.each { |user| ::Ops::Member::Onboarding::SynchronizeSlackMembership.call(user: user) }
       end
     end
   end

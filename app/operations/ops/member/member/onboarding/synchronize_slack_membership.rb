@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     class Onboarding
       # Here check members by team Slack
-      class SynchronizeSlackMembership < ::Ops::Developer::BaseOperation
+      class SynchronizeSlackMembership < ::Ops::Member::BaseOperation
         step :check_membership!
         failure :mark_step_as_left!
         success :mark_step_as_joined!
@@ -16,11 +16,11 @@ module Ops
         end
 
         def mark_step_as_left!(_ctx, user:, **)
-          user.developer_onboarding.slack_left! if user.developer_onboarding.slack_joined?
+          user.member_onboarding.slack_left! if user.member_onboarding.slack_joined?
         end
 
         def mark_step_as_joined!(_ctx, user:, **)
-          user.developer_onboarding.slack_join! if user.developer_onboarding.slack_invited?
+          user.member_onboarding.slack_join! if user.member_onboarding.slack_invited?
         end
       end
     end

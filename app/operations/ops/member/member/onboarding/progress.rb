@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     class Onboarding
       # This is class to calculate percent onboarding progress users
       class Progress
@@ -16,11 +16,11 @@ module Ops
         private
 
         def total_steps
-          count_test_tasks + ::Developer::Onboarding::COUNT_TASKS
+          count_test_tasks + ::Member::Onboarding::COUNT_TASKS
         end
 
         def count_test_tasks
-          @user.test_task_assignments.size || Ops::Developer::Screening::NUMBER_OF_ASSIGNED_TEST_TASKS
+          @user.test_task_assignments.size || Ops::Member::Screening::NUMBER_OF_ASSIGNED_TEST_TASKS
         end
 
         def steps_done
@@ -32,11 +32,11 @@ module Ops
         end
 
         def tasks_after_onboarding_completed
-          return [] unless @user.developer_onboarding
+          return [] unless @user.member_onboarding
           [
-            @user.developer_onboarding.slack_joined?,
-            @user.developer_onboarding.github_joined?,
-            @user.developer_onboarding.feedback_completed?
+            @user.member_onboarding.slack_joined?,
+            @user.member_onboarding.github_joined?,
+            @user.member_onboarding.feedback_completed?
           ]
         end
       end

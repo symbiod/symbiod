@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Developer
+module Member
   class Onboarding
     # This job check invite to GitHub in asyncronous manner.
     class SynchronizeGithubMembershipsJob < ApplicationJob
@@ -8,7 +8,7 @@ module Developer
 
       def perform
         users = ::Onboarding::UsersInvitedAndJoinedGithubQuery.call
-        users.each { |user| ::Ops::Developer::Onboarding::SynchronizeGithubMembership.call(user: user) }
+        users.each { |user| ::Ops::Member::Onboarding::SynchronizeGithubMembership.call(user: user) }
       end
     end
   end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     class Onboarding
       # Here check members by organization GitHub
-      class SynchronizeGithubMembership < ::Ops::Developer::BaseOperation
+      class SynchronizeGithubMembership < ::Ops::Member::BaseOperation
         step :check_membership!
         failure :mark_step_as_left!
         success :mark_step_as_joined!
@@ -18,11 +18,11 @@ module Ops
         end
 
         def mark_step_as_left!(_ctx, user:, **)
-          user.developer_onboarding.github_left! if user.developer_onboarding.github_joined?
+          user.member_onboarding.github_left! if user.member_onboarding.github_joined?
         end
 
         def mark_step_as_joined!(_ctx, user:, **)
-          user.developer_onboarding.github_join! if user.developer_onboarding.github_invited?
+          user.member_onboarding.github_join! if user.member_onboarding.github_invited?
         end
       end
     end

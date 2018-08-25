@@ -27,7 +27,7 @@ describe Ops::Member::InviteToSlack do
 
         it 'users change slack status' do
           allow(service).to receive(:invite).with(user, channels)
-          expect { subject.call(params) }.to change { user.developer_onboarding.reload.slack_status }
+          expect { subject.call(params) }.to change { user.member_onboarding.reload.slack_status }
             .from('slack_pending').to('slack_invited')
         end
       end

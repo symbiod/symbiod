@@ -36,7 +36,7 @@ describe Member::Dashboard::OnboardingStepStatus do
 
   context 'user status github joined' do
     let(:user) { create(:user) }
-    before { create(:developer_onboarding, :joined_to_github, user: user) }
+    before { create(:member_onboarding, :joined_to_github, user: user) }
 
     it 'renders success color' do
       expect(subject.new(user, resource: :github_status).onboarding_step_status)
@@ -50,7 +50,7 @@ describe Member::Dashboard::OnboardingStepStatus do
 
   context 'user status github left' do
     let(:user) { create(:user) }
-    before { create(:developer_onboarding, :left_github, user: user) }
+    before { create(:member_onboarding, :left_github, user: user) }
 
     it 'renders danger color' do
       expect(subject.new(user, resource: :github_status).onboarding_step_status)
@@ -64,7 +64,7 @@ describe Member::Dashboard::OnboardingStepStatus do
 
   context 'user status feedback completed' do
     let(:user) { create(:user) }
-    before { create(:developer_onboarding, :feedback_completed, user: user) }
+    before { create(:member_onboarding, :feedback_completed, user: user) }
 
     it 'renders success color' do
       expect(subject.new(user, resource: :feedback_status).onboarding_step_status)

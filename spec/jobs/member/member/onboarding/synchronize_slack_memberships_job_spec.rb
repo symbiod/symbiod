@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-describe Developer::Onboarding::SynchronizeSlackMembershipsJob do
+describe Member::Onboarding::SynchronizeSlackMembershipsJob do
   subject { described_class }
-  let!(:user) { create(:user, :developer, :active) }
-  before { create(:developer_onboarding, :invited_to_slack, user: user) }
+  let!(:user) { create(:user, :member, :active) }
+  before { create(:member_onboarding, :invited_to_slack, user: user) }
 
   describe '#parform' do
     it 'calls users query' do
       expect(::Onboarding::UsersInvitedAndJoinedSlackQuery)
         .to receive(:call).and_return([user])
-      allow(::Ops::Developer::Onboarding::SynchronizeSlackMembership)
+      allow(::Ops::Member::Onboarding::SynchronizeSlackMembership)
         .to receive(:call).with(user: user)
       subject.perform_now
     end
@@ -19,7 +19,7 @@ describe Developer::Onboarding::SynchronizeSlackMembershipsJob do
     it 'calls synchronize users slack' do
       allow(::Onboarding::UsersInvitedAndJoinedSlackQuery)
         .to receive(:call).and_return([user])
-      expect(::Ops::Developer::Onboarding::SynchronizeSlackMembership)
+      expect(::Ops::Member::Onboarding::SynchronizeSlackMembership)
         .to receive(:call).with(user: user)
       subject.perform_now
     end

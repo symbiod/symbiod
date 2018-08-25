@@ -124,14 +124,14 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
   end
 
   describe 'POST #create' do
-    before { create(:developer_onboarding, user: user) }
+    before { create(:member_onboarding, user: user) }
 
     context 'not signed in' do
       let(:user) { create(:user, :member, :active) }
       let(:params) do
         {
           "#{question.key_name}": 'Answer 1',
-          role_id: user.role(:developer).id
+          role_id: user.role(:member).id
         }
       end
       before { post :create, params: { member_onboarding_survey_response: params } }
@@ -152,7 +152,7 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
           let(:params) do
             {
               "#{question.key_name}": 'Answer 1',
-              role_id: user.role(:developer).id
+              role_id: user.role(:member).id
             }
           end
 
