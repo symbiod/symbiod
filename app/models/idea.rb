@@ -13,11 +13,11 @@ class Idea < ApplicationRecord
   include AASM
 
   aasm column: 'state' do
-    state :pending, initial: true
+    state :idea_pending, initial: true
     state :voting, :active, :disabled, :rejected
 
     event :voting do
-      transitions from: :pending, to: :voting
+      transitions from: :idea_pending, to: :voting
     end
 
     event :activate do

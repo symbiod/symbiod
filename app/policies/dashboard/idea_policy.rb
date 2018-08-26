@@ -46,7 +46,7 @@ module Dashboard
     private
 
     def current_user_allow_voting?
-      record.pending? && staff_or_mentor?
+      record.idea_pending? && staff_or_mentor?
     end
 
     def current_user_allow_activate?
@@ -58,7 +58,7 @@ module Dashboard
     end
 
     def current_user_allow_reject?
-      (record.pending? || record.voting?) && staff_or_mentor? && current_user_not_author_idea
+      (record.idea_pending? || record.voting?) && staff_or_mentor? && current_user_not_author_idea
     end
 
     def current_user_not_author_idea

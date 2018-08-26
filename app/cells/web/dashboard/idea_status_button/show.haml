@@ -1,4 +1,4 @@
-= idea_status
+= link_to_status
 - if ::Dashboard::IdeaPolicy.new(current_user, model).reject?
   = link_to t('dashboard.ideas.button.reject'),
             reject_dashboard_idea_url(model),

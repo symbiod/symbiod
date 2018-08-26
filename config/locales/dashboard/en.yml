@@ -246,11 +246,23 @@ en:
         destroy: Are you sure to delete this question?
     cells:
       button:
-        left: left
         pending: pending
+        idea_pending: pending
+        profile_completed: profile completed
+        rejected: rejected
+        policy_accepted: policy accepted
+        screening_completed: screening completed
+        active: active
+        disabled: disabled
         invited: invited
         joined: joined
+        left: left
+        voting: voting
+        completed: completed
       links:
         confirm:
           disable: Are you sure to disable?
           activate: Are you sure to activate?
+          voting: Are you sure to voting?
+          up: Are you sure to up vote?
+          down: Are you sure to down vote?

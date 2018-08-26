@@ -30,7 +30,11 @@
         %b= t('dashboard.users.table.roles')
       %td
         %ul.list-unstyled
+<<<<<<< HEAD
           = cell(Member::Dashboard::UserRoles, @user)
+=======
+          = cell(Web::Dashboard::UserRoles, @user)
+>>>>>>> (#316) move cells to Web::Dashboard
     %tr
       %td
         %b= t('dashboard.users.table.task_assignments')
@@ -58,10 +62,17 @@
               = t('dashboard.member_test_task.completed')
           - else
             .btn.btn-danger.btn-sm.disabled
+<<<<<<< HEAD
               = t('dashboard.member_test_task.not_completed')
     = cell(Member::Dashboard::OnboardingStepStatus, @user, resource: :slack_status)
     = cell(Member::Dashboard::OnboardingStepStatus, @user, resource: :github_status)
     = cell(Member::Dashboard::OnboardingStepStatus, @user, resource: :feedback_status)
+=======
+              = t('dashboard.developer_test_task.not_completed')
+    = cell(Web::Dashboard::OnboardingStepStatus, @user, resource: :slack_status)
+    = cell(Web::Dashboard::OnboardingStepStatus, @user, resource: :github_status)
+    = cell(Web::Dashboard::OnboardingStepStatus, @user, resource: :feedback_status)
+>>>>>>> (#316) move cells to Web::Dashboard
 %section.py-5
   %h2
     = t('dashboard.users.headers.notes')

@@ -3,26 +3,10 @@
 module Web
   module Dashboard
     # This cell renders status idea
-    class SkillStatusButton < BaseCell
-      def skill_status
-        link_to model.state,
-                change_state,
-                method: :put,
-                class: "btn btn-#{color_status} btn-sm",
-                data: { confirm: t("dashboard.skills.confirm.#{confirm_status}") }
-      end
-
+    class SkillStatusButton < BaseLinkStatusButton
       private
 
-      def color_status
-        model.active? ? 'success' : 'danger'
-      end
-
-      def confirm_status
-        model.active? ? 'disable' : 'active'
-      end
-
-      def change_state
+      def url_status
         model.active? ? deactivate_dashboard_skill_url(model) : activate_dashboard_skill_url(model)
       end
     end

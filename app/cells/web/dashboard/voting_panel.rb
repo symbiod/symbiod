@@ -3,12 +3,13 @@
 module Web
   module Dashboard
     # This cell rendring voting panel
-    class VotingPanel < BaseCell
-      COLOR_BUTTON = { up: 'success', down: 'danger' }.freeze
-
+    class VotingPanel < BaseLinkStatusButton
       def render_vote_action(vote)
         if ::Dashboard::VotePolicy.new(current_user, model).up?
-          voting_link(vote)
+          link_to_status name: vote,
+                         url: url_status(vote),
+                         color: color_status(vote),
+                         confirm: confirm_status(vote)
         else
           vote
         end
@@ -16,11 +17,16 @@ module Web
 
       private
 
-      def voting_link(vote)
-        link_to vote,
-                public_send("#{vote}_dashboard_idea_vote_url", model, id: model.id),
-                method: :put,
-                class: "btn btn-#{COLOR_BUTTON[vote.to_sym]} btn-sm"
+      def url_status(vote)
+        public_send("#{vote}_dashboard_idea_vote_url", model, id: model.id)
+      end
+
+      def color_status(vote)
+        COLOR_STATUS[vote.to_sym]
+      end
+
+      def confirm_status(vote)
+        CONFIRM_STATUS[vote.to_sym]
       end
     end
   end
