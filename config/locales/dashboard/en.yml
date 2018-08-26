@@ -244,3 +244,13 @@ en:
         cancel: Cancel
       confirm:
         destroy: Are you sure to delete this question?
+    cells:
+      button:
+        left: left
+        pending: pending
+        invited: invited
+        joined: joined
+      links:
+        confirm:
+          disable: Are you sure to disable?
+          activate: Are you sure to activate?

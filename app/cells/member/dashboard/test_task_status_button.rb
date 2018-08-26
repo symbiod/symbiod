@@ -3,6 +3,7 @@
 module Member
   module Dashboard
     # This cell rennder status test task
+<<<<<<< HEAD:app/cells/member/dashboard/test_task_status_button.rb
     class TestTaskStatusButton < BaseCell
       def test_task_status
         link_to model.state,
@@ -12,17 +13,12 @@ module Member
                 data: { confirm: t("dashboard.member_test_task.link.confirm.#{confirm_status}") }
       end
 
+=======
+    class TestTaskStatusButton < BaseStatusButton
+>>>>>>> (#316) refactoring activation/deactivation buttons:app/cells/developer/dashboard/test_task_status_button.rb
       private
 
-      def color_status
-        model.active? ? 'success' : 'danger'
-      end
-
-      def confirm_status
-        model.active? ? 'disable' : 'activate'
-      end
-
-      def change_state
+      def url_status
         model.active? ? deactivate_dashboard_test_task_url(model) : activate_dashboard_test_task_url(model)
       end
     end

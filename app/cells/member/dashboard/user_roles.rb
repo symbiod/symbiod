@@ -19,7 +19,11 @@ module Member
       end
 
       def unassign_link(role)
+<<<<<<< HEAD:app/cells/member/dashboard/user_roles.rb
         cell(Member::Dashboard::UserStatusButton, Roles::RolesManager.new(model).role_for(role))
+=======
+        cell(Developer::Dashboard::RoleStatusButton, Roles::RolesManager.new(model).role_for(role))
+>>>>>>> (#316) refactoring activation/deactivation buttons:app/cells/developer/dashboard/user_roles.rb
       end
 
       def assign_link(role)
