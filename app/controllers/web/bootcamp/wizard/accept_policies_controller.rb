@@ -13,7 +13,7 @@ module Web
         end
 
         def update
-          result = Ops::Developer::AcceptPolicy.call(
+          result = Ops::Member::AcceptPolicy.call(
             user: current_user,
             params: profile_params
           )

@@ -16,13 +16,13 @@ module Web
       def show; end
 
       def activate
-        Ops::Developer::Activate.call(user: @candidate, performer: current_user.id)
+        Ops::Member::Activate.call(user: @candidate, performer: current_user.id)
         redirect_to dashboard_test_task_assignments_url,
                     flash: { success: "#{t('dashboard.candidates.notices.activated')}: #{@candidate.email}" }
       end
 
       def reject
-        Ops::Developer::Reject.call(user: @candidate, feedback: rejection_params[:feedback])
+        Ops::Member::Reject.call(user: @candidate, feedback: rejection_params[:feedback])
         redirect_to dashboard_test_task_assignments_url,
                     flash: { success: "#{t('dashboard.candidates.notices.rejected')}: #{@candidate.email}" }
       end
@@ -34,7 +34,7 @@ module Web
       end
 
       def rejection_params
-        params.require(:developer_test_task_assignment).permit(:feedback)
+        params.require(:member_test_task_assignment).permit(:feedback)
       end
     end
   end

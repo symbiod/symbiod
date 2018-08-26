@@ -24,19 +24,19 @@ RSpec.describe User, type: :model do
 
   describe '.with_role_and_state' do
     subject { described_class.with_role_and_state(role, state) }
-    let!(:user1) { create(:user, :developer, :profile_completed) }
-    let!(:user2) { create(:user, :developer, :policy_accepted) }
+    let!(:user1) { create(:user, :member, :profile_completed) }
+    let!(:user2) { create(:user, :member, :policy_accepted) }
     let!(:user3) { create(:user, :author, :pending) }
     let!(:user4) { create(:user, :staff, :active) }
 
-    context 'developer with profile_completed' do
-      let(:role) { :developer }
+    context 'member with profile_completed' do
+      let(:role) { :member }
       let(:state) { :profile_completed }
       it { is_expected.to eq [user1] }
     end
 
-    context 'developer with policy_accepted' do
-      let(:role) { :developer }
+    context 'member with policy_accepted' do
+      let(:role) { :member }
       let(:state) { :policy_accepted }
       it { is_expected.to eq [user2] }
     end
@@ -73,19 +73,19 @@ RSpec.describe User, type: :model do
 
   describe '#test_tasks_completed?' do
     context 'has uncompleted test tasks' do
-      before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
+      before { create(:member_test_task_assignment, :uncompleted, member: subject) }
       specify { expect(subject.test_tasks_completed?).to eq false }
     end
 
     context 'all tasks are completed' do
-      before { create(:developer_test_task_assignment, :completed) }
+      before { create(:member_test_task_assignment, :completed) }
       specify { expect(subject.test_tasks_completed?).to eq true }
     end
   end
 
   describe '#progress' do
     context 'returns a number' do
-      before { create(:developer_test_task_assignment, :uncompleted, developer: subject) }
+      before { create(:member_test_task_assignment, :uncompleted, member: subject) }
 
       it { expect(subject.progress).to be_an(Numeric) }
     end

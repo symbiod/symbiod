@@ -44,8 +44,8 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
         it_behaves_like 'index tests'
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it_behaves_like 'index tests'
       end
@@ -80,7 +80,7 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
       end
 
       context 'idea needs one vote for activation' do
-        let(:user) { create(:user, :developer, :active) }
+        let(:user) { create(:user, :member, :active) }
         before do
           create_list(:vote, Ops::Idea::Upvote::COUNT_VOTES_KICKOFF_PROJECT - 1, idea: idea)
           create(:user, :mentor, :active)
@@ -110,8 +110,8 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
           it_behaves_like 'voting up user'
         end
 
-        context 'user has role developer' do
-          let(:user) { create(:user, :developer, :active) }
+        context 'user has role member' do
+          let(:user) { create(:user, :member, :active) }
 
           it 'redirects to idea page' do
             put :up, params: { idea_id: idea.id, id: 1 }
@@ -140,8 +140,8 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
           it_behaves_like 'voting up user'
         end
 
-        context 'user has role developer' do
-          let(:user) { create(:user, :developer, :active) }
+        context 'user has role member' do
+          let(:user) { create(:user, :member, :active) }
           let!(:vote) { create(:vote, user: user, idea: idea) }
 
           it_behaves_like 'voting up user'
@@ -190,8 +190,8 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
           it_behaves_like 'voting down user'
         end
 
-        context 'user has role developer' do
-          let(:user) { create(:user, :developer, :active) }
+        context 'user has role member' do
+          let(:user) { create(:user, :member, :active) }
 
           it 'redirects to root landing' do
             put :down, params: { idea_id: idea.id, id: 1 }
@@ -220,8 +220,8 @@ RSpec.describe Web::Dashboard::VotesController, type: :controller do
           it_behaves_like 'voting down user'
         end
 
-        context 'user has role developer' do
-          let(:user) { create(:user, :developer, :active) }
+        context 'user has role member' do
+          let(:user) { create(:user, :member, :active) }
           let!(:vote) { create(:vote, user: user, idea: idea) }
 
           it_behaves_like 'voting down user'

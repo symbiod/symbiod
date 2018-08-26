@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :survey_response, class: 'Developer::Onboarding::SurveyResponse' do
+  factory :survey_response, class: 'Member::Onboarding::SurveyResponse' do
     feedback { { question_1: Faker::VForVendetta.speech, question_2: Faker::VForVendetta.speech } }
     role
   end

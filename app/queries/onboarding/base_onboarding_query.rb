@@ -5,8 +5,8 @@ module Onboarding
   class BaseOnboardingQuery
     def self.call
       User
-        .joins(:developer_onboarding)
-        .where(developer_onboardings: query_condition)
+        .joins(:member_onboarding)
+        .where(member_onboardings: query_condition)
     end
   end
 end

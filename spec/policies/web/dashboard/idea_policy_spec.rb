@@ -187,10 +187,10 @@ describe Dashboard::IdeaPolicy do
     end
   end
 
-  context 'developer' do
-    let(:user) { create(:user, :developer, :active) }
+  context 'member' do
+    let(:user) { create(:user, :member, :active) }
 
-    shared_examples 'developer main actions' do
+    shared_examples 'member main actions' do
       it { is_expected.to permit_action(:index) }
       it { is_expected.not_to permit_action(:new) }
       it { is_expected.not_to permit_action(:create) }
@@ -206,28 +206,28 @@ describe Dashboard::IdeaPolicy do
     context 'idea status pending' do
       let(:idea) { create(:idea) }
 
-      it_behaves_like 'developer main actions'
+      it_behaves_like 'member main actions'
       it { is_expected.not_to permit_action(:show) }
     end
 
     context 'idea status voting' do
       let(:idea) { create(:idea, :voting) }
 
-      it_behaves_like 'developer main actions'
+      it_behaves_like 'member main actions'
       it { is_expected.to permit_action(:show) }
     end
 
     context 'idea status disabled' do
       let(:idea) { create(:idea, :disabled) }
 
-      it_behaves_like 'developer main actions'
+      it_behaves_like 'member main actions'
       it { is_expected.not_to permit_action(:show) }
     end
 
     context 'idea status active' do
       let(:idea) { create(:idea, :active) }
 
-      it_behaves_like 'developer main actions'
+      it_behaves_like 'member main actions'
       it { is_expected.not_to permit_action(:show) }
     end
   end
@@ -247,16 +247,16 @@ describe Dashboard::IdeaPolicy do
       end
     end
 
-    context 'current user role developer' do
-      let(:current_user) { create(:user, :developer, :active) }
+    context 'current user role member' do
+      let(:current_user) { create(:user, :member, :active) }
 
       it 'returns activated ideas' do
         expect(subject.resolve).to match_array [idea_4]
       end
     end
 
-    context 'current user role developer and author' do
-      let(:current_user) { create(:user, :developer, :author, :active) }
+    context 'current user role member and author' do
+      let(:current_user) { create(:user, :member, :author, :active) }
       let(:idea_5) { create(:idea, :active, author: current_user) }
 
       it 'returns activated and current author ideas' do

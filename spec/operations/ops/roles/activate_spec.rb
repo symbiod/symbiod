@@ -6,7 +6,7 @@ describe Ops::Roles::Activate do
   subject { described_class }
 
   describe '#call' do
-    let(:role) { create(:role, :developer, :disabled) }
+    let(:role) { create(:role, :member, :disabled) }
     let(:params) { { role: role } }
 
     it 'changes role state' do

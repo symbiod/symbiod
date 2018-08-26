@@ -3,10 +3,10 @@
   = t('landing.body')
 %p.lead
   = link_to t('landing.entrepreneur'), idea_root_url, id: 'offer-idea', class: 'btn btn-lg btn-secondary'
-  = link_to t('landing.developer'), bootcamp_root_url, id: 'join-bootcamp', class: 'btn btn-lg btn-secondary'
+  = link_to t('landing.member'), bootcamp_root_url, id: 'join-bootcamp', class: 'btn btn-lg btn-secondary'
 
 = content_for :counter do
-  = render partial: 'web/shared/counter', locals: { developers_size: @developers_size,
+  = render partial: 'web/shared/counter', locals: { members_size: @members_size,
                                                     mentors_size: @mentors_size,
                                                     projects_size: @projects_size }
 

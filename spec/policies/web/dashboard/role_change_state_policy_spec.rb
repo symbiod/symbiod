@@ -11,8 +11,8 @@ describe Dashboard::RoleChangeStatePolicy do
     it { is_expected.to permit_action(:update) }
   end
 
-  context 'current user has role author or developer' do
-    let(:user) { create(:user, :developer_or_author, :active) }
+  context 'current user has role author or member' do
+    let(:user) { create(:user, :member_or_author, :active) }
 
     it { is_expected.not_to permit_action(:update) }
   end

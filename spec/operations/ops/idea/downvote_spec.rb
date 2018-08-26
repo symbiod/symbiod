@@ -7,7 +7,7 @@ describe Ops::Idea::Downvote do
 
   describe '#call' do
     let(:idea) { create(:idea, :voting) }
-    let(:user) { create(:user, :developer, :active) }
+    let(:user) { create(:user, :member, :active) }
     let(:params) { { idea: idea, user: user } }
 
     it 'created vote idea' do

@@ -21,8 +21,8 @@ describe Ideas::Wizard::ProposalPolicy do
     it_behaves_like 'not allowed to create idea'
   end
 
-  context 'active user developer without ideas' do
-    let(:user) { create(:user, :developer, :active) }
+  context 'active user member without ideas' do
+    let(:user) { create(:user, :member, :active) }
 
     it_behaves_like 'not allowed to create idea'
   end

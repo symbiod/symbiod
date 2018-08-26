@@ -22,7 +22,7 @@ module Dashboard
       def resolve
         if staff_or_mentor?
           Project.all
-        elsif developer?
+        elsif member?
           user.projects
         elsif author?
           Projects::ProjectsAuthorIdeaQuery.new(user).call
@@ -35,8 +35,8 @@ module Dashboard
         user.has_role?(:staff) || user.has_role?(:mentor)
       end
 
-      def developer?
-        user.has_role?(:developer)
+      def member?
+        user.has_role?(:member)
       end
 
       def author?

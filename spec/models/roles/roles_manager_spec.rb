@@ -11,18 +11,18 @@ RSpec.describe Roles::RolesManager do
     end
 
     describe '.role_class_name' do
-      let(:role_name) { :developer }
-      specify { expect(subject.role_class_name(role_name)).to eq 'Roles::Developer' }
+      let(:role_name) { :member }
+      specify { expect(subject.role_class_name(role_name)).to eq 'Roles::Member' }
     end
 
     describe '.role_name_by_type' do
-      let(:role_class_name) { 'Roles::Developer' }
-      specify { expect(subject.role_name_by_type(role_class_name)).to eq 'developer' }
+      let(:role_class_name) { 'Roles::Member' }
+      specify { expect(subject.role_name_by_type(role_class_name)).to eq 'member' }
     end
 
     describe 'instance' do
       subject { described_class.new(user) }
-      let(:user) { create(:user, :developer) }
+      let(:user) { create(:user, :member) }
 
       describe '#add' do
         context 'role is valid' do
@@ -33,7 +33,7 @@ RSpec.describe Roles::RolesManager do
 
           context 'role already exists' do
             it 'does not add role' do
-              expect { subject.add(:developer) }
+              expect { subject.add(:member) }
                 .not_to(change { user.reload.roles.count })
             end
           end
@@ -50,7 +50,7 @@ RSpec.describe Roles::RolesManager do
       describe '#remove' do
         context 'when roles exists' do
           it 'removes role' do
-            expect { subject.remove(:developer) }
+            expect { subject.remove(:member) }
               .to(change { user.reload.roles.count }.by(-1))
           end
         end
@@ -65,7 +65,7 @@ RSpec.describe Roles::RolesManager do
 
       describe '#has?' do
         context 'role exists' do
-          specify { expect(subject.has?(:developer)).to be true }
+          specify { expect(subject.has?(:member)).to be true }
         end
 
         context 'role does not exist' do

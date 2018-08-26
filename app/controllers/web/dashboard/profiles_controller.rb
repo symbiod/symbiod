@@ -27,7 +27,7 @@ module Web
       end
 
       def form
-        @form ||= ::Developer::ProfileForm.new(profile)
+        @form ||= ::Member::ProfileForm.new(profile)
       end
 
       def profile_params

@@ -18,8 +18,8 @@ describe Web::Dashboard::TestTasksController do
         get :index
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -38,8 +38,8 @@ describe Web::Dashboard::TestTasksController do
         end
 
         it 'assigns all test tasks' do
-          create_list(:developer_test_task, 10)
-          expect(assigns(:developer_test_tasks)).to eq Developer::TestTask.order(id: :asc)
+          create_list(:member_test_task, 10)
+          expect(assigns(:member_test_tasks)).to eq Member::TestTask.order(id: :asc)
         end
       end
     end
@@ -60,8 +60,8 @@ describe Web::Dashboard::TestTasksController do
         get :new
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -90,13 +90,13 @@ describe Web::Dashboard::TestTasksController do
         title: Faker::VForVendetta.quote,
         description: Faker::VForVendetta.speech,
         skill_id: skill.id,
-        role_name: 'developer'
+        role_name: 'member'
       }
     end
 
     context 'not signed in' do
       let(:user) { create(:user, :staff, :active) }
-      before { post :create, params: { developer_test_task: test_task_params } }
+      before { post :create, params: { member_test_task: test_task_params } }
 
       it 'redirects to root landing' do
         expect(response).to redirect_to root_landing_url
@@ -110,21 +110,21 @@ describe Web::Dashboard::TestTasksController do
         let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'redirect to dashboard test tasks' do
-          post :create, params: { developer_test_task: test_task_params }
+          post :create, params: { member_test_task: test_task_params }
           expect(response).to redirect_to dashboard_test_tasks_url
         end
 
         it 'returns success status' do
-          expect { post :create, params: { developer_test_task: test_task_params } }
-            .to change(Developer::TestTask, :count).by(1)
+          expect { post :create, params: { member_test_task: test_task_params } }
+            .to change(Member::TestTask, :count).by(1)
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
-          post :create, params: { developer_test_task: test_task_params }
+          post :create, params: { member_test_task: test_task_params }
           expect(response).to redirect_to dashboard_root_url
         end
       end
@@ -141,7 +141,7 @@ describe Web::Dashboard::TestTasksController do
         end
 
         it 'renders new' do
-          post :create, params: { developer_test_task: test_task_params }
+          post :create, params: { member_test_task: test_task_params }
           expect(response).to render_template :new
         end
       end
@@ -149,10 +149,10 @@ describe Web::Dashboard::TestTasksController do
   end
 
   describe 'GET #edit' do
-    let(:developer_test_task) { create(:developer_test_task) }
+    let(:member_test_task) { create(:member_test_task) }
 
     context 'not signed in' do
-      before { get :edit, params: { id: developer_test_task.id } }
+      before { get :edit, params: { id: member_test_task.id } }
 
       it 'redirects to root landing' do
         expect(response).to redirect_to root_landing_url
@@ -162,7 +162,7 @@ describe Web::Dashboard::TestTasksController do
     context 'signed in' do
       before do
         login_user(user)
-        get :edit, params: { id: developer_test_task.id }
+        get :edit, params: { id: member_test_task.id }
       end
 
       context 'user has role staff or mentor' do
@@ -177,12 +177,12 @@ describe Web::Dashboard::TestTasksController do
         end
 
         it 'assigns test task' do
-          expect(assigns(:developer_test_task)).to eq developer_test_task
+          expect(assigns(:member_test_task)).to eq member_test_task
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
           expect(response).to redirect_to dashboard_root_url
@@ -192,16 +192,16 @@ describe Web::Dashboard::TestTasksController do
   end
 
   describe 'PUT #update' do
-    let(:developer_test_task) { create(:developer_test_task) }
+    let(:member_test_task) { create(:member_test_task) }
     let(:new_test_task_params) do
       {
-        description: "New description_#{developer_test_task.description}"
+        description: "New description_#{member_test_task.description}"
       }
     end
 
     context 'not signed in' do
       let(:user) { create(:user, :staff, :active) }
-      before { put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params } }
+      before { put :update, params: { id: member_test_task.id, member_test_task: new_test_task_params } }
 
       it 'redirects to root landing' do
         expect(response).to redirect_to root_landing_url
@@ -215,21 +215,21 @@ describe Web::Dashboard::TestTasksController do
         let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'updates attribute' do
-          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
-          expect(developer_test_task.reload.description).to eq new_test_task_params[:description]
+          put :update, params: { id: member_test_task.id, member_test_task: new_test_task_params }
+          expect(member_test_task.reload.description).to eq new_test_task_params[:description]
         end
 
         it 'redirects to dashboard test tasks' do
-          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
+          put :update, params: { id: member_test_task.id, member_test_task: new_test_task_params }
           expect(response).to redirect_to dashboard_test_tasks_url
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
-          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
+          put :update, params: { id: member_test_task.id, member_test_task: new_test_task_params }
           expect(response).to redirect_to dashboard_root_url
         end
       end
@@ -243,7 +243,7 @@ describe Web::Dashboard::TestTasksController do
         end
 
         it 'renders edit' do
-          put :update, params: { id: developer_test_task.id, developer_test_task: new_test_task_params }
+          put :update, params: { id: member_test_task.id, member_test_task: new_test_task_params }
           expect(response).to render_template :edit
         end
       end
@@ -251,11 +251,11 @@ describe Web::Dashboard::TestTasksController do
   end
 
   describe 'PUT #activate' do
-    let(:developer_test_task) { create(:developer_test_task, :disabled) }
+    let(:member_test_task) { create(:member_test_task, :disabled) }
 
     context 'not signed in' do
       let(:user) { create(:user, :staff, :active) }
-      before { put :activate, params: { id: developer_test_task.id } }
+      before { put :activate, params: { id: member_test_task.id } }
 
       it 'redirects to root landing' do
         expect(response).to redirect_to root_landing_url
@@ -269,21 +269,21 @@ describe Web::Dashboard::TestTasksController do
         let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'the test task became active' do
-          expect { put :activate, params: { id: developer_test_task.id } }
-            .to change { developer_test_task.reload.state }.from('disabled').to('active')
+          expect { put :activate, params: { id: member_test_task.id } }
+            .to change { member_test_task.reload.state }.from('disabled').to('active')
         end
 
         it 'redirects to dashboard test tasks' do
-          put :activate, params: { id: developer_test_task.id }
+          put :activate, params: { id: member_test_task.id }
           expect(response).to redirect_to dashboard_test_tasks_url
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
-          put :activate, params: { id: developer_test_task.id }
+          put :activate, params: { id: member_test_task.id }
           expect(response).to redirect_to dashboard_root_url
         end
       end
@@ -291,11 +291,11 @@ describe Web::Dashboard::TestTasksController do
   end
 
   describe 'PUT #deactivate' do
-    let!(:developer_test_task) { create(:developer_test_task) }
+    let!(:member_test_task) { create(:member_test_task) }
 
     context 'not signed in' do
       let(:user) { create(:user, :staff, :active) }
-      before { put :deactivate, params: { id: developer_test_task.id } }
+      before { put :deactivate, params: { id: member_test_task.id } }
 
       it 'redirects to root landing' do
         expect(response).to redirect_to root_landing_url
@@ -309,21 +309,21 @@ describe Web::Dashboard::TestTasksController do
         let(:user) { create(:user, :staff_or_mentor, :active) }
 
         it 'the test task became disabled' do
-          expect { put :deactivate, params: { id: developer_test_task.id } }
-            .to change { developer_test_task.reload.state }.from('active').to('disabled')
+          expect { put :deactivate, params: { id: member_test_task.id } }
+            .to change { member_test_task.reload.state }.from('active').to('disabled')
         end
 
         it 'redirects to dashboard test tasks' do
-          put :deactivate, params: { id: developer_test_task.id }
+          put :deactivate, params: { id: member_test_task.id }
           expect(response).to redirect_to dashboard_test_tasks_url
         end
       end
 
-      context 'user has role developer or author' do
-        let(:user) { create(:user, :developer_or_author, :active) }
+      context 'user has role member or author' do
+        let(:user) { create(:user, :member_or_author, :active) }
 
         it 'redirects to dashboard root' do
-          put :deactivate, params: { id: developer_test_task.id }
+          put :deactivate, params: { id: member_test_task.id }
           expect(response).to redirect_to dashboard_root_url
         end
       end

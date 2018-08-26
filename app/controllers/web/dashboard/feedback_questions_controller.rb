@@ -10,15 +10,15 @@ module Web
       end
 
       def index
-        @questions = Developer::Onboarding::FeedbackQuestion.order(id: :asc)
+        @questions = Member::Onboarding::FeedbackQuestion.order(id: :asc)
       end
 
       def new
-        @question = Developer::Onboarding::FeedbackQuestion.new
+        @question = Member::Onboarding::FeedbackQuestion.new
       end
 
       def create
-        @question = Developer::Onboarding::FeedbackQuestion.new(question_params)
+        @question = Member::Onboarding::FeedbackQuestion.new(question_params)
         if @question.save
           redirect_to dashboard_feedback_questions_url,
                       flash: { success: t('dashboard.feedback_questions.notices.success.create') }
@@ -49,12 +49,12 @@ module Web
       private
 
       def question_find
-        @question = Developer::Onboarding::FeedbackQuestion.find(params[:id])
+        @question = Member::Onboarding::FeedbackQuestion.find(params[:id])
       end
 
       def question_params
         params
-          .require(:developer_onboarding_feedback_question)
+          .require(:member_onboarding_feedback_question)
           .permit(:description, :key_name)
       end
     end

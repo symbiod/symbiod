@@ -16,10 +16,10 @@ en:
     title: 'The great oppurtunities'
     body: 'For everyone who has some programming skills or an idea of an awesome project '
     counters:
-      developers: Developers
+      members: Members
       mentors: Mentors
       projects: Projects
-    developer: 'Developer'
+    member: 'Member'
     entrepreneur: 'Entrepreneur'
     alerts:
       not_authenticated_dashboard_access: 'You should sign in before accessing Dashboard'

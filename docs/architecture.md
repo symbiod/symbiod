@@ -10,13 +10,13 @@ This person is able to have multiple roles, that define possible workflows and k
 User itself does not have any `state` column, so if we want to find an `active` user, then we search for a user, that has _at least_ one `active` role
 
 `Role` model represents the state of the specific application, and keep all the data required for this role and corresponding relations.
-For example developer and mentor roles require `test_task_assignments` relation, and it should be located in those roles models.
+For example member and mentor roles require `test_task_assignments` relation, and it should be located in those roles models.
 
 Each role is represented by a separate class located at `app/roles/*`.
 
 At the moment we have the following roles:
 
-* `Roles::Developer`
+* `Roles::Member`
 * `Roles::Mentor`
 * `Roles::Author`
 * `Roles::Staff`

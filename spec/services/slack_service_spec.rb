@@ -172,7 +172,7 @@ describe SlackService do
       before { allow(client).to receive(:users_list).and_return(members: users_data) }
 
       context 'user is member team' do
-        let(:user) { create(:user, :developer, :active, email: 'email2') }
+        let(:user) { create(:user, :member, :active, email: 'email2') }
 
         it 'returns true' do
           expect(subject.team_member?(user.email)).to eq true
@@ -180,7 +180,7 @@ describe SlackService do
       end
 
       context 'user is not member team' do
-        let(:user) { create(:user, :developer, :active, email: 'email7') }
+        let(:user) { create(:user, :member, :active, email: 'email7') }
 
         it 'returns false' do
           expect(subject.team_member?(user.email)).to eq false

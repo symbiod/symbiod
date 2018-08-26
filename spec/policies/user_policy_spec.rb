@@ -19,8 +19,8 @@ describe UserPolicy do
     it { is_expected.to permit_action(:manage_roles) }
   end
 
-  context 'active user developer' do
-    let(:user) { create(:user, :developer, :active) }
+  context 'active user member' do
+    let(:user) { create(:user, :member, :active) }
 
     it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_action(:show) }

@@ -18,7 +18,7 @@ class SlackService
     ).call
   end
 
-  # When the new idea is submitted we notify developers through Slack
+  # When the new idea is submitted we notify members through Slack
   def post_to_channel(channel, message)
     client.chat_postMessage(channel: channel, text: message, as_user: false, username: @slack_config.bot_name)
   end

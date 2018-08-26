@@ -8,11 +8,11 @@ module Dashboard
     end
 
     def show?
-      staff_or_author_record? || record.voting? && developer?
+      staff_or_author_record? || record.voting? && member?
     end
 
     def new?
-      not_developer?
+      not_member?
     end
 
     alias create? new?
@@ -86,7 +86,7 @@ module Dashboard
       end
 
       def voting_and_current_user_ideas?
-        user.has_role?(:developer) && user.has_role?(:author)
+        user.has_role?(:member) && user.has_role?(:author)
       end
 
       def current_user_ideas?
@@ -94,7 +94,7 @@ module Dashboard
       end
 
       def active_ideas?
-        user.has_role? :developer
+        user.has_role? :member
       end
     end
   end

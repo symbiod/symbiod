@@ -10,13 +10,13 @@ describe DashboardPolicy do
     it { is_expected.not_to permit_action(:index) }
   end
 
-  context 'active developer' do
-    let(:user) { create(:user, :developer, :active) }
+  context 'active member' do
+    let(:user) { create(:user, :member, :active) }
     it { is_expected.to permit_action(:index) }
   end
 
-  context 'disabled developer' do
-    let(:user) { create(:user, :developer, :disabled) }
+  context 'disabled member' do
+    let(:user) { create(:user, :member, :disabled) }
     it { is_expected.not_to permit_action(:index) }
   end
 

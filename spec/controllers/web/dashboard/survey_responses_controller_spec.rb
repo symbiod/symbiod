@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Web::Dashboard::SurveyResponsesController, type: :controller do
   before { create(:feedback_question) }
-  let!(:question) { ::Developer::Onboarding::FeedbackQuestion.first }
+  let!(:question) { ::Member::Onboarding::FeedbackQuestion.first }
 
   shared_examples 'redirects to landing page' do
     it 'redirects to root landing' do
@@ -101,7 +101,7 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
       end
 
       context 'user has not feedback' do
-        let(:user) { create(:user, :developer, :active) }
+        let(:user) { create(:user, :member, :active) }
         before { get :new }
 
         it 'renders template' do
@@ -112,9 +112,9 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
       end
 
       context 'user has feedback' do
-        let(:user) { create(:user, :developer, :active) }
+        let(:user) { create(:user, :member, :active) }
         before do
-          create(:survey_response, role: user.role(:developer), "#{question.key_name}": 'Answer 1')
+          create(:survey_response, role: user.role(:member), "#{question.key_name}": 'Answer 1')
           get :new
         end
 
@@ -124,17 +124,17 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
   end
 
   describe 'POST #create' do
-    before { create(:developer_onboarding, user: user) }
+    before { create(:member_onboarding, user: user) }
 
     context 'not signed in' do
-      let(:user) { create(:user, :developer, :active) }
+      let(:user) { create(:user, :member, :active) }
       let(:params) do
         {
           "#{question.key_name}": 'Answer 1',
-          role_id: user.role(:developer).id
+          role_id: user.role(:member).id
         }
       end
-      before { post :create, params: { developer_onboarding_survey_response: params } }
+      before { post :create, params: { member_onboarding_survey_response: params } }
 
       it_behaves_like 'redirects to landing page'
     end
@@ -144,31 +144,42 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
         login_user(user)
       end
 
-      context 'user has role developer without feedback' do
-        let!(:user) { create(:user, :developer, :active) }
+      context 'user has role member without feedback' do
+        let!(:user) { create(:user, :member, :active) }
 
         context 'valid params' do
           let(:result_double) { double(success?: true) }
           let(:params) do
             {
               "#{question.key_name}": 'Answer 1',
-              role_id: user.role(:developer).id
+              role_id: user.role(:member).id
             }
           end
 
           it 'run operation create survey response' do
-            expect(Ops::Developer::Onboarding::CreateSurveyResponse)
+            expect(Ops::Member::Onboarding::CreateSurveyResponse)
               .to receive(:call).with(any_args).and_return(result_double)
-            post :create, params: { developer_onboarding_survey_response: params }
+            post :create, params: { member_onboarding_survey_response: params }
+          end
+
+          it 'run send email' do
+            expect { post :create, params: { member_onboarding_survey_response: params } }
+              .to have_enqueued_job(ActionMailer::DeliveryJob)
+              .with(
+                'Staff::SurveyResponseCompletedMailer',
+                'notify',
+                'deliver_now',
+                user.id
+              )
           end
 
           it 'created survey response' do
-            expect { post :create, params: { developer_onboarding_survey_response: params } }
-              .to change(::Developer::Onboarding::SurveyResponse, :count).by(1)
+            expect { post :create, params: { member_onboarding_survey_response: params } }
+              .to change(::Member::Onboarding::SurveyResponse, :count).by(1)
           end
 
           it 'redirects to dashboard' do
-            post :create, params: { developer_onboarding_survey_response: params }
+            post :create, params: { member_onboarding_survey_response: params }
             expect(response).to redirect_to dashboard_root_url
           end
         end
@@ -181,34 +192,34 @@ describe Web::Dashboard::SurveyResponsesController, type: :controller do
           end
 
           it 'renders template' do
-            post :create, params: { developer_onboarding_survey_response: params }
+            post :create, params: { member_onboarding_survey_response: params }
             expect(response).to render_template :new
           end
         end
       end
 
-      context 'user has role developer with feedback' do
+      context 'user has role member with feedback' do
         let(:user) { create(:user, :sample_role, :active) }
-        let(:feedback) { create(:survey_response, role: user.role(:developer), "#{question.key_name}": 'Answer 1') }
+        let(:feedback) { create(:survey_response, role: user.role(:member), "#{question.key_name}": 'Answer 1') }
         let(:params) do
           {
             "#{question.key_name}": 'Answer 1'
           }
         end
-        before { post :create, params: { developer_onboarding_survey_response: params } }
+        before { post :create, params: { member_onboarding_survey_response: params } }
 
         it_behaves_like 'redirects to dashboard'
       end
 
-      context 'user has role not developer' do
-        let(:user) { create(:user, :without_an_developer, :active) }
+      context 'user has role not member' do
+        let(:user) { create(:user, :without_an_member, :active) }
 
         let(:params) do
           {
             "#{question.key_name}": 'Answer 1'
           }
         end
-        before { post :create, params: { developer_onboarding_survey_response: params } }
+        before { post :create, params: { member_onboarding_survey_response: params } }
 
         it_behaves_like 'redirects to dashboard'
       end

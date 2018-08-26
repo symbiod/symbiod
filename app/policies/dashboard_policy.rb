@@ -9,8 +9,8 @@ class DashboardPolicy < ApplicationPolicy
 
   private
 
-  def developer?
-    user&.has_role?(:developer) && user&.role(:developer)&.active?
+  def member?
+    user&.has_role?(:member) && user&.role(:member)&.active?
   end
 
   def staff?
@@ -30,10 +30,10 @@ class DashboardPolicy < ApplicationPolicy
   end
 
   def not_author?
-    staff? || developer? || mentor?
+    staff? || member? || mentor?
   end
 
-  def not_developer?
+  def not_member?
     staff? || mentor? || author?
   end
 
