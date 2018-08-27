@@ -11,6 +11,7 @@
     = stylesheet_link_tag '/css/dashboard.css', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = render partial: 'layouts/shared/analytics'
 
   %body
     %nav.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0
