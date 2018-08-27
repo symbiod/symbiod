@@ -1,8 +1,8 @@
 %p.lead
   = t('dashboard.users.mailers.uncompleted.title')
 %p
-  #{t('dashboard.users.mailers.hello')} #{@user.full_name}
+  #{t('dashboard.users.mailers.hello')} #{@role.user.full_name}
 %p
   #{t('dashboard.users.mailers.uncompleted.text_one')}
-  = link_to t('dashboard.users.mailers.uncompleted.link'), bootcamp_root_url
+  = link_to t('dashboard.users.mailers.uncompleted.link'), root_url
   #{t('dashboard.users.mailers.uncompleted.text_two')}

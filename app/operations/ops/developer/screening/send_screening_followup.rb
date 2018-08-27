@@ -6,16 +6,16 @@ module Ops
       # Notifies about uncompleted steps
       class SendScreeningFollowup < BaseOperation
         step :screening_uncompleted_notification!
-        step :update_user_last_screening_followup_date!
 
         private
 
         def screening_uncompleted_notification!(_ctx, user:, **)
-          ::Developer::Screening::SendFollowupMailer.notify(user.id).deliver_later
-        end
+          roles = Roles::Screening::UncompletedRolesQuery.new.call
 
-        def update_user_last_screening_followup_date!(_ctx, user:, **)
-          user.set_last_screening_followup_date
+          roles.each do |role|
+            ::Screening::SendFollowupMailer.notify(role.id).deliver_later
+            role.set_last_screening_followup_date
+          end
         end
       end
     end

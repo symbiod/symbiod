@@ -44,6 +44,7 @@ FactoryBot.define do
       after(:create) { |u| u.roles.first&.update(state: 'screening_completed') }
     end
 
+    # TODO: weird trait, it should not return active disabled and rejected states
     trait :not_screening_completed do
       after(:create) do |u|
         u.roles.first&.update(state: %w[profile_completed active disabled rejected policy_accepted].sample)
