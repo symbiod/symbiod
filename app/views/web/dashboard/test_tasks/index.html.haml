@@ -22,18 +22,9 @@
         %tr
           %td= member_test_task.id
           %td
-<<<<<<< HEAD
             = link_to member_test_task.title, edit_dashboard_test_task_url(member_test_task)
-          %td= cell(Member::Dashboard::TestTaskStatusButton, member_test_task)
+          %td= cell(Web::Dashboard::TestTaskStatusButton, member_test_task)
           %td= member_test_task.position
           %td= member_test_task.role_name
           %td= member_test_task.skill.title
           %td= markdown(member_test_task.description)
-=======
-            = link_to developer_test_task.title, edit_dashboard_test_task_url(developer_test_task)
-          %td= cell(Web::Dashboard::TestTaskStatusButton, developer_test_task)
-          %td= developer_test_task.position
-          %td= developer_test_task.role_name
-          %td= developer_test_task.skill.title
-          %td= markdown(developer_test_task.description)
->>>>>>> (#316) move cells to Web::Dashboard

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Member::Dashboard::TestTaskStatusButton do
+describe Web::Dashboard::TestTaskStatusButton do
   subject { described_class.new(member_test_task, context: { controller: controller }).test_task_status }
 
   controller Web::Dashboard::TestTasksController

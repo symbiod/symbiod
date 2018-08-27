@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Member::Dashboard::OnboardingStepStatus do
+describe Web::Dashboard::OnboardingStepStatus do
   subject { described_class }
 
   context 'user status slack invited' do

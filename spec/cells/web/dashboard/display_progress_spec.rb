@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Member::Dashboard::DisplayProgress do
+describe Web::Dashboard::DisplayProgress do
   subject { described_class }
 
   context 'progress more then 0%' do

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Member::Dashboard::UserStatusButton do
+describe Web::Dashboard::RoleStatusButton do
   subject { described_class.new(candidate, context: { controller: controller }) }
   let(:current_user) { create(:user, :active, :staff) }
 

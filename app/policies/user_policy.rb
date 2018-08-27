@@ -19,7 +19,7 @@ class UserPolicy < DashboardPolicy
   alias remove_role? edit?
   alias manage_roles? edit?
 
-  def approvered?
+  def approved?
     record.approver.present?
   end
 end

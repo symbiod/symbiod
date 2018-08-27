@@ -15,8 +15,8 @@ module Web
         # Here we accept the name of the model field in @options[:resourse]
         # and bring it to the form without the prefix, since we have the following
         # statuses: slack_pending, github_left, and so on.
-        return 'pending' unless model.developer_onboarding
-        model.developer_onboarding[@options[:resource]].gsub(/\w*_/, '')
+        return 'pending' unless model.member_onboarding
+        model.member_onboarding[@options[:resource]].gsub(/\w*_/, '')
       end
     end
   end

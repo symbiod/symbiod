@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Member::Dashboard::UserRoles do
+describe Web::Dashboard::UserRoles do
   subject { described_class.new(member, context: { controller: controller }) }
 
   controller Web::Dashboard::UsersController
