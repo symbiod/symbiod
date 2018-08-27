@@ -21,11 +21,11 @@ before_install:
   - gem update --system
   - cp config/database.yml.sample config/database.yml
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-  - bundle exec rake db:create
+#before_script:
+#  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+#  - chmod +x ./cc-test-reporter
+#  - ./cc-test-reporter before-build
+#  - bundle exec rake db:create
 
 jobs:
   include:
@@ -52,5 +52,5 @@ jobs:
           branch:
             - master
 
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+#after_script:
+#  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
