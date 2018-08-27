@@ -3,11 +3,7 @@
 module Web
   module Dashboard
     # This cell renders status user
-    class RoleStatusButton < BaseLinkStatusButton
-      def role_status
-        policy(:user).activate? ? link_to_status : model.state
-      end
-
+    class RoleStatusButton < BaseStatusButton
       private
 
       def url_status

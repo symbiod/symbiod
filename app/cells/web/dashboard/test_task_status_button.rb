@@ -3,7 +3,7 @@
 module Web
   module Dashboard
     # This cell rennder status test task
-    class TestTaskStatusButton < BaseLinkStatusButton
+    class TestTaskStatusButton < BaseStatusButton
       private
 
       def url_status

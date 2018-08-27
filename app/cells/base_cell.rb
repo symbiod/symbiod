@@ -19,16 +19,19 @@ class BaseCell < Cell::ViewModel
   end
 
   LINK_STATUS = {
-    pending: ' disabled',
-    profile_completed: ' disabled',
-    rejected: ' disabled',
-    policy_accepted: ' disabled',
-    screening_completed: ' disabled'
+    pending: 'disabled',
+    invited: 'disabled',
+    joined: 'disabled',
+    left: 'disabled',
+    completed: 'disabled',
+    profile_completed: 'disabled',
+    rejected: 'disabled',
+    policy_accepted: 'disabled',
+    screening_completed: 'disabled'
   }.freeze
 
   COLOR_STATUS = {
     pending: 'danger',
-    idea_pending: 'warning',
     profile_completed: 'danger',
     rejected: 'danger',
     policy_accepted: 'danger',
@@ -41,15 +44,17 @@ class BaseCell < Cell::ViewModel
     voting: 'warning',
     completed: 'success',
     up: 'success',
-    down: 'danger'
+    down: 'danger',
+    up_arrow: 'green',
+    down_arrow: 'red'
   }.freeze
 
   CONFIRM_STATUS = {
     active: 'disable',
+    pending: 'voting',
     disabled: 'activate',
     up: 'up',
     down: 'down',
-    idea_pending: 'voting',
     voting: 'activate'
   }.freeze
 end

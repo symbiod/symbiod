@@ -259,6 +259,8 @@ en:
         left: left
         voting: voting
         completed: completed
+        up: up
+        down: down
       links:
         confirm:
           disable: Are you sure to disable?

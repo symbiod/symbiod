@@ -3,15 +3,15 @@
 module Web
   module Dashboard
     # This cell rendring voting panel
-    class VotingPanel < BaseLinkStatusButton
+    class VotingPanel < BaseStatusButton
       def render_vote_action(vote)
         if ::Dashboard::VotePolicy.new(current_user, model).up?
-          link_to_status name: vote,
-                         url: url_status(vote),
-                         color: color_status(vote),
-                         confirm: confirm_status(vote)
+          link_to_status status: vote, url: url_status(vote)
         else
-          vote
+          content_tag :i,
+                      nil,
+                      class: "fa fa-arrow-#{vote}",
+                      style: "color: #{style_color(vote)}"
         end
       end
 
@@ -21,12 +21,8 @@ module Web
         public_send("#{vote}_dashboard_idea_vote_url", model, id: model.id)
       end
 
-      def color_status(vote)
-        COLOR_STATUS[vote.to_sym]
-      end
-
-      def confirm_status(vote)
-        CONFIRM_STATUS[vote.to_sym]
+      def style_color(vote)
+        COLOR_STATUS["#{vote}_arrow".to_sym]
       end
     end
   end

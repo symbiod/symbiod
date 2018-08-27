@@ -18,19 +18,9 @@
       %td
         %b= t('dashboard.ideas.table.status')
       %td= @idea.state
-    - if ::Dashboard::IdeaPolicy.new(current_user, @idea).manage?
-      %tr
-        %td
-          %b= t('dashboard.ideas.table.manage')
-        %td
-          = cell(Web::Dashboard::IdeaStatusButton, @idea)
+    = cell(Web::Dashboard::IdeaStatusButton, @idea)
     %tr
       %td
         %b= t('dashboard.ideas.table.author')
       %td= @idea.author.email
-    - if ::Dashboard::VotePolicy.new(current_user, @idea).voting_panel?
-      %tr
-        %td
-          %b= link_to t('dashboard.ideas.table.votes'), dashboard_idea_votes_url(@idea)
-        %td
-          = cell(Web::Dashboard::VotingPanel, @idea)
+    = cell(Web::Dashboard::VotingPanel, @idea)

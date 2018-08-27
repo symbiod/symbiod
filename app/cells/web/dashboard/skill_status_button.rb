@@ -3,7 +3,7 @@
 module Web
   module Dashboard
     # This cell renders status idea
-    class SkillStatusButton < BaseLinkStatusButton
+    class SkillStatusButton < BaseStatusButton
       private
 
       def url_status

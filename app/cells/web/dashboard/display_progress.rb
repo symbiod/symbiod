@@ -5,9 +5,10 @@ module Web
     # This cell renders progress bar user
     class DisplayProgress < BaseCell
       def progress_bar
-        content_tag :div, class: "progress-bar bg-#{status_bar}", style: "width: #{width_bar}%" do
-          "#{model.progress} %"
-        end
+        content_tag :div,
+                    "#{model.progress} %",
+                    class: "progress-bar bg-#{status_bar}",
+                    style: "width: #{width_bar}%"
       end
 
       private
