@@ -86,6 +86,12 @@ en:
           account_was_disabled: Your account was disabled
         rejected:
           subject: Your request was rejected
+        uncompleted:
+          subject: Uncompleted screening
+          title: Your screening is not completed
+          text_one: It looks like you haven't completed our sign up wizard. Follow the
+          link: link
+          text_two: to do that, and you will be able to get some real-world experience!
         feedback: Feedback
         hello: Hello
       button:
