@@ -27,20 +27,30 @@ before_script:
   - ./cc-test-reporter before-build
   - bundle exec rake db:create
 
-script:
-  - bin/make-db-backup
-  - bundle exec rspec
-  - bin/test-migrations
-  - bundle exec rake db:seed
-  - bin/build
-  - bin/travis-features
+jobs:
+  include:
+    - stage: backup
+      script: ./bin/make-db-backup
+    - stage: tests
+      name: "Unit tests"
+      script: bundle exec rspec
+    - script: bundle exec rake db:seed
+      name: "Seeds test"
+    - stage: build
+      script: ./bin/build
+    - stage: features
+      name: "Migrations test"
+      script: ./bin/test-migrations
+    - script: ./bin/travis-features
+      name: "Cucumber features"
+    - stage: deploy
+      script: skip
+      deploy:
+        - provider: script
+          script: bash bin/push
+        on:
+          branch:
+            - master
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-deploy:
-  - provider: script
-    script: bash bin/push
-    on:
-      branch:
-        - master
