@@ -8,17 +8,17 @@ require 'rails_helper'
 # if its state does not correlate with current controller.
 RSpec.shared_examples 'checks step permissions' do
   context 'user state mismatches the step' do
-    let(:user) { create(:user, :developer, :with_assignment, wrong_state) }
+    let(:user) { create(:user, :member, :with_assignment, wrong_state) }
 
     it 'redirects to proper step' do
       invoke_action
-      path_helper = Developer::Wizard.new(user).route_for_current_step
+      path_helper = Member::Wizard.new(user).route_for_current_step
       expect(response).to redirect_to public_send(path_helper)
     end
   end
 
   context 'user is active' do
-    let(:user) { create(:user, :developer, :with_assignment, :active) }
+    let(:user) { create(:user, :member, :with_assignment, :active) }
 
     it 'redirects to proper step' do
       invoke_action

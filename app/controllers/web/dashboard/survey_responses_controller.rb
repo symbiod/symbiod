@@ -11,22 +11,24 @@ module Web
       end
 
       def index
-        @survey_responses = Developer::Onboarding::SurveyResponse.order(id: :desc).page params[:page]
+        @survey_responses = Member::Onboarding::SurveyResponse.order(id: :desc).page params[:page]
       end
 
       def show; end
 
       def new
-        @survey_response = Developer::Onboarding::SurveyResponse.new
+        @survey_response = Member::Onboarding::SurveyResponse.new
       end
 
       def create
-        @survey_response = Developer::Onboarding::SurveyResponse.new(survey_response_params)
-        if @survey_response.save
-          Staff::SurveyResponseCompletedMailer.notify(@survey_response.newcomer.id).deliver_later
+        result = Ops::Member::Onboarding::CreateSurveyResponse.call(
+          user: current_user, params: survey_response_params
+        )
+        if result.success?
           redirect_to dashboard_root_url,
                       flash: { success: t('dashboard.survey_responses.notices.success') }
         else
+          @survey_response = result[:model]
           render 'new'
         end
       end
@@ -34,18 +36,18 @@ module Web
       private
 
       def survey_response_find
-        @survey_response = Developer::Onboarding::SurveyResponse.find(params[:id])
+        @survey_response = Member::Onboarding::SurveyResponse.find(params[:id])
       end
 
       def survey_response_params
         params
-          .permit(developer_onboarding_survey_response: {})
-          .require(:developer_onboarding_survey_response)
-          .merge(role_id: current_user.role(:developer).id)
+          .permit(member_onboarding_survey_response: {})
+          .require(:member_onboarding_survey_response)
+          .merge(role_id: current_user.role(:member).id)
       end
 
       def questions_find
-        @questions = Developer::Onboarding::FeedbackQuestion.order(id: :asc)
+        @questions = Member::Onboarding::FeedbackQuestion.order(id: :asc)
       end
     end
   end

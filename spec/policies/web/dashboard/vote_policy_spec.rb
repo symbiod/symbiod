@@ -73,10 +73,10 @@ describe Dashboard::VotePolicy do
     end
   end
 
-  context 'developer' do
-    let(:user) { create(:user, :developer, :active) }
+  context 'member' do
+    let(:user) { create(:user, :member, :active) }
 
-    shared_examples 'developer main actions' do
+    shared_examples 'member main actions' do
       it { is_expected.to permit_action(:index) }
       it { is_expected.not_to permit_action(:up) }
       it { is_expected.not_to permit_action(:down) }
@@ -85,7 +85,7 @@ describe Dashboard::VotePolicy do
     context 'idea status pending' do
       let(:idea) { create(:idea) }
 
-      it_behaves_like 'developer main actions'
+      it_behaves_like 'member main actions'
       it { is_expected.not_to permit_action(:voting_panel) }
     end
 
@@ -102,7 +102,7 @@ describe Dashboard::VotePolicy do
       context 'current user has voted' do
         let!(:vote) { create(:vote, user: user, idea: idea) }
 
-        it_behaves_like 'developer main actions'
+        it_behaves_like 'member main actions'
         it { is_expected.to permit_action(:voting_panel) }
       end
     end
@@ -110,14 +110,14 @@ describe Dashboard::VotePolicy do
     context 'idea status disabled' do
       let(:idea) { create(:idea, :disabled) }
 
-      it_behaves_like 'developer main actions'
+      it_behaves_like 'member main actions'
       it { is_expected.not_to permit_action(:voting_panel) }
     end
 
     context 'idea status active' do
       let(:idea) { create(:idea, :active) }
 
-      it_behaves_like 'developer main actions'
+      it_behaves_like 'member main actions'
       it { is_expected.not_to permit_action(:voting_panel) }
     end
   end

@@ -8,7 +8,7 @@ describe Ops::Projects::GenerateProjectSlackChannel do
   let!(:service) { double }
   let!(:channel) { idea.project.slug }
   let(:author) { idea.project.author }
-  let!(:user) { create(:user, :developer, :active) }
+  let!(:user) { create(:user, :member, :active) }
   before { idea.project.users << user }
 
   describe '#call' do

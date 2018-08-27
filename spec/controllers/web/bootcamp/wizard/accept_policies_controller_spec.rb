@@ -5,12 +5,12 @@ require 'rails_helper'
 describe Web::Bootcamp::Wizard::AcceptPoliciesController do
   describe 'PUT #update' do
     context 'policy accepted' do
-      let(:user) { create(:user, :developer, :profile_completed) }
+      let(:user) { create(:user, :member, :profile_completed) }
       let(:result) { double(success?: true) }
       before { login_user(user) }
 
       it 'calls operation' do
-        expect(Ops::Developer::AcceptPolicy)
+        expect(Ops::Member::AcceptPolicy)
           .to receive(:call)
           .with(any_args)
           .and_return(result)
@@ -24,7 +24,7 @@ describe Web::Bootcamp::Wizard::AcceptPoliciesController do
     end
 
     context 'policy not accepted' do
-      let(:user) { create(:user, :developer, :profile_completed) }
+      let(:user) { create(:user, :member, :profile_completed) }
       before { login_user(user) }
 
       it 'render edit' do

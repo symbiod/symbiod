@@ -160,5 +160,32 @@ describe SlackService do
         subject.create_channel(channel)
       end
     end
+
+    describe '#team_member?' do
+      let!(:users_data) do
+        [
+          { 'id' => '1', profile: { email: 'email1' } },
+          { 'id' => '2', profile: { email: 'email2' } },
+          { 'id' => '3', profile: { email: 'email3' } }
+        ]
+      end
+      before { allow(client).to receive(:users_list).and_return(members: users_data) }
+
+      context 'user is member team' do
+        let(:user) { create(:user, :member, :active, email: 'email2') }
+
+        it 'returns true' do
+          expect(subject.team_member?(user.email)).to eq true
+        end
+      end
+
+      context 'user is not member team' do
+        let(:user) { create(:user, :member, :active, email: 'email7') }
+
+        it 'returns false' do
+          expect(subject.team_member?(user.email)).to eq false
+        end
+      end
+    end
   end
 end

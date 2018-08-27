@@ -490,7 +490,6 @@ DEPENDENCIES
   rails-controller-testing
   recaptcha
   redcarpet
-  reform
   reform-rails
   rspec-cells
   rspec-its

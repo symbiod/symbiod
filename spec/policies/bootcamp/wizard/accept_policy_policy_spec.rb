@@ -11,7 +11,7 @@ describe Bootcamp::Wizard::AcceptPolicyPolicy do
   end
 
   context 'user with complete_profile' do
-    let(:user) { create(:user, :developer, :profile_completed) }
+    let(:user) { create(:user, :member, :profile_completed) }
     it { is_expected.to permit_action(:edit) }
   end
 end

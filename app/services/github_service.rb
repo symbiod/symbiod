@@ -55,6 +55,13 @@ class GithubService
     request[:items].first[:login]
   end
 
+  # @param team_id [Integer] Team id.
+  # @param user [String] GitHub username of the user to check.
+  # @return [Boolean] Is a member?
+  def team_member?(user_name, team_name)
+    client.team_member?(team_id_by_name(team_name), user_name)
+  end
+
   private
 
   def user_name_by_id(id)

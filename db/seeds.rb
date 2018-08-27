@@ -20,20 +20,20 @@ skills.each do |skill|
 end
 
 tasks = [
-  { position: 1, role_name: 'developer', skill: Skill.find_by(title: 'Ruby'), title: 'Commente code', description: 'You have the following legacy controller code: https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6 Suggest which parts of it can be improved and why. Please create a new gist, copy code there and comment it. Paste the link to gist as solution of this quiz.' },
-  { position: 2, role_name: 'developer', skill: Skill.find_by(title: 'Ruby'), title: 'Create application', description: 'Create a small Rails application, that implements the logic from gist https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6. As a bonus you can make it 100% covered by tests and deployed to heroku.' },
+  { position: 1, role_name: 'member', skill: Skill.find_by(title: 'Ruby'), title: 'Commente code', description: 'You have the following legacy controller code: https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6 Suggest which parts of it can be improved and why. Please create a new gist, copy code there and comment it. Paste the link to gist as solution of this quiz.' },
+  { position: 2, role_name: 'member', skill: Skill.find_by(title: 'Ruby'), title: 'Create application', description: 'Create a small Rails application, that implements the logic from gist https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6. As a bonus you can make it 100% covered by tests and deployed to heroku.' },
   { position: 1, role_name: 'mentor', skill: Skill.find_by(title: 'Ruby'), title: 'Mentor: Commente code', description: 'You have the following legacy controller code: https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6 Suggest which parts of it can be improved and why. Please create a new gist, copy code there and comment it. Paste the link to gist as solution of this quiz.' },
   { position: 2, role_name: 'mentor', skill: Skill.find_by(title: 'Ruby'), title: 'Mentor: Create application', description: 'Create a small Rails application, that implements the logic from gist https://gist.github.com/Mehonoshin/4c239ea364fe458ef844e3984b757cf6. As a bonus you can make it 100% covered by tests and deployed to heroku.' }
 ]
 
 tasks.each do |task_attributes|
-  Developer::TestTask.find_or_create_by!(task_attributes)
+  Member::TestTask.find_or_create_by!(task_attributes)
 end
 
 # Create members
 5.times do |i|
   user = create_user(i)
-  user.add_role Developer::Wizard::ProfileForm::ROLES.sample
+  user.add_role Member::Wizard::ProfileForm::ROLES.sample
   user.roles.last.update(state: %w[pending active disabled screening_completed].sample)
   UserSkill.create!(user: user, skill: Skill.all.sample, primary: true)
 end

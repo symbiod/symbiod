@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Ops::Projects::GenerateProjectGithubTeam do
   subject { described_class }
-  let!(:user) { create(:user, :developer, :active) }
+  let!(:user) { create(:user, :member, :active) }
   let!(:mentor) { create(:user, :mentor, :active) }
   let!(:service) { double }
 

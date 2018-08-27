@@ -1,6 +1,6 @@
-= simple_form_for developer_test_task, url: url do |f|
+= simple_form_for member_test_task, url: url do |f|
   = f.input :title
-  = f.input :position, collection: 1..Developer::TestTaskAssignment::MAX_NUMBER_OF_ASSIGNMENTS, include_blank: false
+  = f.input :position, collection: 1..Member::TestTaskAssignment::MAX_NUMBER_OF_ASSIGNMENTS, include_blank: false
   = f.input :description, input_html: { id: 'markdown-editor' }
   = f.input :role_name, collection: roles, include_blank: false
   = f.input :skill_id, collection: Skill.all, include_blank: false

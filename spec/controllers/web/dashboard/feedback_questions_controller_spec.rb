@@ -86,7 +86,7 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
   describe 'POST #create' do
     context 'not signed in' do
       let(:params) { { description: 'Description', key_name: 'Question 1' } }
-      before { post :create, params: { developer_onboardin_feedback_question: params } }
+      before { post :create, params: { member_onboardin_feedback_question: params } }
 
       it_behaves_like 'redirects to landing page'
     end
@@ -96,8 +96,8 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
 
       shared_examples 'question was not created' do
         it 'question was not created' do
-          expect { post :create, params: { developer_onboarding_feedback_question: params } }
-            .to change(Developer::Onboarding::FeedbackQuestion, :count).by(0)
+          expect { post :create, params: { member_onboarding_feedback_question: params } }
+            .to change(Member::Onboarding::FeedbackQuestion, :count).by(0)
         end
       end
 
@@ -108,12 +108,12 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
           let(:params) { { description: 'Description', key_name: 'Question 1' } }
 
           it 'question was created' do
-            expect { post :create, params: { developer_onboarding_feedback_question: params } }
-              .to change(Developer::Onboarding::FeedbackQuestion, :count).by(1)
+            expect { post :create, params: { member_onboarding_feedback_question: params } }
+              .to change(Member::Onboarding::FeedbackQuestion, :count).by(1)
           end
 
           it 'redirects to questions page' do
-            post :create, params: { developer_onboarding_feedback_question: params }
+            post :create, params: { member_onboarding_feedback_question: params }
             expect(response).to redirect_to dashboard_feedback_questions_url
           end
 
@@ -126,7 +126,7 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
           it_behaves_like 'question was not created'
 
           it 'renders teemplate' do
-            post :create, params: { developer_onboarding_feedback_question: params }
+            post :create, params: { member_onboarding_feedback_question: params }
             expect(response).to render_template :new
           end
         end
@@ -139,7 +139,7 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
         it_behaves_like 'question was not created'
 
         it 'redirects to dashboard' do
-          post :create, params: { developer_onboarding_feedback_question: params }
+          post :create, params: { member_onboarding_feedback_question: params }
           expect(response).to redirect_to dashboard_root_url
         end
       end
@@ -184,7 +184,7 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
 
     context 'not signed in' do
       let(:params) { { description: 'new description' } }
-      before { put :update, params: { id: question.id, developer_onboarding_feedback_question: params } }
+      before { put :update, params: { id: question.id, member_onboarding_feedback_question: params } }
 
       it_behaves_like 'redirects to landing page'
     end
@@ -199,14 +199,14 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
           let(:params) { { description: 'new description' } }
 
           it 'description field was updated' do
-            expect { put :update, params: { id: question.id, developer_onboarding_feedback_question: params } }
+            expect { put :update, params: { id: question.id, member_onboarding_feedback_question: params } }
               .to change { question.reload.description }
               .from('description')
               .to('new description')
           end
 
           it 'redirects to questions page' do
-            put :update, params: { id: question.id, developer_onboarding_feedback_question: params }
+            put :update, params: { id: question.id, member_onboarding_feedback_question: params }
             expect(response).to redirect_to dashboard_feedback_questions_url
           end
         end
@@ -214,7 +214,7 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
         context 'ivalid params' do
           let(:params) { { description: '' } }
           before do
-            put :update, params: { id: question.id, developer_onboarding_feedback_question: params }
+            put :update, params: { id: question.id, member_onboarding_feedback_question: params }
           end
 
           it 'description field was not updated' do
@@ -231,7 +231,7 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
         let(:user) { create(:user, :without_an_staff, :active) }
         let(:params) { { description: 'description' } }
         before do
-          put :update, params: { id: question.id, developer_onboarding_feedback_question: params }
+          put :update, params: { id: question.id, member_onboarding_feedback_question: params }
         end
 
         it_behaves_like 'redirects to dashboard'
@@ -256,7 +256,7 @@ describe Web::Dashboard::FeedbackQuestionsController, type: :controller do
 
         it 'question was deleted' do
           expect { delete :destroy, params: { id: question.id } }
-            .to change(Developer::Onboarding::FeedbackQuestion, :count).by(-1)
+            .to change(Member::Onboarding::FeedbackQuestion, :count).by(-1)
         end
 
         it 'redirects to questions page' do

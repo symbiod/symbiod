@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   # TODO: remove this aliases, since the user does not represent role anymore
-  factory :user, aliases: %i[author developer] do
+  factory :user, aliases: %i[author member] do
     email { Faker::Internet.email }
     github { Faker::Name.last_name }
     first_name { Faker::Name.first_name }
@@ -44,6 +44,7 @@ FactoryBot.define do
       after(:create) { |u| u.roles.first&.update(state: 'screening_completed') }
     end
 
+    # TODO: weird trait, it should not return active disabled and rejected states
     trait :not_screening_completed do
       after(:create) do |u|
         u.roles.first&.update(state: %w[profile_completed active disabled rejected policy_accepted].sample)
@@ -57,9 +58,9 @@ FactoryBot.define do
       end
     end
 
-    trait :developer do
+    trait :member do
       after(:create) do |user|
-        user.add_role(:developer)
+        user.add_role(:member)
       end
     end
 
@@ -81,9 +82,9 @@ FactoryBot.define do
       end
     end
 
-    trait :developer_or_author do
+    trait :member_or_author do
       after(:create) do |user|
-        user.add_role(%i[developer author].sample)
+        user.add_role(%i[member author].sample)
       end
     end
 
@@ -95,11 +96,11 @@ FactoryBot.define do
 
     trait :without_an_staff do
       after(:create) do |user|
-        user.add_role(%i[mentor developer author].sample)
+        user.add_role(%i[mentor member author].sample)
       end
     end
 
-    trait :without_an_developer do
+    trait :without_an_member do
       after(:create) do |user|
         user.add_role(%i[staff mentor author].sample)
       end
@@ -107,7 +108,7 @@ FactoryBot.define do
 
     trait :sample_role do
       after(:create) do |user|
-        user.add_role(%i[staff mentor developer author].sample)
+        user.add_role(%i[staff mentor member author].sample)
       end
     end
 
@@ -119,7 +120,7 @@ FactoryBot.define do
 
     trait :with_assignment do
       after(:create) do |user|
-        create(:developer_test_task_assignment, :uncompleted, developer: user)
+        create(:member_test_task_assignment, :uncompleted, member: user)
       end
     end
 

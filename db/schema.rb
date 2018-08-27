@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_25_163939) do
+ActiveRecord::Schema.define(version: 2018_08_26_132700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,57 +25,6 @@ ActiveRecord::Schema.define(version: 2018_08_25_163939) do
   end
 
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
-  end
-
-  create_table "developer_onboarding_feedback_questions", force: :cascade do |t|
-    t.string "description", null: false
-    t.string "key_name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["key_name"], name: "index_developer_onboarding_feedback_questions_on_key_name", unique: true
-  end
-
-  create_table "developer_onboarding_survey_responses", force: :cascade do |t|
-    t.jsonb "feedback", null: false
-    t.bigint "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_developer_onboarding_survey_responses_on_role_id", unique: true
-  end
-
-  create_table "developer_onboardings", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.boolean "slack", default: false
-    t.boolean "github", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "developer_test_task_assignments", force: :cascade do |t|
-    t.integer "test_task_id", null: false
-    t.integer "test_task_result_id"
-    t.integer "developer_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "feedback"
-  end
-
-  create_table "developer_test_task_results", force: :cascade do |t|
-    t.string "link", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "developer_test_tasks", force: :cascade do |t|
-    t.text "description", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "title", null: false
-    t.integer "position"
-    t.string "state"
-    t.integer "skill_id"
-    t.string "role_name"
-    t.index ["skill_id"], name: "index_developer_test_tasks_on_skill_id"
   end
 
   create_table "ideas", force: :cascade do |t|
@@ -98,6 +47,58 @@ ActiveRecord::Schema.define(version: 2018_08_25_163939) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_legacy_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_legacy_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "member_onboarding_feedback_questions", force: :cascade do |t|
+    t.string "description", null: false
+    t.string "key_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key_name"], name: "index_member_onboarding_feedback_questions_on_key_name", unique: true
+  end
+
+  create_table "member_onboarding_survey_responses", force: :cascade do |t|
+    t.jsonb "feedback", null: false
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_member_onboarding_survey_responses_on_role_id", unique: true
+  end
+
+  create_table "member_onboardings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "feedback_status"
+    t.string "slack_status"
+    t.string "github_status"
+  end
+
+  create_table "member_test_task_assignments", force: :cascade do |t|
+    t.integer "test_task_id", null: false
+    t.integer "test_task_result_id"
+    t.integer "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "feedback"
+  end
+
+  create_table "member_test_task_results", force: :cascade do |t|
+    t.string "link", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "member_test_tasks", force: :cascade do |t|
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title", null: false
+    t.integer "position"
+    t.string "state"
+    t.integer "skill_id"
+    t.string "role_name"
+    t.index ["skill_id"], name: "index_member_test_tasks_on_skill_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -214,7 +215,7 @@ ActiveRecord::Schema.define(version: 2018_08_25_163939) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
-  add_foreign_key "developer_onboarding_survey_responses", "roles"
+  add_foreign_key "member_onboarding_survey_responses", "roles"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "stacks"

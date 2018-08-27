@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Web::Dashboard::NotesController, type: :controller do
-  let(:user) { create(:user, :developer, :active) }
+  let(:user) { create(:user, :member, :active) }
 
   shared_examples 'redirects to landing page' do
     it 'redirects to root landing' do
@@ -52,8 +52,8 @@ describe Web::Dashboard::NotesController, type: :controller do
         end
       end
 
-      context 'current user has role developer or author' do
-        let(:current_user) { create(:user, :developer_or_author, :active) }
+      context 'current user has role member or author' do
+        let(:current_user) { create(:user, :member_or_author, :active) }
 
         it_behaves_like 'redirects to user page'
       end
@@ -89,8 +89,8 @@ describe Web::Dashboard::NotesController, type: :controller do
           end
         end
 
-        context 'current user has role developer or author' do
-          let(:current_user) { create(:user, :developer_or_author, :active) }
+        context 'current user has role member or author' do
+          let(:current_user) { create(:user, :member_or_author, :active) }
 
           it 'not created note' do
             expect { post :create, params: { user_id: user.id, note: params_note } }
@@ -125,7 +125,7 @@ describe Web::Dashboard::NotesController, type: :controller do
   end
 
   describe 'GET #edit' do
-    let!(:user) { create(:user, :developer, :active) }
+    let!(:user) { create(:user, :member, :active) }
 
     context 'not signed in' do
       let(:note) { create(:note, noteable: user) }
@@ -156,8 +156,8 @@ describe Web::Dashboard::NotesController, type: :controller do
         end
       end
 
-      context 'current user has role developer or author' do
-        let(:current_user) { create(:user, :developer_or_author, :active) }
+      context 'current user has role member or author' do
+        let(:current_user) { create(:user, :member_or_author, :active) }
         let(:note) { create(:note, noteable: user) }
 
         it_behaves_like 'redirects to user page'
@@ -166,7 +166,7 @@ describe Web::Dashboard::NotesController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:user) { create(:user, :developer, :active) }
+    let!(:user) { create(:user, :member, :active) }
 
     context 'not signed in' do
       let(:params) { { content: 'New content' } }
@@ -199,8 +199,8 @@ describe Web::Dashboard::NotesController, type: :controller do
           end
         end
 
-        context 'current user has role developer or author' do
-          let(:current_user) { create(:user, :developer_or_author, :active) }
+        context 'current user has role member or author' do
+          let(:current_user) { create(:user, :member_or_author, :active) }
           let(:note) { create(:note, noteable: user) }
 
           it_behaves_like 'redirects to user page'
@@ -220,8 +220,8 @@ describe Web::Dashboard::NotesController, type: :controller do
           end
         end
 
-        context 'current user has role developer or author' do
-          let(:current_user) { create(:user, :developer_or_author, :active) }
+        context 'current user has role member or author' do
+          let(:current_user) { create(:user, :member_or_author, :active) }
           let(:note) { create(:note, noteable: user) }
 
           it_behaves_like 'redirects to user page'
@@ -231,7 +231,7 @@ describe Web::Dashboard::NotesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:user) { create(:user, :developer, :active) }
+    let!(:user) { create(:user, :member, :active) }
     let!(:note) { create(:note, noteable: user) }
 
     shared_examples 'redirects to user page after delete' do
@@ -261,8 +261,8 @@ describe Web::Dashboard::NotesController, type: :controller do
         it_behaves_like 'redirects to user page after delete'
       end
 
-      context 'current user has role developer or author' do
-        let(:current_user) { create(:user, :developer_or_author, :active) }
+      context 'current user has role member or author' do
+        let(:current_user) { create(:user, :member_or_author, :active) }
 
         it 'not deleted note' do
           expect { delete :destroy, params: { user_id: user.id, id: note.id } }

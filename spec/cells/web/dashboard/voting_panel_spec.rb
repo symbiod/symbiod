@@ -11,7 +11,7 @@ describe Web::Dashboard::VotingPanel do
 
   context 'current user can vote' do
     let(:idea) { create(:idea, :voting) }
-    let(:current_user) { create(:user, :developer, :active) }
+    let(:current_user) { create(:user, :member, :active) }
 
     it 'renders success color link up vote' do
       expect(subject.render_vote_action('up')).to match(/<a class="btn btn-success btn-sm"/)

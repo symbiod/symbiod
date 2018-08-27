@@ -3,14 +3,13 @@
 require 'rails_helper'
 
 describe Users::ScreeningUncompletedUsersQuery do
-  let!(:candidate)  { create(:user, :developer, :pending) }
-  let!(:candidate1) { create(:user, :developer, :profile_completed) }
-  let!(:candidate2) { create(:user, :developer, :policy_accepted) }
-  let!(:candidate3) { create(:user, :developer, :active) }
-  let!(:candidate4) { create(:user, :developer, :disabled) }
-  let!(:candidate5) { create(:user, :developer, :rejected) }
-  let!(:candidate6) { create(:user, :developer, :screening_completed) }
-  let!(:candidate7) { create(:user, :developer, :not_screening_completed) }
+  let!(:candidate)  { create(:user, :member, :pending) }
+  let!(:candidate1) { create(:user, :member, :profile_completed) }
+  let!(:candidate2) { create(:user, :member, :policy_accepted) }
+  let!(:candidate3) { create(:user, :member, :active) }
+  let!(:candidate4) { create(:user, :member, :disabled) }
+  let!(:candidate5) { create(:user, :member, :rejected) }
+  let!(:candidate6) { create(:user, :member, :screening_completed) }
 
   subject { described_class.new.call }
 

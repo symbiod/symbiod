@@ -8,7 +8,7 @@ module Web
       before_action do
         authorize_role(:user)
       end
-      rescue_from Ops::Developer::UnassignRole::LastRoleError, with: :redirect_to_dashboard_user
+      rescue_from Ops::Member::UnassignRole::LastRoleError, with: :redirect_to_dashboard_user
 
       def index
         @users = User.newer_first.page params[:page]
@@ -25,7 +25,7 @@ module Web
       end
 
       def update
-        result = Ops::Developer::UpdateProfile.call(
+        result = Ops::Member::UpdateProfile.call(
           user: @user,
           params: user_params
         )
@@ -38,19 +38,19 @@ module Web
       end
 
       def activate
-        Ops::Developer::Activate.call(user: @user, performer: current_user.id)
+        Ops::Member::Activate.call(user: @user, performer: current_user.id)
         redirect_to dashboard_users_url,
                     flash: { success: "#{t('dashboard.users.notices.activated')}: #{@user.full_name}" }
       end
 
       def deactivate
-        Ops::Developer::Disable.call(user: @user)
+        Ops::Member::Disable.call(user: @user)
         redirect_to dashboard_users_url,
                     flash: { success: "#{t('dashboard.users.notices.disabled')}: #{@user.full_name}" }
       end
 
       def add_role
-        Ops::Developer::AssignRole.call(user: @user, role: params[:role])
+        Ops::Member::AssignRole.call(user: @user, role: params[:role])
         redirect_to dashboard_user_url(@user),
                     flash: { success: "#{params[:role].capitalize} #{t('dashboard.users.notices.add_role')}" }
       end
@@ -58,7 +58,7 @@ module Web
       # TODO: remove this action, from now it is unsafe to remove roles.
       # instead we should prefer to disable active roles.
       def remove_role
-        Ops::Developer::RemoveRole.call(user: @user, role: params[:role], size: @user.roles.size)
+        Ops::Member::RemoveRole.call(user: @user, role: params[:role], size: @user.roles.size)
         redirect_to dashboard_user_url(@user),
                     flash: { success: "#{params[:role].capitalize} #{t('dashboard.users.notices.remove_role')}" }
       end

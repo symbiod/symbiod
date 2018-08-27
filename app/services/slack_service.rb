@@ -18,7 +18,7 @@ class SlackService
     ).call
   end
 
-  # When the new idea is submitted we notify developers through Slack
+  # When the new idea is submitted we notify members through Slack
   def post_to_channel(channel, message)
     client.chat_postMessage(channel: channel, text: message, as_user: false, username: @slack_config.bot_name)
   end
@@ -39,6 +39,10 @@ class SlackService
     client.conversations_create(name: channel_name, is_private: false)
   end
 
+  def team_member?(email)
+    all_emails_team.include?(email)
+  end
+
   private
 
   attr_reader :token
@@ -47,6 +51,10 @@ class SlackService
     @client ||= ::Slack::Web::Client.new(token: token)
   end
   # :nocov:
+
+  def all_emails_team
+    client.users_list[:members].map { |user| user[:profile][:email] }.compact
+  end
 
   def channel_by_name(channel)
     client.conversations_list['channels'].find do |entry|

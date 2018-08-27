@@ -31,10 +31,6 @@ module Ops
         end
       end
 
-      def github_config
-        Settings.github
-      end
-
       def privacy(project)
         project.idea.private_project ? 'secret' : 'closed'
       end

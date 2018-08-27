@@ -3,7 +3,7 @@
 require 'sorcery/model'
 
 # Represents any user in the system
-# ATM it has `developer_onboarding` association, that should be moved to some other model.
+# ATM it has `member_onboarding` association, that should be moved to some other model.
 class User < ApplicationRecord
   include Rolable
 
@@ -17,11 +17,11 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
   has_many :votes
 
-  # TODO: move to some other model, that represents developer explicitly.
-  has_one :developer_onboarding, class_name: 'Developer::Onboarding', dependent: :destroy
+  # TODO: move to some other model, that represents member explicitly.
+  has_one :member_onboarding, class_name: 'Member::Onboarding', dependent: :destroy
   has_many :test_task_assignments,
-           class_name: 'Developer::TestTaskAssignment',
-           foreign_key: 'developer_id',
+           class_name: 'Member::TestTaskAssignment',
+           foreign_key: 'member_id',
            dependent: :destroy
 
   # Author role
@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def progress
-    Ops::Developer::OnboardingProgress.new(self).percent
+    Ops::Member::Onboarding::Progress.new(self).percent
   end
 
   def primary_skill

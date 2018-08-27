@@ -8,7 +8,7 @@ module Bootcamp
       def edit?
         return unless user
         # TODO: this looks like a problem, think about it
-        Roles::RolesManager.new(user).role_for(:developer)&.profile_completed? ||
+        Roles::RolesManager.new(user).role_for(:member)&.profile_completed? ||
           Roles::RolesManager.new(user).role_for(:mentor)&.profile_completed?
       end
     end

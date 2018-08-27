@@ -29,6 +29,25 @@ describe GithubService do
     end
   end
 
+  describe '#team_member?' do
+    let(:team_name) { 'bootcamp' }
+    let(:user_name) { 'reabiliti' }
+    let(:team_id)   { 234 }
+    let(:teams_response) do
+      [
+        { name: team_name, id: team_id }
+      ]
+    end
+    before do
+      allow(client).to receive(:organization_teams).and_return(teams_response)
+    end
+
+    it 'calls #team_member? in Github api client' do
+      allow(client).to receive(:team_member?).with(team_id, user_name)
+      subject.team_member?(user_name, team_name)
+    end
+  end
+
   describe '#create_team' do
     let(:team_name) { 'team_name' }
     let(:privacy) { 'closed' }
@@ -51,7 +70,7 @@ describe GithubService do
 
   describe '#invite_member' do
     let(:user_id)   { 123 }
-    let(:username)  { 'super-developer' }
+    let(:username)  { 'super-member' }
     let(:team_name) { 'mentors' }
     let(:team_id)   { 234 }
     let(:teams_response) do
@@ -84,7 +103,7 @@ describe GithubService do
           url: 'https://api.github.com/orgs/howtohireme/memberships/Mehonoshin',
           status: 403,
           response_header: {},
-          body: 'You cannot demote yourself. Admins must be demoted by another admin. // See: https://developer.github.com/v3/orgs/members/#add-or-update-organization-membership'
+          body: 'You cannot demote yourself. Admins must be demoted by another admin. // See: https://member.github.com/v3/orgs/members/#add-or-update-organization-membership'
         }
       end
 

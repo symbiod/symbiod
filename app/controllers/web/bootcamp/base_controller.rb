@@ -11,7 +11,7 @@ module Web
       end
 
       helper_method def wizard
-        Developer::Wizard.new(current_user)
+        Member::Wizard.new(current_user)
       end
     end
   end

@@ -31,8 +31,8 @@ describe Dashboard::NotePolicy do
     end
   end
 
-  context 'current user has role author or developer' do
-    let(:user) { create(:user, :active, :developer_or_author) }
+  context 'current user has role author or member' do
+    let(:user) { create(:user, :active, :member_or_author) }
     let(:note) { create(:note) }
 
     it { is_expected.not_to permit_action(:new) }
