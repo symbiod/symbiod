@@ -14,7 +14,6 @@ jobs:
     - stage: backup
       script: ./bin/make-db-backup
       name: "Perform DB backup"
-      if: env(TRAVIS_EVENT_TYPE) = cron
 
     - stage: tests
       services:
@@ -66,7 +65,6 @@ jobs:
         - docker
       install: true
       script: ./bin/build
-      if: env(TRAVIS_EVENT_TYPE) = push
 
     - stage: features
       name: "Cucumber features"
@@ -74,7 +72,6 @@ jobs:
         - docker
       install: true
       script: ./bin/travis-features
-      if: env(TRAVIS_EVENT_TYPE) = push
 
     - stage: deploy
       name: "Release to production"
@@ -85,11 +82,14 @@ jobs:
       deploy:
         provider: script
         script: bash bin/deploy
-      if: branch = master AND env(TRAVIS_EVENT_TYPE) = push
 
 stages:
-  - backup
+  - name: backup
+    if: type = cron
   - tests
-  - build
-  - features
-  - deploy
+  - name: build
+    if: type = push
+  - name: features
+    if: type = push
+  - name: deploy
+    if: branch = master AND type = push
