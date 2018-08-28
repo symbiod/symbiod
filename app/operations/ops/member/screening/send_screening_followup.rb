@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ops
-  module Developer
+  module Member
     module Screening
       # Notifies about uncompleted steps
       class SendScreeningFollowup < BaseOperation
@@ -9,12 +9,12 @@ module Ops
 
         private
 
-        def screening_uncompleted_notification!(_ctx, user:, **)
+        def screening_uncompleted_notification!(_ctx, **)
           roles = Roles::Screening::UncompletedRolesQuery.new.call
 
           roles.each do |role|
-            ::Screening::SendFollowupMailer.notify(role.id).deliver_later
-            role.set_last_screening_followup_date
+            ::Member::Screening::SendFollowupMailer.notify(role.id).deliver_later
+            role.user.set_last_screening_followup_date
           end
         end
       end
