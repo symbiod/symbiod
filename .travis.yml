@@ -17,30 +17,57 @@ services:
 addons:
   postgresql: '10'
 
-before_install:
-  - gem update --system
-  - cp config/database.yml.sample config/database.yml
+jobs:
+  include:
+    - stage: backup
+      script: ./bin/make-db-backup
+      name: "Perform DB backup"
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-  - bundle exec rake db:create
+    - stage: tests
+      before_install:
+        - gem update --system
+        - cp config/database.yml.sample config/database.yml
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+        - bundle exec rake db:create
+      script: bundle exec rspec
+      name: "Unit tests"
+      after_script:
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
-script:
-  - bin/make-db-backup
-  - bundle exec rspec
-  - bin/test-migrations
-  - bundle exec rake db:seed
-  - bin/build
-  - bin/travis-features
+    - script: bundle exec rake db:seed
+      name: "Seeds test"
+      before_script:
+        - bundle exec rake db:create
+        - bundle exec rake db:schema:load
 
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    - script: ./bin/test-migrations
+      name: "Migrations test"
+      before_script:
+        - bundle exec rake db:create
 
-deploy:
-  - provider: script
-    script: bash bin/push
-    on:
-      branch:
-        - master
+    - stage: build
+      name: "Prepare and push docker image"
+      script: ./bin/build
+
+    - stage: features
+      name: "Cucumber features"
+      script: ./bin/travis-features
+
+    - stage: deploy
+      script: skip
+      name: "Release to production"
+      deploy:
+        provider: script
+        script: bash bin/push
+
+stages:
+  - name: backup
+    if: env(TRAVIS_EVENT_TYPE) = cron
+  - tests
+  - build
+  - features
+  - name: deploy
+    if: branch = master AND env(TRAVIS_EVENT_TYPE) = push
