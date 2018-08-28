@@ -9,14 +9,6 @@ notifications:
   slack:
     secure: NTbdhOlKuwT75PBFGClX0ksLwdwAPqVAczs8xeNOy6/1m4Gc67+QBft+d0ehrQWXeI1TLPE03Q06bYmbyc2ZiMtmaNY6ELZH+dXLXahHb2k7BTXKteq3EpGgOK3mf0TrYz4m1OOt+cFr3LjJwdSnIP/ZH69dXIUSl9Mf3hvWIblFDtBCd4T3RfGyzXpO/2ZxrtGBzsGr81ujIQTgIm1VkrVjidGXhTdaaGh6QisR+x0o9cPIHC/p48hy0NCDX1K+QNq9/gtmzlKTvt15L6pYKyMsUrWMve8CGojgwqLZPdy3da9D3TTgOAslsgnfAnCaugju/fcVu+X4IdTYFqQ/KpMC+OfHHVno/3RZjF7D9Jh3R8T4zDTEO7RcQMX6puecCNp8r8leWBPqgY7/kwmlLf6iklAz6dkAd7I0kB2LNHFSeCer4gxZp3YhJQgEbSDL9DpTffvMate6nU2fVJbGBY2D9yQ+lBk96mM81dQ7FPUAIbjAO4G61rNRBk91LnPoNuWIFzAqB2z5r1IQrOGckL18F7WpkHwrzZvzVUOR7g218nMB+YaY1fdyzSVKeuAL+3UXGWnQxsby/U3w9Nc6Gnyux1e+DUIqX/aloGj/0yNzPFXXuON5DTvfcJ01Wk+YnjIrrw1W2YsddsojTG1IH6+OYXfVoHPJMC7uJHD7NoI=
 
-services:
-  - postgresql
-  - docker
-  - redis-server
-
-addons:
-  postgresql: '10'
-
 jobs:
   include:
     - stage: backup
@@ -24,6 +16,11 @@ jobs:
       name: "Perform DB backup"
 
     - stage: tests
+      services:
+        - postgresql
+        - redis-server
+      addons:
+        postgresql: '10'
       before_install:
         - gem update --system
         - cp config/database.yml.sample config/database.yml
@@ -39,6 +36,10 @@ jobs:
 
     - script: bundle exec rake db:seed
       name: "Seeds test"
+      services:
+        - postgresql
+      addons:
+        postgresql: '10'
       before_install:
         - gem update --system
         - cp config/database.yml.sample config/database.yml
@@ -48,6 +49,10 @@ jobs:
 
     - script: ./bin/test-migrations
       name: "Migrations test"
+      services:
+        - postgresql
+      addons:
+        postgresql: '10'
       before_install:
         - gem update --system
         - cp config/database.yml.sample config/database.yml
@@ -56,18 +61,24 @@ jobs:
 
     - stage: build
       name: "Prepare and push docker image"
+      services:
+        - docker
       install: true
       script: ./bin/build
 
     - stage: features
       name: "Cucumber features"
+      services:
+        - docker
       install: true
       script: ./bin/travis-features
 
     - stage: deploy
+      name: "Release to production"
+      services:
+        - docker
       install: true
       script: skip
-      name: "Release to production"
       deploy:
         provider: script
         script: bash bin/push
