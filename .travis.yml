@@ -39,24 +39,33 @@ jobs:
 
     - script: bundle exec rake db:seed
       name: "Seeds test"
+      before_install:
+        - gem update --system
+        - cp config/database.yml.sample config/database.yml
       before_script:
         - bundle exec rake db:create
         - bundle exec rake db:schema:load
 
     - script: ./bin/test-migrations
       name: "Migrations test"
+      before_install:
+        - gem update --system
+        - cp config/database.yml.sample config/database.yml
       before_script:
         - bundle exec rake db:create
 
     - stage: build
       name: "Prepare and push docker image"
+      install: true
       script: ./bin/build
 
     - stage: features
       name: "Cucumber features"
+      install: true
       script: ./bin/travis-features
 
     - stage: deploy
+      install: true
       script: skip
       name: "Release to production"
       deploy:
