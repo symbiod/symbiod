@@ -89,9 +89,10 @@ en:
         uncompleted:
           subject: Uncompleted screening
           title: Your screening is not completed
-          text_one: It looks like you haven't completed our sign up wizard. Follow the
+          body_part_one: It looks like you haven't completed our sign up wizard to role
+          body_part_two: . Follow the
           link: link
-          text_two: to do that, and you will be able to get some real-world experience!
+          body_part_three: to do that, and you will be able to get some real-world experience!
         feedback: Feedback
         hello: Hello
       button:

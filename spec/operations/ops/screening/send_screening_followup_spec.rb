@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Ops::Member::Screening::SendScreeningFollowup do
+describe Ops::Screening::SendScreeningFollowup do
   subject { described_class }
 
   describe '#call' do
@@ -11,7 +11,7 @@ describe Ops::Member::Screening::SendScreeningFollowup do
     it 'sends email to uncompleted users' do
       expect { subject.call() }
         .to have_enqueued_job(ActionMailer::DeliveryJob)
-        .with('Member::Screening::SendFollowupMailer', 'notify', 'deliver_now', role.id)
+        .with('Screening::SendFollowupMailer', 'notify', 'deliver_now', role.id)
     end
 
     it 'updates last followup date' do

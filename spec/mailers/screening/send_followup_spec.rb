@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Member::Screening::SendFollowupMailer, type: :mailer do
+RSpec.describe Screening::SendFollowupMailer, type: :mailer do
   describe 'notify' do
     let(:role) { create(:role) }
-    let(:mail) { Member::Screening::SendFollowupMailer.notify(role.id) }
+    let(:mail) { Screening::SendFollowupMailer.notify(role.id) }
 
     it 'renders the subject' do
-      expect(mail.subject).to eq("#{I18n.t('dashboard.users.mailers.uncompleted.subject')}")
+      expect(mail.subject).to eq(I18n.t('dashboard.users.mailers.uncompleted.subject').to_s)
     end
 
     it 'renders the receiver email' do
