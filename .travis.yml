@@ -31,18 +31,24 @@ jobs:
   include:
     - stage: backup
       script: ./bin/make-db-backup
+
     - stage: tests
       name: "Unit tests"
       script: bundle exec rspec
     - script: bundle exec rake db:seed
+      before_script:
+        - bundle exec rake db:schema
       name: "Seeds test"
+
     - stage: build
       script: ./bin/build
+
     - stage: features
       name: "Migrations test"
       script: ./bin/test-migrations
     - script: ./bin/travis-features
       name: "Cucumber features"
+
     - stage: deploy
       script: skip
       deploy:
