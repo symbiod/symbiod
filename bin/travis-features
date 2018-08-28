@@ -29,5 +29,5 @@ fi
 export CURRENT_TAG
 export APP_IMAGE_TAG
 docker pull howtohireme/give-me-poc:$APP_IMAGE_TAG
-docker tag howtohireme/give-me-poc:$APP_IMAGE_TAG howtohireme/give-me-poc:latest
+docker tag howtohireme/give-me-poc:$APP_IMAGE_TAG registry.heroku.com/peaceful-refuge-95132/web:latest
 bin/run
