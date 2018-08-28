@@ -20,7 +20,7 @@ addons:
 jobs:
   include:
     - stage: backup
-    - script: ./bin/make-db-backup
+      script: ./bin/make-db-backup
       name: "Perform DB backup"
 
     - stage: tests
@@ -50,25 +50,25 @@ jobs:
         - bundle exec rake db:create
 
     - stage: build
-    - script: ./bin/build
       name: "Prepare and push docker image"
+      script: ./bin/build
 
     - stage: features
-    - script: ./bin/travis-features
       name: "Cucumber features"
+      script: ./bin/travis-features
 
     - stage: deploy
-      name: "Release to production"
       script: skip
+      name: "Release to production"
       deploy:
         provider: script
         script: bash bin/push
 
 stages:
   - name: backup
-    if: env(TRAVIS_EVENT_TYPE) == cron
+    if: env(TRAVIS_EVENT_TYPE) = cron
   - tests
   - build
   - features
   - name: deploy
-    if: branch = master
+    if: branch = master AND env(TRAVIS_EVENT_TYPE) = push
