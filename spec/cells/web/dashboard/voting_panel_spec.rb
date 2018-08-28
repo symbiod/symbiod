@@ -35,11 +35,13 @@ describe Web::Dashboard::VotingPanel do
     let(:current_user) { create(:user, :author, :active) }
 
     it 'renders disabled link up vote' do
-      expect(subject.render_vote_action('up')).to eq 'up'
+      expect(subject.render_vote_action('up'))
+        .to eq '<i class="fa fa-arrow-up" style="color: green"></i>'
     end
 
     it 'renders disabled link down vote' do
-      expect(subject.render_vote_action('down')).to eq 'down'
+      expect(subject.render_vote_action('down'))
+        .to eq '<i class="fa fa-arrow-down" style="color: red"></i>'
     end
   end
 end

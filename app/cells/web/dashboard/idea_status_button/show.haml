@@ -1,7 +1,12 @@
-= idea_status
-- if ::Dashboard::IdeaPolicy.new(current_user, model).reject?
-  = link_to t('dashboard.ideas.button.reject'),
-            reject_dashboard_idea_url(model),
-            method: :put,
-            confirm: { data: t('dashboard.ideas.confirm.reject') },
-            class: 'btn btn-sm btn-danger'
+- if ::Dashboard::IdeaPolicy.new(current_user, model).manage?
+  %tr
+    %td
+      %b= t('dashboard.ideas.table.manage')
+    %td
+      = link_to_status confirm: model.state
+      - if ::Dashboard::IdeaPolicy.new(current_user, model).reject?
+        = link_to t('dashboard.ideas.button.reject'),
+                  reject_dashboard_idea_url(model),
+                  method: :put,
+                  data: { confirm: t('dashboard.ideas.confirm.reject') },
+                  class: 'btn btn-sm btn-danger'

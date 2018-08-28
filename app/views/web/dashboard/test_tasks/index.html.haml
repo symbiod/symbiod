@@ -23,7 +23,7 @@
           %td= member_test_task.id
           %td
             = link_to member_test_task.title, edit_dashboard_test_task_url(member_test_task)
-          %td= cell(Member::Dashboard::TestTaskStatusButton, member_test_task)
+          %td= cell(Web::Dashboard::TestTaskStatusButton, member_test_task)
           %td= member_test_task.position
           %td= member_test_task.role_name
           %td= member_test_task.skill.title

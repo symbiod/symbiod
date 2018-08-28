@@ -1,5 +1,10 @@
-= model.votes.up.count
-= render_vote_action('up')
-|
-= render_vote_action('down')
-= model.votes.down.count
+- if ::Dashboard::VotePolicy.new(current_user, model).voting_panel?
+  %tr
+    %td
+      %b= link_to t('dashboard.ideas.table.votes'), dashboard_idea_votes_url(model)
+    %td
+      = model.votes.up.count
+      = render_vote_action('up')
+      |
+      = render_vote_action('down')
+      = model.votes.down.count

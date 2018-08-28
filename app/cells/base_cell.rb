@@ -17,4 +17,49 @@ class BaseCell < Cell::ViewModel
   def current_user
     controller.current_user
   end
+
+  LINK_STATUS = {
+    pending: 'disabled',
+    invited: 'disabled',
+    joined: 'disabled',
+    left: 'disabled',
+    completed: 'disabled',
+    profile_completed: 'disabled',
+    rejected: 'disabled',
+    policy_accepted: 'disabled',
+    screening_completed: 'disabled'
+  }.freeze
+
+  COLOR_STATUS = {
+    pending: 'danger',
+    profile_completed: 'danger',
+    rejected: 'danger',
+    policy_accepted: 'danger',
+    screening_completed: 'warning',
+    active: 'success',
+    disabled: 'danger',
+    invited: 'warning',
+    joined: 'success',
+    left: 'danger',
+    voting: 'warning',
+    completed: 'success',
+    up: 'success',
+    down: 'danger',
+    up_arrow: 'green',
+    down_arrow: 'red'
+  }.freeze
+
+  CONFIRM_STATUS = {
+    active: 'disable',
+    pending: 'voting',
+    disabled: 'activate',
+    up: 'up',
+    down: 'down',
+    voting: 'activate',
+    invited: 'activate',
+    profile_completed: 'activate',
+    rejected: 'activate',
+    policy_accepted: 'activate',
+    screening_completed: 'activate'
+  }.freeze
 end

@@ -1,0 +1,9 @@
+%tr
+  %td
+    %b= t('dashboard.users.table.roles')
+  %td
+    %ul.list-unstyled
+      - list_roles.each do |role|
+        %li
+          = role
+          = render_role(role)

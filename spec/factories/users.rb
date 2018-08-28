@@ -81,6 +81,12 @@ FactoryBot.define do
       end
     end
 
+    trait :mentor_or_member do
+      after(:create) do |user|
+        user.add_role(%i[mentor member].sample)
+      end
+    end
+
     trait :member_or_author do
       after(:create) do |user|
         user.add_role(%i[member author].sample)
