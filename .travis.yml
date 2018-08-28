@@ -17,19 +17,19 @@ services:
 addons:
   postgresql: '10'
 
-before_install:
-  - gem update --system
-  - cp config/database.yml.sample config/database.yml
-
 jobs:
   include:
     - stage: backup
-      script: ./bin/make-db-backup
-      if: env(TRAVIS_EVENT_TYPE) == cron
+    - script: ./bin/make-db-backup
+      name: "Perform DB backup"
 
     - stage: tests
+      before_install:
+        - gem update --system
+        - cp config/database.yml.sample config/database.yml
+
+    - script: bundle exec rspec
       name: "Unit tests"
-      script: bundle exec rspec
       before_script:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
@@ -37,32 +37,38 @@ jobs:
         - bundle exec rake db:create
       after_script:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
     - script: bundle exec rake db:seed
+      name: "Seeds test"
       before_script:
         - bundle exec rake db:create
         - bundle exec rake db:schema:load
-      name: "Seeds test"
+
     - script: ./bin/test-migrations
       name: "Migrations test"
       before_script:
         - bundle exec rake db:create
 
     - stage: build
-      script: ./bin/build
+    - script: ./bin/build
+      name: "Prepare and push docker image"
 
     - stage: features
     - script: ./bin/travis-features
       name: "Cucumber features"
 
     - stage: deploy
+      name: "Release to production"
       script: skip
-      if: branch = master
       deploy:
         provider: script
         script: bash bin/push
 
 stages:
-  - backup
+  - name: backup
+    if: env(TRAVIS_EVENT_TYPE) == cron
   - tests
   - build
   - features
+  - name: deploy
+    if: branch = master
