@@ -21,50 +21,48 @@ before_install:
   - gem update --system
   - cp config/database.yml.sample config/database.yml
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-  - bundle exec rake db:create
-
 jobs:
   include:
     - stage: backup
       script: ./bin/make-db-backup
+      if: env(TRAVIS_EVENT_TYPE) == cron
 
     - stage: tests
       name: "Unit tests"
       script: bundle exec rspec
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+        - bundle exec rake db:create
+      after_script:
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     - script: bundle exec rake db:seed
       before_script:
-        - bundle exec rake db:schema
+        - bundle exec rake db:create
+        - bundle exec rake db:schema:load
       name: "Seeds test"
+    - script: ./bin/test-migrations
+      name: "Migrations test"
+      before_script:
+        - bundle exec rake db:create
 
     - stage: build
       script: ./bin/build
 
     - stage: features
-      name: "Migrations test"
-      script: ./bin/test-migrations
     - script: ./bin/travis-features
       name: "Cucumber features"
 
     - stage: deploy
       script: skip
+      if: branch = master
       deploy:
         provider: script
         script: bash bin/push
-        on:
-          branch:
-            - master
 
 stages:
   - backup
   - tests
   - build
   - features
-  - name: deploy
-    if: branch = master
-
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
