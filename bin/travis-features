@@ -11,7 +11,9 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
   echo "Using master branch of features"
   echo "Current branch is master, using 'latest' tag"
   CURRENT_TAG="latest"
+	APP_IMAGE_TAG="latest"
 else
+	APP_IMAGE_TAG=$TRAVIS_BRANCH
   if [ `git branch --list -r origin/$TRAVIS_BRANCH` ]; then
     echo "Using $TRAVIS_BRANCH branch of features"
     echo "Travis branch is $TRAVIS_BRANCH, using '$TRAVIS_BRANCH' tag"
@@ -25,6 +27,7 @@ else
 fi
 
 export CURRENT_TAG
-docker pull howtohireme/give-me-poc:$CURRENT_TAG
-docker tag howtohireme/give-me-poc:$CURRENT_TAG howtohireme/give-me-poc:latest
+export APP_IMAGE_TAG
+docker pull howtohireme/give-me-poc:$APP_IMAGE_TAG
+docker tag howtohireme/give-me-poc:$APP_IMAGE_TAG howtohireme/give-me-poc:latest
 bin/run
