@@ -5,7 +5,7 @@ module Web
     # This cell renders user roles
     class UserRoles < BaseCell
       def render_role(role_name)
-        return unless UserPolicy.new(current_user, nil).manage_roles?
+        return '' unless UserPolicy.new(current_user, nil).manage_roles?
         render_role_management(role_name)
       end
 

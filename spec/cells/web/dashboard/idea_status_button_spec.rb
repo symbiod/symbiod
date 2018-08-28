@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Web::Dashboard::IdeaStatusButton do
-  subject { described_class.new(idea, context: { controller: controller }).idea_status }
+  subject { described_class.new(idea, context: { controller: controller }).link_to_status(confirm: idea.state) }
 
   controller Web::Dashboard::IdeasController
 
@@ -11,7 +11,7 @@ describe Web::Dashboard::IdeaStatusButton do
     let(:idea) { create(:idea, :voting) }
 
     it 'renders success color link' do
-      expect(subject).to match(/<a class="btn btn-success btn-sm"/)
+      expect(subject).to match(/<a class="btn btn-warning btn-sm"/)
     end
 
     it 'renders link to activate' do
@@ -19,31 +19,21 @@ describe Web::Dashboard::IdeaStatusButton do
     end
 
     it 'renders link to confirm status to activate' do
-      expect(subject).to match(/data-confirm="Are you sure to active/)
+      expect(subject).to match(/data-confirm="Are you sure to activate?/)
     end
   end
 
   context 'idea status active' do
     let(:idea) { create(:idea, :active) }
 
-    it 'renders success color link' do
-      expect(subject).to match(/<a class="btn btn-danger btn-sm"/)
-    end
-
-    it 'renders link to disable' do
-      expect(subject).to match(/deactivate/)
-    end
-
-    it 'renders link to confirm status to disable' do
-      expect(subject).to match(/data-confirm="Are you sure to disable/)
-    end
+    it_behaves_like 'button status is active'
   end
 
   context 'idea status pending' do
     let(:idea) { create(:idea, :pending) }
 
     it 'renders warning color link' do
-      expect(subject).to match(/<a class="btn btn-warning btn-sm"/)
+      expect(subject).to match(/<a class="btn btn-danger btn-sm"/)
     end
 
     it 'renders link to voting' do
@@ -51,35 +41,19 @@ describe Web::Dashboard::IdeaStatusButton do
     end
 
     it 'renders link to confirm status to activate' do
-      expect(subject).to match(/data-confirm="Are you sure to voting/)
+      expect(subject).to match(/data-confirm="Are you sure to voting?/)
     end
   end
 
   context 'idea status disabled' do
     let(:idea) { create(:idea, :disabled) }
 
-    it 'renders danger color link' do
-      expect(subject).to match(/<a class="btn btn-success btn-sm"/)
-    end
-
-    it 'renders link to activate' do
-      expect(subject).to match(/activate/)
-    end
-
-    it 'renders link to confirm status to activate' do
-      expect(subject).to match(/data-confirm="Are you sure to active/)
-    end
+    it_behaves_like 'button status is disabled'
   end
 
   context 'idea status rejected' do
     let(:idea) { create(:idea, :rejected) }
 
-    it 'renders success color button' do
-      expect(subject).to match(/<a class="btn btn-success btn-sm/)
-    end
-
-    it 'renders disabled button' do
-      expect(subject).to match(/<a class="btn btn-success btn-sm disabled"/)
-    end
+    it_behaves_like 'button status is rejected'
   end
 end

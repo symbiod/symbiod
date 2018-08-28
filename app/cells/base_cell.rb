@@ -55,6 +55,11 @@ class BaseCell < Cell::ViewModel
     disabled: 'activate',
     up: 'up',
     down: 'down',
-    voting: 'activate'
+    voting: 'activate',
+    invited: 'activate',
+    profile_completed: 'activate',
+    rejected: 'activate',
+    policy_accepted: 'activate',
+    screening_completed: 'activate'
   }.freeze
 end

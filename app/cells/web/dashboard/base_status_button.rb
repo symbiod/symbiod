@@ -4,13 +4,13 @@ module Web
   module Dashboard
     # This cell renders status user
     class BaseStatusButton < BaseCell
-      private
-
       def link_to_status(status: model.state, url: url_status, confirm: nil)
         @status = status
         options = { method: :put }.merge(class_button).merge(tabindex).merge(data_confirm(confirm))
         link_to t("dashboard.cells.button.#{@status}"), url, options
       end
+
+      private
 
       def link_status
         LINK_STATUS[@status.to_sym]
@@ -29,7 +29,7 @@ module Web
       end
 
       def class_button
-        { class: "btn btn-#{COLOR_STATUS[@status.to_sym]} btn-sm #{link_status}" }
+        { class: "btn btn-#{COLOR_STATUS[@status.to_sym]} btn-sm #{link_status}".rstrip }
       end
 
       def data_confirm(confirm)

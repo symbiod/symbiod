@@ -5,6 +5,7 @@
       %tr
         %th= t('dashboard.users.table.email')
         %th= t('dashboard.users.table.full_name')
+        %th= t('dashboard.users.table.date_registration')
         %th= t('dashboard.users.table.roles')
         %th= t('dashboard.users.table.primary_skill')
         %th= t('dashboard.users.table.progress')
@@ -13,6 +14,7 @@
         %tr
           %td= link_to user.email, dashboard_user_url(user)
           %td= user.full_name
+          %td= human_date(user)
           %td
             %ul.list-unstyled
               - user.roles.each do |role|
