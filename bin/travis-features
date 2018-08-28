@@ -25,4 +25,6 @@ else
 fi
 
 export CURRENT_TAG
+docker pull howtohireme/give-me-poc:$CURRENT_TAG
+docker tag howtohireme/give-me-poc:$CURRENT_TAG howtohireme/give-me-poc:latest
 bin/run
