@@ -46,8 +46,8 @@ jobs:
     - stage: deploy
       script: skip
       deploy:
-        - provider: script
-          script: bash bin/push
+        provider: script
+        script: bash bin/push
         on:
           branch:
             - master
