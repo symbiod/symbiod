@@ -81,13 +81,15 @@ jobs:
       script: skip
       deploy:
         provider: script
-        script: bash bin/push
+        script: bash bin/deploy
 
 stages:
   - name: backup
     if: env(TRAVIS_EVENT_TYPE) = cron
   - tests
-  - build
-  - features
+  - name: build
+    if: env(TRAVIS_EVENT_TYPE) = push
+  - name: features
+    if: env(TRAVIS_EVENT_TYPE) = push
   - name: deploy
     if: branch = master AND env(TRAVIS_EVENT_TYPE) = push
