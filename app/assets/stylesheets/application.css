@@ -13,7 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-p.link a {
-  text-decoration: underline;
-}

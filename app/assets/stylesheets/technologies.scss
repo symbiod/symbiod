@@ -1,0 +1,30 @@
+.section-technologies .item {
+  margin: 0 auto;
+  width: 80px;
+  height: 120px;
+
+  $technologies: ruby rails phoenix javascript typescript angularjs vuejs
+                 reactjs backbonejs marionettejs nodejs css3 html5 csharp
+                 dotnet java android scala python php oracle mssql docker
+                 ansible amazon;
+
+  $technologies_with_png_icon: elixir linux;
+
+  @each $technology in $technologies {
+    &.#{$technology} {
+      background: asset-data-url('technologies/#{$technology}.svg') no-repeat;
+      background-size: contain;
+      background-position-x: center;
+      background-position-y: center;
+    }
+  }
+  // Dirty fix for elixir: no svg for it
+  @each $technology in $technologies_with_png_icon {
+    &.#{$technology} {
+      background: asset-data-url('technologies/#{$technology}.png') no-repeat;
+      background-size: contain;
+      background-position-x: center;
+      background-position-y: center;
+    }
+  }
+}

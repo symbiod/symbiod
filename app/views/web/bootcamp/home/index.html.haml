@@ -18,3 +18,41 @@
                                                   id: 'join-via-github',
                                                   class: 'btn btn-lg btn-secondary'
 
+%br
+
+%h2.cover-heading= t('bootcamp.landing.who.title')
+%p.lead
+  = t('bootcamp.landing.who.body')
+
+%br
+
+%h2.cover-heading= t('bootcamp.landing.opensource.title')
+%p.lead
+  = t('bootcamp.landing.opensource.body')
+
+%br
+
+%h2.cover-heading= t('bootcamp.landing.nda.title')
+%p.lead
+  = t('bootcamp.landing.nda.body')
+
+%br
+
+%h2.cover-heading= t('bootcamp.landing.audience.title')
+%p.lead
+  = t('bootcamp.landing.audience.body')
+
+%br
+
+%h2.cover-heading= t('bootcamp.landing.technologies.title')
+%p.lead
+  = t('bootcamp.landing.technologies.body')
+%p.lead
+  %section.section-technologies{ style: 'border-bottom: 2px solid #303236;' }
+    .container
+      .row.mb20
+        - %w(ruby rails javascript typescript css3 html5).each do |tech|
+          .col-xs-4.col-sm-2.xs-box
+            .item{ class: tech }
+
+

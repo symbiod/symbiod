@@ -1,8 +1,23 @@
 en:
   bootcamp:
     landing:
-      title: Upgrade your member skills
-      body: Take part in real-life non-profit opensource projects
+      who:
+        title: Who we are?
+        body: GiveMePOC is a non-profitable community of developers, designers, managers and QA engineers, who share their experience and help non-profit organizations with their product development. All our activities are as transparent as possible.
+      opensource:
+        title: What do we do?
+        body: We offer our members to contribute to non-profit projects development. All members will be able to get an experience in team collaboration, best coding practices and delivering real world features. 
+      nda:
+        title: Forget about NDA
+        body: All your effort will be available as an opensource at GitHub, so you can show it to your potential employers.
+      audience:
+        title: Both for Junior and Senior specialists
+        body: Your current level does not matter. Most of our members are junior developers, but even experienced specialists can always learn something new about architecture, leadership and management.
+      technologies:
+        title: Technologies we use
+        body: We are constantly looking for new mentors, who is familiar with different technologies, and is able to enforce our team. At the moment our expertise is limited to the following technologies.
+      title: Receive a new expertise
+      body: To join our community we offer to complete a short walk-through with a simple knowledge test.
       github_login: Sign in via GitHub
       unfilled_github_email: Please fill your github profile according to our <a href='https://github.com/howtohireme/wiki/wiki/First-Steps' target='_blank'>guidelines</a>
       proceed_with_wizard: Follow sign up wizard
