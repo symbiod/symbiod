@@ -194,7 +194,6 @@ ActiveRecord::Schema.define(version: 2018_08_29_061451) do
     t.string "timezone"
     t.string "cv_url"
     t.integer "approver_id"
-    t.datetime "last_screening_followup_date", default: -> { "CURRENT_TIMESTAMP" }
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
