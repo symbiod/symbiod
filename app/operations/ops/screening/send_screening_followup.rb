@@ -13,7 +13,7 @@ module Ops
 
         roles.each do |role|
           ::Screening::SendFollowupMailer.notify(role.id).deliver_later
-          role.user.set_last_screening_followup_date
+          role.set_last_screening_followup_date
         end
       end
     end

@@ -16,7 +16,7 @@ module Roles
                             state: %i[pending
                                       profile_completed
                                       policy_accepted] })
-            .where('users.last_screening_followup_date > ?', 3.days.ago)
+            .where('roles.last_screening_followup_date > ?', 3.days.ago)
       end
     end
   end

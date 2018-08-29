@@ -59,8 +59,4 @@ class User < ApplicationRecord
   def primary_skill
     skills.find_by(user_skills: { primary: true })
   end
-
-  def set_last_screening_followup_date
-    update(last_screening_followup_date: DateTime.now)
-  end
 end

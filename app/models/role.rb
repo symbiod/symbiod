@@ -17,4 +17,8 @@ class Role < ApplicationRecord
   def is?(role_name)
     name == role_name.to_s
   end
+
+  def set_last_screening_followup_date
+    update(last_screening_followup_date: DateTime.now)
+  end
 end
