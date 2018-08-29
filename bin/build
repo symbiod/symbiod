@@ -4,4 +4,14 @@
 # Otherwise we may get openssl incompatibility error, because
 # the image has different OpenSSL version, than Travis host system.
 rm -rf ./vendor/bundle
-docker build --build-arg master_key=$RAILS_MASTER_KEY -t registry.heroku.com/peaceful-refuge-95132/web -f Dockerfile .
+
+if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+  CURRENT_TAG="latest"
+else
+  CURRENT_TAG=$TRAVIS_BRANCH 
+fi
+
+docker login -u "$DOCKER_HUB_USERNAME" -p "$DOCKER_HUB_PASSWORD"
+docker build --build-arg master_key=$RAILS_MASTER_KEY -t howtohireme/give-me-poc:$CURRENT_TAG -f Dockerfile .
+docker push howtohireme/give-me-poc:$CURRENT_TAG
+

@@ -11,7 +11,9 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
   echo "Using master branch of features"
   echo "Current branch is master, using 'latest' tag"
   CURRENT_TAG="latest"
+	APP_IMAGE_TAG="latest"
 else
+	APP_IMAGE_TAG=$TRAVIS_BRANCH
   if [ `git branch --list -r origin/$TRAVIS_BRANCH` ]; then
     echo "Using $TRAVIS_BRANCH branch of features"
     echo "Travis branch is $TRAVIS_BRANCH, using '$TRAVIS_BRANCH' tag"
@@ -24,10 +26,8 @@ else
   fi
 fi
 
-# We don't want to run features for PR builds
-if [[ "$TRAVIS_EVENT_TYPE" == "push" ]]; then
-  export CURRENT_TAG
-  bin/run
-else
-	echo "Skip build for PR event"
-fi
+export CURRENT_TAG
+export APP_IMAGE_TAG
+docker pull howtohireme/give-me-poc:$APP_IMAGE_TAG
+docker tag howtohireme/give-me-poc:$APP_IMAGE_TAG registry.heroku.com/peaceful-refuge-95132/web:latest
+bin/run
