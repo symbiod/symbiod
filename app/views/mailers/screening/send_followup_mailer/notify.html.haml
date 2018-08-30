@@ -1,0 +1,11 @@
+%p.lead
+  = t('dashboard.users.mailers.uncompleted.title')
+%p
+  #{t('dashboard.users.mailers.hello')} #{@role.user.full_name}
+%p
+  #{t('dashboard.users.mailers.uncompleted.body_part_one')}
+  %b
+    = @role_name
+  #{t('dashboard.users.mailers.uncompleted.body_part_two')}
+  = link_to t('dashboard.users.mailers.uncompleted.link'), root_url
+  #{t('dashboard.users.mailers.uncompleted.body_part_three')}

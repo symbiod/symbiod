@@ -6,7 +6,6 @@ github:
     client_id: <%= ENV['GITHUB_CLIENT_ID'] %>
     secret: <%= ENV['GITHUB_SECRET'] %>
     callback_domain: <%= ENV['GITHUB_CALLBACK_DOMAIN'] %>
-
 slack:
   default_channel: 'bootcamp'
   ideas_channel: 'ideas'
@@ -15,3 +14,5 @@ slack:
 notifications:
   email:
     default_from: 'givemepoc@gmail.com'
+sheduler:
+  time: '10:00'
