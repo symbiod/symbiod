@@ -13,3 +13,18 @@ p.link a {
     margin-top: 70px;
   }
 }
+
+footer {
+  .social {
+    margin-bottom: 15px;
+
+    img {
+      margin: 5px;
+
+      &.facebook {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}

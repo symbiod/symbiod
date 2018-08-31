@@ -1,0 +1,11 @@
+%footer.mastfoot.mt-auto
+  .inner
+    .social
+      = link_to Settings.github.project.url, target: '_blank' do
+        = image_tag 'github.png'
+      = link_to Settings.facebook.page.url, target: '_blank' do
+        = image_tag 'facebook.png', class: 'facebook'
+    %p
+      = t('landing.footer.built_by')
+      = succeed ', 2018' do
+        = link_to 'HowToHireMe', 'https://howtohireme.ru', target: '_blank'
