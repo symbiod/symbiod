@@ -8,7 +8,7 @@ module Screening
     queue_as :default
 
     def perform
-      Ops::Member::Screening::SendScreeningFollowup.call
+      Ops::Screening::SendScreeningFollowup.call
     end
   end
 end
