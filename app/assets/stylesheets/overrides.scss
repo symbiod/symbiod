@@ -1,0 +1,15 @@
+body {
+  box-shadow: none;
+}
+
+p.link a {
+  text-decoration: underline;
+}
+
+.cover-container {
+  max-width: 50em;
+
+  .cover {
+    margin-top: 70px;
+  }
+}
