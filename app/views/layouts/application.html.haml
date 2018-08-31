@@ -13,7 +13,6 @@
     = render partial: 'layouts/shared/analytics'
 
   %body.text-center
-    = render partial: 'layouts/shared/fork_me'
     .cover-container.d-flex.h-100.p-3.mx-auto.flex-column
       %header.masthead.mb-auto
         .inner
@@ -31,9 +30,5 @@
       %section.py-5
         = yield :counter
 
-      %footer.mastfoot.mt-auto
-        .inner
-          %p
-            = t('landing.footer.built_by')
-            = succeed ', 2018' do
-              = link_to 'HowToHireMe', 'https://howtohireme.ru', target: '_blank'
+      = render partial: 'layouts/shared/footer'
+
