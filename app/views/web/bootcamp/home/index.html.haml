@@ -1,52 +1,13 @@
-%h1.cover-heading= t('bootcamp.landing.title')
+= Web::Bootcamp::LandingBlock.('bootcamp.landing')
 %p.lead
-  = t('bootcamp.landing.body')
-%p.lead
-  -# TODO: Good candidate for cell extraction
-  - if current_user
-    - if wizard.active?
-      = link_to t('bootcamp.landing.proceed_with_wizard'), current_wizard_step_url,
-                                                           class: 'btn btn-lg btn-secondary'
-    - elsif DashboardPolicy.new(current_user, nil).index?
-      = link_to t('bootcamp.landing.go_to_dashboard'), dashboard_root_url,
-                                                       class: 'btn btn-lg btn-secondary'
-    - else
-      .alert.alert-danger{ role: 'alert' }
-        = t('bootcamp.landing.account_disabled')
-  - else
-    = link_to t('bootcamp.landing.github_login'), bootcamp_auth_at_provider_url(provider: :github),
-                                                  id: 'join-via-github',
-                                                  class: 'btn btn-lg btn-secondary'
+  = cell(Web::Bootcamp::JoinButton, wizard, current_wizard_step_url: current_wizard_step_url).()
+  
+= Web::Bootcamp::LandingBlock.('bootcamp.landing.who')
+= Web::Bootcamp::LandingBlock.('bootcamp.landing.opensource')
+= Web::Bootcamp::LandingBlock.('bootcamp.landing.nda')
+= Web::Bootcamp::LandingBlock.('bootcamp.landing.audience')
 
-%br
-
-%h2.cover-heading= t('bootcamp.landing.who.title')
-%p.lead
-  = t('bootcamp.landing.who.body')
-
-%br
-
-%h2.cover-heading= t('bootcamp.landing.opensource.title')
-%p.lead
-  = t('bootcamp.landing.opensource.body')
-
-%br
-
-%h2.cover-heading= t('bootcamp.landing.nda.title')
-%p.lead
-  = t('bootcamp.landing.nda.body')
-
-%br
-
-%h2.cover-heading= t('bootcamp.landing.audience.title')
-%p.lead
-  = t('bootcamp.landing.audience.body')
-
-%br
-
-%h2.cover-heading= t('bootcamp.landing.technologies.title')
-%p.lead
-  = t('bootcamp.landing.technologies.body')
+= Web::Bootcamp::LandingBlock.('bootcamp.landing.technologies')
 %p.lead
   %section.section-technologies{ style: 'border-bottom: 2px solid #303236;' }
     .container

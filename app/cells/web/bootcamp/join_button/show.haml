@@ -1,0 +1,14 @@
+- if current_user
+  - if wizard.active?
+    = link_to t('bootcamp.landing.proceed_with_wizard'), wizard_step,
+                                                         class: 'btn btn-lg btn-secondary'
+  - elsif DashboardPolicy.new(current_user, nil).index?
+    = link_to t('bootcamp.landing.go_to_dashboard'), dashboard_root_url,
+                                                     class: 'btn btn-lg btn-secondary'
+  - else
+    .alert.alert-danger{ role: 'alert' }
+      = t('bootcamp.landing.account_disabled')
+- else
+  = link_to t('bootcamp.landing.github_login'), bootcamp_auth_at_provider_url(provider: :github),
+                                                id: 'join-via-github',
+                                                class: 'btn btn-lg btn-secondary'

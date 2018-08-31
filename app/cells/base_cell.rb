@@ -13,6 +13,7 @@ class BaseCell < Cell::ViewModel
   include MarkdownHelper
   include Pundit
   include ActionView::Helpers::TranslationHelper
+  include ::Rails.application.routes.url_helpers
 
   def current_user
     controller.current_user
