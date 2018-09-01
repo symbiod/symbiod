@@ -33,7 +33,7 @@
         %ul.list-unstyled
           - @test_task_assignments.each do |test_task_assignment|
             %li= test_task_assignment.test_task.title
-    - if UserPolicy.new(nil, @user).approvered?
+    - if UserPolicy.new(nil, @user).approved?
       %tr
         %td
           %b= t('dashboard.users.table.approver')
