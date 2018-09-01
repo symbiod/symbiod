@@ -13,18 +13,25 @@ en:
     success_login: 'Login successful'
     failed_login: 'Login failed'
     logout: 'Logged out'
-    title: 'The great oppurtunities'
-    body: 'For everyone who has some programming skills or an idea of an awesome project '
+    title: A symbiosis of specialists and non-profits
+    body: |
+      We help specialists improve their skills through the contribution to non-profit projects.
+      <br>
+      <br>
+      We welcome everyone with some development, design or management skills,
+      as well as organizations or individuals who need help with the implementation of their non-profitable mission.
     counters:
       members: Members
       mentors: Mentors
       projects: Projects
-    member: 'Member'
-    entrepreneur: 'Entrepreneur'
+    member: Specialist
+    entrepreneur: Organization
     alerts:
       not_authenticated_dashboard_access: 'You should sign in before accessing Dashboard'
     footer:
       built_by: 'Proudly built by'
+    partners:
+      title: Our partners
   notes:
     fields:
       commenter: Commenter

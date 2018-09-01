@@ -28,3 +28,24 @@ footer {
     }
   }
 }
+
+p.lead {
+  a {
+    &#offer-idea {
+      width: 180px;
+      white-space: normal;
+    }
+    &#join-bootcamp {
+      width: 180px;
+    }
+
+    img {
+      &.howtohireme {
+        width: 300px;
+      }
+      &.netology {
+        height: 55px;
+      }
+    }
+  }
+}
