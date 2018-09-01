@@ -1,12 +1,21 @@
 %h1.cover-heading= t('landing.title')
 %p.lead
-  = t('landing.body')
+  = raw t('landing.body')
 %p.lead
   = link_to t('landing.entrepreneur'), idea_root_url, id: 'offer-idea', class: 'btn btn-lg btn-secondary'
   = link_to t('landing.member'), bootcamp_root_url, id: 'join-bootcamp', class: 'btn btn-lg btn-secondary'
 
-= content_for :counter do
+%br
+%br
+
+%h3.cover-heading= t('landing.partners.title')
+%p.lead
+  = link_to 'https://howtohireme.ru/', target: '_blank' do
+    = image_tag 'partners/howtohireme.png', class: 'howtohireme'
+  = link_to 'https://netology.ru/', target: '_blank' do
+    = image_tag 'partners/netology.png', class: 'netology'
+
+%section.py-5
   = render partial: 'web/shared/counter', locals: { members_size: @members_size,
                                                     mentors_size: @mentors_size,
                                                     projects_size: @projects_size }
-
