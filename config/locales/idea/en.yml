@@ -20,8 +20,12 @@ en:
       access:
         deny: Access is denied to proposals
     landing:
-      title: Have an awesome project idea?
-      body: We can provide you a development team, with designers, managers and quality assurance engineers for free!
+      title: Have an idea of non-profitable project?
+      body: |
+        We can provide offer you a development team, with designers, managers and quality assurance engineers for free!
+        <br>
+        The only limitation, is that all source code will be available in our public GitHub,
+        and its commercial usage won't be allowed due to the license.
       go_to_dashboard: Go to dashboard
       go_to_proposal: Go to proposal
       author_log_in: Offer an idea
