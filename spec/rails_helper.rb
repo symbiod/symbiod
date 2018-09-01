@@ -25,6 +25,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
+  config.include PunditViewPolicy, type: :view
   config.include FactoriesHelper
   config.include RolesHelper
   config.extend CellsHelper
