@@ -4,29 +4,31 @@ module Ops
   module Member
     # Get random test task depending on skill and position
     class AssignTestTasks < BaseOperation
-      step :create_test_task_assignments!
+      step :find_test_tasks!
+      failure :complete_screening!
+      success :setup_test_task_assignments!
 
       private
 
-      def create_test_task_assignments!(_ctx, user:, positions:, **)
-        @user = user
-        @positions = positions
-        test_tasks.each do |test_task|
-          user.test_task_assignments.create!(test_task: test_task)
-        end
-      end
-
-      def test_tasks
+      def find_test_tasks!(ctx, user:, positions:, **)
         # TODO: potentially unsafe picking just first role
         # we need probably to pass which role do we want to assign.
         # ATM not sure how to figure out that.
-        (1..@positions).inject([]) do |test_tasks, position|
-          test_tasks << ::Member::TestTask.active.where(
-            position: position,
-            role_name: @user.roles_name.first,
-            skill_id: @user.primary_skill.id
-          ).sample
-        end.compact
+        ctx[:test_tasks] = []
+        (1..positions).each do |position|
+          ctx[:test_tasks] << TestTasks::ByPositionRoleAndSkillQuery.new(position, user).call.sample
+        end
+        ctx[:test_tasks].compact.present?
+      end
+
+      def complete_screening!(_ctx, user:, **)
+        Ops::Member::Screening::Finish.call(user: user)
+      end
+
+      def setup_test_task_assignments!(ctx, user:, **)
+        ctx[:test_tasks].compact.each do |test_task|
+          user.test_task_assignments.create!(test_task: test_task)
+        end
       end
     end
   end

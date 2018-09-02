@@ -14,7 +14,6 @@ module Ops
       success :assign_initial_role!
       success :assign_primary_skill!
       success :complete_profile!
-      success :start_screening!
 
       private
 
@@ -29,11 +28,6 @@ module Ops
 
       def complete_profile!(_ctx, user:, **)
         role(user).complete_profile!
-      end
-
-      # TODO: move to accept policy operation
-      def start_screening!(_ctx, user:, **)
-        Ops::Member::Screening::Start.call(user: user)
       end
     end
   end

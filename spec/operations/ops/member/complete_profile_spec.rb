@@ -38,13 +38,6 @@ describe Ops::Member::CompleteProfile do
           .to(skill)
       end
 
-      it 'calls StartScreening operation' do
-        expect(Ops::Member::Screening::Start)
-          .to receive(:call)
-          .with(user: user)
-        subject.call(user: user, params: params)
-      end
-
       it 'assigns role to user' do
         subject.call(user: user, params: params)
         expect(user.has_role?(non_user_params[:role])).to be true
@@ -67,13 +60,6 @@ describe Ops::Member::CompleteProfile do
       it 'does not create primary skill for user' do
         expect { subject.call(user: user, params: params) }
           .not_to change(user.reload, :primary_skill)
-      end
-
-      it 'does not call StartScreening operation' do
-        expect(Ops::Member::Screening::Start)
-          .not_to receive(:call)
-          .with(user: user)
-        subject.call(user: user, params: params)
       end
 
       it 'does not assign role to user' do
