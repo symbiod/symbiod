@@ -1,0 +1,10 @@
+ru:
+  mailers:
+    member:
+      onboarding_started:
+        feedback: We would also like you to leave feedback about onboarding
+                  by answering a few
+        questions: questions
+      onboarding:
+        survey_responses:
+          subject: Новый отзыв добавлен

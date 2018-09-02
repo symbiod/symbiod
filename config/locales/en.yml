@@ -1,18 +1,18 @@
 en:
   landing:
-    brand: 'Give Me POC'
+    brand: Give Me POC
     navigation:
-      home: 'Home'
-      bootcamp: 'Bootcamp'
-      idea: 'Ideas'
-      dashboard: 'Dashboard'
-      sign_up: 'Sign up'
-      sign_in: 'Sign in'
-      logout: 'Logout'
-    success_register: 'Successfully registered'
-    success_login: 'Login successful'
-    failed_login: 'Login failed'
-    logout: 'Logged out'
+      home: Home
+      bootcamp: Bootcamp
+      ideas: Ideas
+      dashboard: Dashboard
+      sign_up: Sign up
+      sign_in: Sign in
+      logout: Logout
+    success_register: Successfully registered
+    success_login: Login successful
+    failed_login: Login failed
+    logout: Logged out
     title: A symbiosis of specialists and non-profits
     body: |
       We help specialists improve their skills through the contribution to non-profit projects.
@@ -27,9 +27,9 @@ en:
     member: Specialist
     entrepreneur: Organization
     alerts:
-      not_authenticated_dashboard_access: 'You should sign in before accessing Dashboard'
+      not_authenticated_dashboard_access: You should sign in before accessing Dashboard
     footer:
-      built_by: 'Proudly built by'
+      built_by: Proudly built by team
     partners:
       title: Our partners
   notes:

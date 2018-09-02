@@ -1,0 +1,277 @@
+ru:
+  dashboard:
+    navigation:
+      profile: Profile
+      dashboard: Dashboard
+      applicants: Applicants
+      survey_responses: Feedbacks
+      feedback_questions: Questions
+      test_tasks: Test Tasks
+      users: Users management
+      skills: Skills management
+      ideas: Ideas
+      projects: Projects
+      reports: Reports
+      analytics: Analytics
+      activity: Activity
+      my_projects: My projects
+      mentored: Mentored
+    profile:
+      edit:
+        title: Edit your profile
+        button: Edit
+      update:
+        button: Update
+        flash:
+          success: Profile is updated
+      email: Email
+      location: Location
+      timezone: Timezone
+      cv_url: CV url
+      edit_title: Edit your profile
+      roles: Available roles
+      primary_skill: Primary skill
+      registration_date: Registration date
+    candidates:
+      notices:
+        activated: The candidate was activated
+        rejected: The candidate was rejected
+      reject: Reject
+      activate: Activate
+      confirm_rejection: Do you really want to reject this candidate?
+    users:
+      unassign_role: "Unassign role %{role}"
+      assign_role: "Assign role %{role}"
+      confirm:
+        unassign_role: "Are you sure to unassign role %{role}"
+        assign_role: "Are you sure to assign role %{role}"
+      edit:
+        header: Edit user
+      access:
+        deny: The user does not have permission to access this page
+      notices:
+        activated: The user was activated
+        disabled: The user was disabled
+        add_role: role was added
+        remove_role: role was removed
+        update: The user was updated
+      alert:
+        last_role: Can not remove the last role
+      table:
+        applicants: Applicants
+        approver: Approver
+        email: Email
+        full_name: Full name
+        github_user: GitHub user
+        progress: Progress
+        roles: Roles
+        status: Status
+        task_assignments: Task assignments
+        date_registration: Date registration
+        tasks: Tasks
+        pending: pending
+        invited: invited
+        joined: joined
+        left: left
+        completed: completed
+        not_completed: not completed
+      link:
+        confirm:
+          disable: Are you sure to disable?
+          activate: Are you sure to activate?
+        review_applicant: Review applicant
+      mailers:
+        disabled:
+          subject: Account was disabled
+          account_was_disabled: Your account was disabled
+        rejected:
+          subject: Your request was rejected
+        uncompleted:
+          subject: Uncompleted screening
+          title: Your screening is not completed
+          body_part_one: It looks like you haven't completed our sign up wizard to role
+          body_part_two: . Follow the
+          link: link
+          body_part_three: to do that, and you will be able to get some real-world experience!
+        feedback: Feedback
+        hello: Hello
+      button:
+        edit: Edit
+      headers:
+        notes: Notes
+        user: User
+        onboarding_progress: Onboarding progress
+    member_test_task:
+      link:
+        confirm:
+          disable: Are you sure to disable?
+          activate: Are you sure to activate?
+      notices:
+        update: The test task was updated
+        create: The test task was created
+        deactivated: The test task was disabled
+        activated: The test task was activated
+      edit:
+        header: Edit test task
+      new:
+        header: New test task
+      index:
+        header: Bootcamp test tasks
+      title: Title
+      state: Status
+      position: Position
+      description: Description
+      button:
+        new: New test Task
+      completed: completed
+      not_completed: not completed
+      skill: Skill
+    skills:
+      headers:
+        index: Skills
+        new: New skill
+        edit: Edit skill
+      button:
+        new: New
+        create: Create
+        update: Update
+      table:
+        title: Title
+        status: Status
+      create:
+        success: The skill was created
+        danger: Could not create skill
+      update:
+        success: The skill was updated
+        danger: Could not update skill
+      notice:
+        activate: The skill was activated
+        deactivate: The skill was disabled
+      confirm:
+        active: Are you sure to active?
+        disable: Are you sure to disable?
+    ideas:
+      table:
+        name: Name
+        description: Description
+        status: Status
+        manage: Manage
+        author: Author
+        votes: Votes
+      headers:
+        show: Idea id
+        index: Ideas
+        edit: Edit idea
+        new: New idea
+      button:
+        new: New
+        update: Update
+        create: Create
+        voting: Voting
+        activate: Activate
+        disable: Disable
+        reject: Reject
+      update:
+        success: Idea was updated
+        danger: Could not update idea
+      notice:
+        voting: The idea change state to voting
+        activated: The idea change state to active
+        deactivated: The idea change state to disabled
+        rejected: The idea change state to rejected
+      confirm:
+        voting: Are you sure to voting?
+        active: Are you sure to active?
+        disable: Are you sure to disable?
+    votes:
+      headers:
+        index: Index page
+      table:
+        user: User
+        vote_type: Vote type
+      notice:
+        success: Thanks for the vote
+        success_project: Thanks for the decisive voice, the project was created
+        warning: Sorry, but you already voted for this idea
+    projects:
+      update:
+        success: Project was success updated
+        danger: Could not update project
+      headers:
+        index: Index
+        show: Show
+        edit: Edit
+      table:
+        id: Id
+        name: Name
+        author: Author
+        stack: Stack
+        members: Members
+    roles:
+      notices:
+        deactivated: Role was deactivated
+        activated: Role was activated
+    survey_responses:
+      empty_questions: Sorry, but the list of questions is empty
+      mailers:
+        text: You can click on the link to view the
+      tables:
+        users: Users
+      notices:
+        success: Thank you for your feedback
+        feedback: Please leave a feedback about onboarding
+        completed: User left feedback after onboarding
+      headers:
+        new: We will be glad if you leave feedback
+        show: This feedback by
+        index: Feedbacks users
+      links:
+        feedback: feedback
+      buttons:
+        create: Leave feedback
+    feedback_questions:
+      notices:
+        success:
+          create: Question was success created
+          update: Question was success updated
+          destroy: Question was deleted
+        danger:
+          create: Question was not created
+          update: Question was not updated
+      tables:
+        description: Question
+        key_name: Key name
+      headers:
+        index: All feedback questions
+        edit: Edit question
+        new: New question
+      buttons:
+        create: Create
+        update: Update
+        cancel: Cancel
+      confirm:
+        destroy: Are you sure to delete this question?
+    cells:
+      button:
+        pending: pending
+        idea_pending: pending
+        profile_completed: profile completed
+        rejected: rejected
+        policy_accepted: policy accepted
+        screening_completed: screening completed
+        active: active
+        disabled: disabled
+        invited: invited
+        joined: joined
+        left: left
+        voting: voting
+        completed: completed
+        up: up
+        down: down
+      links:
+        confirm:
+          disable: Are you sure to disable?
+          activate: Are you sure to activate?
+          voting: Are you sure to voting?
+          up: Are you sure to up vote?
+          down: Are you sure to down vote?

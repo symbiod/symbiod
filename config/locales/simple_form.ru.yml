@@ -1,28 +1,28 @@
-en:
+ru:
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": 'Да'
+    "no": 'Нет'
     required:
-      text: required
+      text: Обязательно
       mark: '*'
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: 'Please review the problems below:'
+      default_message: 'Обнаружены следующие проблемы:'
     labels:
       member_wizard_profile:
         edit:
-          first_name: First name
-          last_name: Last name
-          location: Location
-          timezone: Timezone
-          cv_url: CV url
-          role: Role
-          primary_skill_id: Primary skill
+          first_name: Имя
+          last_name: Фамилия
+          location: Местоположение
+          timezone: Часовой пояс
+          cv_url: Резюме или Linkedin
+          role: Уровень
+          primary_skill_id: Специализация
       member_test_task_result:
-        edit:
-          link: Link
+        index:
+          link: Ссылка
     # Examples
     # labels:
     #   defaults:

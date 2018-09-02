@@ -27,6 +27,9 @@ en:
       title: Fill your member profile
       body: We prefer to work with real people who has real names
       submit: Submit
+      roles:
+        member: Member
+        mentor: Mentor
     screening:
       title: Prove your skills
       body: Complete several small quizes, to show that you know the basics
@@ -34,6 +37,8 @@ en:
       wait_for_tasks_review: Let us check you answers, and we'll be back to you soon.
       completed: Screening was completed
       rejection: You were rejected
+      question: Question
+      review_by_link: You can make a review of the applicant by clicking on the link
     onboarding:
       started: Onboarding started!
     policy:
