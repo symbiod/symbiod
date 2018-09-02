@@ -11,14 +11,8 @@ module Ops
       private
 
       def find_test_tasks!(ctx, user:, positions:, **)
-        # TODO: potentially unsafe picking just first role
-        # we need probably to pass which role do we want to assign.
-        # ATM not sure how to figure out that.
-        ctx[:test_tasks] = []
-        (1..positions).each do |position|
-          ctx[:test_tasks] << TestTasks::ByPositionRoleAndSkillQuery.new(position, user).call.sample
-        end
-        ctx[:test_tasks].compact.present?
+        ctx[:test_tasks] = TestTasks::ForApplicationQuery.new(positions, user).call
+        ctx[:test_tasks].present?
       end
 
       def complete_screening!(_ctx, user:, **)
@@ -26,7 +20,7 @@ module Ops
       end
 
       def setup_test_task_assignments!(ctx, user:, **)
-        ctx[:test_tasks].compact.each do |test_task|
+        ctx[:test_tasks].each do |test_task|
           user.test_task_assignments.create!(test_task: test_task)
         end
       end

@@ -9,77 +9,51 @@ describe Ops::Member::AssignTestTasks do
     let!(:positions) { Ops::Member::Screening::Start::NUMBER_OF_ASSIGNED_TEST_TASKS }
     let!(:role) { user.roles.first }
     let!(:skill) { user.primary_skill }
+    let!(:query) { double }
+    before do
+      allow(TestTasks::ForApplicationQuery)
+        .to receive(:new)
+        .with(positions, user)
+        .and_return(query)
+    end
 
-    shared_examples 'no test tasks' do
-      it 'does not assign test tasks to user' do
-        expect { subject }.to change { user.test_task_assignments.count }.by(0)
+    shared_examples 'run query test tasks' do
+      it 'run query test tasks' do
+        expect(query).to receive(:call)
+        subject
       end
+    end
 
-      it 'calls complete screening' do
+    context 'no test tasks' do
+      it_behaves_like 'run query test tasks'
+
+      it 'complete screening' do
+        allow(query).to receive(:call).and_return([])
         expect(Ops::Member::Screening::Finish).to receive(:call).with(user: user)
         subject
       end
+
+      it 'does not assign test tasks to user' do
+        allow(query).to receive(:call).and_return([])
+        expect { subject }.to change { user.test_task_assignments.count }.by(0)
+      end
     end
 
-    shared_examples 'complete screening not calls' do
+    context 'exist test tasks' do
+      let!(:test_task_1) { create(:member_test_task, skill: skill, role_name: role.name) }
+      let!(:test_task_2) { create(:member_test_task, skill: skill, role_name: role.name) }
+
+      it_behaves_like 'run query test tasks'
+
       it 'complete screening not calls' do
+        allow(query).to receive(:call).and_return([test_task_1, test_task_2])
         expect(Ops::Member::Screening::Finish).not_to receive(:call).with(user: user)
         subject
       end
-    end
 
-    describe 'number of available tasks' do
-      context 'no test tasks exist' do
-        it_behaves_like 'no test tasks'
-      end
-
-      context 'all test tasks are disabled' do
-        before do
-          create_list(:member_test_task, 2, :disabled, skill: skill, role_name: role.name)
-        end
-
-        it_behaves_like 'no test tasks'
-      end
-
-      context 'less test tasks exist than required number' do
-        before do
-          create(:member_test_task, skill: skill, role_name: role.name)
-        end
-
-        it 'assigns all existing test tasks to user' do
-          expect { subject }
-            .to change { user.test_task_assignments.count }
-            .by(Member::TestTask.count)
-        end
-
-        it_behaves_like 'complete screening not calls'
-      end
-
-      context 'multiple test tasks exist' do
-        before do
-          # We can't use here create_list since the position field in the factory
-          # is shuffled, and in case if we create two first positioned records,
-          # then the spec will fail
-          create(:member_test_task, :first_position, skill: skill, role_name: role.name)
-          create(:member_test_task, :second_position, skill: skill, role_name: role.name)
-          create(:member_test_task, :first_position, skill: skill, role_name: role.name)
-        end
-
-        it 'assigns all existing test tasks to user' do
-          expect { subject }.to change { user.test_task_assignments.reload.count }.by(positions)
-        end
-
-        it_behaves_like 'complete screening not calls'
-      end
-
-      context 'no test tasks with proper skill' do
-        let(:another_skill) { create(:skill) }
-
-        before do
-          create_list(:member_test_task, positions + 1, skill: another_skill, role_name: role.name)
-        end
-
-        it_behaves_like 'no test tasks'
+      it 'assign test tasks to user' do
+        allow(query).to receive(:call).and_return([test_task_1, test_task_2])
+        expect { subject }.to change { user.test_task_assignments.count }.by(2)
       end
     end
   end

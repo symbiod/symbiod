@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-describe TestTasks::ByPositionRoleAndSkillQuery do
-  subject { described_class.new(position, user).call }
+describe TestTasks::ForApplicationQuery do
+  subject { described_class.new(positions, user).call }
   let!(:user) { create(:user, :member, :with_primary_skill) }
-  let!(:position) { 1 }
+  let!(:positions) { Ops::Member::Screening::Start::NUMBER_OF_ASSIGNED_TEST_TASKS }
   let!(:role) { user.roles.first }
   let!(:skill) { user.primary_skill }
 
