@@ -9,6 +9,12 @@
       %tr
         %td Email
         %td= @candidate.email
+      %tr
+        %td Profile
+        %td= link_to @candidate.full_name, dashboard_user_url(@candidate)
+      %tr
+        %td Primary skill
+        %td= @candidate.primary_skill&.title
       - @candidate.test_task_assignments.each do |assignment|
         %tr
           %td= assignment.test_task.title
