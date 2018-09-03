@@ -11,8 +11,6 @@ describe 'web/dashboard/test_task_assignments/show' do
                               :active,
                               first_name: 'Bob',
                               last_name: 'Marley'))
-    assign(:roles, [create(:role)])
-    assign(:test_task_assignments, [create(:member_test_task_assignment)])
   end
 
   it 'renders without error' do
