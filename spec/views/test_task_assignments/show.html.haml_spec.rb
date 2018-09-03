@@ -4,11 +4,11 @@ require 'rails_helper'
 
 describe 'web/dashboard/test_task_assignments/show' do
   before do
-    assign(:skill, create(:skill, title: 'Java'))
     assign(:candidate, create(:user,
                               :member,
                               :with_assignment_completed,
                               :active,
+                              :with_primary_skill_java,
                               first_name: 'Bob',
                               last_name: 'Marley'))
   end
@@ -21,6 +21,6 @@ describe 'web/dashboard/test_task_assignments/show' do
     render
 
     expect(rendered).to match /Bob Marley/
-    # expect(rendered).to match /Java/
+    expect(rendered).to match /Java/
   end
 end
