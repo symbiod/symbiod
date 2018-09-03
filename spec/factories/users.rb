@@ -130,6 +130,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_assignment_completed do
+      after(:create) do |user|
+        create(:member_test_task_assignment, :completed, member: user)
+      end
+    end
+
     trait :authenticated_through_github do
       after(:create) do |user|
         create(:authentication, :github, user: user)
