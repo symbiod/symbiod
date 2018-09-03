@@ -4,13 +4,13 @@ require 'rails_helper'
 
 describe 'web/dashboard/test_task_assignments/show' do
   before do
-    assign(:skill, create(:skill, :title => 'Java'))
+    assign(:skill, create(:skill, title: 'Java'))
     assign(:candidate, create(:user,
                               :member,
                               :with_assignment_completed,
                               :active,
-                              :first_name => 'Bob',
-                              :last_name => 'Marley'))
+                              first_name: 'Bob',
+                              last_name: 'Marley'))
     assign(:roles, [create(:role)])
     assign(:test_task_assignments, [create(:member_test_task_assignment)])
   end
