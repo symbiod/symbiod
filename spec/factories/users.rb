@@ -162,8 +162,8 @@ FactoryBot.define do
     end
 
     trait :with_primary_skill_java do
-      after(:create) do |user, options|
-        skill_name = "Java"
+      after(:create) do |user|
+        skill_name = 'Java'
         skill = Skill.find_or_create_by(title: skill_name)
         create(:user_skill, :primary, skill: skill, user: user)
       end

@@ -20,7 +20,7 @@ describe 'web/dashboard/test_task_assignments/show' do
   it 'renders contain' do
     render
 
-    expect(rendered).to match /Bob Marley/
-    expect(rendered).to match /Java/
+    expect(rendered).to match(/Bob Marley/)
+    expect(rendered).to match(/Java/)
   end
 end
