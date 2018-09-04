@@ -12,7 +12,7 @@ module Users
     end
 
     def call
-      staff + mentors_by_skill
+      (staff + mentors_by_skill).uniq
     end
 
     private
