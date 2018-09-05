@@ -1,9 +1,6 @@
 ---
 en:
   dashboard:
-    test_task_assignments:
-      show: 
-        title: Candidate
     candidates:
       activate: Activate
       confirm_rejection: Do you really want to reject this candidate?
@@ -208,6 +205,9 @@ en:
         success: Thank you for your feedback
       tables:
         users: Users
+    test_task_assignments:
+      show:
+        title: Candidate
     title: Dashboard
     users:
       access:

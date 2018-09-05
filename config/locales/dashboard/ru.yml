@@ -1,9 +1,6 @@
 ---
 ru:
   dashboard:
-    test_task_assignments:
-      show: 
-        title: Заявка на участие
     candidates:
       activate: Активировать
       confirm_rejection: Вы точно хотите отклонить участника?
@@ -208,6 +205,9 @@ ru:
         success: Спасибо за ваш отзыв
       tables:
         users: Пользователи
+    test_task_assignments:
+      show:
+        title: Заявка на участие
     title: Стартовая точка
     users:
       access:

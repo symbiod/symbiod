@@ -1,9 +1,5 @@
 ---
 en:
-  locales:
-    link:
-      en: In russian
-      ru: In english
   dashboard:
     ideas:
       button:
@@ -59,6 +55,10 @@ en:
     success_login: Login successful
     success_register: Successfully registered
     title: A symbiosis of specialists and non-profits
+  locales:
+    link:
+      en: In russian
+      ru: In english
   notes:
     buttons:
       create: Create
