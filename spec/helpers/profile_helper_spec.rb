@@ -17,15 +17,6 @@ describe ProfileHelper do
     }
   end
 
-  describe 'test_task_link' do
-    it {
-      user_assigment = with_assignment_completed.test_task_assignments.first
-      user_assigment_link = user_assigment.test_task_result.link
-      expect(test_task_link(user_assigment))
-        .to eq "<a target=\"_blank\" href=\"#{user_assigment_link}\">#{user_assigment_link}</a>"
-    }
-  end
-
   def user_github
     CGI.escapeHTML(user.github)
   end
