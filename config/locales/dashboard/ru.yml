@@ -7,7 +7,10 @@ ru:
       notices:
         activated: Новый участник активирован
         rejected: Участник отклонен
+      primary_skill: Специализация
+      profile: Профиль
       reject: Отклонить
+      test_task: Тестовое задание
       title: Заявки на участие
     cells:
       button:

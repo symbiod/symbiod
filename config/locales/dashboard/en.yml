@@ -7,7 +7,10 @@ en:
       notices:
         activated: The candidate was activated
         rejected: The candidate was rejected
+      primary_skill: Primary skill
+      profile: Profile
       reject: Reject
+      test_task: Test task
       title: Candidates
     cells:
       button:
