@@ -1,6 +1,9 @@
 ---
 ru:
   dashboard:
+    test_task_assignments:
+      show: 
+        title: Заявка на участие
     candidates:
       activate: Активировать
       confirm_rejection: Вы точно хотите отклонить участника?

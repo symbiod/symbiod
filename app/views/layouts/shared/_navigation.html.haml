@@ -5,3 +5,5 @@
                                              class: 'nav-link' if policy(:dashboard).index?
 = link_to t('landing.navigation.logout'), logout_url, method: :delete, class: 'nav-link' if current_user
 
+.p_r
+  = link_to t("locales.link.#{I18n.locale}"), toggle_locales_url

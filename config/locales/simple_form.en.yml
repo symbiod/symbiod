@@ -11,6 +11,9 @@ en:
         new:
           description: Description
           key_name: Key
+      member_test_task_assignment:
+        new:
+          feedback: Feedback
       member_test_task_result:
         edit:
           link: Link

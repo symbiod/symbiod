@@ -11,6 +11,9 @@ ru:
         new:
           description: Описание
           key_name: Ключ
+      member_test_task_assignment:
+        new:
+          feedback: Рекомендации
       member_test_task_result:
         edit:
           link: Ссылка

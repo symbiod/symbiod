@@ -1,5 +1,9 @@
 ---
 en:
+  locales:
+    link:
+      en: In russian
+      ru: In english
   dashboard:
     ideas:
       button:
