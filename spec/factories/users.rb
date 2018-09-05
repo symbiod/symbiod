@@ -130,6 +130,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_assignment_completed do
+      after(:create) do |user|
+        create(:member_test_task_assignment, :completed, member: user)
+      end
+    end
+
     trait :authenticated_through_github do
       after(:create) do |user|
         create(:authentication, :github, user: user)
@@ -150,6 +156,14 @@ FactoryBot.define do
       # Allow to pass custom skill name to the user factory
       after(:create) do |user, options|
         skill_name = options.skill_name || "#{Faker::Job.field}-#{Time.now.to_f}"
+        skill = Skill.find_or_create_by(title: skill_name)
+        create(:user_skill, :primary, skill: skill, user: user)
+      end
+    end
+
+    trait :with_primary_skill_java do
+      after(:create) do |user|
+        skill_name = 'Java'
         skill = Skill.find_or_create_by(title: skill_name)
         create(:user_skill, :primary, skill: skill, user: user)
       end

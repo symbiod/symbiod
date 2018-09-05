@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe ProfileHelper do
   subject(:user) { create(:user) }
+  subject(:with_assignment_completed) { create(:user, :with_assignment_completed) }
 
   describe 'human_date' do
     it { expect(human_date(user)).to eq user.created_at.strftime('%d-%m-%Y') }
