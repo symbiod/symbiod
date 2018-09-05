@@ -41,6 +41,7 @@ en:
       confirm_rejection: Do you really want to reject this candidate?
       profile: Profile
       primary_skill: Primary skill
+      test_task: Link to test task
     users:
       unassign_role: "Unassign role %{role}"
       assign_role: "Assign role %{role}"
