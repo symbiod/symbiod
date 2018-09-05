@@ -1,28 +1,9 @@
+---
 ru:
   simple_form:
-    "yes": 'Да'
-    "no": 'Нет'
-    required:
-      text: Обязательно
-      mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: 'Обнаружены следующие проблемы:'
     labels:
-      member_wizard_profile:
-        edit:
-          first_name: Имя
-          last_name: Фамилия
-          location: Местоположение
-          timezone: Часовой пояс
-          cv_url: Резюме или Linkedin
-          role: Уровень
-          primary_skill_id: Специализация
-      member_test_task_result:
-        index:
-          link: Ссылка
       member_onboarding_feedback_question:
         create:
           description: Описание
@@ -30,22 +11,20 @@ ru:
         new:
           description: Описание
           key_name: Ключ
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-    # include_blanks:
-    #   defaults:
-    #     age: 'Rather not say'
-    # prompts:
-    #   defaults:
-    #     age: 'Select your age'
+      member_test_task_result:
+        index:
+          link: Ссылка
+      member_wizard_profile:
+        edit:
+          cv_url: Резюме или Linkedin
+          first_name: Имя
+          last_name: Фамилия
+          location: Местоположение
+          primary_skill_id: Специализация
+          role: Уровень
+          timezone: Часовой пояс
+    'no': Нет
+    required:
+      mark: "*"
+      text: Обязательно
+    'yes': Да

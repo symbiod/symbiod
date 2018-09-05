@@ -1,52 +1,53 @@
+---
 en:
   landing:
-    brand: Give Me POC
-    navigation:
-      home: Home
-      bootcamp: Bootcamp
-      ideas: Ideas
-      dashboard: Dashboard
-      sign_up: Sign up
-      sign_in: Sign in
-      logout: Logout
-    success_register: Successfully registered
-    success_login: Login successful
-    failed_login: Login failed
-    logout: Logged out
-    title: A symbiosis of specialists and non-profits
+    alerts:
+      not_authenticated_dashboard_access: You should sign in before accessing Dashboard
     body: |
       We help specialists improve their skills through the contribution to non-profit projects.
       <br>
       <br>
       We welcome everyone with some development, design or management skills,
       as well as organizations or individuals who need help with the implementation of their non-profitable mission.
+    brand: Give Me POC
     counters:
       members: Members
       mentors: Mentors
       projects: Projects
-    member: Specialist
     entrepreneur: Organization
-    alerts:
-      not_authenticated_dashboard_access: You should sign in before accessing Dashboard
+    failed_login: Login failed
     footer:
       built_by: Proudly built by team
+    logout: Logged out
+    member: Specialist
+    navigation:
+      bootcamp: Bootcamp
+      dashboard: Dashboard
+      home: Home
+      ideas: Ideas
+      logout: Logout
+      sign_in: Sign in
+      sign_up: Sign up
     partners:
       title: Our partners
+    success_login: Login successful
+    success_register: Successfully registered
+    title: A symbiosis of specialists and non-profits
   notes:
-    fields:
-      commenter: Commenter
-      note: Note
     buttons:
       create: Create
       update: Update
+    fields:
+      commenter: Commenter
+      note: Note
     noties:
+      access_denied: Not enough rights to create a note
+      confirm:
+        destroy: Are you sure to delete this note?
       danger:
         create: Not all fields are filled in the note
         update: Not all fields are filled in the note
       success:
         create: Note was successfully created
-        update: Note was successfully updated
         destroy: Note was successfully deleted
-      confirm:
-        destroy: Are you sure to delete this note?
-      access_denied: Not enough rights to create a note
+        update: Note was successfully updated
