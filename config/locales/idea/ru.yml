@@ -1,26 +1,8 @@
+---
 ru:
   idea:
-    sessions:
-      submit: Отправить
-      new:
-        header: Войти
-        sign_up: Зарегистрироваться
-        new_user: Нет аккаунта?
-        have_account: Уже зарегистрированы?
-      access:
-        deny: Вы уже вошли в систему
-    registrations:
-      submit: Регистрация
-      access:
-        deny: Вы уже вошли в систему
-    proposals:
-      new:
-        header: Предложить идею некоммерческого проекта
-      propose: Отправить
-      access:
-        deny: Доступ закрыт
     landing:
-      title: У вас есть идея некоммерческого проекта?
+      author_log_in: Предложить идею
       body: |
         Мы можем дать вам команду разработчиков, дизайнеров, менеджеров и тестировщиков для ее реализации бесплатно!
         <br>
@@ -28,23 +10,36 @@ ru:
         и коммерческое использование проекта будет запрещено лицензией.
       go_to_dashboard: К проектам
       go_to_proposal: К идее
-      author_log_in: Предложить идею
+      title: У вас есть идея некоммерческого проекта?
       wait_for_idea_approve: Спасибо! Мы рассмотрим вашу идею и ответим как можно скорее.
+    proposals:
+      access:
+        deny: Доступ закрыт
+      new:
+        header: Предложить идею некоммерческого проекта
+      propose: Отправить
+    registrations:
+      access:
+        deny: Вы уже вошли в систему
+      submit: Регистрация
+    sessions:
+      access:
+        deny: Вы уже вошли в систему
+      new:
+        have_account: Уже зарегистрированы?
+        header: Войти
+        new_user: Нет аккаунта?
+        sign_up: Зарегистрироваться
+      submit: Отправить
     wizard:
-      policy:
-        title: Наша политика
-        body:
-          By accept this you approve your agreement with our policy located at
-          Принимая это, вы соглашаетесь выполнять условия описанные в нашей
-          <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>.
-          <br />
-          Мы требуем выполнение политики всеми авторами проектов.
-        accept: Я принимаю
-        submit: Отправить
-        must_be_accepted: Для прохождения к следующему шагу, вы должны принять нашу политику.
-      proposals:
-        fill_all_fields: Заполните все поля
       mailers:
         activated:
           subject: Ваша учетная запись активирована
-
+      policy:
+        accept: Я принимаю
+        body: By accept this you approve your agreement with our policy located at Принимая это, вы соглашаетесь выполнять условия описанные в нашей <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>. <br /> Мы требуем выполнение политики всеми авторами проектов.
+        must_be_accepted: Для прохождения к следующему шагу, вы должны принять нашу политику.
+        submit: Отправить
+        title: Наша политика
+      proposals:
+        fill_all_fields: Заполните все поля

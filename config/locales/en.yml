@@ -1,5 +1,27 @@
 ---
 en:
+  dashboard:
+    ideas:
+      button:
+        edit: Edit
+      confirm:
+        reject: Reject
+    member_test_task:
+      role: Role
+    navigation:
+      logout: Logout
+    profile:
+      github: Github
+    projects:
+      button:
+        edit: Edit
+    users:
+      table:
+        primary_skill: Primary skill
+  dashbooard:
+    projects:
+      update:
+        danger: Danger
   landing:
     alerts:
       not_authenticated_dashboard_access: You should sign in before accessing Dashboard
@@ -51,3 +73,10 @@ en:
         create: Note was successfully created
         destroy: Note was successfully deleted
         update: Note was successfully updated
+  views:
+    pagination:
+      first: First
+      last: Last
+      next: Next
+      previous: Previous
+      truncate: Truncate

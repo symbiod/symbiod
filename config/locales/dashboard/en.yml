@@ -1,283 +1,281 @@
+---
 en:
   dashboard:
-    title: Dashboard
-    navigation:
-      profile: Profile
-      dashboard: Dashboard
-      applicants: Applicants
-      survey_responses: Feedbacks
-      feedback_questions: Questions
-      test_tasks: Test Tasks
-      users: Users management
-      skills: Skills management
-      ideas: Ideas
-      projects: Projects
-      reports: Reports
-      analytics: Analytics
-      activity: Activity
-      my_projects: My projects
-      mentored: Mentored
-    profile:
-      edit:
-        title: Edit your profile
-        button: Edit
-      update:
-        button: Update
-        flash:
-          success: Profile is updated
-      email: Email
-      location: Location
-      timezone: Timezone
-      cv_url: CV url
-      edit_title: Edit your profile
-      roles: Available roles
-      primary_skill: Primary skill
-      registration_date: Registration date
     candidates:
-      title: Candidates
+      activate: Activate
+      confirm_rejection: Do you really want to reject this candidate?
       notices:
         activated: The candidate was activated
         rejected: The candidate was rejected
       reject: Reject
-      activate: Activate
-      confirm_rejection: Do you really want to reject this candidate?
-      profile: Profile
-      primary_skill: Primary skill
-      test_task: Link to test task
-    users:
-      title: Users
-      unassign_role: "Unassign role %{role}"
-      assign_role: "Assign role %{role}"
+      title: Candidates
+    cells:
+      button:
+        active: active
+        completed: completed
+        disabled: disabled
+        down: down
+        idea_pending: pending
+        invited: invited
+        joined: joined
+        left: left
+        pending: pending
+        policy_accepted: policy accepted
+        profile_completed: profile completed
+        rejected: rejected
+        screening_completed: screening completed
+        up: up
+        voting: voting
+      links:
+        confirm:
+          activate: Are you sure to activate?
+          disable: Are you sure to disable?
+          down: Are you sure to down vote?
+          up: Are you sure to up vote?
+          voting: Are you sure to voting?
+    feedback_questions:
+      buttons:
+        cancel: Cancel
+        create: Create
+        update: Update
       confirm:
-        unassign_role: "Are you sure to unassign role %{role}"
-        assign_role: "Are you sure to assign role %{role}"
+        destroy: Are you sure to delete this question?
+      headers:
+        edit: Edit question
+        index: All feedback questions
+        new: New question
+      notices:
+        danger:
+          create: Question was not created
+          update: Question was not updated
+        success:
+          create: Question was success created
+          destroy: Question was deleted
+          update: Question was success updated
+      tables:
+        description: Question
+        key_name: Key name
+    ideas:
+      button:
+        activate: Activate
+        create: Create
+        disable: Disable
+        new: New
+        reject: Reject
+        update: Update
+        voting: Voting
+      confirm:
+        active: Are you sure to active?
+        disable: Are you sure to disable?
+        voting: Are you sure to voting?
+      headers:
+        edit: Edit idea
+        index: Ideas
+        new: New idea
+        show: Idea id
+      notice:
+        activated: The idea change state to active
+        deactivated: The idea change state to disabled
+        rejected: The idea change state to rejected
+        voting: The idea change state to voting
+      table:
+        author: Author
+        description: Description
+        manage: Manage
+        name: Name
+        status: Status
+        votes: Votes
+      update:
+        danger: Could not update idea
+        success: Idea was updated
+    member_test_task:
+      button:
+        new: New test Task
+      completed: completed
+      description: Description
       edit:
-        header: Edit user
+        header: Edit test task
+      index:
+        header: Bootcamp test tasks
+      link:
+        confirm:
+          activate: Are you sure to activate?
+          disable: Are you sure to disable?
+      new:
+        header: New test task
+      not_completed: not completed
+      notices:
+        activated: The test task was activated
+        create: The test task was created
+        deactivated: The test task was disabled
+        update: The test task was updated
+      position: Position
+      skill: Skill
+      state: Status
+      title: Title
+    navigation:
+      activity: Activity
+      analytics: Analytics
+      applicants: Applicants
+      dashboard: Dashboard
+      feedback_questions: Questions
+      ideas: Ideas
+      mentored: Mentored
+      my_projects: My projects
+      profile: Profile
+      projects: Projects
+      reports: Reports
+      skills: Skills management
+      survey_responses: Feedbacks
+      test_tasks: Test Tasks
+      users: Users management
+    profile:
+      cv_url: CV url
+      edit:
+        button: Edit
+        title: Edit your profile
+      edit_title: Edit your profile
+      email: Email
+      location: Location
+      primary_skill: Primary skill
+      registration_date: Registration date
+      roles: Available roles
+      timezone: Timezone
+      update:
+        button: Update
+        flash:
+          success: Profile is updated
+    projects:
+      headers:
+        edit: Edit
+        index: Index
+        show: Show
+      table:
+        author: Author
+        id: Id
+        members: Members
+        name: Name
+        stack: Stack
+      update:
+        danger: Could not update project
+        success: Project was success updated
+    roles:
+      notices:
+        activated: Role was activated
+        deactivated: Role was deactivated
+    skills:
+      button:
+        create: Create
+        new: New
+        update: Update
+      confirm:
+        active: Are you sure to active?
+        disable: Are you sure to disable?
+      create:
+        danger: Could not create skill
+        success: The skill was created
+      headers:
+        edit: Edit skill
+        index: Skills
+        new: New skill
+      notice:
+        activate: The skill was activated
+        deactivate: The skill was disabled
+      table:
+        status: Status
+        title: Title
+      update:
+        danger: Could not update skill
+        success: The skill was updated
+    survey_responses:
+      buttons:
+        create: Leave feedback
+      empty_questions: Sorry, but the list of questions is empty
+      headers:
+        index: Feedbacks users
+        new: We will be glad if you leave feedback
+        show: This feedback by
+      links:
+        feedback: feedback
+      mailers:
+        text: You can click on the link to view the
+      notices:
+        completed: User left feedback after onboarding
+        feedback: Please leave a feedback about onboarding
+        success: Thank you for your feedback
+      tables:
+        users: Users
+    title: Dashboard
+    users:
       access:
         deny: The user does not have permission to access this page
-      notices:
-        activated: The user was activated
-        disabled: The user was disabled
-        add_role: role was added
-        remove_role: role was removed
-        update: The user was updated
       alert:
         last_role: Can not remove the last role
+      assign_role: Assign role %{role}
+      button:
+        edit: Edit
+      confirm:
+        assign_role: Are you sure to assign role %{role}
+        unassign_role: Are you sure to unassign role %{role}
+      edit:
+        header: Edit user
+      headers:
+        notes: Notes
+        onboarding_progress: Onboarding progress
+        user: User
+      link:
+        confirm:
+          activate: Are you sure to activate?
+          disable: Are you sure to disable?
+        review_applicant: Review applicant
+      mailers:
+        disabled:
+          account_was_disabled: Your account was disabled
+          subject: Account was disabled
+        feedback: Feedback
+        hello: Hello
+        rejected:
+          subject: Your request was rejected
+        uncompleted:
+          body_part_one: It looks like you haven't completed our sign up wizard to role
+          body_part_three: to do that, and you will be able to get some real-world experience!
+          body_part_two: ". Follow the"
+          link: link
+          subject: Uncompleted screening
+          title: Your screening is not completed
+      notices:
+        activated: The user was activated
+        add_role: role was added
+        disabled: The user was disabled
+        remove_role: role was removed
+        update: The user was updated
       table:
         applicants: Applicants
         approver: Approver
+        completed: completed
+        date_registration: Date registration
         email: Email
         full_name: Full name
         github_user: GitHub user
+        invited: invited
+        joined: joined
+        left: left
+        not_completed: not completed
+        pending: pending
         progress: Progress
         roles: Roles
         status: Status
         task_assignments: Task assignments
-        date_registration: Date registration
         tasks: Tasks
-        pending: pending
-        invited: invited
-        joined: joined
-        left: left
-        completed: completed
-        not_completed: not completed
-      link:
-        confirm:
-          disable: Are you sure to disable?
-          activate: Are you sure to activate?
-        review_applicant: Review applicant
-      mailers:
-        disabled:
-          subject: Account was disabled
-          account_was_disabled: Your account was disabled
-        rejected:
-          subject: Your request was rejected
-        uncompleted:
-          subject: Uncompleted screening
-          title: Your screening is not completed
-          body_part_one: It looks like you haven't completed our sign up wizard to role
-          body_part_two: . Follow the
-          link: link
-          body_part_three: to do that, and you will be able to get some real-world experience!
-        feedback: Feedback
-        hello: Hello
-      button:
-        edit: Edit
-      headers:
-        notes: Notes
-        user: User
-        onboarding_progress: Onboarding progress
-    member_test_task:
-      link:
-        confirm:
-          disable: Are you sure to disable?
-          activate: Are you sure to activate?
-      notices:
-        update: The test task was updated
-        create: The test task was created
-        deactivated: The test task was disabled
-        activated: The test task was activated
-      edit:
-        header: Edit test task
-      new:
-        header: New test task
-      index:
-        header: Bootcamp test tasks
-      title: Title
-      state: Status
-      position: Position
-      description: Description
-      button:
-        new: New test Task
-      completed: completed
-      not_completed: not completed
-      skill: Skill
-    skills:
-      headers:
-        index: Skills
-        new: New skill
-        edit: Edit skill
-      button:
-        new: New
-        create: Create
-        update: Update
-      table:
-        title: Title
-        status: Status
-      create:
-        success: The skill was created
-        danger: Could not create skill
-      update:
-        success: The skill was updated
-        danger: Could not update skill
-      notice:
-        activate: The skill was activated
-        deactivate: The skill was disabled
-      confirm:
-        active: Are you sure to active?
-        disable: Are you sure to disable?
-    ideas:
-      table:
-        name: Name
-        description: Description
-        status: Status
-        manage: Manage
-        author: Author
-        votes: Votes
-      headers:
-        show: Idea id
-        index: Ideas
-        edit: Edit idea
-        new: New idea
-      button:
-        new: New
-        update: Update
-        create: Create
-        voting: Voting
-        activate: Activate
-        disable: Disable
-        reject: Reject
-      update:
-        success: Idea was updated
-        danger: Could not update idea
-      notice:
-        voting: The idea change state to voting
-        activated: The idea change state to active
-        deactivated: The idea change state to disabled
-        rejected: The idea change state to rejected
-      confirm:
-        voting: Are you sure to voting?
-        active: Are you sure to active?
-        disable: Are you sure to disable?
+      title: Users
+      unassign_role: Unassign role %{role}
     votes:
       headers:
         index: Index page
-      table:
-        user: User
-        vote_type: Vote type
       notice:
         success: Thanks for the vote
         success_project: Thanks for the decisive voice, the project was created
         warning: Sorry, but you already voted for this idea
-    projects:
-      update:
-        success: Project was success updated
-        danger: Could not update project
-      headers:
-        index: Index
-        show: Show
-        edit: Edit
       table:
-        id: Id
-        name: Name
-        author: Author
-        stack: Stack
-        members: Members
-    roles:
-      notices:
-        deactivated: Role was deactivated
-        activated: Role was activated
-    survey_responses:
-      empty_questions: Sorry, but the list of questions is empty
-      mailers:
-        text: You can click on the link to view the
-      tables:
-        users: Users
-      notices:
-        success: Thank you for your feedback
-        feedback: Please leave a feedback about onboarding
-        completed: User left feedback after onboarding
-      headers:
-        new: We will be glad if you leave feedback
-        show: This feedback by
-        index: Feedbacks users
-      links:
-        feedback: feedback
-      buttons:
-        create: Leave feedback
-    feedback_questions:
-      notices:
-        success:
-          create: Question was success created
-          update: Question was success updated
-          destroy: Question was deleted
-        danger:
-          create: Question was not created
-          update: Question was not updated
-      tables:
-        description: Question
-        key_name: Key name
-      headers:
-        index: All feedback questions
-        edit: Edit question
-        new: New question
-      buttons:
-        create: Create
-        update: Update
-        cancel: Cancel
-      confirm:
-        destroy: Are you sure to delete this question?
-    cells:
-      button:
-        pending: pending
-        idea_pending: pending
-        profile_completed: profile completed
-        rejected: rejected
-        policy_accepted: policy accepted
-        screening_completed: screening completed
-        active: active
-        disabled: disabled
-        invited: invited
-        joined: joined
-        left: left
-        voting: voting
-        completed: completed
-        up: up
-        down: down
-      links:
-        confirm:
-          disable: Are you sure to disable?
-          activate: Are you sure to activate?
-          voting: Are you sure to voting?
-          up: Are you sure to up vote?
-          down: Are you sure to down vote?
+        user: User
+        vote_type: Vote type

@@ -14,6 +14,8 @@ en:
       member_test_task_result:
         edit:
           link: Link
+        index:
+          link: Link
       member_wizard_profile:
         edit:
           cv_url: CV url

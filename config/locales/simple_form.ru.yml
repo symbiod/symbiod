@@ -12,6 +12,8 @@ ru:
           description: Описание
           key_name: Ключ
       member_test_task_result:
+        edit:
+          link: Ссылка
         index:
           link: Ссылка
       member_wizard_profile:

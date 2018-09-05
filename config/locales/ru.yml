@@ -1,5 +1,27 @@
 ---
 ru:
+  dashboard:
+    ideas:
+      button:
+        edit: Редактировать
+      confirm:
+        reject: Вы точно хотите отклонить?
+    member_test_task:
+      role: Уровень
+    navigation:
+      logout: Выйти
+    profile:
+      github: Github
+    projects:
+      button:
+        edit: Редактировать
+    users:
+      table:
+        primary_skill: Специализация
+  dashbooard:
+    projects:
+      update:
+        danger: Не удалось обновить проект
   landing:
     alerts:
       not_authenticated_dashboard_access: Вы должны войти в систему для доступа к проектам
@@ -51,3 +73,10 @@ ru:
         create: Заметка успешно создана
         destroy: Заметка успешно удалена
         update: Заметка успешно обновлена
+  views:
+    pagination:
+      first: Первая
+      last: Последняя
+      next: Следующая
+      previous: Предыдущая
+      truncate: Очистить
