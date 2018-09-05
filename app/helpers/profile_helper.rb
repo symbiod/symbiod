@@ -9,4 +9,8 @@ module ProfileHelper
   def github_link(user)
     link_to user.github, "https://github.com/#{user.github}", target: :_blank
   end
+
+  def test_task_link(assignment)
+    link_to assignment.test_task_result.link, "#{assignment.test_task_result.link}", target: :_blank
+  end
 end
