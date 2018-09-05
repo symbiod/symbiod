@@ -1,4 +1,4 @@
-%h2 Bootcamp candidates
+%h2= t('dashboard.candidates.title')
 
 .table-responsive
   %table.table.table-striped.table-sm
@@ -6,15 +6,9 @@
       %tr
         %th #
         %th Email
-        %th Header
-        %th Header
-        %th Header
     %tbody
       - @candidates.each do |candidate|
         %tr
           %td= candidate.id
           %td= link_to candidate.email, dashboard_test_task_assignment_url(candidate)
-          %td ipsum
-          %td dolor
-          %td sit
 

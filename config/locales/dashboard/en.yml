@@ -1,5 +1,6 @@
 en:
   dashboard:
+    title: Dashboard
     navigation:
       profile: Profile
       dashboard: Dashboard
@@ -33,6 +34,7 @@ en:
       primary_skill: Primary skill
       registration_date: Registration date
     candidates:
+      title: Candidates
       notices:
         activated: The candidate was activated
         rejected: The candidate was rejected
@@ -43,6 +45,7 @@ en:
       primary_skill: Primary skill
       test_task: Link to test task
     users:
+      title: Users
       unassign_role: "Unassign role %{role}"
       assign_role: "Assign role %{role}"
       confirm:

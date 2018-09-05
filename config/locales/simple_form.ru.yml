@@ -23,6 +23,13 @@ ru:
       member_test_task_result:
         index:
           link: Ссылка
+      member_onboarding_feedback_question:
+        create:
+          description: Описание
+          key_name: Ключ
+        new:
+          description: Описание
+          key_name: Ключ
     # Examples
     # labels:
     #   defaults:

@@ -5,9 +5,9 @@
 %table.table.table-striped.table-sm
   %thead
     %tr
-      %th= t('idea.propose.name')
-      %th= t('idea.propose.status')
-      %th= t('idea.propose.author')
+      %th= t('dashboard.ideas.table.name')
+      %th= t('dashboard.ideas.table.status')
+      %th= t('dashboard.ideas.table.author')
     - @ideas.each do |idea|
       %tr
         %td= link_to idea.name, dashboard_idea_url(idea)

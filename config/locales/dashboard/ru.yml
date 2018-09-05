@@ -1,277 +1,280 @@
 ru:
   dashboard:
+    title: Стартовая точка
     navigation:
-      profile: Profile
-      dashboard: Dashboard
-      applicants: Applicants
-      survey_responses: Feedbacks
-      feedback_questions: Questions
-      test_tasks: Test Tasks
-      users: Users management
-      skills: Skills management
-      ideas: Ideas
-      projects: Projects
-      reports: Reports
-      analytics: Analytics
-      activity: Activity
-      my_projects: My projects
-      mentored: Mentored
+      profile: Профиль
+      dashboard: Главная
+      applicants: Новый участники
+      survey_responses: Отзывы
+      feedback_questions: Вопросы для отзывов
+      test_tasks: Тестовые задания
+      users: Участники
+      skills: Специализации
+      ideas: Идеи
+      projects: Проекты
+      reports: Отчеты
+      analytics: Аналитика
+      activity: Активность
+      my_projects: Мои проекты
+      mentored: Управляемые проекты
     profile:
       edit:
-        title: Edit your profile
-        button: Edit
+        title: Редактирование профиля
+        button: Изменить
       update:
-        button: Update
+        button: Обновить
         flash:
-          success: Profile is updated
+          success: Профиль обновлен
       email: Email
-      location: Location
-      timezone: Timezone
-      cv_url: CV url
-      edit_title: Edit your profile
-      roles: Available roles
-      primary_skill: Primary skill
-      registration_date: Registration date
+      location: Местоположение
+      timezone: Часовой пояс
+      cv_url: Резюме/Linkedin
+      edit_title: Редактирование профиля
+      roles: Роли
+      primary_skill: Специализация
+      registration_date: Дата регистрации
     candidates:
+      title: Заявки на участие
       notices:
-        activated: The candidate was activated
-        rejected: The candidate was rejected
-      reject: Reject
-      activate: Activate
-      confirm_rejection: Do you really want to reject this candidate?
+        activated: Новый участник активирован
+        rejected: Участник отклонен
+      reject: Отклонить
+      activate: Активировать
+      confirm_rejection: Вы точно хотите отклонить участника?
     users:
-      unassign_role: "Unassign role %{role}"
-      assign_role: "Assign role %{role}"
+      title: Участники
+      unassign_role: Убрать роль %{role}
+      assign_role: Назначить роль %{role}
       confirm:
-        unassign_role: "Are you sure to unassign role %{role}"
-        assign_role: "Are you sure to assign role %{role}"
+        unassign_role: Вы точно хотите убрать роль %{role}?
+        assign_role: Вы точно хотите назначить роль %{role}?
       edit:
-        header: Edit user
+        header: Изменить пользователя
       access:
-        deny: The user does not have permission to access this page
+        deny: Не достаточно прав для доступа к странице
       notices:
-        activated: The user was activated
-        disabled: The user was disabled
-        add_role: role was added
-        remove_role: role was removed
-        update: The user was updated
+        activated: Пользователь активирован
+        disabled: Пользователь деактивирован
+        add_role: Роль добавлена
+        remove_role: Роль удалена
+        update: Пользователь обновлен
       alert:
-        last_role: Can not remove the last role
+        last_role: Вы не можете удалить единственную роль пользователя
       table:
-        applicants: Applicants
-        approver: Approver
+        applicants: Участники
+        approver: Рассмотрел заявку
         email: Email
-        full_name: Full name
-        github_user: GitHub user
-        progress: Progress
-        roles: Roles
-        status: Status
-        task_assignments: Task assignments
-        date_registration: Date registration
-        tasks: Tasks
-        pending: pending
-        invited: invited
-        joined: joined
-        left: left
-        completed: completed
-        not_completed: not completed
+        full_name: Имя
+        github_user: GitHub аккаунт
+        progress: Прогресс
+        roles: Роли
+        status: Статус
+        task_assignments: Тестовые задания
+        date_registration: Дата регистрации
+        tasks: Задания
+        pending: ожидает
+        invited: приглашен
+        joined: присоединился
+        left: покинул
+        completed: завершен
+        not_completed: не завершен
       link:
         confirm:
-          disable: Are you sure to disable?
-          activate: Are you sure to activate?
-        review_applicant: Review applicant
+          disable: Вы точно хотите деактивировать?
+          activate: Вы точно хотите активировать?
+        review_applicant: Рассмотрение кандидата
       mailers:
         disabled:
-          subject: Account was disabled
-          account_was_disabled: Your account was disabled
+          subject: Ваша учетная запись неактивна
+          account_was_disabled: Ваша учетная запись теперь не активна
         rejected:
-          subject: Your request was rejected
+          subject: Ваша заявка была отклонена
         uncompleted:
-          subject: Uncompleted screening
-          title: Your screening is not completed
-          body_part_one: It looks like you haven't completed our sign up wizard to role
-          body_part_two: . Follow the
-          link: link
-          body_part_three: to do that, and you will be able to get some real-world experience!
-        feedback: Feedback
-        hello: Hello
+          subject: Незавершенный скрининг
+          title: Вы не завершили процесс скрининга
+          body_part_one: Похоже, что вы не завершили все шаги нашего процесса регистрации
+          body_part_two: . Пройдите по
+          link: ссылке
+          body_part_three: чтобы завершить, и вы сможете присоединиться к нашему сообществу и получать новый опыт!
+        feedback: Отзыв
+        hello: Доброго времени суток
       button:
-        edit: Edit
+        edit: Редактировать
       headers:
-        notes: Notes
-        user: User
-        onboarding_progress: Onboarding progress
+        notes: Заметки
+        user: Пользователь
+        onboarding_progress: Онбординг
     member_test_task:
       link:
         confirm:
-          disable: Are you sure to disable?
-          activate: Are you sure to activate?
+          disable: Вы точно хотите деактивировать?
+          activate: Вы точно хотите активировать?
       notices:
-        update: The test task was updated
-        create: The test task was created
-        deactivated: The test task was disabled
-        activated: The test task was activated
+        update: Тестовое задание изменено
+        create: Тестовое задание создано
+        deactivated: Тестовое задание деактивировано
+        activated: Тестовое задание активировано
       edit:
-        header: Edit test task
+        header: Редактировать тестовое задание
       new:
-        header: New test task
+        header: Новое тестовое задание
       index:
-        header: Bootcamp test tasks
-      title: Title
-      state: Status
-      position: Position
-      description: Description
+        header: Тестовые задания
+      title: Название
+      state: Статус
+      position: Позиция
+      description: Описание
       button:
-        new: New test Task
-      completed: completed
-      not_completed: not completed
-      skill: Skill
+        new: Новое тестовое задание
+      completed: завершено
+      not_completed: не завершено
+      skill: Специализация
     skills:
       headers:
-        index: Skills
-        new: New skill
-        edit: Edit skill
+        index: Специализации
+        new: Новая специализация
+        edit: Редактировать специализацию
       button:
-        new: New
-        create: Create
-        update: Update
+        new: Новая
+        create: Создать
+        update: Обновить
       table:
-        title: Title
-        status: Status
+        title: Название
+        status: Статус
       create:
-        success: The skill was created
-        danger: Could not create skill
+        success: Специализация создана
+        danger: Не удалось создать специализацию
       update:
-        success: The skill was updated
-        danger: Could not update skill
+        success: Специализация обновлена
+        danger: Невозможно обновить специализацию
       notice:
-        activate: The skill was activated
-        deactivate: The skill was disabled
+        activate: Специализация активирована
+        deactivate: Специализация деактивирована
       confirm:
-        active: Are you sure to active?
-        disable: Are you sure to disable?
+        active: Вы точно хотите активировать специализацю?
+        disable: Вы точно хотите деактивировать специализацию?
     ideas:
       table:
-        name: Name
-        description: Description
-        status: Status
-        manage: Manage
-        author: Author
-        votes: Votes
+        name: Название
+        description: Описание
+        status: Статус
+        manage: Управление
+        author: Автор
+        votes: Голоса
       headers:
-        show: Idea id
-        index: Ideas
-        edit: Edit idea
-        new: New idea
+        show: Просмотр идеи
+        index: Идеи
+        edit: Редактировать
+        new: Создать
       button:
-        new: New
-        update: Update
-        create: Create
-        voting: Voting
-        activate: Activate
-        disable: Disable
-        reject: Reject
+        new: Создать
+        update: Обновить
+        create: Создать
+        voting: Голосование
+        activate: Активировать
+        disable: Деактивировать
+        reject: Отклонить
       update:
-        success: Idea was updated
-        danger: Could not update idea
+        success: Идея обновлена
+        danger: Невозможно обновить идею
       notice:
-        voting: The idea change state to voting
-        activated: The idea change state to active
-        deactivated: The idea change state to disabled
-        rejected: The idea change state to rejected
+        voting: Голосование запущено
+        activated: Идея активирована
+        deactivated: Идея неактивна
+        rejected: Идея отклонена
       confirm:
-        voting: Are you sure to voting?
-        active: Are you sure to active?
-        disable: Are you sure to disable?
+        voting: Запустить голосование?
+        active: Активировать идею?
+        disable: Деактивировать идею?
     votes:
       headers:
-        index: Index page
+        index: Голосование
       table:
-        user: User
-        vote_type: Vote type
+        user: Пользователь
+        vote_type: Голос
       notice:
-        success: Thanks for the vote
-        success_project: Thanks for the decisive voice, the project was created
-        warning: Sorry, but you already voted for this idea
+        success: Спасибо за ваш интерес
+        success_project: Спасибо за ваш решающий голос
+        warning: Вы уже голосовали за эту идею
     projects:
       update:
-        success: Project was success updated
-        danger: Could not update project
+        success: Проект обновлен
+        danger: Не удается обновить проект
       headers:
-        index: Index
-        show: Show
-        edit: Edit
+        index: Проекты
+        show: Проект
+        edit: Редактировать
       table:
         id: Id
-        name: Name
-        author: Author
-        stack: Stack
-        members: Members
+        name: Название
+        author: Автор
+        stack: Технология
+        members: Участники
     roles:
       notices:
-        deactivated: Role was deactivated
-        activated: Role was activated
+        deactivated: Роль неактивна
+        activated: Роль активна
     survey_responses:
-      empty_questions: Sorry, but the list of questions is empty
+      empty_questions: К сожалению в данный момент у нас нет вопросов
       mailers:
-        text: You can click on the link to view the
+        text: Перейдите по ссылке для просмотра
       tables:
-        users: Users
+        users: Пользователи
       notices:
-        success: Thank you for your feedback
-        feedback: Please leave a feedback about onboarding
-        completed: User left feedback after onboarding
+        success: Спасибо за ваш отзыв
+        feedback: Пожалуйста, оцените ваш опыт входа в проект
+        completed: Новый отзыв об онбординге
       headers:
-        new: We will be glad if you leave feedback
-        show: This feedback by
-        index: Feedbacks users
+        new: Мы будем рады вашим ответам
+        show: Отзыв
+        index: Пользователи
       links:
-        feedback: feedback
+        feedback: отзыв
       buttons:
-        create: Leave feedback
+        create: Оставить отзыв
     feedback_questions:
       notices:
         success:
-          create: Question was success created
-          update: Question was success updated
-          destroy: Question was deleted
+          create: Вопрос создан
+          update: Вопрос обновлен
+          destroy: Вопрос удален
         danger:
-          create: Question was not created
-          update: Question was not updated
+          create: Вопрос не создан
+          update: Вопрос не обновлен
       tables:
-        description: Question
-        key_name: Key name
+        description: Описание
+        key_name: Название
       headers:
-        index: All feedback questions
-        edit: Edit question
-        new: New question
+        index: Все вопросы
+        edit: Редактировать
+        new: Создать
       buttons:
-        create: Create
-        update: Update
-        cancel: Cancel
+        create: Создать
+        update: Обновить
+        cancel: Отмена
       confirm:
-        destroy: Are you sure to delete this question?
+        destroy: Вы точно хотите удалить вопрос?
     cells:
       button:
-        pending: pending
-        idea_pending: pending
-        profile_completed: profile completed
-        rejected: rejected
-        policy_accepted: policy accepted
-        screening_completed: screening completed
-        active: active
-        disabled: disabled
-        invited: invited
-        joined: joined
-        left: left
-        voting: voting
-        completed: completed
-        up: up
-        down: down
+        pending: на рассмотрении
+        idea_pending: на рассмотрении
+        profile_completed: профиль заполнен
+        rejected: отклонено
+        policy_accepted: политики принята
+        screening_completed: скрининг пройден
+        active: активно
+        disabled: неактивно
+        invited: приглашен
+        joined: присоединился
+        left: покинул
+        voting: голосование
+        completed: завершено
+        up: за
+        down: против
       links:
         confirm:
-          disable: Are you sure to disable?
-          activate: Are you sure to activate?
-          voting: Are you sure to voting?
-          up: Are you sure to up vote?
-          down: Are you sure to down vote?
+          disable: Вы уверены, что хотите деактивировать?
+          activate: Вы точно хотите активировать?
+          voting: Запустить голосование?
+          up: Проголосовать 'За'?
+          down: Проголосовать 'Против'?

@@ -1,49 +1,50 @@
 ru:
   idea:
     sessions:
-      submit: Submit
+      submit: Отправить
       new:
-        header: Log in
-        sign_up: Sign up
-        new_user: New to POC?
-        have_account: Already have account?
+        header: Войти
+        sign_up: Зарегистрироваться
+        new_user: Нет аккаунта?
+        have_account: Уже зарегистрированы?
       access:
-        deny: The user is already logged in
+        deny: Вы уже вошли в систему
     registrations:
-      submit: Sign up
+      submit: Регистрация
       access:
-        deny: The user is already logged in
+        deny: Вы уже вошли в систему
     proposals:
       new:
-        header: Suggest an awesome project
-      propose: Propose
+        header: Предложить идею некоммерческого проекта
+      propose: Отправить
       access:
-        deny: Access is denied to proposals
+        deny: Доступ закрыт
     landing:
-      title: Have an idea of non-profitable project?
+      title: У вас есть идея некоммерческого проекта?
       body: |
-        We can provide offer you a development team, with designers, managers and quality assurance engineers for free!
+        Мы можем дать вам команду разработчиков, дизайнеров, менеджеров и тестировщиков для ее реализации бесплатно!
         <br>
-        The only limitation, is that all source code will be available in our public GitHub,
-        and its commercial usage won't be allowed due to the license.
-      go_to_dashboard: Go to dashboard
-      go_to_proposal: Go to proposal
-      author_log_in: Offer an idea
-      wait_for_idea_approve: Thank you! We’ll consider your project idea and will back to you soon
+        Единственным нашим условием является, что все результаты работы нашей команды будут доступны в публичной GitHub организации,
+        и коммерческое использование проекта будет запрещено лицензией.
+      go_to_dashboard: К проектам
+      go_to_proposal: К идее
+      author_log_in: Предложить идею
+      wait_for_idea_approve: Спасибо! Мы рассмотрим вашу идею и ответим как можно скорее.
     wizard:
       policy:
-        title: Our policy
+        title: Наша политика
         body:
           By accept this you approve your agreement with our policy located at
+          Принимая это, вы соглашаетесь выполнять условия описанные в нашей
           <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>.
           <br />
-          Following policy is required for all project authors.
-        accept: I accept
-        submit: Submit
-        must_be_accepted: You should accept the policy for further steps.
+          Мы требуем выполнение политики всеми авторами проектов.
+        accept: Я принимаю
+        submit: Отправить
+        must_be_accepted: Для прохождения к следующему шагу, вы должны принять нашу политику.
       proposals:
-        fill_all_fields: Fill all fields to submit the idea
+        fill_all_fields: Заполните все поля
       mailers:
         activated:
-          subject: You account was activated
+          subject: Ваша учетная запись активирована
 

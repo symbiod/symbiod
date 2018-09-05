@@ -2,9 +2,12 @@ ru:
   mailers:
     member:
       onboarding_started:
-        feedback: We would also like you to leave feedback about onboarding
-                  by answering a few
-        questions: questions
+        feedback: Оставьте отзыв о вашем опыте регистрации и начала работы с системой, ответив на несколько
+        questions: вопросов
+        read: Прочитайте
+        fill_github_and_slack: Заполните Github/Slack профили в соответствии с нашими рекоммендациями
+        say_hello: Поприветствуйте всех в нашем Slack
+        pick_project: Выберите интересный вам проект и присоединитесь к его Slack каналу
       onboarding:
         survey_responses:
           subject: Новый отзыв добавлен
