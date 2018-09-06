@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: ideas
+#
+#  id                 :bigint(8)        not null, primary key
+#  name               :string           not null
+#  description        :text             not null
+#  author_id          :integer          not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  private_project    :boolean          default(FALSE)
+#  skip_bootstrapping :boolean          default(FALSE)
+#  state              :string           not null
+#
+
 # It is a model of ideas that are offered by the authors
 class Idea < ApplicationRecord
   validates :name, presence: true

@@ -1,0 +1,24 @@
+.card.bg-light.mb-3
+  %h4.card-header= t('cells.member.dashboard_header')
+  .card-body
+    %h5.card-title= t('cells.member.dashboards.projects')
+    .table-responsive.pb-5
+      %table.table.table-striped.table-sm
+        %thead
+          %tr
+            %th= t('cells.member.dashboard.title_project')
+            %th= t('cells.member.dashboard.stack')
+          - @options[:projects].each do |project|
+            %tr
+              %td= link_to project.name, dashboard_project_url(project)
+              %td= project.stack.name
+
+    %h5.card-title= t('cells.member.dashboard.github_resources')
+
+    %ul
+      %li= link_to t('cells.member.dashboard.project_issues'),
+        'https://github.com/howtohireme/give-me-poc/issues',
+        target: :_blank
+      %li= link_to t('cells.member.dashboard.setup_documentation'),
+        'https://github.com/howtohireme/give-me-poc/blob/master/docs/getting_started.md',
+        target: :_blank
