@@ -1,5 +1,5 @@
 %p.lead
-  Question
+  = t('bootcamp.screening.question')
   = current_user.test_task_assignments.count - current_user.test_task_assignments.uncompleted.count + 1
   = '/'
   = current_user.test_task_assignments.count

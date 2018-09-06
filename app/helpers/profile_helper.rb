@@ -9,4 +9,10 @@ module ProfileHelper
   def github_link(user)
     link_to user.github, "https://github.com/#{user.github}", target: :_blank
   end
+
+  def new_member_role_options
+    Member::Wizard::ProfileForm::ROLES.map do |role|
+      [t("bootcamp.profile.roles.#{role}"), role]
+    end
+  end
 end

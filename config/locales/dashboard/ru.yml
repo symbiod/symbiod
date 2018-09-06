@@ -1,0 +1,287 @@
+---
+ru:
+  dashboard:
+    candidates:
+      activate: Активировать
+      confirm_rejection: Вы точно хотите отклонить участника?
+      notices:
+        activated: Новый участник активирован
+        rejected: Участник отклонен
+      primary_skill: Специализация
+      profile: Профиль
+      reject: Отклонить
+      test_task: Тестовое задание
+      title: Заявки на участие
+    cells:
+      button:
+        active: активно
+        completed: завершено
+        disabled: неактивно
+        down: против
+        idea_pending: на рассмотрении
+        invited: приглашен
+        joined: присоединился
+        left: покинул
+        pending: на рассмотрении
+        policy_accepted: политики принята
+        profile_completed: профиль заполнен
+        rejected: отклонено
+        screening_completed: скрининг пройден
+        up: за
+        voting: голосование
+      links:
+        confirm:
+          activate: Вы точно хотите активировать?
+          disable: Вы уверены, что хотите деактивировать?
+          down: Проголосовать 'Против'?
+          up: Проголосовать 'За'?
+          voting: Запустить голосование?
+    feedback_questions:
+      buttons:
+        cancel: Отмена
+        create: Создать
+        update: Обновить
+      confirm:
+        destroy: Вы точно хотите удалить вопрос?
+      headers:
+        edit: Редактировать
+        index: Все вопросы
+        new: Создать
+      notices:
+        danger:
+          create: Вопрос не создан
+          update: Вопрос не обновлен
+        success:
+          create: Вопрос создан
+          destroy: Вопрос удален
+          update: Вопрос обновлен
+      tables:
+        description: Описание
+        key_name: Название
+    ideas:
+      button:
+        activate: Активировать
+        create: Создать
+        disable: Деактивировать
+        new: Создать
+        reject: Отклонить
+        update: Обновить
+        voting: Голосование
+      confirm:
+        active: Активировать идею?
+        disable: Деактивировать идею?
+        voting: Запустить голосование?
+      headers:
+        edit: Редактировать
+        index: Идеи
+        new: Создать
+        show: Просмотр идеи
+      notice:
+        activated: Идея активирована
+        deactivated: Идея неактивна
+        rejected: Идея отклонена
+        voting: Голосование запущено
+      table:
+        author: Автор
+        description: Описание
+        manage: Управление
+        name: Название
+        status: Статус
+        votes: Голоса
+      update:
+        danger: Невозможно обновить идею
+        success: Идея обновлена
+    member_test_task:
+      button:
+        new: Новое тестовое задание
+      completed: завершено
+      description: Описание
+      edit:
+        header: Редактировать тестовое задание
+      index:
+        header: Тестовые задания
+      link:
+        confirm:
+          activate: Вы точно хотите активировать?
+          disable: Вы точно хотите деактивировать?
+      new:
+        header: Новое тестовое задание
+      not_completed: не завершено
+      notices:
+        activated: Тестовое задание активировано
+        create: Тестовое задание создано
+        deactivated: Тестовое задание деактивировано
+        update: Тестовое задание изменено
+      position: Позиция
+      skill: Специализация
+      state: Статус
+      title: Название
+    navigation:
+      activity: Активность
+      analytics: Аналитика
+      applicants: Новый участники
+      dashboard: Главная
+      feedback_questions: Вопросы для отзывов
+      ideas: Идеи
+      mentored: Управляемые проекты
+      my_projects: Мои проекты
+      profile: Профиль
+      projects: Проекты
+      reports: Отчеты
+      skills: Специализации
+      survey_responses: Отзывы
+      test_tasks: Тестовые задания
+      users: Участники
+    profile:
+      cv_url: Резюме/Linkedin
+      edit:
+        button: Изменить
+        title: Редактирование профиля
+      edit_title: Редактирование профиля
+      email: Email
+      location: Местоположение
+      primary_skill: Специализация
+      registration_date: Дата регистрации
+      roles: Роли
+      timezone: Часовой пояс
+      update:
+        button: Обновить
+        flash:
+          success: Профиль обновлен
+    projects:
+      headers:
+        edit: Редактировать
+        index: Проекты
+        show: Проект
+      table:
+        author: Автор
+        id: Id
+        members: Участники
+        name: Название
+        stack: Технология
+      update:
+        danger: Не удается обновить проект
+        success: Проект обновлен
+    roles:
+      notices:
+        activated: Роль активна
+        deactivated: Роль неактивна
+    skills:
+      button:
+        create: Создать
+        new: Новая
+        update: Обновить
+      confirm:
+        active: Вы точно хотите активировать специализацю?
+        disable: Вы точно хотите деактивировать специализацию?
+      create:
+        danger: Не удалось создать специализацию
+        success: Специализация создана
+      headers:
+        edit: Редактировать специализацию
+        index: Специализации
+        new: Новая специализация
+      notice:
+        activate: Специализация активирована
+        deactivate: Специализация деактивирована
+      table:
+        status: Статус
+        title: Название
+      update:
+        danger: Невозможно обновить специализацию
+        success: Специализация обновлена
+    survey_responses:
+      buttons:
+        create: Оставить отзыв
+      empty_questions: К сожалению в данный момент у нас нет вопросов
+      headers:
+        index: Пользователи
+        new: Мы будем рады вашим ответам
+        show: Отзыв
+      links:
+        feedback: отзыв
+      mailers:
+        text: Перейдите по ссылке для просмотра
+      notices:
+        completed: Новый отзыв об онбординге
+        feedback: Пожалуйста, оцените ваш опыт входа в проект
+        success: Спасибо за ваш отзыв
+      tables:
+        users: Пользователи
+    test_task_assignments:
+      show:
+        title: Заявка на участие
+    title: Стартовая точка
+    users:
+      access:
+        deny: Не достаточно прав для доступа к странице
+      alert:
+        last_role: Вы не можете удалить единственную роль пользователя
+      assign_role: Назначить роль %{role}
+      button:
+        edit: Редактировать
+      confirm:
+        assign_role: Вы точно хотите назначить роль %{role}?
+        unassign_role: Вы точно хотите убрать роль %{role}?
+      edit:
+        header: Изменить пользователя
+      headers:
+        notes: Заметки
+        onboarding_progress: Онбординг
+        user: Пользователь
+      link:
+        confirm:
+          activate: Вы точно хотите активировать?
+          disable: Вы точно хотите деактивировать?
+        review_applicant: Рассмотрение кандидата
+      mailers:
+        disabled:
+          account_was_disabled: Ваша учетная запись теперь не активна
+          subject: Ваша учетная запись неактивна
+        feedback: Отзыв
+        hello: Доброго времени суток
+        rejected:
+          subject: Ваша заявка была отклонена
+        uncompleted:
+          body_part_one: Похоже, что вы не завершили все шаги нашего процесса регистрации
+          body_part_three: чтобы завершить, и вы сможете присоединиться к нашему сообществу и получать новый опыт!
+          body_part_two: ". Пройдите по"
+          link: ссылке
+          subject: Незавершенный скрининг
+          title: Вы не завершили процесс скрининга
+      notices:
+        activated: Пользователь активирован
+        add_role: Роль добавлена
+        disabled: Пользователь деактивирован
+        remove_role: Роль удалена
+        update: Пользователь обновлен
+      table:
+        applicants: Участники
+        approver: Рассмотрел заявку
+        completed: завершен
+        date_registration: Дата регистрации
+        email: Email
+        full_name: Имя
+        github_user: GitHub аккаунт
+        invited: приглашен
+        joined: присоединился
+        left: покинул
+        not_completed: не завершен
+        pending: ожидает
+        progress: Прогресс
+        roles: Роли
+        status: Статус
+        task_assignments: Тестовые задания
+        tasks: Задания
+      title: Участники
+      unassign_role: Убрать роль %{role}
+    votes:
+      headers:
+        index: Голосование
+      notice:
+        success: Спасибо за ваш интерес
+        success_project: Спасибо за ваш решающий голос
+        warning: Вы уже голосовали за эту идею
+      table:
+        user: Пользователь
+        vote_type: Голос

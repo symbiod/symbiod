@@ -4,5 +4,5 @@
 %p Email: #{mail_to @user.email}
 %p Github: #{github_link(@user)}
 %p
-  You can make a review of the applicant by clicking on the link
+  = t('bootcamp.screening.review_by_link')
   = link_to @user.full_name, dashboard_test_task_assignment_url(@user), target: :_blank

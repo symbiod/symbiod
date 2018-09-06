@@ -1,0 +1,45 @@
+---
+ru:
+  idea:
+    landing:
+      author_log_in: Предложить идею
+      body: |
+        Мы можем дать вам команду разработчиков, дизайнеров, менеджеров и тестировщиков для ее реализации бесплатно!
+        <br>
+        Единственным нашим условием является, что все результаты работы нашей команды будут доступны в публичной GitHub организации,
+        и коммерческое использование проекта будет запрещено лицензией.
+      go_to_dashboard: К проектам
+      go_to_proposal: К идее
+      title: У вас есть идея некоммерческого проекта?
+      wait_for_idea_approve: Спасибо! Мы рассмотрим вашу идею и ответим как можно скорее.
+    proposals:
+      access:
+        deny: Доступ закрыт
+      new:
+        header: Предложить идею некоммерческого проекта
+      propose: Отправить
+    registrations:
+      access:
+        deny: Вы уже вошли в систему
+      submit: Регистрация
+    sessions:
+      access:
+        deny: Вы уже вошли в систему
+      new:
+        have_account: Уже зарегистрированы?
+        header: Войти
+        new_user: Нет аккаунта?
+        sign_up: Зарегистрироваться
+      submit: Отправить
+    wizard:
+      mailers:
+        activated:
+          subject: Ваша учетная запись активирована
+      policy:
+        accept: Я принимаю
+        body: By accept this you approve your agreement with our policy located at Принимая это, вы соглашаетесь выполнять условия описанные в нашей <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>. <br /> Мы требуем выполнение политики всеми авторами проектов.
+        must_be_accepted: Для прохождения к следующему шагу, вы должны принять нашу политику.
+        submit: Отправить
+        title: Наша политика
+      proposals:
+        fill_all_fields: Заполните все поля

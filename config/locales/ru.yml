@@ -1,15 +1,86 @@
+---
 ru:
-  landing:
-    brand: 'Give Me POC'
+  dashboard:
+    ideas:
+      button:
+        edit: Редактировать
+      confirm:
+        reject: Вы точно хотите отклонить?
+    member_test_task:
+      role: Уровень
     navigation:
-      home: 'Главная'
-      bootcamp: 'Разработчикам'
-      idea: 'Бизнесменам'
-      dashboard: 'Dashboard'
-      sign_up: 'Зарегистрироваться'
-      sign_in: 'Войти'
-      logout: 'Выйти'
-    success_register: 'Удачная регистрация'
-    success_login: 'Удачный вход'
-    failed_login: 'Неудачный вход'
-    logout: 'Выход'
+      logout: Выйти
+    profile:
+      github: Github
+    projects:
+      button:
+        edit: Редактировать
+    users:
+      table:
+        primary_skill: Специализация
+  dashbooard:
+    projects:
+      update:
+        danger: Не удалось обновить проект
+  landing:
+    alerts:
+      not_authenticated_dashboard_access: Вы должны войти в систему для доступа к проектам
+    body: |
+      Мы помогаем специалистам получить новый опыт, принимая участие в некоммерческих проектах.
+      <br>
+      <br>
+      К нашему сообществу может присоединиться любой специалист с базовыми знаниями в разработке, дизайне или менеджменте,
+      а также организации или отдельные люди, которым требуется помощь с разработкой их некоммерческого проекта.
+    brand: Give Me POC
+    counters:
+      members: Специалисты
+      mentors: Менторы
+      projects: Проекты
+    entrepreneur: Организация
+    failed_login: Невозможно войти в систему
+    footer:
+      built_by: Разработано командой
+    logout: Вы успешно вышли из системы
+    member: Специалист
+    navigation:
+      bootcamp: Специалистам
+      dashboard: Проекты
+      home: Главная
+      ideas: Организациям
+      logout: Выйти
+      sign_in: Войти
+      sign_up: Регистрация
+    partners:
+      title: Наши партнеры
+    success_login: Вы успешно вошли в систему
+    success_register: Вы успешно зарегистрированы
+    title: Симбиоз специалистов и некоммерческих организаций
+  locales:
+    link:
+      en: In russian
+      ru: In english
+  notes:
+    buttons:
+      create: Создать
+      update: Обновить
+    fields:
+      commenter: Автор
+      note: Заметка
+    noties:
+      access_denied: Не достаточно прав для создания заметки
+      confirm:
+        destroy: Вы уверены, что хотите удалить заметку?
+      danger:
+        create: Заполните все поля заметки
+        update: Заполните все поля заметки
+      success:
+        create: Заметка успешно создана
+        destroy: Заметка успешно удалена
+        update: Заметка успешно обновлена
+  views:
+    pagination:
+      first: Первая
+      last: Последняя
+      next: Следующая
+      previous: Предыдущая
+      truncate: Очистить

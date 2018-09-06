@@ -1,0 +1,35 @@
+---
+ru:
+  simple_form:
+    error_notification:
+      default_message: 'Обнаружены следующие проблемы:'
+    labels:
+      member_onboarding_feedback_question:
+        create:
+          description: Описание
+          key_name: Ключ
+        new:
+          description: Описание
+          key_name: Ключ
+      member_test_task_assignment:
+        new:
+          feedback: Рекомендации
+      member_test_task_result:
+        edit:
+          link: Ссылка
+        index:
+          link: Ссылка
+      member_wizard_profile:
+        edit:
+          cv_url: Резюме или Linkedin
+          first_name: Имя
+          last_name: Фамилия
+          location: Местоположение
+          primary_skill_id: Специализация
+          role: Уровень
+          timezone: Часовой пояс
+    'no': Нет
+    required:
+      mark: "*"
+      text: Обязательно
+    'yes': Да

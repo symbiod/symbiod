@@ -1,0 +1,14 @@
+---
+ru:
+  mailers:
+    member:
+      onboarding:
+        survey_responses:
+          subject: Новый отзыв добавлен
+      onboarding_started:
+        feedback: Оставьте отзыв о вашем опыте регистрации и начала работы с системой, ответив на несколько
+        fill_github_and_slack: Заполните Github/Slack профили в соответствии с нашими рекоммендациями
+        pick_project: Выберите интересный вам проект и присоединитесь к его Slack каналу
+        questions: вопросов
+        read: Прочитайте
+        say_hello: Поприветствуйте всех в нашем Slack

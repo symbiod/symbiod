@@ -81,6 +81,12 @@ Rails.application.routes.draw do
       root to: 'home#index'
     end
 
+    resource :locales, only: [] do
+      collection do
+        get :toggle
+      end
+    end
+
     mount Sidekiq::Web => '/sidekiq', constraints: SidekiqConstraint.new
 
     delete '/logout', to: 'sign_outs#destroy', as: :logout

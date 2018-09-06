@@ -1,0 +1,50 @@
+---
+en:
+  bootcamp:
+    landing:
+      account_disabled: Unfortunately, your account is disabled
+      audience:
+        body: Your current level does not matter. Most of our members are junior developers, but even experienced specialists can always learn something new about architecture, leadership and management.
+        title: Both for Junior and Senior specialists
+      body: To join our community we offer to complete a short walk-through with a simple knowledge test.
+      github_login: Sign in via GitHub
+      go_to_dashboard: Go to Dashboard
+      nda:
+        body: All your effort will be available as an opensource at GitHub, so you can show it to your potential employers.
+        title: Forget about NDA
+      opensource:
+        body: We offer our members to contribute to non-profit projects development. All members will be able to get an experience in team collaboration, best coding practices and delivering real world features.
+        title: What do we do?
+      proceed_with_wizard: Follow sign up wizard
+      technologies:
+        body: We are constantly looking for new mentors, who is familiar with different technologies, and is able to enforce our team. At the moment our expertise is limited to the following technologies.
+        title: Technologies we use
+      title: Receive a new expertise
+      unfilled_github_email: Please fill your github profile according to our <a href='https://github.com/howtohireme/wiki/wiki/First-Steps' target='_blank'>guidelines</a>
+      who:
+        body: GiveMePOC is a non-profitable community of developers, designers, managers and QA engineers, who share their experience and help non-profit organizations with their product development. All our activities are as transparent as possible.
+        title: Who we are?
+    onboarding:
+      started: Onboarding started!
+    policy:
+      accept: I accept
+      must_be_accepted: Policy must be accepted
+      submit: Submit
+      text_html: By accepting this, you approve your agreement with all our principles and policies, located at <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>. <br/> Following policies is mandatory for all Bootcamp members.
+      title: Our policy
+    profile:
+      body: We prefer to work with real people who has real names
+      roles:
+        member: Member
+        mentor: Mentor
+      submit: Submit
+      title: Fill your member profile
+    screening:
+      body: Complete several small quizes, to show that you know the basics
+      completed: Screening was completed
+      congrats: Congratulations!
+      question: Question
+      rejection: You were rejected
+      review_by_link: You can make a review of the applicant by clicking on the link
+      title: Prove your skills
+      wait_for_tasks_review: Let us check you answers, and we'll be back to you soon.

@@ -27,7 +27,7 @@ describe 'web/dashboard/test_task_assignments/show' do
 
       expect(rendered).to match(/Bob Marley/)
       expect(rendered).to match(/Java/)
-      expect(rendered).to match(/Link to test task/)
+      expect(rendered).to match(/Test task/)
     end
   end
 end

@@ -1,10 +1,14 @@
+---
 en:
   mailers:
     member:
-      onboarding_started:
-        feedback: We would also like you to leave feedback about onboarding
-                  by answering a few
-        questions: questions
       onboarding:
         survey_responses:
           subject: User left feedback after onboarding
+      onboarding_started:
+        feedback: We would also like you to leave feedback about onboarding by answering a few
+        fill_github_and_slack: Fill Github/Slack profiles according to our guidelines
+        pick_project: Find suitable project for you in Github
+        questions: questions
+        read: Read
+        say_hello: Say hello at Slack

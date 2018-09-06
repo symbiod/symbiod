@@ -57,23 +57,23 @@
               = nav_item_link t('dashboard.navigation.projects'),
                               dashboard_projects_url,
                               icon: 'shopping-bag'
-              = nav_item_link t('dashboard.navigation.reports'),
-                              '#',
-                              icon: 'file-text'
-              = nav_item_link t('dashboard.navigation.analytics'),
-                              '#',
-                              icon: 'bar-chart-2'
-              = nav_item_link t('dashboard.navigation.activity'),
-                              '#',
-                              icon: 'layers'
-            %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
-              %span= t('dashboard.navigation.my_projects')
-              %a.d-flex.align-items-center.text-muted{ href: '#' }
-                %span{ 'data-feather': 'plus-circle' }
-            %ul.nav.flex-column.mb-2
-              = nav_item_link t('dashboard.navigation.mentored'),
-                              '#',
-                              icon: 'file-text'
+              -#= nav_item_link t('dashboard.navigation.reports'),
+                              -#'#',
+                              -#icon: 'file-text'
+              -#= nav_item_link t('dashboard.navigation.analytics'),
+                              -#'#',
+                              -#icon: 'bar-chart-2'
+              -#= nav_item_link t('dashboard.navigation.activity'),
+                              -#'#',
+                              -#icon: 'layers'
+            -#%h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+              -#%span= t('dashboard.navigation.my_projects')
+              -#%a.d-flex.align-items-center.text-muted{ href: '#' }
+                -#%span{ 'data-feather': 'plus-circle' }
+            -#%ul.nav.flex-column.mb-2
+              -#= nav_item_link t('dashboard.navigation.mentored'),
+                              -#'#',
+                              -#icon: 'file-text'
         %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{ role: 'main' }
           = render partial: 'layouts/shared/dashboard_flashes'
 
