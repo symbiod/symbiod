@@ -2,6 +2,6 @@
 
 module Dashboards
   # This cell displays the dashboard for the mentor role
-  class Mentor < BaseCell
+  class Mentor < BaseDashboard
   end
 end
