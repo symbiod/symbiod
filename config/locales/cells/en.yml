@@ -1,17 +1,18 @@
+---
 en:
   cells:
-    member:
-      dashboard_header: Member control panel
-      dashboard:
-        projects: Projects
-        title_project: Title
-        stack: Stack of technologies
-        github_resources: GitHub resources
-        project_issues: Issues in the project
-        setup_documentation: How to setup documentation
-    staff:
-      dashboard_header: Staff control panel
-    mentor:
-      dashboard_header: Mentor control panel
     author:
       dashboard_header: Author control panel
+    member:
+      dashboard:
+        github_resources: GitHub resources
+        project_issues: Issues in the project
+        projects: Projects
+        setup_documentation: How to setup documentation
+        stack: Stack of technologies
+        title_project: Title
+      dashboard_header: Member control panel
+    mentor:
+      dashboard_header: Mentor control panel
+    staff:
+      dashboard_header: Staff control panel

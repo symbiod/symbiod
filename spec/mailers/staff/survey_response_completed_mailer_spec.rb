@@ -14,7 +14,7 @@ RSpec.describe Staff::SurveyResponseCompletedMailer, type: :mailer do
       create(:survey_response, role: user.role(:member), "#{question.key_name}": 'Answer 1')
     end
 
-    its(:subject) { is_expected.to eq I18n.t('dashboard.survey_responses.notices.completed') }
+    its(:subject) { is_expected.to eq I18n.t('mailers.member.onboarding.survey_responses.subject') }
     its(:from) { is_expected.to eq(['givemepoc@gmail.com']) }
     its(:to) { is_expected.to eq recipients.map(&:email) }
 

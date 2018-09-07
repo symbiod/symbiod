@@ -1,0 +1,18 @@
+---
+ru:
+  cells:
+    author:
+      dashboard_header: Панель управления Автора
+    member:
+      dashboard:
+        github_resources: GitHub ресурсы
+        project_issues: Задачи по данному проекту
+        projects: Проекты
+        setup_documentation: Документация по установке и запуску проекта
+        stack: Стэк технологий
+        title_project: Заголовок
+      dashboard_header: панель управления Участника
+    mentor:
+      dashboard_header: Панель кправления Ментора
+    staff:
+      dashboard_header: Панель управления Сотрудника
