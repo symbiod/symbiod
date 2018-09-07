@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: member_test_task_assignments
+#
+#  id                  :bigint(8)        not null, primary key
+#  test_task_id        :integer          not null
+#  test_task_result_id :integer
+#  member_id           :integer          not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  feedback            :text
+#
+
 module Member
   # Represents an assigned test task to specific member.
   # We consider it completed, when corresponding `test_task_result` is created for this task.

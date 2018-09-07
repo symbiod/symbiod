@@ -1,0 +1,2 @@
+- model.roles_name.each do |role|
+  = cell(REPOSITORY[role.to_sym].constantize, model, send("#{role}_options"))

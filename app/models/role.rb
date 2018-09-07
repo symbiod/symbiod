@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: roles
+#
+#  id                           :bigint(8)        not null, primary key
+#  type                         :string
+#  user_id                      :integer
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  state                        :string
+#  last_screening_followup_date :datetime
+#
+
 # Represents possible role in the system. This class has a subset of descendants,
 # that represent specific roles, and may have a completely different behaviour.
 # Take a look at `app/models/roles/*.rb` files for more information
@@ -19,6 +32,6 @@ class Role < ApplicationRecord
   end
 
   def set_last_screening_followup_date
-    update(last_screening_followup_date: DateTime.now)
+    update(last_screening_followup_date: Time.now)
   end
 end

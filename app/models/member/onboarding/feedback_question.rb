@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: member_onboarding_feedback_questions
+#
+#  id          :bigint(8)        not null, primary key
+#  description :string           not null
+#  key_name    :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 module Member
   class Onboarding
     # This model is questions feedbacks

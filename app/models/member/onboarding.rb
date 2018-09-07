@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: member_onboardings
+#
+#  id              :bigint(8)        not null, primary key
+#  user_id         :integer          not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  feedback_status :string
+#  slack_status    :string
+#  github_status   :string
+#
+
 module Member
   # Holds the results of onboarding steps.
   class Onboarding < ApplicationRecord

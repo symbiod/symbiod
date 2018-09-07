@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: skills
+#
+#  id         :bigint(8)        not null, primary key
+#  title      :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  state      :string
+#
+
 # This model contains a list of possible member skills
 class Skill < ApplicationRecord
   validates :title, presence: true, uniqueness: true

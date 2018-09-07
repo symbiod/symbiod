@@ -2,12 +2,13 @@
 
 ## To run the application natively:
 
-* `git clone git@github.com:howtohireme/give-me-poc.git`
+* The [postgresql][postgresql] database must be installed
+* `git clone https://github.com/howtohireme/give-me-poc.git`
 * `cd give-me-poc`
 * `cp config/database.yml.sample config/database.yml`
 * Change the password in `config/database.yml` to your password.
-* `rake db:create`
-* `rake db:schema:load`
+* `rails db:create`
+* `rails db:schema:load`
 
 ## To run the application with Vagrant:
 
@@ -18,3 +19,5 @@
 When you start app locally, use `lvh.me` domain to access it
 
 e.g. `http://lvh.me:3000/` or `http://bootcamp.lvh.me:3000/`
+
+[postgresql]: https://www.postgresql.org/

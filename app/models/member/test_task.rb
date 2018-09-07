@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: member_test_tasks
+#
+#  id          :bigint(8)        not null, primary key
+#  description :text             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  title       :string           not null
+#  position    :integer
+#  state       :string
+#  skill_id    :integer
+#  role_name   :string
+#
+
 module Member
   # Represents the task description, that should be solved by member
   class TestTask < ApplicationRecord
