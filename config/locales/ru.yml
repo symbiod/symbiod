@@ -50,6 +50,10 @@ ru:
       logout: Выйти
       sign_in: Войти
       sign_up: Регистрация
+    newsletter:
+      placeholder: ваш email
+      submit: Подписаться
+      title: Подпишитесь на новости проекта
     partners:
       title: Наши партнеры
     success_login: Вы успешно вошли в систему

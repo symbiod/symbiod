@@ -54,3 +54,15 @@ p.lead {
   margin-left: 50px;
   margin-top: 3px;
 }
+
+#mc_embed_signup {
+  form {
+    input {
+      &.form-control {
+        margin-bottom: 10px;
+        width: 70%;
+        display: inline;
+      }
+    }
+  }
+}

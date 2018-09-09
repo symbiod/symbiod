@@ -50,6 +50,10 @@ en:
       logout: Logout
       sign_in: Sign in
       sign_up: Sign up
+    newsletter:
+      placeholder: your email
+      submit: Subscribe
+      title: Subscribe to our newsletter
     partners:
       title: Our partners
     success_login: Login successful
