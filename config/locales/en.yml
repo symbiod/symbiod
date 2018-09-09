@@ -50,15 +50,15 @@ en:
       logout: Logout
       sign_in: Sign in
       sign_up: Sign up
+    newsletter:
+      placeholder: your email
+      submit: Subscribe
+      title: Subscribe to our newsletter
     partners:
       title: Our partners
     success_login: Login successful
     success_register: Successfully registered
     title: A symbiosis of specialists and non-profits
-    newsletter:
-      title: Subscribe to our newsletter
-      placeholder: your email
-      submit: Subscribe
   locales:
     link:
       en: In russian
