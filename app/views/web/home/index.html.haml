@@ -19,3 +19,7 @@
   = render partial: 'web/shared/counter', locals: { members_size: @members_size,
                                                     mentors_size: @mentors_size,
                                                     projects_size: @projects_size }
+
+%h3.cover-heading= t('landing.newsletter.title')
+%p.lead
+  = render partial: 'web/shared/newsletter'

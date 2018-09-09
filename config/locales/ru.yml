@@ -55,6 +55,10 @@ ru:
     success_login: Вы успешно вошли в систему
     success_register: Вы успешно зарегистрированы
     title: Симбиоз специалистов и некоммерческих организаций
+    newsletter:
+      title: Подпишитесь на новости проекта
+      placeholder: ваш email
+      submit: Подписаться
   locales:
     link:
       en: In russian
