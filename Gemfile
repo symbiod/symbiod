@@ -39,6 +39,7 @@ gem 'strong_migrations'
 gem 'clockwork'
 gem 'config'
 gem 'recaptcha'
+gem 'rails_semantic_logger'
 
 # Rails 5.2 stuff
 # gem 'mini_magick', '~> 4.8'
