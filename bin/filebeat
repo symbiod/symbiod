@@ -3,4 +3,6 @@
 if [[ "$RAILS_ENV" == "production" ]]; then
   current_dir=$(pwd)
   filebeat run -c $current_dir/config/filebeat.yml
+else
+  tail -f README.md
 fi
