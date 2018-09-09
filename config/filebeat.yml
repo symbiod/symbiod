@@ -1,0 +1,23 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /app/log/production.log
+      json.keys_under_root: true
+      fields:
+        logzio_codec: json
+        token: ${LOGZ_IO_TOKEN}
+        type: Rails
+      fields_under_root: true
+      encoding: utf-8
+      ignore_older: 3h
+  registry_file: /var/lib/filebeat/registry
+output:
+  logstash:
+    hosts: ["listener.logz.io:5015"]
+    ssl:
+      certificate_authorities: ['/etc/pki/tls/certs/COMODORSADomainValidationSecureServerCA.crt']
+# We use the following output for debugging of logs capture
+#output:
+#  console:
+#    pretty: true

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ "$RAILS_ENV" == "production" ]]; then
+  current_dir=$(pwd)
+  filebeat run -c $current_dir/config/filebeat.yml
+fi
