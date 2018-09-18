@@ -1,5 +1,19 @@
 # Getting started
 
+## Before starting application
+
+To get access to the secret variables, such as Github credentials, Slack and others you need to decrypt a file located at `secrets/envrc.gpg`
+
+To to that we need to have your public GPG key in the repo.
+
+* generate GPG key with `gpg --gen-key`
+* export public key to the file `gpg --export --armor youremail@example.com > last_name.asc`
+* put the public key to the `secrets/pubkeys/last_name.asc`
+* commit changes, push and create a PR
+* when your PR is merged you'll be able to run `secrets/decrypt` to get the list of environment variables, required for project run
+
+For more information about GPG encryption read this [article](http://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/).
+
 ## To run the application natively:
 
 * The [postgresql][postgresql] database must be installed
