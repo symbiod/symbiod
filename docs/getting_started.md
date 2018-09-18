@@ -12,6 +12,8 @@ To to that we need to have your public GPG key in the repo.
 * commit changes, push and create a PR
 * when your PR is merged you'll be able to run `secrets/decrypt` to get the list of environment variables, required for project run
 
+For more information about GPG encryption read this [article](http://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/).
+
 ## To run the application natively:
 
 * The [postgresql][postgresql] database must be installed
