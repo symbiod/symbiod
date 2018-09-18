@@ -6,4 +6,4 @@
 * [DB dumps](https://github.com/howtohireme/give-me-poc/blob/master/docs/db_dumps.md)
 * [Architecture](https://github.com/howtohireme/give-me-poc/blob/master/docs/architecture.md)
 * [UI toolkit](https://github.com/howtohireme/give-me-poc/blob/master/docs/ui_toolkit.md)
-* [Continous Integration](https://github.com/howtohireme/give-me-poc/blob/master/docs/continuous_integration.md)
+* [Continuous Integration](https://github.com/howtohireme/give-me-poc/blob/master/docs/continuous_integration.md)
