@@ -23,6 +23,7 @@ For more information about GPG encryption read this [article](http://blog.ghosti
 * Change the password in `config/database.yml` to your password.
 * `rails db:create`
 * `rails db:schema:load`
+* Polulate the empty database with `rake db:seed`
 
 ## To run the application with Vagrant:
 
