@@ -54,5 +54,9 @@ FactoryBot.define do
     trait :rejected do
       state 'rejected'
     end
+
+    trait :registered_5_days_ago do
+      last_screening_followup_date { Time.now - 5.days }
+    end
   end
 end
