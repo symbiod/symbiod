@@ -12,6 +12,10 @@ notifications:
 jobs:
   include:
     - stage: backup
+      services:
+        - postgresql
+      addons:
+        postgresql: '10'
       script: ./bin/make-db-backup
       name: "Perform DB backup"
 
@@ -85,11 +89,3 @@ jobs:
 
 stages:
   - name: backup
-    if: type = cron
-  - tests
-  - name: build
-    if: type = push
-  - name: features
-    if: type = push
-  - name: deploy
-    if: branch = master AND type = push
