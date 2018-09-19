@@ -12,11 +12,7 @@ describe 'web/dashboard/test_task_assignments/index' do
   end
 
   describe 'index view' do
-    it 'renders without error' do
-      expect { render }.not_to raise_error
-    end
-
-    it 'renders contain' do
+    it 'renders primary skill' do
       render
 
       expect(rendered).to match(candidates.first.email)
