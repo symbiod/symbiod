@@ -3,47 +3,43 @@
 # After pulling the dump from heroku we upload it to public
 # S3 bucket, where it'll be available to anyone without authentication.
 
-if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]]; then
-  heroku pg:backups:capture --app peaceful-refuge-95132
-  heroku pg:backups:download --app peaceful-refuge-95132
+heroku pg:backups:capture --app peaceful-refuge-95132
+heroku pg:backups:download --app peaceful-refuge-95132
 
-  if ! [ -x "$(aws --version)" ]; then
-    echo "Installing awscli"
-    pip install --user awscli
-    export PATH=$PATH:$HOME/.local/bin
-  fi
-
-	# We want to clean certain fields from production database.
-	# TODO: probably we can move obfuscation to the separate script
-	# create PG database
-	psql -c 'create database poc_production;'
-	# load dump into the database
-	pg_restore --verbose --clean --no-acl --no-owner -d $PGDATABASE latest.dump
-	# remove dump
-	rm latest.dump
-	# replace content in sensitive tables
-	psql -w poc_production -c "UPDATE notes SET content='It was obfuscated'";
-	psql -w poc_production -c "UPDATE useres SET salt='obfuscated', crypted_password='obfuscated'";
-	# dump the data to the new latest.dump
-	pg_dump poc_production > latest.dump
-
-  TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
-  aws s3 cp latest.dump s3://givemepoc/latest.dump --acl public-read
-  aws s3 cp latest.dump s3://givemepoc/$TIMESTAMP.dump --acl public-read
-  rm latest.dump
-
-  # We remove old backup file each time when we have more that 7 backups
-  MIN_FILES=7
-  FILE_COUNT=$( aws s3 ls s3://givemepoc/ | wc -l )
-
-  if [ $MIN_FILES -lt $FILE_COUNT ]; then
-      echo "More than $MIN_FILES"
-      FILE_TO_DEL=$(aws s3 ls s3://givemepoc/ | head -1 | awk {'print $4'})
-      echo "Remove $FILE_TO_DEL"
-      aws s3 rm s3://givemepoc/$FILE_TO_DEL
-  fi
-
-  echo "You can get the latest dump via url: https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump or by running bin/load_dump"
-else
-  echo "Backup is not executed on non-cron Travis build"
+if ! [ -x "$(aws --version)" ]; then
+	echo "Installing awscli"
+	pip install --user awscli
+	export PATH=$PATH:$HOME/.local/bin
 fi
+
+# We want to clean certain fields from production database.
+# TODO: probably we can move obfuscation to the separate script
+# create PG database
+psql -c 'create database poc_production;'
+# load dump into the database
+pg_restore --verbose --clean --no-acl --no-owner -d $PGDATABASE latest.dump
+# remove dump
+rm latest.dump
+# replace content in sensitive tables
+psql -w poc_production -c "UPDATE notes SET content='It was obfuscated'";
+psql -w poc_production -c "UPDATE useres SET salt='obfuscated', crypted_password='obfuscated'";
+# dump the data to the new latest.dump
+pg_dump poc_production > latest.dump
+
+TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
+aws s3 cp latest.dump s3://givemepoc/latest.dump --acl public-read
+aws s3 cp latest.dump s3://givemepoc/$TIMESTAMP.dump --acl public-read
+rm latest.dump
+
+# We remove old backup file each time when we have more that 7 backups
+MIN_FILES=7
+FILE_COUNT=$( aws s3 ls s3://givemepoc/ | wc -l )
+
+if [ $MIN_FILES -lt $FILE_COUNT ]; then
+		echo "More than $MIN_FILES"
+		FILE_TO_DEL=$(aws s3 ls s3://givemepoc/ | head -1 | awk {'print $4'})
+		echo "Remove $FILE_TO_DEL"
+		aws s3 rm s3://givemepoc/$FILE_TO_DEL
+fi
+
+echo "You can get the latest dump via url: https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump or by running bin/load_dump"
