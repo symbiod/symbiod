@@ -6,7 +6,7 @@ describe Ops::Screening::SendScreeningFollowup do
   subject { described_class }
 
   describe '#call' do
-    let!(:role) { create(:role, :member, :pending) }
+    let!(:role) { create(:role, :member, :pending, :registered_5_days_ago) }
 
     it 'sends email to uncompleted users' do
       expect { subject.call }
