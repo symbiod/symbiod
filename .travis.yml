@@ -17,6 +17,7 @@ jobs:
       addons:
         postgresql: '10'
       script: ./bin/make-db-backup
+      install: true
       name: "Perform DB backup"
 
 stages:
