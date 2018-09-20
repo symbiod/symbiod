@@ -12,7 +12,12 @@ notifications:
 jobs:
   include:
     - stage: backup
+      services:
+        - postgresql
+      addons:
+        postgresql: '10'
       script: ./bin/make-db-backup
+      install: true
       name: "Perform DB backup"
 
     - stage: tests

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# At the moment we clean:
+# * notes - to remove subjective and opinionated information about project members
+# * users - to remove salt and crypted passwords, to prevent brute-forcing the password hashes
+psql -w "$PGDATABASE" -c "UPDATE notes SET content='It was obfuscated';"
+psql -w "$PGDATABASE" -c "UPDATE users SET salt='obfuscated', crypted_password='obfuscated';"
+
