@@ -22,7 +22,7 @@ rm latest.dump
 # replace content in sensitive tables
 bin/obfuscate-db
 # dump the data to the new latest.dump
-pg_dump "$PGDATABASE" > latest.dump
+pg_dump -Fc "$PGDATABASE" > latest.dump
 
 TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
 aws s3 cp latest.dump s3://givemepoc/latest.dump --acl public-read
