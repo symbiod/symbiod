@@ -47,6 +47,7 @@ Rails.application.routes.draw do
         resources :notes, except: %i[index]
       end
       resources :role_activation, only: :update
+      resources :force_role_activation, only: :update
       resources :role_deactivation, only: :update
       resources :survey_responses, only: %i[index show new create]
       resources :feedback_questions, except: %i[show]

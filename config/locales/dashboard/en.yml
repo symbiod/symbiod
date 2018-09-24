@@ -163,6 +163,7 @@ en:
         danger: Could not update project
         success: Project was success updated
     roles:
+      force_activate: Force activate
       notices:
         activated: Role was activated
         deactivated: Role was deactivated

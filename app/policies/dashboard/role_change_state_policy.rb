@@ -6,5 +6,9 @@ module Dashboard
     def update?
       staff_or_mentor?
     end
+
+    def force_activate?
+      staff? && record && !record.active?
+    end
   end
 end

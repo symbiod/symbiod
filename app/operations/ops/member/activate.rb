@@ -19,7 +19,7 @@ module Ops
       end
 
       def set_approver!(_ctx, user:, performer:, **)
-        user.update!(approver_id: performer)
+        user.update!(approver_id: performer.id)
       end
 
       def send_notifications!(_ctx, user:, **)
