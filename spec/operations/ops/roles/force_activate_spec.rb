@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Ops::Roles::ForceActivate do
   describe '.call' do
-    let(:parameters) { { user: user, performer: performer } }
+    let(:parameters) { { user: user, performer: performer.id } }
     let(:user) { create(:user, :member, :pending) }
     let(:performer) { create(:user, :staff) }
     subject { described_class.call(parameters) }
