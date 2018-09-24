@@ -6,7 +6,7 @@ require './spec/support/github_mock'
 require 'simplecov'
 
 SimpleCov.start 'rails' do
-  minimum_coverage 99.00
+  minimum_coverage 99.56
 end
 
 RSpec.configure do |config|

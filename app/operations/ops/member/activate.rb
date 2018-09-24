@@ -18,6 +18,7 @@ module Ops
         role(user).activate!
       end
 
+      # TODO: rename performer to performer_id
       def set_approver!(_ctx, user:, performer:, **)
         user.update!(approver_id: performer)
       end

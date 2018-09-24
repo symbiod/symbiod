@@ -163,6 +163,7 @@ ru:
         danger: Не удается обновить проект
         success: Проект обновлен
     roles:
+      force_activate: Принудительно активировать
       notices:
         activated: Роль активна
         deactivated: Роль неактивна

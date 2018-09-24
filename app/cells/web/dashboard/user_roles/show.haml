@@ -7,3 +7,7 @@
         %li
           = role
           = render_role(role)
+
+          - role_record = Roles::RolesManager.new(model).role_for(role)
+          - if Dashboard::RoleChangeStatePolicy.new(current_user, role_record).force_activate?
+            = link_to t('dashboard.roles.force_activate'), dashboard_force_role_activation_url(id: role_record.id), method: :put, class: 'btn btn-danger btn-sm'

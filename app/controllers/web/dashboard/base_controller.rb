@@ -25,8 +25,9 @@ module Web
         redirect_to dashboard_root_url
       end
 
-      def authorize_role(policy_name)
-        authorize policy_name, "#{action_name}?".to_sym
+      def authorize_role(policy_name, action=nil)
+        action ||= action_name
+        authorize policy_name, "#{action}?".to_sym
       end
     end
   end
