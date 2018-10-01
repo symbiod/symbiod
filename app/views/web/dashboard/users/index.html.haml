@@ -14,7 +14,7 @@
         %tr
           %td= link_to user.email, dashboard_user_url(user)
           %td= user.full_name
-          %td= human_date(user)
+          %td{:data => {:tooltip => 'Some message'}}= human_date(user)
           %td
             %ul.list-unstyled
               - user.roles.each do |role|
