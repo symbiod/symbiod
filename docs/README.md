@@ -7,3 +7,4 @@
 * [Architecture](https://github.com/howtohireme/give-me-poc/blob/master/docs/architecture.md)
 * [UI toolkit](https://github.com/howtohireme/give-me-poc/blob/master/docs/ui_toolkit.md)
 * [Continuous Integration](https://github.com/howtohireme/give-me-poc/blob/master/docs/continuous_integration.md)
+* [ZenHub rules](https://github.com/howtohireme/give-me-poc/blob/master/docs/ZenHub.md)
