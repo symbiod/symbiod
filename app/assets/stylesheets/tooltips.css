@@ -19,7 +19,6 @@
 [data-tooltip]::after {
   content: attr(data-tooltip);
   text-align: center;
-  max-width: calc(100% - 30px);
   padding: 0.25rem 0.5rem;
   overflow: hidden;
   border-radius: 0.3rem;
