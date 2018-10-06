@@ -10,7 +10,7 @@ To do that we need to have your public GPG key in the repo.
 * export public key to the file `gpg --export --armor youremail@example.com > your_last_name.asc`
 * put the public key to the `secrets/pubkeys/your_last_name.asc`
 * commit changes, push and create a PR
-* after your PR is merged you'll be able to run `secrets/decrypt` to get the list of environment variables required for project run
+* after PR is merged you'll be able to run `secrets/decrypt` to get the list of environment variables required for project run
 
 Follow the link to read more about about GPG encryption [article](http://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/).
 
