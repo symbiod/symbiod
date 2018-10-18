@@ -26,6 +26,8 @@ en:
         title: Who we are?
     onboarding:
       started: Onboarding started!
+      survey_unfinished: We are struggling to provide better onboarding experience. Please help us with your feedback.
+      survey_unfinished_title: Feedback about onboarding experience
     policy:
       accept: I accept
       must_be_accepted: Policy must be accepted

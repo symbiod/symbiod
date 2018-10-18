@@ -26,6 +26,8 @@ ru:
         title: Кто мы?
     onboarding:
       started: Можете присоединиться к проекту!
+      survey_unfinished: Пожалуйста оставьте ваш отзыв о процессе регистрации, это очень поможет нам.
+      survey_unfinished_title: Отзыв о процессе регистрации
     policy:
       accept: Я принимаю
       must_be_accepted: Вы должны принять условия участия
