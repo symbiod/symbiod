@@ -10,7 +10,7 @@ module Ops
         private
 
         def survey_uncompleted_notification!(_ctx, **)
-          users = ::Onboarding::UsersInvitedAndFinishedSurveyQuery.new.call
+          users = ::Onboarding::UsersInvitedAndUnfinishedSurveyQuery.new.call
 
           users.each do |user|
             ::Member::UnfinishedSurveyMailer.notify(user.id).deliver_later
