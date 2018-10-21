@@ -58,5 +58,9 @@ FactoryBot.define do
     trait :registered_5_days_ago do
       last_screening_followup_date { Time.now - 5.days }
     end
+
+    trait :registered_3_days_ago do
+      last_screening_followup_date { Time.now - 3.days }
+    end
   end
 end

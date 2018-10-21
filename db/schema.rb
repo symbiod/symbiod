@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_14_122321) do
+ActiveRecord::Schema.define(version: 2018_10_20_153821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_122321) do
     t.string "state"
     t.datetime "last_screening_followup_date", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "last_unfinished_survey_followup_date", default: -> { "CURRENT_TIMESTAMP" }
+    t.integer "unfinished_survey_followup_counter", default: 0
     t.index ["type", "user_id"], name: "index_roles_on_type_and_user_id"
     t.index ["type"], name: "index_roles_on_type"
     t.index ["user_id"], name: "index_roles_on_user_id"

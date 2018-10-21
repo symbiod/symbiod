@@ -10,7 +10,9 @@
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #  state                        :string
-#  last_screening_followup_date :datetime
+#  last_screening_followup_date         :datetime
+#  last_unfinished_survey_followup_date :datetime
+#  unfinished_survey_followup_counter   :integer
 #
 
 # Represents possible role in the system. This class has a subset of descendants,
@@ -37,5 +39,9 @@ class Role < ApplicationRecord
 
   def set_last_unfinished_survey_followup_date
     update(last_unfinished_survey_followup_date: Time.now)
+  end
+
+  def increase_survey_followup_counter
+    increment(:unfinished_survey_followup_counter, 1)
   end
 end
