@@ -41,7 +41,7 @@ describe Web::Bootcamp::JoinButton do
     it 'renders link to github sign in' do
       expect(subject)
         .to eq '<a id="join-via-github" class="btn btn-lg btn-secondary"' \
-               " href=\"http://bootcamp.test.host/oauth/github\">#{I18n.t('bootcamp.landing.github_login')}</a>\n"
+               " href=\"http://test.host/bootcamp/oauth/github\">#{I18n.t('bootcamp.landing.github_login')}</a>\n"
     end
   end
 end

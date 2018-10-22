@@ -1,6 +1,6 @@
-= nav_link t('landing.navigation.home'), root_landing_url, subdomain: 'www', id: 'home'
-= nav_link t('landing.navigation.ideas'), idea_root_url, subdomain: 'idea', id: 'idea'
-= nav_link t('landing.navigation.bootcamp'), bootcamp_root_url, subdomain: 'bootcamp', id: 'bootcamp'
+= nav_link t('landing.navigation.home'), root_landing_url, id: 'home'
+= nav_link t('landing.navigation.ideas'), idea_root_url, id: 'idea'
+= nav_link t('landing.navigation.bootcamp'), bootcamp_root_url, id: 'bootcamp'
 = link_to t('landing.navigation.dashboard'), dashboard_root_url,
                                              class: 'nav-link' if policy(:dashboard).index?
 = link_to t('landing.navigation.logout'), logout_url, method: :delete, class: 'nav-link' if current_user
