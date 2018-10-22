@@ -9,7 +9,10 @@ module Member
       queue_as :default
 
       def perform
-        Ops::Member::Onboarding::SendSurveyFollowup.call
+        roles = ::Onboarding::RolesInvitedAndNotFinishedSurveyQuery.new.call
+        roles.each do |role|
+          ::Ops::Member::Onboarding::SendSurveyFollowup.call(role: role)
+        end
       end
     end
   end

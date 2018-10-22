@@ -34,11 +34,11 @@ class Role < ApplicationRecord
   end
 
   def set_last_screening_followup_date
-    update(last_screening_followup_date: Time.now)
+    update(last_screening_followup_date: Time.zone.now)
   end
 
   def set_last_unfinished_survey_followup_date
-    update(last_unfinished_survey_followup_date: Time.now)
+    touch(last_unfinished_survey_followup_date: Time.zone.now)
   end
 
   def increase_survey_followup_counter

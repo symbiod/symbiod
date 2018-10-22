@@ -2,14 +2,14 @@
 
 module Onboarding
   # Find users where invited and finished survey
-  class UsersInvitedAndUnfinishedSurveyQuery
+  class RolesInvitedAndNotFinishedSurveyQuery
     def call
-      unfinished_survey_roles
+      not_finished_survey_roles
     end
 
     private
 
-    def unfinished_survey_roles
+    def not_finished_survey_roles
       Role
         .joins(user: :member_onboarding)
         .where(member_onboardings: { feedback_status: 'feedback_pending' }).distinct

@@ -5,10 +5,8 @@ module Member
   class UnfinishedSurveyMailer < ApplicationMailer
     def notify(role_id)
       @role = Role.find(role_id)
-      mail(
-          to: @role.user.email,
-          subject: "#{t('bootcamp.onboarding.survey_unfinished_title')}"
-      )
+      mail(to: @role.user.email,
+           subject: t('bootcamp.onboarding.survey_unfinished_title'))
     end
   end
 end

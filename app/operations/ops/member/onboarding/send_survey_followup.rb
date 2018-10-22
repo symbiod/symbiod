@@ -9,14 +9,10 @@ module Ops
 
         private
 
-        def survey_uncompleted_notification!(_ctx, **)
-          roles = ::Onboarding::UsersInvitedAndUnfinishedSurveyQuery.new.call
-
-          roles.each do |role|
-            ::Member::UnfinishedSurveyMailer.notify(role.id).deliver_later
-            role.set_last_unfinished_survey_followup_date
-            role.increase_survey_followup_counter
-          end
+        def survey_uncompleted_notification!(_ctx, role:, **)
+          ::Member::UnfinishedSurveyMailer.notify(role.id).deliver_later
+          # role.set_last_unfinished_survey_followup_date
+          # role.increase_survey_followup_counter
         end
       end
     end
