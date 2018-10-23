@@ -11,7 +11,7 @@
 #  updated_at                   :datetime         not null
 #  state                        :string
 #  last_screening_followup_date         :datetime
-#  last_unfinished_survey_followup_date :datetime
+#  last_not_finished_survey_followup_date_at :datetime
 #  unfinished_survey_followup_counter   :integer
 #
 
@@ -34,14 +34,14 @@ class Role < ApplicationRecord
   end
 
   def set_last_screening_followup_date
-    update(last_screening_followup_date: Time.zone.now)
+    touch(:last_screening_followup_date)
   end
 
-  def set_last_unfinished_survey_followup_date
-    touch(last_unfinished_survey_followup_date: Time.zone.now)
-  end
-
-  def increase_survey_followup_counter
-    increment(:unfinished_survey_followup_counter, 1)
-  end
+  # def last_not_finished_survey_followup_date
+  #   touch(:last_not_finished_survey_followup_date_at)
+  # end
+  #
+  # def increase_survey_followup_counter
+  #   increment!(:unfinished_survey_followup_counter)
+  # end
 end
