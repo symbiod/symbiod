@@ -10,7 +10,7 @@ describe Member::Onboarding::SendFollowupSurveyJob do
 
   describe '#perform' do
     it 'calls Member::Onboarding::SendSurveyFollowup operation' do
-      expect(Ops::Member::Onboarding::SendSurveyFollowup).to receive(:call)
+      expect(Ops::Member::Onboarding::SendSurveyFollowup).to receive(:call).with(role: role)
       described_class.perform_now
     end
   end

@@ -13,9 +13,9 @@ describe Ops::Member::Onboarding::SendSurveyFollowup do
       .with('Member::UnfinishedSurveyMailer', 'notify', 'deliver_now', role.id)
   end
 
-  it 'updates followup conter' do
+  it 'updates followup counter' do
     expect { subject }
-      .to change { role.unfinished_survey_followup_counter }.by(1)
+      .to change { role.reload.unfinished_survey_followup_counter }.by(1)
   end
 
   it 'updates last followup date' do

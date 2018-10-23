@@ -37,11 +37,11 @@ class Role < ApplicationRecord
     touch(:last_screening_followup_date)
   end
 
-  # def last_not_finished_survey_followup_date
-  #   touch(:last_not_finished_survey_followup_date_at)
-  # end
-  #
-  # def increase_survey_followup_counter
-  #   increment!(:unfinished_survey_followup_counter)
-  # end
+  def last_not_finished_survey_followup_date
+    touch(:last_not_finished_survey_followup_date_at)
+  end
+
+  def increase_survey_followup_counter
+    increment!(:unfinished_survey_followup_counter)
+  end
 end
