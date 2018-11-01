@@ -7,10 +7,10 @@ module Onboarding
     FEEDBACK_STATUS = 'feedback_pending'
 
     def self.call
-      Role
+      Role.select(:user_id)
         .joins(user: :member_onboarding)
-        .where(member_onboardings:
-          { feedback_status: FEEDBACK_STATUS }).distinct
+        .group(:user_id)
+        .where(member_onboardings: { feedback_status: FEEDBACK_STATUS })
     end
   end
 end
