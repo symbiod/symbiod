@@ -1,6 +1,7 @@
 # Give me a proof-of-concept
 
 [![Build Status](https://travis-ci.org/howtohireme/give-me-poc.svg?branch=master)](https://travis-ci.org/howtohireme/give-me-poc)
+[![Open Source Helpers](https://www.codetriage.com/howtohireme/give-me-poc/badges/users.svg)](https://www.codetriage.com/howtohireme/give-me-poc)
 [![Maintainability](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/maintainability)](https://codeclimate.com/github/howtohireme/give-me-poc/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/test_coverage)](https://codeclimate.com/github/howtohireme/give-me-poc/test_coverage)
 [![Inline docs](http://inch-ci.org/github/howtohireme/give-me-poc.svg?branch=master)](http://inch-ci.org/github/howtohireme/give-me-poc)
