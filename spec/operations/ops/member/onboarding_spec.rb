@@ -9,8 +9,14 @@ describe Ops::Member::Onboarding do
     let(:user) { create(:user) }
     let(:params) { { user: user } }
 
-    it 'creates_onboarding' do
+    it 'creates onboarding' do
       expect { subject.call(params) }.to change(Member::Onboarding, :count).by(1)
+    end
+
+    it 'creates member_onboarding with onboarding completion timestamp' do
+      subject.call(params)
+      expect(user.member_onboarding.reload.onboarding_complete_date_at)
+        .to be_within(1.second).of Time.current
     end
 
     it 'assigns onboarding to user' do
