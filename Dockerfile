@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.5.1
 MAINTAINER HowToHireMe Team <opensource@howtohireme.ru>
 ARG master_key
 
