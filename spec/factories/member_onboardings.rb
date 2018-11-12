@@ -6,6 +6,7 @@ FactoryBot.define do
     slack_status 'slack_pending'
     github_status 'github_pending'
     feedback_status 'feedback_pending'
+    onboarding_complete_date_at Time.current
 
     trait :invited_to_slack do
       slack_status 'slack_invited'

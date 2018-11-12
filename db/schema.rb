@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_061451) do
+ActiveRecord::Schema.define(version: 2018_11_06_174224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_08_29_061451) do
     t.string "feedback_status"
     t.string "slack_status"
     t.string "github_status"
+    t.datetime "onboarding_complete_date_at", default: -> { "CURRENT_TIMESTAMP" }
   end
 
   create_table "member_test_task_assignments", force: :cascade do |t|
@@ -142,6 +143,8 @@ ActiveRecord::Schema.define(version: 2018_08_29_061451) do
     t.datetime "updated_at", null: false
     t.string "state"
     t.datetime "last_screening_followup_date", default: -> { "CURRENT_TIMESTAMP" }
+    t.integer "unfinished_survey_followup_counter", default: 0
+    t.datetime "last_not_finished_survey_followup_date_at", default: -> { "CURRENT_TIMESTAMP" }
     t.index ["type", "user_id"], name: "index_roles_on_type_and_user_id"
     t.index ["type"], name: "index_roles_on_type"
     t.index ["user_id"], name: "index_roles_on_user_id"
