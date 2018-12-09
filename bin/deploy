@@ -2,7 +2,7 @@
 
 docker pull howtohireme/give-me-poc:latest
 docker tag howtohireme/give-me-poc:latest registry.heroku.com/peaceful-refuge-95132/web:latest
-docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.heroku.com
+docker login --username=_ --password=$HEROKU_AUTH_TOKEN registry.heroku.com
 docker push registry.heroku.com/peaceful-refuge-95132/web
 
 wget -qO- https://toolbelt.heroku.com/install.sh | sh
