@@ -7,45 +7,38 @@ describe SubdomainUrlHelper do
     let(:link_text) { 'Some Link' }
     let(:link_url)  { 'https://google.com' }
 
-    before { controller.request.host = "#{current_domain}.host.com" }
+    before { controller.request.host = "host.com#{current_slug}" }
 
     context 'id provided' do
-      let(:current_domain) { 'www' }
+      let(:current_slug) { '/' }
       let(:id) { 'some-id' }
 
       it do
-        expect(helper.nav_link(link_text, link_url, id: id, subdomain: 'www'))
+        expect(helper.nav_link(link_text, link_url, id: id))
           .to eq '<a class="nav-link active" id="some-id" href="https://google.com">Some Link</a>'
       end
     end
 
-    context 'current subdomain' do
-      let(:current_domain) { 'www' }
+    context 'current slug' do
+      let(:current_slug) { '/bootcamp' }
 
       it do
-        expect(helper.nav_link(link_text, link_url, subdomain: 'www'))
+        expect(helper.nav_link(link_text, link_url, slug: 'bootcamp'))
           .to eq '<a class="nav-link active" id="" href="https://google.com">Some Link</a>'
-      end
-
-      context 'the default domain is www' do
-        it do
-          expect(helper.nav_link(link_text, link_url, subdomain: 'www'))
-            .to eq '<a class="nav-link active" id="" href="https://google.com">Some Link</a>'
-        end
       end
     end
 
     context 'other subdomain' do
-      let(:current_domain) { 'other' }
+      let(:current_slug) { '/other' }
 
       it do
-        expect(helper.nav_link(link_text, link_url, subdomain: 'www'))
+        expect(helper.nav_link(link_text, link_url, slug: 'bootcamp'))
           .to eq '<a class="nav-link " id="" href="https://google.com">Some Link</a>'
       end
     end
   end
 
   describe '.root_landing_url' do
-    specify { expect(helper.root_landing_url).to eq 'http://www.test.host/' }
+    specify { expect(helper.root_landing_url).to eq 'http://test.host/' }
   end
 end

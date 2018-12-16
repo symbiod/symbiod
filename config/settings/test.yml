@@ -3,4 +3,4 @@ github:
   oauth:
     client_id: '123456'
     secret: 'qwerty'
-    callback_domain: 'http://bootcamp.lvh.me:3000'
+    callback_domain: 'http://lvh.me:3000'

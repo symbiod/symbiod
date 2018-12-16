@@ -61,7 +61,7 @@ module Web
       # On the basis of the transmitted path, we determine for which model
       # a note will be created and perform a search already by id
       def load_noteable
-        resource, id = request.path.split('/')[1, 2]
+        _, resource, id = request.path.split('/')[1, 3]
         @noteable = resource.singularize.classify.constantize.find(id)
       end
 

@@ -116,7 +116,7 @@ Rails.application.config.sorcery.configure do |config|
   #
   config.github.key = Settings.github.oauth.client_id.chomp if Settings.github.oauth.client_id
   config.github.secret = Settings.github.oauth.secret.chomp if Settings.github.oauth.secret
-  config.github.callback_url = "#{Settings.github.oauth.callback_domain}/oauth/callback?provider=github".chomp
+  config.github.callback_url = "#{Settings.github.oauth.callback_domain}/bootcamp/oauth/callback?provider=github".chomp
   config.github.user_info_mapping = { email: 'email', github: 'login' }
   # config.github.scope = ""
   #
