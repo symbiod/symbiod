@@ -5,7 +5,7 @@ require './lib/sidekiq_constraint'
 
 Rails.application.routes.draw do
   scope module: :web do
-    scope as: :bootcamp, module: :bootcamp, constraints: { subdomain: 'bootcamp' } do
+    namespace :bootcamp do
       namespace :wizard do
         resources :screenings, only: %i[index update]
         resource :profile, only: %i[edit update]
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       root to: 'home#index'
     end
 
-    scope as: :idea, module: :idea, constraints: { subdomain: 'idea' } do
+    namespace :idea do
       resource :sessions, only: %i[new create]
 
       namespace :wizard do
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       root to: 'home#index'
     end
 
-    scope as: :dashboard, module: :dashboard, constraints: { subdomain: 'dashboard' } do
+    namespace :dashboard do
       resources :test_task_assignments, only: %i[index show] do
         member do
           put :activate
@@ -91,7 +91,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq', constraints: SidekiqConstraint.new
 
     delete '/logout', to: 'sign_outs#destroy', as: :logout
-    root to: 'home#index', as: :root_landing, constraints: { subdomain: 'www' }
+    root to: 'home#index', as: :root_landing
   end
 
   get '/ping', to: 'ping#index'
