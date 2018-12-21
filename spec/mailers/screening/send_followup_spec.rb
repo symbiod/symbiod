@@ -16,7 +16,7 @@ RSpec.describe Screening::SendFollowupMailer, type: :mailer do
     end
 
     it 'renders the sender email' do
-      expect(mail.from).to eq(['givemepoc@gmail.com'])
+      expect(mail.from).to eq(['symbiod@gmail.com'])
     end
   end
 end

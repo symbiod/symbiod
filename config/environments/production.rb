@@ -61,7 +61,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
-  routes.default_url_options = { host: 'www.givemepoc.org' }
+  routes.default_url_options = { host: 'www.symbiod.org' }
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
@@ -78,7 +78,7 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true
   }
-  config.action_mailer.default_url_options = { host: 'www.givemepoc.org' }
+  config.action_mailer.default_url_options = { host: 'www.symbiod.org' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

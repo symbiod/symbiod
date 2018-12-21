@@ -1,10 +1,10 @@
 # Give me a proof-of-concept
 
-[![Build Status](https://travis-ci.org/howtohireme/give-me-poc.svg?branch=master)](https://travis-ci.org/howtohireme/give-me-poc)
-[![Open Source Helpers](https://www.codetriage.com/howtohireme/give-me-poc/badges/users.svg)](https://www.codetriage.com/howtohireme/give-me-poc)
-[![Maintainability](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/maintainability)](https://codeclimate.com/github/howtohireme/give-me-poc/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/test_coverage)](https://codeclimate.com/github/howtohireme/give-me-poc/test_coverage)
-[![Inline docs](http://inch-ci.org/github/howtohireme/give-me-poc.svg?branch=master)](http://inch-ci.org/github/howtohireme/give-me-poc)
+[![Build Status](https://travis-ci.org/symbiod/symbiod.svg?branch=master)](https://travis-ci.org/symbiod/symbiod)
+[![Open Source Helpers](https://www.codetriage.com/symbiod/symbiod/badges/users.svg)](https://www.codetriage.com/symbiod/symbiod)
+[![Maintainability](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/maintainability)](https://codeclimate.com/github/symbiod/symbiod/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/90170690cc5aab0e5168/test_coverage)](https://codeclimate.com/github/symbiod/symbiod/test_coverage)
+[![Inline docs](http://inch-ci.org/github/symbiod/symbiod.svg?branch=master)](http://inch-ci.org/github/symbiod/symbiod)
 
 ![image](https://s15.postimg.cc/bbc427ycr/2018-07-09_14.01.32.jpg)
 
@@ -17,14 +17,14 @@ Experienced developers will be able to practice in leading teams, managing the p
 
 ## Documentation
 
-Feel free to explore [our docs](https://github.com/howtohireme/give-me-poc/blob/master/docs), that describe our process and technical details.
+Feel free to explore [our docs](https://github.com/symbiod/symbiod/blob/master/docs), that describe our process and technical details.
 
 ## Contributing
 
 We have an enormous amount of work and appreciate *any* kind of help, that can be offered.
 
-If you want to take part in the project as developer then [this document](https://github.com/howtohireme/give-me-poc/blob/master/CONTRIBUTING.md) is for you!
+If you want to take part in the project as developer then [this document](https://github.com/symbiod/symbiod/blob/master/CONTRIBUTING.md) is for you!
 
 If you want to take part as designer of manager don't hesitate to drop us an [email](mailto:opensource@howtohireme.ru).
 
-And don't forget to sign up at [givemepoc.org](http://givemepoc.org) ;)
+And don't forget to sign up at [symbiod.org](http://symbiod.org) ;)

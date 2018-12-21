@@ -1,7 +1,7 @@
 github:
-  organization: 'howtohireme'
+  organization: 'symbiod'
   project:
-    url: 'https://github.com/howtohireme/give-me-poc'
+    url: 'https://github.com/symbiod/symbiod'
   default_team: 'bootcamp'
   api_token: <%= ENV['GITHUB_TOKEN'] %>
   oauth:
@@ -15,9 +15,9 @@ slack:
   bot_name: 'Notifications Bot'
 notifications:
   email:
-    default_from: 'givemepoc@gmail.com'
+    default_from: 'symbiod@gmail.com'
 sheduler:
   time: '10:00'
 facebook:
   page:
-    url: 'https://www.facebook.com/givemepoc'
+    url: 'https://www.facebook.com/symbiod'

@@ -15,7 +15,7 @@ RSpec.describe Staff::SurveyResponseCompletedMailer, type: :mailer do
     end
 
     its(:subject) { is_expected.to eq I18n.t('mailers.member.onboarding.survey_responses.subject') }
-    its(:from) { is_expected.to eq(['givemepoc@gmail.com']) }
+    its(:from) { is_expected.to eq(['symbiod@gmail.com']) }
     its(:to) { is_expected.to eq recipients.map(&:email) }
 
     it 'renders link to github' do
