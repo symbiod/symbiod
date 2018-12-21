@@ -8,14 +8,14 @@ Besides the regular Rails app, we have a sidekiq daemon, which executes queued i
 
 The scheduler process initiates all events, which should be triggered by the schedule. To sum up, we have 3 processes that run together to make the system live.
 
-Examine the [Procfile](https://github.com/howtohireme/give-me-poc/blob/master/Procfile.production) to see the list of processes.
+Examine the [Procfile](https://github.com/symbiod/symbiod/blob/master/Procfile.production) to see the list of processes.
 
 ## Namespacing
 
 We want our codebase to reflect the business side of the project, to achieve that we need a proper naming of all entities in the system.
 This requirement applies to all classes in the system, including Cells, Operations, Forms, Controllers, Models.
 
-For example, take a look at the [operations directory](https://github.com/howtohireme/give-me-poc/tree/master/app/operations/ops). The root namespace contains the names of entities, which might act as the subjects of different operations. Some deeper nesting may be required as well. `Member` namespace has [additional nesting](https://github.com/howtohireme/give-me-poc/tree/master/app/operations/ops/member), that represents other entities such as `Onboarding` or `Screening`.
+For example, take a look at the [operations directory](https://github.com/symbiod/symbiod/tree/master/app/operations/ops). The root namespace contains the names of entities, which might act as the subjects of different operations. Some deeper nesting may be required as well. `Member` namespace has [additional nesting](https://github.com/symbiod/symbiod/tree/master/app/operations/ops/member), that represents other entities such as `Onboarding` or `Screening`.
 
 There are no strict guidelines that describe how should we choose if a new operation deserves a separate namespace, most often we use common sense and discuss possible naming with team members.
 

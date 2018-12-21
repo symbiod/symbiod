@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   config.vm.synced_folder "./", "/app"
-  config.vm.synced_folder '../give-me-poc-features', '/features'
+  config.vm.synced_folder '../symbiod-features', '/features'
 
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"
