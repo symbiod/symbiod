@@ -26,7 +26,7 @@ describe Author::RegistrationForm do
   context 'valid params' do
     let(:params) do
       {
-        email: 'user@givemepoc.org',
+        email: 'user@symbiod.org',
         password: 'password',
         first_name: 'John',
         last_name: 'Smith',

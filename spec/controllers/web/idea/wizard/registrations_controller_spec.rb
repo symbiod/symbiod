@@ -46,7 +46,7 @@ describe Web::Idea::Wizard::RegistrationsController do
       let(:params) do
         {
           user: {
-            email: 'user@givemepoc.org',
+            email: 'user@symbiod.org',
             password: 'password',
             first_name: 'John',
             last_name: 'Smith',
@@ -85,7 +85,7 @@ describe Web::Idea::Wizard::RegistrationsController do
       let(:params) do
         {
           user: {
-            email: 'user@givemepoc.org',
+            email: 'user@symbiod.org',
             password: 'password',
             first_name: '',
             last_name: '',

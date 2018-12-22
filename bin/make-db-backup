@@ -25,19 +25,19 @@ bin/obfuscate-db
 pg_dump -Fc --no-acl --no-owner "$PGDATABASE" > latest.dump
 
 TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
-aws s3 cp latest.dump s3://givemepoc/latest.dump --acl public-read
-aws s3 cp latest.dump s3://givemepoc/$TIMESTAMP.dump --acl public-read
+aws s3 cp latest.dump s3://symbiod/latest.dump --acl public-read
+aws s3 cp latest.dump s3://symbiod/$TIMESTAMP.dump --acl public-read
 rm latest.dump
 
 # We remove old backup file each time when we have more that 7 backups
 MIN_FILES=7
-FILE_COUNT=$( aws s3 ls s3://givemepoc/ | wc -l )
+FILE_COUNT=$( aws s3 ls s3://symbiod/ | wc -l )
 
 if [ $MIN_FILES -lt $FILE_COUNT ]; then
 		echo "More than $MIN_FILES"
-		FILE_TO_DEL=$(aws s3 ls s3://givemepoc/ | head -1 | awk {'print $4'})
+		FILE_TO_DEL=$(aws s3 ls s3://symbiod/ | head -1 | awk {'print $4'})
 		echo "Remove $FILE_TO_DEL"
-		aws s3 rm s3://givemepoc/$FILE_TO_DEL
+		aws s3 rm s3://symbiod/$FILE_TO_DEL
 fi
 
-echo "You can get the latest dump via url: https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump or by running bin/load_dump"
+echo "You can get the latest dump via url: https://s3.eu-west-2.amazonaws.com/symbiod/latest.dump or by running bin/load_dump"

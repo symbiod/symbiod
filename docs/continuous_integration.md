@@ -10,7 +10,7 @@ Our working process relies on our CI in many places. We do the following things 
 * Deploy new versions
 * Perform DB backups
 
-For each step, we have a script, defined as [bin](https://github.com/howtohireme/give-me-poc/tree/master/bin) directory of the project.
+For each step, we have a script, defined as [bin](https://github.com/symbiod/symbiod/tree/master/bin) directory of the project.
 
 ## Pipeline
 
@@ -24,8 +24,8 @@ Such an approach prevents us from using redundant resources if the code has some
 
 ## Travis
 
-We use [Travis](https://travis-ci.org/howtohireme/give-me-poc) as our CI service.
-All required configuration is defined at [.travis.yml](https://github.com/howtohireme/give-me-poc/blob/master/.travis.yml) file at the repository.
+We use [Travis](https://travis-ci.org/symbiod/symbiod) as our CI service.
+All required configuration is defined at [.travis.yml](https://github.com/symbiod/symbiod/blob/master/.travis.yml) file at the repository.
 It allows us to install additional software, define the order of stages and jobs within the stage.
 Also, we can define conditional stages, which are executed on specific conditions.
 
@@ -37,7 +37,7 @@ Unit tests job is the most important for the daily developer's work.
 It is executed almost on every event and runs first to provide fast feedback to the developer.
 We run it on `pr` and `push` events and skip the `cron` event.
 So each time you push some commits to the remote repository, it triggers tests stage.
-For this job we require `PostgreSQL` and `redis` to be installed, also we install [code climate](https://codeclimate.com/github/howtohireme/give-me-poc) reporter,
+For this job we require `PostgreSQL` and `redis` to be installed, also we install [code climate](https://codeclimate.com/github/symbiod/symbiod) reporter,
 that can collect code coverage metrics and publish them on the project page at Code Climate website.
 
 ### Seeds test
@@ -56,7 +56,7 @@ It can lead to the problems when we deploy those "naive" migrations on productio
 In other cases, we can get a broken app even after deployment.
 To minimize risks we can, at least, check that proposed migrations run successfully on the production database.
 We use production dump for that. So this job assumes, that you already have production dump somewhere.
-The methods of performing and importing of the dump are described at [sepatate document](https://github.com/howtohireme/give-me-poc/blob/master/docs/db_dumps.md).
+The methods of performing and importing of the dump are described at [sepatate document](https://github.com/symbiod/symbiod/blob/master/docs/db_dumps.md).
 This job is quite similar to the `seeds test`, but requires some additional preparation, like installing the proper version of `pg_restore` utility.
 
 ### Docker images build
@@ -65,7 +65,7 @@ All previous jobs are executed in parallel, but docker image job has his stage.
 The reason for that is that we don't want to push broken images to the registry.
 On the other hand, this job can also be moved to the `tests` stage, to make the build faster, but in this case, we'll not have guaranteed that only working code is present in our docker images.
 
-The result of `build` stage is a docker image, which is pushed to [public registry](https://hub.docker.com/u/howtohireme/).
+The result of `build` stage is a docker image, which is pushed to [public registry](https://hub.docker.com/u/symbiod/).
 This docker hub registry acts as an intermediate place for our images before they get shipped to production.
 
 #### Master branch build
@@ -84,9 +84,9 @@ Features are high-level acceptance tests written on human-readable `cucumber` la
 Those tests check that all business-critical processes work as expected in our application.
 Features job assumes that we have either `latest` or `branch_name` images at our docker hub registry.
 
-The script for this job is located at [bin/features](https://github.com/howtohireme/give-me-poc/blob/master/bin/travis-features).
+The script for this job is located at [bin/features](https://github.com/symbiod/symbiod/blob/master/bin/travis-features).
 
-As the first step of this build, we check out the [features repository](https://github.com/howtohireme/give-me-poc-features).
+As the first step of this build, we check out the [features repository](https://github.com/symbiod/symbiod-features).
 The next login depends on the current branch, that is used in this job.
 
 #### Master branch

@@ -2,8 +2,8 @@
 # This script allows you to pull the latest dump from S3 and load it into your
 # development database
 
-wget https://s3.eu-west-2.amazonaws.com/givemepoc/latest.dump -O /tmp/givemepoc_latest.dump
+wget https://s3.eu-west-2.amazonaws.com/symbiod/latest.dump -O /tmp/symbiod_latest.dump
 
-pg_restore --verbose --clean --no-acl --no-owner -d $PGDATABASE /tmp/givemepoc_latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -d $PGDATABASE /tmp/symbiod_latest.dump
 
-rm /tmp/givemepoc_latest.dump
+rm /tmp/symbiod_latest.dump

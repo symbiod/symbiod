@@ -12,6 +12,6 @@ else
 fi
 
 docker login -u "$DOCKER_HUB_USERNAME" -p "$DOCKER_HUB_PASSWORD"
-docker build --build-arg master_key=$RAILS_MASTER_KEY -t howtohireme/give-me-poc:$CURRENT_TAG -f Dockerfile .
-docker push howtohireme/give-me-poc:$CURRENT_TAG
+docker build --build-arg master_key=$RAILS_MASTER_KEY -t symbiod/symbiod:$CURRENT_TAG -f Dockerfile .
+docker push symbiod/symbiod:$CURRENT_TAG
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker pull howtohireme/give-me-poc:latest
-docker tag howtohireme/give-me-poc:latest registry.heroku.com/peaceful-refuge-95132/web:latest
+docker pull symbiod/symbiod:latest
+docker tag symbiod/symbiod:latest registry.heroku.com/peaceful-refuge-95132/web:latest
 docker login --username=_ --password=$HEROKU_AUTH_TOKEN registry.heroku.com
 docker push registry.heroku.com/peaceful-refuge-95132/web
 

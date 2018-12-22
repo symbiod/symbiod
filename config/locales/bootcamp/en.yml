@@ -22,7 +22,7 @@ en:
       title: Receive a new expertise
       unfilled_github_email: Please fill your github profile according to our <a href='https://github.com/howtohireme/wiki/wiki/First-Steps' target='_blank'>guidelines</a>
       who:
-        body: GiveMePOC is a non-profitable community of developers, designers, managers and QA engineers, who share their experience and help non-profit organizations with their product development. All our activities are as transparent as possible.
+        body: Symbiod is a non-profitable community of developers, designers, managers and QA engineers, who share their experience and help non-profit organizations with their product development. All our activities are as transparent as possible.
         title: Who we are?
     onboarding:
       started: Onboarding started!
