@@ -1,4 +1,4 @@
-## Give Me POC development docs
+## Symbiod development docs
 
 * [Getting started](https://github.com/symbiod/symbiod/blob/master/docs/getting_started.md)
 * [GitHub integration](https://github.com/symbiod/symbiod/blob/master/docs/github_integration.md)
