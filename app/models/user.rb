@@ -11,6 +11,7 @@
 #  password_digest :string
 #  name            :string
 #  admin           :boolean          default(FALSE)
+#  about           :string
 #
 
 require 'sorcery/model'

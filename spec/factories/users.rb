@@ -10,6 +10,7 @@ FactoryBot.define do
     location { Faker::Address.country }
     timezone { Faker::Address.time_zone }
     cv_url { Faker::Internet.url }
+    about { Faker::Lorem.characters(150) }
     password 'password'
     salt { 'ExqpVWiDcK2vGfeRjqTx' }
     crypted_password { Sorcery::CryptoProviders::BCrypt.encrypt('password', salt) }
