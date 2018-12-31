@@ -22,4 +22,8 @@ RSpec.describe Web::LocalesController do
       end
     end
   end
+
+  after do
+    I18n.locale = :en
+  end
 end
