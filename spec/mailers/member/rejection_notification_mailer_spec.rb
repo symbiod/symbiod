@@ -7,7 +7,7 @@ RSpec.describe Member::RejectionNotificationMailer, type: :mailer do
     let(:user) { create(:user) }
     subject { Member::RejectionNotificationMailer.notify(user.id, 'feedback') }
 
-    its(:subject) { is_expected.to eq("#{I18n.t('bootcamp.screening.rejection')}, #{user.full_name}") }
+    its(:subject) { is_expected.to eq("#{I18n.t('specialists.screening.rejection')}, #{user.full_name}") }
     its(:to) { is_expected.to eq([user.email]) }
     its(:from) { is_expected.to eq([Settings.notifications.email.default_from]) }
   end

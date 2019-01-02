@@ -20,7 +20,7 @@ describe ProfileHelper do
   describe '.new_member_role_options' do
     specify do
       expect(new_member_role_options)
-        .to eq [[t('bootcamp.profile.roles.member'), 'member'], [t('bootcamp.profile.roles.mentor'), 'mentor']]
+        .to eq [[t('specialists.profile.roles.member'), 'member'], [t('specialists.profile.roles.mentor'), 'mentor']]
     end
   end
 

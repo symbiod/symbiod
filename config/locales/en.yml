@@ -43,7 +43,7 @@ en:
     logout: Logged out
     member: Specialist
     navigation:
-      bootcamp: Bootcamp
+      specialists: Specialists
       dashboard: Dashboard
       home: Home
       ideas: Ideas
