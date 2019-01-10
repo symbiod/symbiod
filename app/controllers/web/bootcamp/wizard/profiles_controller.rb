@@ -30,7 +30,8 @@ module Web
           params
             .require(:member_wizard_profile)
             .permit(:first_name, :last_name, :location,
-                    :timezone, :cv_url, :role, :primary_skill_id)
+                    :timezone, :cv_url, :role, :primary_skill_id,
+                    :about)
         end
 
         def policy_class

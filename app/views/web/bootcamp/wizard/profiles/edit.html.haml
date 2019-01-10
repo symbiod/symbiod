@@ -10,4 +10,5 @@
   = f.input :cv_url
   = f.input :role, collection: new_member_role_options, include_blank: false
   = f.input :primary_skill_id, collection: Skill.active, include_blank: false
+  = f.input :about, as: :text
   = f.button :submit, t('bootcamp.profile.submit'), type: :submit, class: 'btn btn-lg btn-secondary'

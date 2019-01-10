@@ -21,6 +21,7 @@ ru:
           link: Ссылка
       member_wizard_profile:
         edit:
+          about: О себе
           cv_url: Резюме или Linkedin
           first_name: Имя
           last_name: Фамилия

@@ -21,6 +21,7 @@ en:
           link: Link
       member_wizard_profile:
         edit:
+          about: About
           cv_url: CV url
           first_name: First name
           last_name: Last name

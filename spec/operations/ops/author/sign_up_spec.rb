@@ -12,7 +12,8 @@ describe Ops::Author::SignUp do
           first_name: 'John',
           last_name: 'Smith',
           location: 'Russia',
-          timezone: 'Europe/Moscow'
+          timezone: 'Europe/Moscow',
+          about: Faker::Lorem.characters(150)
         }
       end
 
