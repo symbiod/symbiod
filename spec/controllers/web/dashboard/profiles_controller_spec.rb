@@ -56,7 +56,8 @@ RSpec.describe Web::Dashboard::ProfilesController do
           {
             first_name: 'Some new name',
             last_name:  'Some new last_name',
-            location:   'Some new location'
+            location:   'Some new location',
+            about: Faker::Lorem.characters(150)
           }
         end
 
@@ -97,7 +98,8 @@ RSpec.describe Web::Dashboard::ProfilesController do
         let(:params) do
           {
             last_name:  'Some new last_name',
-            email: 'some-new-email@gmail.com'
+            email: 'some-new-email@gmail.com',
+            about: Faker::Lorem.characters(150)
           }
         end
 

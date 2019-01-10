@@ -32,7 +32,7 @@ module Web
 
       def profile_params
         params.require(:user)
-              .permit(:first_name, :last_name, :location, :timezone, :cv_url)
+              .permit(:first_name, :last_name, :location, :timezone, :cv_url, :about)
       end
     end
   end
