@@ -18,7 +18,8 @@ describe Member::Wizard::ProfileForm do
         timezone: 'Europe/Moscow',
         cv_url: 'https://google.com',
         role: 'mentor',
-        primary_skill_id: 1
+        primary_skill_id: 1,
+        about: Faker::Lorem.characters(150)
       }
     end
 
@@ -29,6 +30,7 @@ describe Member::Wizard::ProfileForm do
     it { expect(errors).not_to include :cv_url }
     it { expect(errors).not_to include :role }
     it { expect(errors).not_to include :primary_skill_id }
+    it { expect(errors).not_to include :about }
 
     it { is_expected.to be_valid }
   end
@@ -43,7 +45,26 @@ describe Member::Wizard::ProfileForm do
     it { expect(errors).to include :cv_url }
     it { expect(errors).to include :role }
     it { expect(errors).to include :primary_skill_id }
+    it { expect(errors).to include :about }
 
     it { is_expected.not_to be_valid }
+
+    context 'with short about' do
+      let(:params) do
+        {
+          first_name: 'John',
+          last_name: 'Smith',
+          location: 'Russia',
+          timezone: 'Europe/Moscow',
+          cv_url: 'https://google.com',
+          role: 'mentor',
+          primary_skill_id: 1,
+          about: Faker::Lorem.characters(15)
+        }
+      end
+      it { expect(errors).to include :about }
+
+      it { is_expected.not_to be_valid }
+    end
   end
 end

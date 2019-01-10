@@ -16,7 +16,8 @@ describe Member::ProfileForm do
         last_name: 'Smith',
         location: 'Russia',
         timezone: 'Europe/Moscow',
-        cv_url: 'https://google.com'
+        cv_url: 'https://google.com',
+        about: Faker::Lorem.characters(150)
       }
     end
 
@@ -25,6 +26,7 @@ describe Member::ProfileForm do
     it { expect(errors).not_to include :location }
     it { expect(errors).not_to include :timezone }
     it { expect(errors).not_to include :cv_url }
+    it { expect(errors).not_to include :about }
 
     it { is_expected.to be_valid }
   end
@@ -37,7 +39,25 @@ describe Member::ProfileForm do
     it { expect(errors).to include :location }
     it { expect(errors).to include :timezone }
     it { expect(errors).to include :cv_url }
+    it { expect(errors).to include :about }
 
     it { is_expected.not_to be_valid }
+
+    context 'with short about' do
+      let(:params) do
+        {
+          first_name: 'John',
+          last_name: 'Smith',
+          location: 'Russia',
+          timezone: 'Europe/Moscow',
+          cv_url: 'https://google.com',
+          about: 'About'
+        }
+      end
+
+      it { expect(errors).to include :about }
+
+      it { is_expected.not_to be_valid }
+    end
   end
 end

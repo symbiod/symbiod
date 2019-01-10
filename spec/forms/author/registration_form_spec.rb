@@ -19,8 +19,27 @@ describe Author::RegistrationForm do
     it { expect(errors).to include :last_name }
     it { expect(errors).to include :location }
     it { expect(errors).to include :timezone }
+    it { expect(errors).to include :about }
 
     it { is_expected.not_to be_valid }
+
+    context 'with short about' do
+      let(:params) do
+        {
+          email: 'user@givemepoc.org',
+          password: 'password',
+          first_name: 'John',
+          last_name: 'Smith',
+          location: 'Russia',
+          timezone: 'Europe/Moscow',
+          about: 'About'
+        }
+      end
+
+      it { expect(errors).to include :about }
+
+      it { is_expected.not_to be_valid }
+    end
   end
 
   context 'valid params' do
@@ -31,7 +50,8 @@ describe Author::RegistrationForm do
         first_name: 'John',
         last_name: 'Smith',
         location: 'Russia',
-        timezone: 'Europe/Moscow'
+        timezone: 'Europe/Moscow',
+        about: Faker::Lorem.characters(150)
       }
     end
 
@@ -41,6 +61,7 @@ describe Author::RegistrationForm do
     it { expect(errors).not_to include :last_name }
     it { expect(errors).not_to include :location }
     it { expect(errors).not_to include :timezone }
+    it { expect(errors).not_to include :about }
 
     it { is_expected.to be_valid }
   end
