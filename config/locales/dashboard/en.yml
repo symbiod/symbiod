@@ -133,6 +133,7 @@ en:
       test_tasks: Test Tasks
       users: Users management
     profile:
+      about: About
       cv_url: CV url
       edit:
         button: Edit
