@@ -34,7 +34,7 @@ module Web
 
         def author_params
           params.require(:user)
-                .permit(:email, :first_name, :last_name, :location, :timezone, :password)
+                .permit(:email, :first_name, :last_name, :location, :timezone, :password, :about)
         end
       end
     end
