@@ -9,6 +9,7 @@ describe Ops::Member::CompleteProfile do
     let(:user) { create(:user) }
     let(:skill) { create(:skill) }
     let(:role) { role_for(user: user, role_name: :member) }
+    let(:about) { Faker::Lorem.characters(150) }
     let(:non_user_params) do
       {
         primary_skill_id: skill.id,

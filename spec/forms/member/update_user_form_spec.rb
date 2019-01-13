@@ -19,7 +19,8 @@ describe Member::UpdateUserForm do
         timezone: 'Europe/Moscow',
         cv_url: 'https://google.com',
         github: 'superuser',
-        primary_skill_id: 1
+        primary_skill_id: 1,
+        about: Faker::Lorem.characters(150)
       }
     end
 
@@ -31,6 +32,7 @@ describe Member::UpdateUserForm do
     it { expect(errors).not_to include :cv_url }
     it { expect(errors).not_to include :github }
     it { expect(errors).not_to include :primary_skill_id }
+    it { expect(errors).not_to include :about }
 
     it { is_expected.to be_valid }
   end
@@ -46,7 +48,27 @@ describe Member::UpdateUserForm do
     it { expect(errors).to include :cv_url }
     it { expect(errors).to include :github }
     it { expect(errors).to include :primary_skill_id }
+    it { expect(errors).to include :about }
 
     it { is_expected.not_to be_valid }
+
+    context 'with short about' do
+      let(:params) do
+        {
+          email: 'user@gmail.com',
+          first_name: 'John',
+          last_name: 'Smith',
+          location: 'Russia',
+          timezone: 'Europe/Moscow',
+          cv_url: 'https://google.com',
+          github: 'superuser',
+          primary_skill_id: 1,
+          about: Faker::Lorem.characters(15)
+        }
+      end
+      it { expect(errors).to include :about }
+
+      it { is_expected.not_to be_valid }
+    end
   end
 end

@@ -133,6 +133,7 @@ ru:
       test_tasks: Тестовые задания
       users: Участники
     profile:
+      about: О себе
       cv_url: Резюме/Linkedin
       edit:
         button: Изменить
