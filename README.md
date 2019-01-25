@@ -28,3 +28,4 @@ If you want to take part in the project as developer then [this document](https:
 If you want to take part as designer of manager don't hesitate to drop us an [email](mailto:opensource@howtohireme.ru).
 
 And don't forget to sign up at [www.symbiod.org](https://www.symbiod.org) ;)
+0a
