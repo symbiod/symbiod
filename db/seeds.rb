@@ -33,6 +33,9 @@ end
 # Create members
 5.times do |i|
   user = create_user(i)
+  if i == 1
+    user.add_role Member::Wizard::ProfileForm::ROLES
+  end
   user.add_role Member::Wizard::ProfileForm::ROLES.sample
   user.roles.last.update(state: %w[pending active disabled screening_completed].sample)
   UserSkill.create!(user: user, skill: Skill.all.sample, primary: true)
