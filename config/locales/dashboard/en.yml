@@ -52,9 +52,9 @@ en:
           create: Question was not created
           update: Question was not updated
         success:
-          create: Question was success created
+          create: Question was successfully created
           destroy: Question was deleted
-          update: Question was success updated
+          update: Question was successfully updated
       tables:
         description: Question
         key_name: Key name
@@ -162,7 +162,7 @@ en:
         stack: Stack
       update:
         danger: Could not update project
-        success: Project was success updated
+        success: Project was successfully updated
     roles:
       force_activate: Force activate
       notices:

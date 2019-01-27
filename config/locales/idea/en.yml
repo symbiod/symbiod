@@ -2,15 +2,15 @@
 en:
   idea:
     landing:
-      author_log_in: Offer an idea
+      author_log_in: Bring an idea
       body: |
-        We can provide offer you a development team, with designers, managers and quality assurance engineers for free!
+        We can provide you a development team, with designers, managers and quality assuring you engineers for free!
         <br>
         The only limitation, is that all source code will be available in our public GitHub,
         and its commercial usage won't be allowed due to the license.
       go_to_dashboard: Go to dashboard
       go_to_proposal: Go to proposal
-      title: Have an idea of non-profitable project?
+      title: Do you have an idea of non-profitable project?
       wait_for_idea_approve: Thank you! We’ll consider your project idea and will back to you soon
     proposals:
       access:
@@ -26,7 +26,7 @@ en:
       access:
         deny: The user is already logged in
       new:
-        have_account: Already have account?
+        have_account: Already have an account?
         header: Log in
         new_user: New to POC?
         sign_up: Sign up
@@ -34,12 +34,12 @@ en:
     wizard:
       mailers:
         activated:
-          subject: You account was activated
+          subject: You're account is activated
       policy:
         accept: I accept
-        body: By accept this you approve your agreement with our policy located at <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>. <br /> Following policy is required for all project authors.
+        body: By accepting this you approve your agreement with our policy located at <a href="https://github.com/howtohireme/wiki/wiki/Terms-and-Rules" target="_blank">wiki</a>. <br /> Following policy is required for all project authors.
         must_be_accepted: You should accept the policy for further steps.
         submit: Submit
         title: Our policy
       proposals:
-        fill_all_fields: Fill all fields to submit the idea
+        fill_all_fields: Fill all the fields to submit the idea
