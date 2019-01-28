@@ -8,10 +8,12 @@
       %th= t('dashboard.ideas.table.name')
       %th= t('dashboard.ideas.table.status')
       %th= t('dashboard.ideas.table.author')
+      %th= t('dashboard.ideas.table.created_at')
     - @ideas.each do |idea|
       %tr
         %td= link_to idea.name, dashboard_idea_url(idea)
         %td= idea.state
         %td= idea.author.email
+        %td= idea.author.created_at.strftime("%A, %d %b %Y %l:%M %p")
 %br
 = paginate @ideas

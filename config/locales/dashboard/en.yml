@@ -88,6 +88,7 @@ en:
         name: Name
         status: Status
         votes: Votes
+        created_at: Created At
       update:
         danger: Could not update idea
         success: Idea was updated
