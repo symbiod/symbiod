@@ -123,7 +123,7 @@ ru:
       applicants: Новый участники
       dashboard: Главная
       feedback_questions: Вопросы для отзывов
-      ideas: Идеи
+      ideas: Идеи %{count}
       mentored: Управляемые проекты
       my_projects: Мои проекты
       profile: Профиль
