@@ -9,7 +9,9 @@ module Ops
       step Contract::Build(constant: ::Propose::ProposeForm)
       step Contract::Validate()
       step Contract::Persist()
-      success :send_message_to_slack!
+      unless Rails.env.development?
+        success :send_message_to_slack!
+      end
 
       private
 
