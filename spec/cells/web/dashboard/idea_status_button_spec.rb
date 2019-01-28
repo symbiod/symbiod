@@ -19,7 +19,7 @@ describe Web::Dashboard::IdeaStatusButton do
     end
 
     it 'renders link to confirm status to activate' do
-      expect(subject).to match(/data-confirm="Are you sure to activate?/)
+      expect(subject).to match(/data-confirm="Are you sure you want to activate?/)
     end
   end
 
@@ -41,7 +41,7 @@ describe Web::Dashboard::IdeaStatusButton do
     end
 
     it 'renders link to confirm status to activate' do
-      expect(subject).to match(/data-confirm="Are you sure to voting?/)
+      expect(subject).to match(/data-confirm="Are you sure you want to vote?/)
     end
   end
 

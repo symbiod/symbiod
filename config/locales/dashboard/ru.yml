@@ -83,6 +83,7 @@ ru:
         voting: Голосование запущено
       table:
         author: Автор
+        created_at: Дата
         description: Описание
         manage: Управление
         name: Название

@@ -7,5 +7,5 @@
         = image_tag 'facebook.png', class: 'facebook'
     %p
       = t('landing.footer.built_by')
-      = succeed ', ' + Date.current.year do
+      = succeed ', ' + Date.current.year.to_s do
         = link_to t('landing.brand'), 'mailto:opensource@howtohireme.ru', target: '_blank'
