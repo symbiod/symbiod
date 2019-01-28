@@ -51,7 +51,7 @@
               = nav_item_link t('dashboard.navigation.skills'),
                               dashboard_skills_url,
                               policy_name: %i[dashboard skill]
-              = nav_item_link t('dashboard.navigation.ideas'),
+              = nav_item_link "#{t('dashboard.navigation.ideas')} #{count_pending_ideas}",
                               dashboard_ideas_url,
                               icon: 'info'
               = nav_item_link t('dashboard.navigation.projects'),
