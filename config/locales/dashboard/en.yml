@@ -83,12 +83,12 @@ en:
         voting: The idea change state to voting
       table:
         author: Author
+        created_at: Created At
         description: Description
         manage: Manage
         name: Name
         status: Status
         votes: Votes
-        created_at: Created At
       update:
         danger: Could not update idea
         success: Idea was updated

@@ -83,12 +83,12 @@ ru:
         voting: Голосование запущено
       table:
         author: Автор
+        created_at: Дата
         description: Описание
         manage: Управление
         name: Название
         status: Статус
         votes: Голоса
-        created_at: Дата
       update:
         danger: Невозможно обновить идею
         success: Идея обновлена
