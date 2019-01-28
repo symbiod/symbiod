@@ -88,7 +88,7 @@ ru:
         name: Название
         status: Статус
         votes: Голоса
-        created_at:
+        created_at: Дата
       update:
         danger: Невозможно обновить идею
         success: Идея обновлена
