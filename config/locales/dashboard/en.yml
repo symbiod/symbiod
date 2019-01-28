@@ -83,6 +83,7 @@ en:
         voting: The idea change state to voting
       table:
         author: Author
+        created_at: Created At
         description: Description
         manage: Manage
         name: Name
