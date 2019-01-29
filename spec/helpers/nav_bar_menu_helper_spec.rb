@@ -23,9 +23,9 @@ describe NavBarMenuHelper do
 
   describe '#count_pending_ideas' do
     context 'pending ideas exist' do
-      let!(:idea1) { create(:idea, :pending)}
-      let!(:idea2) { create(:idea, :pending)}
-      let!(:idea3) { create(:idea, :active)}
+      let!(:idea1) { create(:idea, :pending) }
+      let!(:idea2) { create(:idea, :pending) }
+      let!(:idea3) { create(:idea, :active) }
 
       it 'returns positivie number of pending ideas' do
         expect(count_pending_ideas).to eq 2
