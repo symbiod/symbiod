@@ -21,6 +21,24 @@ describe NavBarMenuHelper do
     end
   end
 
+  describe '#count_pending_ideas' do
+    context 'pending ideas exist' do
+      let!(:idea1) { create(:idea, :pending)}
+      let!(:idea2) { create(:idea, :pending)}
+      let!(:idea3) { create(:idea, :active)}
+
+      it 'returns positivie number of pending ideas' do
+        expect(count_pending_ideas).to eq 2
+      end
+    end
+
+    context 'no pending ideas' do
+      it 'returns 0' do
+        expect(count_pending_ideas).to eq 0
+      end
+    end
+  end
+
   describe '#nav_item_link' do
     context 'user denied access to page' do
       let(:current_user) { create(:user, :member, :active) }
