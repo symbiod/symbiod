@@ -14,7 +14,6 @@ module NavBarMenuHelper
 
   def count_applicants
     Role.where(state: :screening_completed).count
-
   end
 
   def count_pending_ideas
