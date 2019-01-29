@@ -14,11 +14,11 @@ module NavBarMenuHelper
 
   def count_applicants
     pending_applications = Role.where(state: :screening_completed).count
-    "(#{pending_applications})" unless pending_applications.zero?
+    # pending_applications unless pending_applications.zero?
   end
 
   def count_pending_ideas
     pending_ideas = Idea.where(state: :pending).count
-    "(#{pending_ideas})" unless pending_ideas.zero?
+    # pending_ideas unless pending_ideas.zero?
   end
 end
