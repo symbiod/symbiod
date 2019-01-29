@@ -121,15 +121,15 @@ ru:
       activity: Активность
       analytics: Аналитика
       applicant:
-        zero: Новый участники
         one: заявитель (%{count})
-        other: Новый участники (%{count})
+        other: Новый участники (%{count})"
+        zero: Новый участники
       dashboard: Главная
       feedback_questions: Вопросы для отзывов
       idea:
-        zero: идея
         one: идея (%{count})
         other: Идеи (%{count})
+        zero: идея
       mentored: Управляемые проекты
       my_projects: Мои проекты
       profile: Профиль

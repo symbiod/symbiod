@@ -121,15 +121,15 @@ en:
       activity: Activity
       analytics: Analytics
       applicant:
-        zero : Applicants
         one: Applicant (%{count})
         other: Applicants (%{count})
+        zero: Applicants
       dashboard: Dashboard
       feedback_questions: Questions
       idea:
-        zero : Idea
         one: Idea (%{count} - pending)
         other: Ideas (%{count} - pending)
+        zero: Idea
       mentored: Mentored
       my_projects: My projects
       profile: Profile
