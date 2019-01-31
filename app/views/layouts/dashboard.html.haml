@@ -31,7 +31,7 @@
               = nav_item_link t('dashboard.navigation.dashboard'),
                               dashboard_root_url,
                               icon: 'home'
-              = nav_item_link "#{t('dashboard.navigation.applicants')} #{count_applicants}",
+              = nav_item_link t('dashboard.navigation.applicant', count: count_applicants),
                               dashboard_test_task_assignments_url,
                               policy_name: :test_task_assignment,
                               icon: 'users'
@@ -51,7 +51,7 @@
               = nav_item_link t('dashboard.navigation.skills'),
                               dashboard_skills_url,
                               policy_name: %i[dashboard skill]
-              = nav_item_link t('dashboard.navigation.ideas'),
+              = nav_item_link t('dashboard.navigation.idea', count: count_pending_ideas),
                               dashboard_ideas_url,
                               icon: 'info'
               = nav_item_link t('dashboard.navigation.projects'),

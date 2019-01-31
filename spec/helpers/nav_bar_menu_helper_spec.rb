@@ -10,13 +10,31 @@ describe NavBarMenuHelper do
       let!(:candidate3) { create(:user, :member, :active) }
 
       it 'returns positive number of pending users' do
-        expect(count_applicants).to eq '(2)'
+        expect(count_applicants).to eq 2
       end
     end
 
     context 'no pending applications' do
-      it 'returns nil' do
-        expect(count_applicants).to eq nil
+      it 'returns 0' do
+        expect(count_applicants).to eq 0
+      end
+    end
+  end
+
+  describe '#count_pending_ideas' do
+    context 'pending ideas exist' do
+      let!(:idea1) { create(:idea, :pending) }
+      let!(:idea2) { create(:idea, :pending) }
+      let!(:idea3) { create(:idea, :active) }
+
+      it 'returns positivie number of pending ideas' do
+        expect(count_pending_ideas).to eq 2
+      end
+    end
+
+    context 'no pending ideas' do
+      it 'returns 0' do
+        expect(count_pending_ideas).to eq 0
       end
     end
   end

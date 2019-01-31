@@ -120,10 +120,16 @@ en:
     navigation:
       activity: Activity
       analytics: Analytics
-      applicants: Applicants
+      applicant:
+        one: Applicant (%{count})
+        other: Applicants (%{count})
+        zero: Applicants
       dashboard: Dashboard
       feedback_questions: Questions
-      ideas: Ideas
+      idea:
+        one: Idea (%{count} - pending)
+        other: Ideas (%{count} - pending)
+        zero: Idea
       mentored: Mentored
       my_projects: My projects
       profile: Profile

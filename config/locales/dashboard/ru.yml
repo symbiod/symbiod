@@ -120,10 +120,16 @@ ru:
     navigation:
       activity: Активность
       analytics: Аналитика
-      applicants: Новый участники
+      applicant:
+        one: заявитель (%{count})
+        other: Новый участники (%{count})"
+        zero: Новый участники
       dashboard: Главная
       feedback_questions: Вопросы для отзывов
-      ideas: Идеи
+      idea:
+        one: идея (%{count})
+        other: Идеи (%{count})
+        zero: идея
       mentored: Управляемые проекты
       my_projects: Мои проекты
       profile: Профиль
