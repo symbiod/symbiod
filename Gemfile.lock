@@ -183,7 +183,7 @@ GEM
     hashie (3.5.7)
     highline (2.0.0)
     hirb (0.7.3)
-    honeybadger (3.3.0)
+    honeybadger (3.3.1)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
