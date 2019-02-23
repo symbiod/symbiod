@@ -1,4 +1,4 @@
-# Symbiod app
+# Symbiod platform
 
 [![Build Status](https://travis-ci.org/symbiod/symbiod.svg?branch=master)](https://travis-ci.org/symbiod/symbiod)
 [![Open Source Helpers](https://www.codetriage.com/symbiod/symbiod/badges/users.svg)](https://www.codetriage.com/symbiod/symbiod)
