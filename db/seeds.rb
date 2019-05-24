@@ -1,5 +1,8 @@
 require 'faker'
 require 'yaml'
+I18n.locale = 'en'
+
+Rake::Task['db:reset'].invoke
 
 def create_user(number)
   User.create!(

@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(version: 2018_12_24_215628) do
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
+  create_table "developer_test_task_results", force: :cascade do |t|
+    t.string "link", null: false
+    t.integer "developer_id", null: false
+    t.integer "test_task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["developer_id"], name: "index_developer_test_task_results_on_developer_id"
+  end
+
+  create_table "developer_test_tasks", force: :cascade do |t|
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ideas", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false

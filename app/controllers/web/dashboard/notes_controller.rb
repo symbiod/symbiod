@@ -20,9 +20,9 @@ module Web
         build_note
         if @note.save
           redirect_to send("dashboard_#{@noteable.class.name.underscore}_url", @noteable),
-                      flash: { success: t('notes.noties.success.create') }
+                      flash: { success: t('dashboard.notes.noties.success.create') }
         else
-          flash.now[:danger] = t('notes.noties.danger.create')
+          flash.now[:danger] = t('dashboard.notes.noties.danger.create')
           render 'notes/new', layout: 'dashboard'
         end
       end
@@ -34,9 +34,9 @@ module Web
       def update
         if @note.update(note_params)
           redirect_to send("dashboard_#{@noteable.class.name.underscore}_url", @noteable),
-                      flash: { success: t('notes.noties.success.update') }
+                      flash: { success: t('dashboard.notes.noties.success.update') }
         else
-          flash.now[:danger] = t('notes.noties.danger.update')
+          flash.now[:danger] = t('dashboard.notes.noties.danger.update')
           render 'notes/edit', layout: 'dashboard'
         end
       end
@@ -44,7 +44,7 @@ module Web
       def destroy
         @note.destroy
         redirect_to send("dashboard_#{@noteable.class.name.underscore}_url", @noteable),
-                    flash: { success: t('notes.noties.success.destroy') }
+                    flash: { success: t('dashboard.notes.noties.success.destroy') }
       end
 
       private
@@ -67,7 +67,7 @@ module Web
 
       def redirect_to_dashboard_notable
         redirect_to send("dashboard_#{@noteable.class.name.underscore}_url", @noteable),
-                    flash: { danger: t('notes.noties.access_denied') }
+                    flash: { danger: t('dashboard.notes.noties.access_denied') }
       end
 
       def build_note
