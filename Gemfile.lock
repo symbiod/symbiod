@@ -82,7 +82,8 @@ GEM
       cells (>= 4.1.6, < 5.0.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    clockwork (2.0.3)
+    clockwork (2.0.4)
+      activesupport
       tzinfo
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -454,7 +455,7 @@ GEM
     turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
-    tzinfo (1.2.5)
+    tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uber (0.1.0)
     uglifier (4.1.8)
