@@ -8,6 +8,9 @@
 
 ![image](https://s15.postimg.cc/bbc427ycr/2018-07-09_14.01.32.jpg)
 
+**Archived:
+No more development effort is planned. In case any questions about GiveMePOC/Symbiod/Bootcamp projects please contact [Mehonoshin](https://github.com/Mehonoshin).**
+
 We want to build a place, where anyone can take part in development of opensource projects, that will help non-profits to bring value to the people.
 
 The approach is that we connect individuals, that have an idea of some useful non-profit project(or event profitable, but tolerant to having the code open to everyone) and developers who wants to participate in those projects.
