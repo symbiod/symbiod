@@ -20,10 +20,10 @@ describe SubdomainUrlHelper do
     end
 
     context 'current slug' do
-      let(:current_slug) { '/bootcamp' }
+      let(:current_slug) { '/specialists' }
 
       it do
-        expect(helper.nav_link(link_text, link_url, slug: 'bootcamp'))
+        expect(helper.nav_link(link_text, link_url, slug: 'specialists'))
           .to eq '<a class="nav-link active" id="" href="https://google.com">Some Link</a>'
       end
     end
@@ -32,7 +32,7 @@ describe SubdomainUrlHelper do
       let(:current_slug) { '/other' }
 
       it do
-        expect(helper.nav_link(link_text, link_url, slug: 'bootcamp'))
+        expect(helper.nav_link(link_text, link_url, slug: 'specialists'))
           .to eq '<a class="nav-link " id="" href="https://google.com">Some Link</a>'
       end
     end

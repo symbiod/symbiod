@@ -7,7 +7,7 @@ module Member
       @user = User.find(user_id)
       mail(
         to: @user.email,
-        subject: "#{t('bootcamp.onboarding.started')}, #{@user.full_name}"
+        subject: "#{t('specialists.onboarding.started')}, #{@user.full_name}"
       )
     end
   end

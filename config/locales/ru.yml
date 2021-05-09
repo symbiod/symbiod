@@ -43,7 +43,7 @@ ru:
     logout: Вы успешно вышли из системы
     member: Специалист
     navigation:
-      bootcamp: Специалистам
+      specialists: Специалистам
       dashboard: Проекты
       home: Главная
       ideas: Организациям

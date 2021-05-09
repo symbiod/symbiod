@@ -12,7 +12,7 @@ module ProfileHelper
 
   def new_member_role_options
     Member::Wizard::ProfileForm::ROLES.map do |role|
-      [t("bootcamp.profile.roles.#{role}"), role]
+      [t("specialists.profile.roles.#{role}"), role]
     end
   end
 end

@@ -5,7 +5,7 @@ require './lib/sidekiq_constraint'
 
 Rails.application.routes.draw do
   scope module: :web do
-    namespace :bootcamp do
+    namespace :specialists do
       namespace :wizard do
         resources :screenings, only: %i[index update]
         resource :profile, only: %i[edit update]

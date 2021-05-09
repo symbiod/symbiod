@@ -6,7 +6,7 @@ module Member
     def notify(user_id, feedback)
       @user = User.find(user_id)
       @feedback = feedback
-      mail(to: @user.email, subject: "#{t('bootcamp.screening.rejection')}, #{@user.full_name}")
+      mail(to: @user.email, subject: "#{t('specialists.screening.rejection')}, #{@user.full_name}")
     end
   end
 end

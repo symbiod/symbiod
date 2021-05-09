@@ -13,10 +13,10 @@ module Member
 
     def steps_routes_mapping
       {
-        pending: 'edit_bootcamp_wizard_profile_url',
-        profile_completed: 'edit_bootcamp_wizard_accept_policy_url',
-        policy_accepted: 'bootcamp_wizard_screenings_url',
-        screening_completed: 'bootcamp_wizard_screenings_url'
+        pending: 'edit_specialists_wizard_profile_url',
+        profile_completed: 'edit_specialists_wizard_accept_policy_url',
+        policy_accepted: 'specialists_wizard_screenings_url',
+        screening_completed: 'specialists_wizard_screenings_url'
       }
     end
   end
