@@ -168,7 +168,6 @@ ru:
         name: Название
         stack: Технология
       update:
-        danger: Не удается обновить проект
         success: Проект обновлен
     roles:
       force_activate: Принудительно активировать

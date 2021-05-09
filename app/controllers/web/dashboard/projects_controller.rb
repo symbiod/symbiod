@@ -24,7 +24,7 @@ module Web
           redirect_to dashboard_project_url(@project),
                       flash: { success: t('dashboard.projects.update.success') }
         else
-          flash.now[:danger] = t('dashbooard.projects.update.danger')
+          flash.now[:danger] = t('dashboard.projects.update.danger')
           render :edit
         end
       end

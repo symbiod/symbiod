@@ -5,7 +5,7 @@
         .card-header
           .row
             .col
-              #{t('notes.fields.note')} ##{note.id}
+              #{t('dashboard.notes.fields.note')} ##{note.id}
             .col.text-right
               - if Dashboard::NotePolicy.new(current_user, note).edit?
                 = link_to edit_dashboard_user_note_url(model, note) do
@@ -13,11 +13,11 @@
               - if policy(%i[dashboard note]).destroy?
                 = link_to dashboard_user_note_url(model, note),
                           method: :delete,
-                          data: { confirm: t('notes.noties.confirm.destroy') } do
+                          data: { confirm: t('dashboard.notes.noties.confirm.destroy') } do
                   %i.fa.fa-remove
         .card-body.card-text
           = markdown(note.content)
         .card-footer.text-muted
-          = t('notes.fields.commenter')
+          = t('dashboard.notes.fields.commenter')
           = link_to note.commenter.email,
                     dashboard_user_url(note.commenter)

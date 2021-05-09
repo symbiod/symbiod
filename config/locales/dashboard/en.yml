@@ -168,7 +168,6 @@ en:
         name: Name
         stack: Stack
       update:
-        danger: Could not update project
         success: Project was successfully updated
     roles:
       force_activate: Force activate

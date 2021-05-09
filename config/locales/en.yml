@@ -1,5 +1,9 @@
 ---
 en:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: Record invalid
   dashboard:
     ideas:
       button:
@@ -10,18 +14,35 @@ en:
       role: Role
     navigation:
       logout: Logout
+    notes:
+      buttons:
+        create: Create
+        update: Update
+      content: Note content
+      fields:
+        commenter: Commenter
+        note: Note
+      noties:
+        access_denied: Not enough rights to create a note
+        confirm:
+          destroy: Are you sure to delete this note?
+        danger:
+          create: Not all fields are filled in the note
+          update: Not all fields are filled in the note
+        success:
+          create: Note was successfully created
+          destroy: Note was successfully deleted
+          update: Note was successfully updated
     profile:
       github: Github
     projects:
       button:
         edit: Edit
+      update:
+        danger: Danger
     users:
       table:
         primary_skill: Primary skill
-  dashbooard:
-    projects:
-      update:
-        danger: Danger
   landing:
     alerts:
       not_authenticated_dashboard_access: You should sign in before accessing Dashboard
@@ -63,24 +84,6 @@ en:
     link:
       en: In russian
       ru: In english
-  notes:
-    buttons:
-      create: Create
-      update: Update
-    fields:
-      commenter: Commenter
-      note: Note
-    noties:
-      access_denied: Not enough rights to create a note
-      confirm:
-        destroy: Are you sure to delete this note?
-      danger:
-        create: Not all fields are filled in the note
-        update: Not all fields are filled in the note
-      success:
-        create: Note was successfully created
-        destroy: Note was successfully deleted
-        update: Note was successfully updated
   views:
     pagination:
       first: First

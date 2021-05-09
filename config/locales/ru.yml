@@ -1,5 +1,9 @@
 ---
 ru:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: Record invalid
   dashboard:
     ideas:
       button:
@@ -10,18 +14,35 @@ ru:
       role: Уровень
     navigation:
       logout: Выйти
+    notes:
+      buttons:
+        create: Создать
+        update: Обновить
+      content: Содержимое заметки
+      fields:
+        commenter: Автор
+        note: Заметка
+      noties:
+        access_denied: Не достаточно прав для создания заметки
+        confirm:
+          destroy: Вы уверены, что хотите удалить заметку?
+        danger:
+          create: Заполните все поля заметки
+          update: Заполните все поля заметки
+        success:
+          create: Заметка успешно создана
+          destroy: Заметка успешно удалена
+          update: Заметка успешно обновлена
     profile:
       github: Github
     projects:
       button:
         edit: Редактировать
+      update:
+        danger: Не удалось обновить проект
     users:
       table:
         primary_skill: Специализация
-  dashbooard:
-    projects:
-      update:
-        danger: Не удалось обновить проект
   landing:
     alerts:
       not_authenticated_dashboard_access: Вы должны войти в систему для доступа к проектам
@@ -63,24 +84,6 @@ ru:
     link:
       en: In russian
       ru: In english
-  notes:
-    buttons:
-      create: Создать
-      update: Обновить
-    fields:
-      commenter: Автор
-      note: Заметка
-    noties:
-      access_denied: Не достаточно прав для создания заметки
-      confirm:
-        destroy: Вы уверены, что хотите удалить заметку?
-      danger:
-        create: Заполните все поля заметки
-        update: Заполните все поля заметки
-      success:
-        create: Заметка успешно создана
-        destroy: Заметка успешно удалена
-        update: Заметка успешно обновлена
   views:
     pagination:
       first: Первая
