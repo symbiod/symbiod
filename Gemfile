@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.5.1'
+ruby '~> 2.5.5'
 
 gem 'aasm'
 gem 'cells-rails'
@@ -76,7 +76,7 @@ end
 group :test do
   gem 'faker'
   gem 'database_cleaner'
-  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
+  gem 'shoulda-matchers', '~> 4.5.1'
   gem 'simplecov', require: false
   gem 'webmock'
 end
