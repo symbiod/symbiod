@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.5.5'
+ruby File.read('.ruby-version').strip
 
 gem 'aasm'
 gem 'cells-rails'
