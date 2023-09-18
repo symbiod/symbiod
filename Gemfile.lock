@@ -51,6 +51,7 @@ GEM
       rake (>= 10.4, < 14.0)
     arel (9.0.0)
     ast (2.4.2)
+    base64 (0.1.1)
     bcrypt (3.1.18)
     bindex (0.8.1)
     builder (3.2.4)
@@ -152,7 +153,8 @@ GEM
       railties (>= 5.0.0)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.6.0)
+    faraday (2.7.11)
+      base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-mashify (0.1.1)
@@ -160,9 +162,9 @@ GEM
       hashie
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
-    faraday-net_http (3.0.1)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
-    gli (2.21.0)
+    gli (2.21.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     haml (6.0.6)
@@ -242,7 +244,7 @@ GEM
     minitest (5.16.3)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.2.3)
+    multipart-post (2.3.0)
     newrelic_rpm (8.11.0)
     nio4r (2.5.8)
     nokogiri (1.10.10)
@@ -405,13 +407,12 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    slack-ruby-client (1.1.0)
+    slack-ruby-client (2.2.0)
       faraday (>= 2.0)
       faraday-mashify
       faraday-multipart
       gli
       hashie
-      websocket-driver
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -487,7 +488,7 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    websocket-driver (0.7.5)
+    websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
