@@ -246,7 +246,7 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.1.5)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.8.4)
     minitest (5.20.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -262,8 +262,9 @@ GEM
       net-protocol
     newrelic_rpm (9.5.0)
     nio4r (2.5.9)
-    nokogiri (1.10.10)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.15.3)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     oauth (0.6.2)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
@@ -544,7 +545,7 @@ DEPENDENCIES
   loofah (= 2.3.1)
   migration_opener
   newrelic_rpm
-  nokogiri (~> 1.10.8)
+  nokogiri (~> 1.15.3)
   octokit (~> 4.0)
   pry-rails (= 0.3.9)
   puma (~> 3.12.6)
