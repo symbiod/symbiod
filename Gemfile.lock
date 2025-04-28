@@ -103,7 +103,7 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    date (3.3.3)
+    date (3.4.1)
     declarative (0.0.20)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
@@ -251,12 +251,12 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
-    net-imap (0.4.1)
+    net-imap (0.4.20)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
     net-smtp (0.4.0)
       net-protocol
@@ -458,7 +458,7 @@ GEM
     thor (1.2.2)
     thread_safe (0.3.6)
     tilt (2.3.0)
-    timeout (0.4.0)
+    timeout (0.4.3)
     trailblazer (2.1.0)
       trailblazer-macro (>= 2.1.0, < 2.2.0)
       trailblazer-macro-contract (>= 2.1.0, < 2.2.0)
